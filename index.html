@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURA APPAREL | Modern Minimalist Clothing</title>
+  <style>
+    /* CSS Reset & Base Variables */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-color: #fcfcfc;
+      --text-color: #1a1a1a;
+      --accent-color: #555555;
+      --light-gray: #f2f2f2;
+      --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navigation Bar */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(252, 252, 252, 0.95);
+      backdrop-filter: blur(5px);
+      border-bottom: 1px solid #eaeaea;
+      z-index: 100;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #999;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 80vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
+                  url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #ffffff;
+      padding: 0 1rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 2.2rem;
+      background-color: #ffffff;
+      color: #1a1a1a;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #1a1a1a;
+      color: #ffffff;
+    }
+
+    /* Featured Products Section */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 1.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .product-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      background-color: var(--light-gray);
+      margin-bottom: 1rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .product-card:hover .product-image {
+      opacity: 0.9;
+    }
+
+    .product-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
+
+    .product-name {
+      font-weight: 500;
+    }
+
+    .product-price {
+      color: var(--accent-color);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #111;
+      color: #fff;
+      padding: 3rem 2rem;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .footer-section h4 {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 2rem auto 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid #222;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none; /* Can be replaced with a hamburger menu */
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <div class="logo">Aura</div>
+      <ul class="nav-links">
+        <li><a href="#new">New Arrivals</a></li>
+        <li><a href="#women">Women</a></li>
+        <li><a href="#men">Men</a></li>
+        <li><a href="#collection">Collection</a></li>
+      </ul>
+      <div class="nav-icons">
+        <span>Search</span>
+        <span>Cart (0)</span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <h1>Autumn Essentials</h1>
+    <p>Minimalist silhouettes crafted for everyday comfort.</p>
+    <a href="#shop" class="btn">Explore Now</a>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="container" id="shop">
+    <h2 class="section-title">Curated Selection</h2>
+    <div class="product-grid">
+      
+      <!-- Product Item 1 -->
+      <div class="product-card">
+        <img class="product-image" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Classic White Tee" />
+        <div class="product-info">
+          <span class="product-name">Heavyweight Cotton Tee</span>
+          <span class="product-price">$45.00</span>
+        </div>
+      </div>
+
+      <!-- Product Item 2 -->
+      <div class="product-card">
+        <img class="product-image" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" alt="Wool Overcoat" />
+        <div class="product-info">
+          <span class="product-name">Tailored Wool Coat</span>
+          <span class="product-price">$280.00</span>
+        </div>
+      </div>
+
+      <!-- Product Item 3 -->
+      <div class="product-card">
+        <img class="product-image" src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Oversized Knit Sweater" />
+        <div class="product-info">
+          <span class="product-name">Cashmere Blend Knit</span>
+          <span class="product-price">$120.00</span>
+        </div>
+      </div>
+
+      <!-- Product Item 4 -->
+      <div class="product-card">
+        <img class="product-image" src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80" alt="Denim Trousers" />
+        <div class="product-info">
+          <span class="product-name">Relaxed Denim Trousers</span>
+          <span class="product-price">$95.00</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>About Aura</h4>
+        <p style="color: #aaa; font-size: 0.85rem; max-width: 250px;">
+          Timeless wardrobe staples designed with sustainability, form, and durability in mind.
+        </p>
+      </div>
+      <div class="footer-section">
+        <h4>Customer Care</h4>
+        <ul>
+          <li><a href="#">Shipping & Returns</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Follow</h4>
+        <ul>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Pinterest</a></li>
+          <li><a href="#">Newsletter</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2026 Aura Apparel. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

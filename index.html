@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MARUSHOBHA | Grace has a new address</title>
+  <title>MARUSHOBHA | Custom. Character. Class. — Grace has a new address</title>
   <meta name="description" content="Premium contemporary women's fashion inspired by Indian craftsmanship, traditional fabrics and modern silhouettes. Heritage × Modernity × Comfort × Character." />
 
-  <!-- Favicon with fallbacks -->
-  <link rel="icon" type="image/jpeg" href="favicon.jpeg" />
-  <link rel="apple-touch-icon" href="favicon.jpeg" />
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="favicon_2.jpeg" />
+  <link rel="apple-touch-icon" href="favicon_2.jpeg" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts -->
+  <!-- Google Fonts: Cormorant Garamond, Montserrat, Playfair Display & Dancing Script -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Dancing+Script:wght@500;600;700&family=Montserrat:wght@200;300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -27,6 +27,7 @@
         extend: {
           fontFamily: {
             serif: ['"Playfair Display"', '"Cormorant Garamond"', 'serif'],
+            display: ['"Cormorant Garamond"', 'serif'],
             sans: ['"Montserrat"', 'sans-serif'],
             script: ['"Dancing Script"', 'cursive'],
           },
@@ -37,6 +38,7 @@
               warmBeige: '#EBDDC9',
               gold: '#B88E4F',
               goldDark: '#966E33',
+              terracotta: '#A65B47',
               charcoal: '#23201D',
               muted: '#6E665D',
             }
@@ -62,6 +64,8 @@
     @keyframes ping {
       75%, 100% { transform: scale(2); opacity: 0; }
     }
+    .img-zoom { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .group:hover .img-zoom { transform: scale(1.05); }
   </style>
 </head>
 
@@ -70,13 +74,13 @@
   <!-- 1. TOP ANNOUNCEMENT BAR -->
   <aside aria-label="Announcement" class="bg-[#23201D] text-white text-[10px] sm:text-[11px] tracking-[0.24em] uppercase py-2.5 px-4 text-center font-medium flex items-center justify-center gap-2 sm:gap-4 flex-wrap">
     <span>FREE SHIPPING ON ORDERS ABOVE ₹2,999</span>
-    <span class="inline-block w-1 h-1 rounded-full bg-[#B88E4F]"></span>
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#B88E4F]"></span>
     <span>EASY RETURNS</span>
-    <span class="inline-block w-1 h-1 rounded-full bg-[#B88E4F]"></span>
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#B88E4F]"></span>
     <span>INDIA-WIDE DELIVERY</span>
   </aside>
 
-  <!-- 1. NAVIGATION BAR -->
+  <!-- NAVIGATION BAR -->
   <header class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#23201D]/10 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 sm:h-24 flex items-center justify-between">
       
@@ -90,27 +94,35 @@
         <a href="#home" class="hover:text-[#B88E4F] transition-colors">Home</a>
         <a href="#shop" class="hover:text-[#B88E4F] transition-colors">Shop</a>
         <a href="#collections" class="hover:text-[#B88E4F] transition-colors">Collections</a>
+        <a href="#spotlight" class="hover:text-[#B88E4F] transition-colors">Spotlight</a>
         <a href="#fabrics" class="hover:text-[#B88E4F] transition-colors">Our Fabrics</a>
         <a href="#story" class="hover:text-[#B88E4F] transition-colors">Our Story</a>
-        <a href="#journal" class="hover:text-[#B88E4F] transition-colors">Journal</a>
         <a href="#contact" class="hover:text-[#B88E4F] transition-colors">Contact</a>
       </nav>
 
-      <!-- Center Brand Logo -->
-      <a href="#home" class="text-center group flex flex-col items-center py-1">
+      <!-- Center Brand Logo & Illustrated Emblem -->
+      <a href="#home" class="text-center group flex items-center gap-2.5 py-1">
         <img 
-          src="MARUSHOBHA%20LOGO%201.jpeg" 
-          alt="MARUSHOBHA" 
+          src="LOGO.jpeg" 
+          alt="Marushobha Emblem" 
           class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
-          onerror="this.onerror=null; this.src='logo.jpeg'; if(!this.src) this.src='favicon.jpeg';"
+          onerror="this.onerror=null; this.src='favicon_2.jpeg'; if(!this.src) this.src='https://placehold.co/80x80/FAF7F2/B88E4F?text=MS';"
         />
+        <div class="flex flex-col text-left">
+          <span class="font-serif text-xl sm:text-2xl tracking-[0.22em] font-semibold text-[#23201D] group-hover:text-[#B88E4F] transition-colors">
+            MARUSHOBHA
+          </span>
+          <span class="text-[8px] tracking-[0.38em] text-[#B88E4F] uppercase font-semibold">
+            CUSTOM &bull; CHARACTER &bull; CLASS
+          </span>
+        </div>
       </a>
 
       <!-- Right Utility Icons -->
       <div class="flex items-center space-x-5 text-[#23201D]">
         <button onclick="toggleSearchModal(true)" class="p-1 hover:text-[#B88E4F] transition-colors" title="Search"><i data-lucide="search" class="w-5 h-5"></i></button>
-        <button onclick="alert('Wishlist feature: 0 items saved.')" class="hidden sm:inline-block p-1 hover:text-[#B88E4F] transition-colors" title="Wishlist"><i data-lucide="heart" class="w-5 h-5"></i></button>
-        <button onclick="alert('Sign In / Atelier Account portal opens shortly.')" class="hidden sm:inline-block p-1 hover:text-[#B88E4F] transition-colors" title="Account"><i data-lucide="user" class="w-5 h-5"></i></button>
+        <button onclick="showWishlistToast()" class="hidden sm:inline-block p-1 hover:text-[#B88E4F] transition-colors" title="Wishlist"><i data-lucide="heart" class="w-5 h-5"></i></button>
+        <button onclick="showAccountNotice()" class="hidden sm:inline-block p-1 hover:text-[#B88E4F] transition-colors" title="Account"><i data-lucide="user" class="w-5 h-5"></i></button>
         <button onclick="toggleCartDrawer(true)" class="relative p-1 hover:text-[#B88E4F] transition-colors" title="Shopping Cart">
           <i data-lucide="shopping-bag" class="w-5 h-5"></i>
           <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-[#B88E4F] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
@@ -118,28 +130,28 @@
       </div>
     </div>
 
-    <!-- Mobile Menu Drawer -->
-    <div id="mobileMenu" class="hidden lg:hidden bg-[#FAF7F2] border-b border-stone-200 px-6 py-6 space-y-4">
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-[#FAF7F2] border-b border-stone-200 px-6 py-6 space-y-4 shadow-xl">
       <a href="#home" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Home</a>
       <a href="#shop" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Shop</a>
       <a href="#collections" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Collections</a>
+      <a href="#spotlight" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Spotlight</a>
       <a href="#fabrics" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Our Fabrics</a>
       <a href="#story" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Our Story</a>
-      <a href="#journal" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Journal</a>
       <a href="#contact" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Contact</a>
     </div>
   </header>
 
-  <!-- 1. HERO SECTION -->
+  <!-- HERO SECTION -->
   <section id="home" class="relative min-h-[90vh] flex items-center justify-center text-center overflow-hidden">
     <div class="absolute inset-0 z-0">
       <img 
-        src="main%20logo.jpeg" 
+        src="MAINLOGO-copy-0.jpeg" 
         alt="Marushobha Campaign Background" 
-        class="w-full h-full object-cover object-center filter brightness-[0.88]" 
-        onerror="this.onerror=null; this.src='main%20logo_2.jpeg'; if(!this.src) this.src='hero.jpeg';"
+        class="w-full h-full object-cover object-center filter brightness-[0.88]"
+        onerror="this.onerror=null; this.src='BACKGROUND.jpeg'; if(!this.src) this.src='https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1800&q=80';"
       />
-      <div class="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-[#FAF7F2]/50 to-[#23201D]/30"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-[#FAF7F2]/45 to-[#23201D]/40"></div>
     </div>
 
     <div class="max-w-4xl mx-auto px-6 py-28 relative z-10 space-y-6">
@@ -149,7 +161,7 @@
         <span class="w-10 h-[1px] bg-[#B88E4F]"></span>
       </div>
 
-      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal text-[#23201D] tracking-tight leading-[1.12]">
+      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#23201D] tracking-tight leading-[1.08]">
         Grace has a <span class="italic font-normal text-[#966E33]">new address.</span>
       </h1>
 
@@ -161,14 +173,14 @@
         <a href="#shop" class="w-full sm:w-auto inline-block bg-[#23201D] text-white text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#B88E4F] transition-all duration-300 font-medium shadow-md">
           Shop New Arrivals
         </a>
-        <a href="#collections" class="w-full sm:w-auto inline-block bg-white/85 backdrop-blur-sm border border-[#23201D] text-[#23201D] text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#23201D] hover:text-white transition-all duration-300 font-medium">
-          Explore Collections
+        <a href="#spotlight" class="w-full sm:w-auto inline-block bg-white/90 backdrop-blur-sm border border-[#23201D] text-[#23201D] text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#23201D] hover:text-white transition-all duration-300 font-medium">
+          View Spotlight Look
         </a>
       </div>
     </div>
   </section>
 
-  <!-- 2. SHOP BY CATEGORY -->
+  <!-- SHOP BY CATEGORY -->
   <section class="py-24 max-w-7xl mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
       <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Visual Curations</span>
@@ -177,136 +189,41 @@
     </div>
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-      <div onclick="filterShop('category', 'All')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">New Arrivals</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Discover the latest Marushobha pieces.</p>
-      </div>
-
       <div onclick="filterShop('category', 'Dresses')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Dresses</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Contemporary dresses with Indian-inspired details.</p>
+        <div class="h-36 sm:h-44 overflow-hidden mb-3 bg-stone-100">
+          <img src="MS00007.jpeg" alt="Dresses" class="w-full h-full object-cover object-top img-zoom" onerror="this.src='https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&q=80'" />
+        </div>
+        <h3 class="font-serif text-base sm:text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Dresses</h3>
+        <p class="text-[11px] text-[#6E665D] font-light mt-1">Bandhani ruffles & cotton shifts.</p>
       </div>
 
       <div onclick="filterShop('category', 'Co-ords')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Co-ord Sets</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Effortless matching looks.</p>
+        <div class="h-36 sm:h-44 overflow-hidden mb-3 bg-stone-100">
+          <img src="MS00009.jpeg" alt="Co-ords" class="w-full h-full object-cover object-top img-zoom" onerror="this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80'" />
+        </div>
+        <h3 class="font-serif text-base sm:text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Co-ord Sets</h3>
+        <p class="text-[11px] text-[#6E665D] font-light mt-1">Denim fusion & corseted sets.</p>
       </div>
 
       <div onclick="filterShop('category', 'Pants')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Pants & Trousers</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Modern silhouettes designed for everyday styling.</p>
+        <div class="h-36 sm:h-44 overflow-hidden mb-3 bg-stone-100">
+          <img src="MS00001.jpeg" alt="Pants & Trousers" class="w-full h-full object-cover object-top img-zoom" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80'" />
+        </div>
+        <h3 class="font-serif text-base sm:text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Pants & Trousers</h3>
+        <p class="text-[11px] text-[#6E665D] font-light mt-1">Pleated palazzos & wide-leg cuts.</p>
       </div>
 
-      <div onclick="filterShop('category', 'Tops')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Tops</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Statement tops, corsets and contemporary separates.</p>
-      </div>
-
-      <div onclick="filterShop('category', 'All')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Ethnic Edit</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Modern interpretations of Indian dressing.</p>
-      </div>
-
-      <div onclick="filterShop('category', 'All')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Western Edit</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Contemporary Western silhouettes.</p>
-      </div>
-
-      <div onclick="filterShop('category', 'All')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
-        <h3 class="font-serif text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Festive Edit</h3>
-        <p class="text-[11px] text-[#6E665D] font-light mt-1">Elevated pieces for celebrations & special moments.</p>
+      <div onclick="filterShop('category', 'Ethnic Wear')" class="group cursor-pointer bg-white p-5 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm">
+        <div class="h-36 sm:h-44 overflow-hidden mb-3 bg-stone-100">
+          <img src="MS00003.jpeg" alt="Ethnic Edit" class="w-full h-full object-cover object-top img-zoom" onerror="this.src='https://images.unsplash.com/photo-1596783049557-41808b8b0e8b?auto=format&fit=crop&w=600&q=80'" />
+        </div>
+        <h3 class="font-serif text-base sm:text-lg font-medium text-[#23201D] group-hover:text-[#B88E4F] transition-colors">Ethnic Edit</h3>
+        <p class="text-[11px] text-[#6E665D] font-light mt-1">Modern shararas & chikankari.</p>
       </div>
     </div>
   </section>
 
-  <!-- 3. COLLECTIONS HUB -->
-  <section id="collections" class="py-24 bg-[#F4ECE1]/50 border-t border-[#23201D]/10">
-    <div class="max-w-7xl mx-auto px-6">
-      
-      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-        <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Dedicated Lines</span>
-        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">Signature Collections</h2>
-        <p class="text-[#6E665D] text-sm font-light">Deep explorations into regional weaves, re-engineered for the modern woman.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
-        <!-- Khadi Collection -->
-        <div class="bg-white p-8 border border-stone-200 shadow-sm flex flex-col justify-between">
-          <div class="space-y-3">
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Heritage, Reimagined</span>
-            <h3 class="font-serif text-2xl font-normal text-[#23201D]">Khadi Collection</h3>
-            <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-              Celebrating the natural beauty and character of Khadi through contemporary silhouettes: Khadi dresses, co-ords, corsets, tops, and trousers.
-            </p>
-          </div>
-          <button onclick="filterShop('fabric', 'Khadi')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left flex items-center gap-2">
-            Explore Khadi <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- Kota Doria Collection -->
-        <div class="bg-white p-8 border border-stone-200 shadow-sm flex flex-col justify-between">
-          <div class="space-y-3">
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Lightness with Character</span>
-            <h3 class="font-serif text-2xl font-normal text-[#23201D]">Kota Doria Collection</h3>
-            <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-              Airy, elegant Kota Doria interpreted through modern designs: dresses, sheer overlays, lightweight tops, and breezy co-ords.
-            </p>
-          </div>
-          <button onclick="filterShop('fabric', 'Kota Doria')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left flex items-center gap-2">
-            Explore Kota Doria <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- Bandhani Collection -->
-        <div class="bg-white p-8 border border-stone-200 shadow-sm flex flex-col justify-between">
-          <div class="space-y-3">
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Tradition with Attitude</span>
-            <h3 class="font-serif text-2xl font-normal text-[#23201D]">Bandhani Collection</h3>
-            <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-              Resist-dyed dot motifs harmonized with tailored architectural lines, structured shoulders, and minimalist western styling.
-            </p>
-          </div>
-          <button onclick="filterShop('fabric', 'Bandhani')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left flex items-center gap-2">
-            Explore Bandhani <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- Lahariya Collection -->
-        <div class="bg-white p-8 border border-stone-200 shadow-sm flex flex-col justify-between">
-          <div class="space-y-3">
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Movement in Every Line</span>
-            <h3 class="font-serif text-2xl font-normal text-[#23201D]">Lahariya Collection</h3>
-            <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-              A modern interpretation of the iconic wave-like textile aesthetic translated onto effortless slips, wrap sets, and flowing daywear.
-            </p>
-          </div>
-          <button onclick="filterShop('fabric', 'Lahariya')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left flex items-center gap-2">
-            Explore Lahariya <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-        <!-- Denim x Indian Craft -->
-        <div class="bg-white p-8 border border-stone-200 shadow-sm flex flex-col justify-between md:col-span-2 lg:col-span-2">
-          <div class="space-y-3">
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Two Worlds. One Look.</span>
-            <h3 class="font-serif text-2xl font-normal text-[#23201D]">Denim &times; Indian Craft</h3>
-            <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-              Contemporary denim combined with Indian-inspired textiles: Denim &times; Kota Doria, Denim &times; Bandhani, and Denim &times; Handspun Khadi.
-            </p>
-          </div>
-          <button onclick="filterShop('fabric', 'Denim')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left flex items-center gap-2">
-            Shop The Edit <i data-lucide="arrow-right" class="w-4 h-4"></i>
-          </button>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 4. SHOP PAGE (Filtered Boutique) -->
+  <!-- 4. SHOP PAGE (Interactive Boutique Catalog) -->
   <section id="shop" class="py-24 max-w-7xl mx-auto px-6 border-t border-[#23201D]/10">
     <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
       <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Atelier Catalog</span>
@@ -318,42 +235,46 @@
     <div class="bg-white p-6 border border-stone-200 mb-10 shadow-sm space-y-4">
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
         <div>
-          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1">Category</label>
+          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1 font-medium">Category</label>
           <select id="filterCategory" onchange="applyShopFilters()" class="w-full p-2 border border-stone-200 text-[#23201D] bg-[#FAF7F2] text-xs">
             <option value="All">All Categories</option>
             <option value="Dresses">Dresses</option>
             <option value="Tops">Tops & Corsets</option>
             <option value="Pants">Pants & Trousers</option>
             <option value="Co-ords">Co-ord Sets</option>
+            <option value="Ethnic Wear">Ethnic Wear</option>
+            <option value="Western Wear">Western Wear</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1">Fabric</label>
+          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1 font-medium">Fabric</label>
           <select id="filterFabric" onchange="applyShopFilters()" class="w-full p-2 border border-stone-200 text-[#23201D] bg-[#FAF7F2] text-xs">
             <option value="All">All Fabrics</option>
             <option value="Khadi">Khadi</option>
-            <option value="Kota Doria">Kota Doria</option>
             <option value="Cotton">Cotton</option>
             <option value="Bandhani">Bandhani</option>
-            <option value="Lahariya">Lahariya</option>
             <option value="Denim">Denim</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1">Colour</label>
+          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1 font-medium">Colour</label>
           <select id="filterColor" onchange="applyShopFilters()" class="w-full p-2 border border-stone-200 text-[#23201D] bg-[#FAF7F2] text-xs">
             <option value="All">All Colours</option>
             <option value="Yellow">Yellow</option>
-            <option value="Blue">Blue</option>
+            <option value="Blue">Blue / Indigo</option>
             <option value="Olive">Olive / Green</option>
+            <option value="Pink">Pink / Rose</option>
+            <option value="Red">Red / Scarlet</option>
+            <option value="Violet">Violet / Purple</option>
             <option value="Black">Black</option>
+            <option value="Beige">Beige / Blush</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1">Size</label>
+          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1 font-medium">Size</label>
           <select id="filterSize" onchange="applyShopFilters()" class="w-full p-2 border border-stone-200 text-[#23201D] bg-[#FAF7F2] text-xs">
             <option value="All">All Sizes</option>
             <option value="XS">XS</option>
@@ -365,7 +286,7 @@
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1">Availability</label>
+          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1 font-medium">Availability</label>
           <select id="filterAvailability" onchange="applyShopFilters()" class="w-full p-2 border border-stone-200 text-[#23201D] bg-[#FAF7F2] text-xs">
             <option value="All">All Items</option>
             <option value="In Stock">In Stock</option>
@@ -374,10 +295,9 @@
         </div>
 
         <div>
-          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1">Sort By</label>
+          <label class="block text-[10px] uppercase tracking-wider text-stone-500 mb-1 font-medium">Sort By</label>
           <select id="filterSort" onchange="applyShopFilters()" class="w-full p-2 border border-stone-200 text-[#23201D] bg-[#FAF7F2] text-xs font-medium">
             <option value="Featured">Featured</option>
-            <option value="Newest">Newest</option>
             <option value="LowToHigh">Price: Low to High</option>
             <option value="HighToLow">Price: High to Low</option>
           </select>
@@ -391,7 +311,92 @@
     </div>
   </section>
 
-  <!-- 10. FABRIC STORIES (With Infographic Feature) -->
+  <!-- EDITORIAL SPOTLIGHT SUITE -->
+  <section id="spotlight" class="py-24 bg-[#F4ECE1]/40 border-t border-[#23201D]/10">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
+        <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Spotlight Release</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Scarlet Ruffle Edit</h2>
+        <p class="text-[#6E665D] text-sm font-light">Interactive preview with multi-angle gallery and size selection.</p>
+      </div>
+
+      <div class="bg-white p-6 sm:p-12 border border-stone-200 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Big Gallery & Switcher -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="h-[520px] bg-stone-100 overflow-hidden relative border border-stone-200">
+            <img id="mainSpotlightImg" src="MS00007.jpeg" alt="Scarlet Ruffle" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80'" />
+            <span class="absolute top-4 left-4 bg-[#23201D] text-white text-[9px] uppercase tracking-widest px-3 py-1 font-medium">Bespoke Bandhani</span>
+          </div>
+
+          <div class="grid grid-cols-6 gap-2">
+            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
+              <img src="MS00007.jpeg" alt="Scarlet Ruffle" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
+            </button>
+            <button onclick="switchGalleryImg('MS00006.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
+              <img src="MS00006.jpeg" alt="Violet Leaf" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80'" />
+            </button>
+            <button onclick="switchGalleryImg('MS00008.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
+              <img src="MS00008.jpeg" alt="Rose Plaid" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=400&q=80'" />
+            </button>
+            <button onclick="switchGalleryImg('MS00009.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
+              <img src="MS00009.jpeg" alt="Ajrakh Denim Set" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=400&q=80'" />
+            </button>
+            <button onclick="switchGalleryImg('MS00010.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
+              <img src="MS00010.jpeg" alt="Bandhani Denim" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=400&q=80'" />
+            </button>
+            <button onclick="switchGalleryImg('MS00011.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
+              <img src="MS00011.jpeg" alt="Indigo Bow" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1550639525-c97d455acf70?auto=format&fit=crop&w=400&q=80'" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Product Purchase Card -->
+        <div class="lg:col-span-5 space-y-6">
+          <div>
+            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Traditional Bandhani &times; Cascade Ruffles</span>
+            <h3 class="font-serif text-3xl sm:text-4xl text-[#23201D] mt-1">Scarlet Ruffle Dress</h3>
+            <div class="flex items-center gap-3 mt-2">
+              <span class="text-xl font-medium text-[#23201D]">₹5,890</span>
+              <div class="flex items-center text-amber-500 text-xs gap-1">
+                <span>★★★★★</span>
+                <span class="text-stone-500 text-[11px]">(4.9 | 32 Reviews)</span>
+              </div>
+            </div>
+            <p class="text-xs text-[#6E665D] mt-2 font-light">A timeless blend of romance and elegance crafted in Bandhani perfection with graceful flowing tiers.</p>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center text-xs mb-2">
+              <span class="font-medium text-stone-700">Select Size:</span>
+              <button onclick="alert('Size Guide: XS (32) | S (34) | M (36) | L (38) | XL (40)')" class="text-[10px] uppercase tracking-wider text-[#B88E4F] underline">Size Guide</button>
+            </div>
+            <div class="flex gap-2 text-xs">
+              <button onclick="selectSpotlightSize(this, 'XS')" class="size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium">XS</button>
+              <button onclick="selectSpotlightSize(this, 'S')" class="size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium">S</button>
+              <button onclick="selectSpotlightSize(this, 'M')" class="size-btn px-3 py-1.5 border border-[#23201D] bg-[#23201D] text-white font-medium">M</button>
+              <button onclick="selectSpotlightSize(this, 'L')" class="size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium">L</button>
+              <button onclick="selectSpotlightSize(this, 'XL')" class="size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium">XL</button>
+            </div>
+          </div>
+
+          <div class="space-y-3 pt-2">
+            <button onclick="addToCart('scarlet-ruffle', currentSpotlightSize)" class="w-full bg-[#23201D] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#B88E4F] transition-colors font-medium">
+              Add To Bag
+            </button>
+            <button onclick="addToCart('scarlet-ruffle', currentSpotlightSize); toggleCartDrawer(true);" class="w-full bg-[#B88E4F] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#966E33] transition-colors font-medium">
+              Buy It Now
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FABRIC STORIES -->
   <section id="fabrics" class="py-24 max-w-7xl mx-auto px-6 border-t border-[#23201D]/10">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
       <div class="lg:col-span-7 space-y-4">
@@ -404,302 +409,19 @@
 
       <div class="lg:col-span-5 flex justify-center">
         <div class="rounded-sm overflow-hidden shadow-xl border border-stone-200 max-w-md w-full bg-white">
-          <img 
-            src="WhatsApp%20Image%202026-09-06%20at%2012.18.37%20PM.jpeg" 
-            alt="Marushobha Fabric Guide" 
-            class="w-full h-auto object-cover"
-            onerror="this.onerror=null; this.src='WhatsApp%20Image%202026-09-06%20at%2012.18.37%20PM_2.jpeg'; if(!this.src) this.src='fabrics.jpeg';"
-          />
+          <img src="08.jpeg" alt="Marushobha Fabric Guide" class="w-full h-auto object-cover" onerror="this.src='https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=600&q=80'" />
         </div>
-      </div>
-    </div>
-
-    <!-- 6 Fabric Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-white p-8 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block mb-1">Handspun Indian Heritage</span>
-          <h3 class="font-serif text-2xl font-normal text-[#23201D] mb-2">KHADI</h3>
-          <p class="text-xs text-[#6E665D] leading-relaxed font-light">
-            A timeless Indian textile, interpreted for today. Natural texture. Breathable character. Quiet elegance.
-          </p>
-        </div>
-        <button onclick="filterShop('fabric', 'Khadi')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left">
-          [Shop Khadi &rarr;]
-        </button>
-      </div>
-
-      <div class="bg-white p-8 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block mb-1">Rajasthan Artisan Loom</span>
-          <h3 class="font-serif text-2xl font-normal text-[#23201D] mb-2">KOTA DORIA</h3>
-          <p class="text-xs text-[#6E665D] leading-relaxed font-light">
-            Signature square-weave (khat) in fine cotton & silk. Imparts a translucent, weightless drape that moves effortlessly.
-          </p>
-        </div>
-        <button onclick="filterShop('fabric', 'Kota Doria')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left">
-          [Shop Kota Doria &rarr;]
-        </button>
-      </div>
-
-      <div class="bg-white p-8 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block mb-1">Western India Resist Dye</span>
-          <h3 class="font-serif text-2xl font-normal text-[#23201D] mb-2">BANDHANI</h3>
-          <p class="text-xs text-[#6E665D] leading-relaxed font-light">
-            Meticulously tied micro-dots celebrating tactile personality and festive soul, tempered with clean modern cuts.
-          </p>
-        </div>
-        <button onclick="filterShop('fabric', 'Bandhani')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left">
-          [Shop Bandhani &rarr;]
-        </button>
-      </div>
-
-      <div class="bg-white p-8 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block mb-1">Wave Rhythm</span>
-          <h3 class="font-serif text-2xl font-normal text-[#23201D] mb-2">LAHARIYA</h3>
-          <p class="text-xs text-[#6E665D] leading-relaxed font-light">
-            Dynamic diagonal wave motifs representing running winds and monsoon water, providing kinetic rhythm to tailoring.
-          </p>
-        </div>
-        <button onclick="filterShop('fabric', 'Lahariya')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left">
-          [Shop Lahariya &rarr;]
-        </button>
-      </div>
-
-      <div class="bg-white p-8 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block mb-1">Daily Foundation</span>
-          <h3 class="font-serif text-2xl font-normal text-[#23201D] mb-2">COTTON & LINEN</h3>
-          <p class="text-xs text-[#6E665D] leading-relaxed font-light">
-            Breathable staple fibers delivering tactile, understated luxury and daily cooling comfort that softens with wear.
-          </p>
-        </div>
-        <button onclick="filterShop('fabric', 'Cotton')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left">
-          [Shop Cotton & Linen &rarr;]
-        </button>
-      </div>
-
-      <div class="bg-white p-8 border border-stone-200 hover:border-[#B88E4F] transition-all shadow-sm flex flex-col justify-between">
-        <div>
-          <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block mb-1">Urban Attitude</span>
-          <h3 class="font-serif text-2xl font-normal text-[#23201D] mb-2">DENIM</h3>
-          <p class="text-xs text-[#6E665D] leading-relaxed font-light">
-            Structured, durable western denim counterbalancing the sheer grace of Indian handlooms for an unexpected fusion.
-          </p>
-        </div>
-        <button onclick="filterShop('fabric', 'Denim')" class="mt-6 text-xs uppercase tracking-widest font-semibold text-[#23201D] hover:text-[#B88E4F] transition-colors text-left">
-          [Shop Denim Fusion &rarr;]
-        </button>
       </div>
     </div>
   </section>
 
-  <!-- 11 & 12. LUXURY PRODUCT EDITORIAL SUITE -->
-  <section class="py-24 bg-[#F4ECE1]/40 border-t border-[#23201D]/10">
-    <div class="max-w-7xl mx-auto px-6">
-      
-      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-        <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Spotlight Release</span>
-        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Editorial Product Suite</h2>
-      </div>
-
-      <div class="bg-white p-6 sm:p-12 border border-stone-200 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
-        <!-- Multi-angle Image Gallery -->
-        <div class="lg:col-span-7 space-y-4">
-          <div class="h-[520px] bg-stone-100 overflow-hidden relative border border-stone-200">
-            <img 
-              id="mainSpotlightImg" 
-              src="azure.jpeg" 
-              alt="Azure Bloom Front" 
-              class="w-full h-full object-cover object-top"
-              onerror="this.onerror=null; this.src='WhatsApp%20Image%202026-09-06%20at%2011.03.24%20AM.jpeg';"
-            />
-            <span class="absolute top-4 left-4 bg-[#23201D] text-white text-[9px] uppercase tracking-widest px-3 py-1 font-medium">Bespoke Release</span>
-          </div>
-
-          <!-- Gallery Thumbnails -->
-          <div class="grid grid-cols-4 gap-3">
-            <button onclick="switchGalleryImg('azure.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="azure.jpeg" alt="Front" class="w-full h-full object-cover object-top" />
-            </button>
-            <button onclick="switchGalleryImg('WhatsApp%20Image%202026-09-06%20at%2011.03.24%20AM.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="WhatsApp%20Image%202026-09-06%20at%2011.03.24%20AM.jpeg" alt="Back & Detail" class="w-full h-full object-cover object-top" />
-            </button>
-            <button onclick="switchGalleryImg('WhatsApp%20Image%202026-09-06%20at%2011.03.25.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="WhatsApp%20Image%202026-09-06%20at%2011.03.25.jpeg" alt="Sunlit Rebellion" class="w-full h-full object-cover object-top" />
-            </button>
-            <button onclick="switchGalleryImg('WhatsApp%20Image%202026-09-06%20at%2011.03.25%20AM.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="WhatsApp%20Image%202026-09-06%20at%2011.03.25%20AM.jpeg" alt="Forest Muse" class="w-full h-full object-cover object-top" />
-            </button>
-          </div>
-        </div>
-
-        <!-- Product Specs & Narrative Tabs -->
-        <div class="lg:col-span-5 space-y-6">
-          <div>
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Khadi Cotton Blend &times; Floral Motif</span>
-            <h3 class="font-serif text-3xl sm:text-4xl text-[#23201D] mt-1">Azure Bloom</h3>
-            <div class="flex items-center gap-3 mt-2">
-              <span class="text-xl font-medium text-[#23201D]">₹5,200</span>
-              <div class="flex items-center text-amber-500 text-xs gap-1">
-                <span>★★★★★</span>
-                <span class="text-stone-500 text-[11px]">(4.8 | 24 Reviews)</span>
-              </div>
-            </div>
-            <p class="text-xs text-[#6E665D] mt-2 font-light">Colour: Natural Ecru &bull; Indigo Floral Lace</p>
-          </div>
-
-          <!-- Size Picker -->
-          <div>
-            <div class="flex justify-between items-center text-xs mb-2">
-              <span class="font-medium text-stone-700">Size Selection</span>
-              <button onclick="alert('Size Guide: XS (32) | S (34) | M (36) | L (38) | XL (40) | XXL (42)')" class="text-[10px] uppercase tracking-wider text-[#B88E4F] underline">Size Guide</button>
-            </div>
-            <div class="flex gap-2">
-              <button class="px-3 py-1.5 border border-stone-300 text-xs hover:border-[#23201D] font-medium">XS</button>
-              <button class="px-3 py-1.5 border border-stone-300 text-xs hover:border-[#23201D] font-medium">S</button>
-              <button class="px-3 py-1.5 border border-[#23201D] bg-[#23201D] text-white text-xs font-medium">M</button>
-              <button class="px-3 py-1.5 border border-stone-300 text-xs hover:border-[#23201D] font-medium">L</button>
-              <button class="px-3 py-1.5 border border-stone-300 text-xs hover:border-[#23201D] font-medium">XL</button>
-            </div>
-          </div>
-
-          <!-- Quantity & Purchase CTAs -->
-          <div class="space-y-3 pt-2">
-            <div class="flex gap-3">
-              <div class="flex items-center border border-stone-300 px-3">
-                <button onclick="adjustSpotlightQty(-1)" class="text-stone-500 hover:text-stone-800 text-sm px-1">-</button>
-                <span id="spotlightQty" class="text-xs font-medium px-3">1</span>
-                <button onclick="adjustSpotlightQty(1)" class="text-stone-500 hover:text-stone-800 text-sm px-1">+</button>
-              </div>
-              <button onclick="addToBagSpotlight()" class="flex-1 bg-[#23201D] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#B88E4F] transition-colors font-medium">
-                Add To Bag
-              </button>
-            </div>
-            <button onclick="buyNowSpotlight()" class="w-full bg-[#B88E4F] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#966E33] transition-colors font-medium">
-              Buy It Now
-            </button>
-          </div>
-
-          <!-- Tabs -->
-          <div class="border-t border-stone-200 pt-4 space-y-3 text-xs">
-            <div class="flex border-b border-stone-200 text-[11px] uppercase tracking-wider">
-              <button onclick="switchTab('desc')" id="tabBtn-desc" class="py-2 px-3 border-b-2 border-[#23201D] font-semibold text-[#23201D]">Story & Details</button>
-              <button onclick="switchTab('care')" id="tabBtn-care" class="py-2 px-3 text-stone-500 hover:text-[#23201D]">Fabric & Care</button>
-              <button onclick="switchTab('ship')" id="tabBtn-ship" class="py-2 px-3 text-stone-500 hover:text-[#23201D]">Shipping & Returns</button>
-            </div>
-
-            <div id="tabContent-desc" class="text-stone-600 font-light leading-relaxed space-y-2">
-              <p><strong>The Story:</strong> Floral details. A bolder you. Minimal yet meaningful floral motifs with delicate back lace ties and an intricate scallop lace hem. Soft, breathable, and comfortable with natural texture.</p>
-            </div>
-
-            <div id="tabContent-care" class="hidden text-stone-600 font-light leading-relaxed space-y-2">
-              <p>Hand-spun organic Khadi cotton blend. Dry clean or gentle hand wash in cold water using mild liquid detergent. Dry in shade. Warm iron on reverse.</p>
-            </div>
-
-            <div id="tabContent-ship" class="hidden text-stone-600 font-light leading-relaxed space-y-2">
-              <p>Complimentary pan-India delivery on orders above ₹2,999. Dispatched within 2–4 business days. Easy 7-day doorstep size exchange policy.</p>
-            </div>
-          </div>
-
-          <!-- Complete the look -->
-          <div class="bg-[#FAF7F2] p-5 border border-stone-200 space-y-3">
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block">Complete Your Look</span>
-            <div class="flex items-center justify-between text-xs">
-              <span class="text-stone-700">Azure Bloom Dress + Handloom Scarf + Brass Hoops</span>
-              <span class="font-semibold text-stone-900">₹6,890</span>
-            </div>
-            <button onclick="addBundleToBag()" class="w-full border border-[#23201D] text-[#23201D] text-xs uppercase tracking-widest py-2.5 hover:bg-[#23201D] hover:text-white transition-colors font-medium">
-              Add Complete Look Bundle
-            </button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 13. SHOP THE LOOK (Hotspots) -->
-  <section class="py-24 max-w-7xl mx-auto px-6 border-t border-[#23201D]/10">
-    <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-      <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Editorial Stylist</span>
-      <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">Shop The Look</h2>
-      <p class="text-[#6E665D] text-sm font-light">Interactive lifestyle styling. Click on the pins to inspect each piece.</p>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-      <div class="lg:col-span-7 relative h-[600px] bg-stone-200 border border-stone-200 overflow-hidden shadow-md">
-        <img 
-          src="WhatsApp%20Image%202026-09-06%20at%2011.03.25.jpeg" 
-          alt="Sunlit Rebellion Lifestyle" 
-          class="w-full h-full object-cover object-top"
-          onerror="this.onerror=null; this.src='sunlit.jpeg';"
-        />
-        
-        <button onclick="showHotspotItem('corset')" class="absolute top-[32%] left-[48%] w-6 h-6 rounded-full bg-[#B88E4F] text-white flex items-center justify-center shadow-lg hotspot-pulse focus:outline-none" title="Corset Top">
-          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-        </button>
-
-        <button onclick="showHotspotItem('skirt')" class="absolute top-[48%] left-[45%] w-6 h-6 rounded-full bg-[#B88E4F] text-white flex items-center justify-center shadow-lg hotspot-pulse focus:outline-none" title="Mini Skirt">
-          <i data-lucide="plus" class="w-3.5 h-3.5"></i>
-        </button>
-      </div>
-
-      <div class="lg:col-span-5 bg-white p-8 border border-stone-200 space-y-6 shadow-sm">
-        <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold block">Editorial Ensemble</span>
-        <h3 class="font-serif text-3xl text-[#23201D]">The Sunlit Rebellion Look</h3>
-        <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-          An off-shoulder corset neck in breathable yellow plaid Khadi paired with a tailored front-slit belt skirt and urban footwear.
-        </p>
-
-        <div class="space-y-4 border-y border-stone-200 py-6 text-xs">
-          <div class="flex justify-between items-center">
-            <div>
-              <p class="font-medium text-stone-900">Sunlit Khadi Corset Top</p>
-              <span class="text-[11px] text-stone-400">Off-shoulder corset cut</span>
-            </div>
-            <span class="font-semibold text-stone-800">₹2,499</span>
-          </div>
-
-          <div class="flex justify-between items-center">
-            <div>
-              <p class="font-medium text-stone-900">Plaid Front-Slit Skirt</p>
-              <span class="text-[11px] text-stone-400">Tailored with belt detail</span>
-            </div>
-            <span class="font-semibold text-stone-800">₹2,451</span>
-          </div>
-        </div>
-
-        <div class="flex justify-between items-center text-sm font-semibold">
-          <span>Complete Ensemble Total</span>
-          <span class="text-[#23201D]">₹4,950</span>
-        </div>
-
-        <button onclick="addAllHotspotLook()" class="w-full bg-[#23201D] text-white text-xs uppercase tracking-[0.22em] py-4 hover:bg-[#B88E4F] transition-colors font-medium">
-          Add All To Bag
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- 15. OUR STORY (With Motive Graphic) -->
+  <!-- OUR STORY -->
   <section id="story" class="py-24 bg-white border-t border-[#23201D]/10">
     <div class="max-w-6xl mx-auto px-6">
-      
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div class="lg:col-span-5 flex justify-center">
           <div class="rounded-sm overflow-hidden shadow-xl border border-stone-200 max-w-md w-full bg-white">
-            <img 
-              src="WhatsApp%20Image%202026-09-06%20at%2012.18.36%20P.jpeg" 
-              alt="Marushobha Motive Story" 
-              class="w-full h-auto object-cover"
-              onerror="this.onerror=null; this.src='WhatsApp%20Image%202026-09-06%20at%2012.18.36%20P_2.jpeg'; if(!this.src) this.src='motive.jpeg';"
-            />
+            <img src="06.jpeg" alt="Marushobha Motive Story" class="w-full h-auto object-cover" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80'" />
           </div>
         </div>
 
@@ -709,9 +431,6 @@
           <p class="text-[#6E665D] text-sm sm:text-base leading-relaxed font-light">
             Marushobha was born from a simple thought: fashion should feel modern, but never disconnected from its roots. India has an extraordinary textile heritage—Khadi, Kota Doria, Bandhani, and Leheriya carrying stories of generations of craftsmanship.
           </p>
-          <p class="text-[#6E665D] text-sm sm:text-base leading-relaxed font-light">
-            We transform this heritage through contemporary silhouettes, comfortable construction, and effortless styling. For the woman who desires comfort without sacrificing elegance, and seeks personal style beyond fast fleeting trends.
-          </p>
           <div class="pt-4">
             <button onclick="alert('Marushobha: Rooted in Jaipur & Mumbai weaving clusters.')" class="bg-[#23201D] text-white text-xs uppercase tracking-[0.22em] px-8 py-4 hover:bg-[#B88E4F] transition-colors font-medium">
               Discover Our Story
@@ -719,108 +438,15 @@
           </div>
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <!-- 16. OUR CRAFT (Made with Intention) -->
-  <section class="py-24 bg-[#F4ECE1]/60 border-t border-[#23201D]/10">
-    <div class="max-w-7xl mx-auto px-6">
-      
-      <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-        <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Artisanal Production</span>
-        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">Made With Intention</h2>
-        <p class="text-[#6E665D] text-sm font-light">Every single step honors the fabric and the artisan.</p>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 text-center">
-        <div class="bg-white p-6 border border-stone-200 shadow-sm space-y-2">
-          <span class="text-xs font-serif text-[#B88E4F] font-bold">01</span>
-          <h4 class="font-serif text-base text-[#23201D]">Fabric Selection</h4>
-          <p class="text-[11px] text-stone-500 font-light">Direct sourcing from authentic handloom clusters.</p>
-        </div>
-
-        <div class="bg-white p-6 border border-stone-200 shadow-sm space-y-2">
-          <span class="text-xs font-serif text-[#B88E4F] font-bold">02</span>
-          <h4 class="font-serif text-base text-[#23201D]">Design Drafting</h4>
-          <p class="text-[11px] text-stone-500 font-light">Architectural lines meeting traditional drapes.</p>
-        </div>
-
-        <div class="bg-white p-6 border border-stone-200 shadow-sm space-y-2">
-          <span class="text-xs font-serif text-[#B88E4F] font-bold">03</span>
-          <h4 class="font-serif text-base text-[#23201D]">Embroidery</h4>
-          <p class="text-[11px] text-stone-500 font-light">Hand-stitched accents, scallop laces & piping.</p>
-        </div>
-
-        <div class="bg-white p-6 border border-stone-200 shadow-sm space-y-2">
-          <span class="text-xs font-serif text-[#B88E4F] font-bold">04</span>
-          <h4 class="font-serif text-base text-[#23201D]">Printing & Dye</h4>
-          <p class="text-[11px] text-stone-500 font-light">Manual resist-dye, wave-folds & floral motifs.</p>
-        </div>
-
-        <div class="bg-white p-6 border border-stone-200 shadow-sm space-y-2">
-          <span class="text-xs font-serif text-[#B88E4F] font-bold">05</span>
-          <h4 class="font-serif text-base text-[#23201D]">Construction</h4>
-          <p class="text-[11px] text-stone-500 font-light">Tailored corsetry, clean seams & soft linings.</p>
-        </div>
-
-        <div class="bg-white p-6 border border-stone-200 shadow-sm space-y-2">
-          <span class="text-xs font-serif text-[#B88E4F] font-bold">06</span>
-          <h4 class="font-serif text-base text-[#23201D]">Quality Check</h4>
-          <p class="text-[11px] text-stone-500 font-light">Zero compromise inspection for lasting value.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 17. JOURNAL -->
-  <section id="journal" class="py-24 max-w-7xl mx-auto px-6 border-t border-[#23201D]/10">
-    <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-      <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Editorial Chronicle</span>
-      <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Marushobha Journal</h2>
-      <p class="text-[#6E665D] text-sm font-light">Conversations on textiles, styling guides, and cultural musings.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <article class="bg-white border border-stone-200 p-6 shadow-sm space-y-3">
-        <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Textile History</span>
-        <h3 class="font-serif text-xl text-[#23201D] hover:text-[#B88E4F] cursor-pointer transition-colors">The Story of Khadi: What Makes It Special?</h3>
-        <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-          How a revolutionary handspun weave became the premier breathable luxury fabric for modern women's wardrobes.
-        </p>
-      </article>
-
-      <article class="bg-white border border-stone-200 p-6 shadow-sm space-y-3">
-        <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Style Masterclass</span>
-        <h3 class="font-serif text-xl text-[#23201D] hover:text-[#B88E4F] cursor-pointer transition-colors">5 Ways to Style Your Marushobha Co-ord</h3>
-        <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-          From Monday meetings to relaxed Sunday brunch: breaking down separates to multiply your wardrobe rotation.
-        </p>
-      </article>
-
-      <article class="bg-white border border-stone-200 p-6 shadow-sm space-y-3">
-        <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Philosophy</span>
-        <h3 class="font-serif text-xl text-[#23201D] hover:text-[#B88E4F] cursor-pointer transition-colors">Why Indian Fabrics Belong in Modern Wardrobes</h3>
-        <p class="text-xs text-[#6E665D] font-light leading-relaxed">
-          Reframing heritage: moving beyond ceremonial occasions into contemporary daily dressing.
-        </p>
-      </article>
     </div>
   </section>
 
   <!-- CONTACT & ATELIER SUITE -->
   <section id="contact" class="py-24 bg-[#F4ECE1]/40 border-t border-[#23201D]/10">
     <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-      
       <div class="flex justify-center">
         <div class="rounded-sm overflow-hidden shadow-xl border border-stone-200 max-w-sm w-full bg-white">
-          <img 
-            src="WhatsApp%20Image%202026-09-06%20at%2012.18.36%20PM.jpeg" 
-            alt="Contact Marushobha" 
-            class="w-full h-auto object-cover"
-            onerror="this.onerror=null; this.src='WhatsApp%20Image%202026-09-06%20at%2012.18.36%20PM_2.jpeg'; if(!this.src) this.src='contact.jpeg';"
-          />
+          <img src="07.jpeg" alt="Contact Marushobha" class="w-full h-auto object-cover" onerror="this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80'" />
         </div>
       </div>
 
@@ -855,18 +481,6 @@
               </a>
             </div>
           </div>
-
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-full bg-[#EBDDC9]/50 flex items-center justify-center text-[#B88E4F]">
-              <i data-lucide="globe" class="w-5 h-5"></i>
-            </div>
-            <div>
-              <span class="block text-[11px] uppercase tracking-wider text-stone-400 font-medium">Official Website</span>
-              <a href="https://www.marushobha.com" class="text-sm font-medium text-[#23201D] hover:text-[#B88E4F] transition-colors">
-                www.marushobha.com
-              </a>
-            </div>
-          </div>
         </div>
 
         <div class="pt-4 border-t border-stone-200">
@@ -876,15 +490,14 @@
           </p>
         </div>
       </div>
-
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="bg-[#FAF7F2] py-14 border-t border-stone-200 text-[#23201D] text-xs">
     <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-4">
-        <img src="favicon.jpeg" alt="M" class="h-9 w-9 rounded-full object-cover border border-stone-200" onerror="this.style.display='none';" />
+      <div class="flex items-center gap-3">
+        <img src="LOGO.jpeg" alt="Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'" />
         <div>
           <span class="font-serif text-lg tracking-[0.2em] font-semibold block">MARUSHOBHA</span>
           <span class="text-[8.5px] tracking-[0.3em] text-[#B88E4F] uppercase font-medium">Custom &bull; Character &bull; Class</span>
@@ -895,16 +508,6 @@
       </p>
     </div>
   </footer>
-
-  <!-- SEARCH MODAL -->
-  <div id="searchModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white max-w-lg w-full p-6 shadow-2xl relative">
-      <button onclick="toggleSearchModal(false)" class="absolute top-4 right-4 text-stone-400 hover:text-[#23201D]"><i data-lucide="x" class="w-5 h-5"></i></button>
-      <h4 class="font-serif text-xl mb-4 text-[#23201D]">Search the Collection</h4>
-      <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search Khadi, dresses, co-ords..." class="w-full p-3 border border-stone-300 text-xs focus:outline-none focus:border-[#B88E4F]" />
-      <div id="searchResults" class="mt-4 space-y-2 text-xs max-h-60 overflow-y-auto"></div>
-    </div>
-  </div>
 
   <!-- SLIDE-OUT CART DRAWER -->
   <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden transition-opacity"></div>
@@ -937,74 +540,169 @@
     </div>
   </aside>
 
+  <!-- SEARCH MODAL -->
+  <div id="searchModal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-lg w-full p-6 shadow-2xl relative">
+      <button onclick="toggleSearchModal(false)" class="absolute top-4 right-4 text-stone-400 hover:text-[#23201D]"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <h4 class="font-serif text-xl mb-4 text-[#23201D]">Search the Collection</h4>
+      <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Search Khadi, Bandhani, dresses, co-ords..." class="w-full p-3 border border-stone-300 text-xs focus:outline-none focus:border-[#B88E4F]" />
+      <div id="searchResults" class="mt-4 space-y-2 text-xs max-h-60 overflow-y-auto"></div>
+    </div>
+  </div>
+
   <!-- FLOATING WHATSAPP CONCIERGE -->
   <a href="https://wa.me/919999999999?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20pieces." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
     <i data-lucide="message-circle" class="w-5 h-5"></i>
     <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 text-xs font-medium uppercase tracking-wider">Styling Concierge</span>
   </a>
 
-  <!-- SCRIPT DATABASE & APP LOGIC -->
   <script>
-    // Master Product Catalog with encoded filenames & robust fallbacks
     const masterCatalog = [
       {
-        id: "sunlit-rebellion",
-        name: "Sunlit Rebellion",
-        category: "Co-ords",
-        fabric: "Khadi",
-        color: "Yellow",
-        price: 4950,
-        availability: "In Stock",
-        sizes: ["XS", "S", "M", "L", "XL"],
-        tag: "A Little Bold. A Lot You.",
-        image: "WhatsApp%20Image%202026-09-06%20at%2011.03.25.jpeg",
-        description: "Crafted in breathable yellow plaid Khadi. Blends timeless tradition with modern edge featuring an off-shoulder corset neck, belt detail, and front slit skirt."
-      },
-      {
-        id: "azure-bloom",
-        name: "Azure Bloom",
+        id: "violet-leaf",
+        name: "Violet Leaf Mini Dress",
         category: "Dresses",
         fabric: "Cotton",
-        color: "Blue",
-        price: 5200,
-        availability: "In Stock",
-        sizes: ["S", "M", "L", "XL"],
-        tag: "Floral Details. A Bolder You.",
-        image: "azure.jpeg",
-        description: "Khadi cotton blend with minimal yet meaningful floral motifs, delicate back lace ties, and an intricate scallop lace hem."
-      },
-      {
-        id: "forest-muse",
-        name: "Forest Muse",
-        category: "Tops",
-        fabric: "Khadi",
-        color: "Olive",
-        price: 4950,
+        color: "Violet",
+        price: 4650,
         availability: "In Stock",
         sizes: ["XS", "S", "M", "L"],
-        tag: "Rooted In Style. Made For You.",
-        image: "WhatsApp%20Image%202026-09-06%20at%2011.03.25%20AM.jpeg",
-        description: "Earth-toned olive green striped Khadi corset top paired with a tailored black front-slit mini skirt. Sophisticated structure meets handloom ease."
+        tag: "100% Cotton &bull; Flattering Fit",
+        image: "MS00006.jpeg",
+        fallback: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80",
+        description: "Pure cotton tailored mini dress featuring a structured square neckline, angled layered corset waist, and front slit detail."
       },
       {
-        id: "buttercup-doria",
-        name: "Buttercup",
+        id: "scarlet-ruffle",
+        name: "Scarlet Ruffle Maxi Dress",
+        category: "Dresses",
+        fabric: "Bandhani",
+        color: "Red",
+        price: 5890,
+        availability: "In Stock",
+        sizes: ["XS", "S", "M", "L", "XL"],
+        tag: "Traditional Bandhani Print",
+        image: "MS00007.jpeg",
+        fallback: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=80",
+        description: "Red and white traditional Bandhani with cascading asymmetric ruffles, halter strap tie, and graceful drape."
+      },
+      {
+        id: "rose-plaid",
+        name: "Rose Plaid Open-Back Dress",
+        category: "Dresses",
+        fabric: "Cotton",
+        color: "Pink",
+        price: 4400,
+        availability: "In Stock",
+        sizes: ["S", "M", "L"],
+        tag: "Everyday Looks Better",
+        image: "MS00008.jpeg",
+        fallback: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&q=80",
+        description: "Charming pink plaid sundress with a dramatic open back, statement bow tie, square neckline, and pleated skirt."
+      },
+      {
+        id: "ajrakh-denim-set",
+        name: "Ajrakh Corset & Denim Midi",
         category: "Co-ords",
-        fabric: "Kota Doria",
-        color: "Yellow",
-        price: 3299,
+        fabric: "Denim",
+        color: "Blue",
+        price: 5950,
         availability: "In Stock",
         sizes: ["XS", "S", "M", "L", "XL"],
         tag: "Two Worlds. One Look.",
-        image: "main%20logo.jpeg",
-        description: "A playful meeting of lightweight Kota Doria and contemporary denim, designed to bring traditional Indian texture into a modern silhouette."
+        image: "MS00009.jpeg",
+        fallback: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80",
+        description: "Sweetheart corset top with floral Ajrakh bell sleeves and corset back strings, paired with a front-slit denim midi skirt."
+      },
+      {
+        id: "indigo-bandhani-set",
+        name: "Indigo Bandhani Bell & Denim Set",
+        category: "Co-ords",
+        fabric: "Bandhani",
+        color: "Blue",
+        price: 5800,
+        availability: "In Stock",
+        sizes: ["XS", "S", "M", "L"],
+        tag: "Denim &times; Indian Craft",
+        image: "MS00010.jpeg",
+        fallback: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=700&q=80",
+        description: "Indigo Bandhani flare bell-sleeve corset with ecru bodice and back lace-up strings, paired with wide-leg denim palazzo trousers."
+      },
+      {
+        id: "indigo-bow-set",
+        name: "Indigo Check Cutout Skirt Set",
+        category: "Western Wear",
+        fabric: "Cotton",
+        color: "Blue",
+        price: 4990,
+        availability: "In Stock",
+        sizes: ["XS", "S", "M", "L"],
+        tag: "Asymmetric Statement",
+        image: "MS00011.jpeg",
+        fallback: "https://images.unsplash.com/photo-1550639525-c97d455acf70?auto=format&fit=crop&w=700&q=80",
+        description: "Deep indigo textured check fabric featuring a one-shoulder oversized bow top, waist cutouts, and an asymmetric tiered ruffle skirt."
+      },
+      {
+        id: "blush-palazzo",
+        name: "Blush Corset Palazzo Set",
+        category: "Pants",
+        fabric: "Khadi",
+        color: "Beige",
+        price: 5490,
+        availability: "In Stock",
+        sizes: ["XS", "S", "M", "L", "XL"],
+        tag: "The Bottom Edit",
+        image: "MS00001.jpeg",
+        fallback: "https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=700&q=80",
+        description: "Tailored blush textured corset top with lace-up back strings paired with ultra-wide high-waisted pleated palazzo pants."
+      },
+      {
+        id: "blush-floral-trousers",
+        name: "Blush Floral String Set",
+        category: "Pants",
+        fabric: "Khadi",
+        color: "Pink",
+        price: 5490,
+        availability: "In Stock",
+        sizes: ["XS", "S", "M", "L"],
+        tag: "Side String Detail",
+        image: "MS00002.jpeg",
+        fallback: "https://images.unsplash.com/photo-1596783049557-41808b8b0e8b?auto=format&fit=crop&w=700&q=80",
+        description: "Side-string lace-up floral corset top paired with tailored black handspun Khadi wide-leg trousers."
+      },
+      {
+        id: "midnight-noir",
+        name: "Midnight Noir Kurta Set",
+        category: "Ethnic Wear",
+        fabric: "Cotton",
+        color: "Black",
+        price: 6200,
+        availability: "In Stock",
+        sizes: ["S", "M", "L", "XL"],
+        tag: "Handcrafted Cowrie Trims",
+        image: "MS00003.jpeg",
+        fallback: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80",
+        description: "All-black chikankari embroidered long tunic with waist side ties, bell sleeves, and cowrie shell pearl tassel fringe."
+      },
+      {
+        id: "mustard-sharara",
+        name: "Mustard Floral Sharara Set",
+        category: "Ethnic Wear",
+        fabric: "Cotton",
+        color: "Yellow",
+        price: 6400,
+        availability: "In Stock",
+        sizes: ["XS", "S", "M", "L", "XL"],
+        tag: "Festive Peplum & Sharara",
+        image: "MS00005.jpeg",
+        fallback: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=700&q=80",
+        description: "Saffron yellow floral peplum kurti with embellished neckline and back dori tassels, paired with flared floral sharara pants."
       }
     ];
 
     let cart = [];
-    let spotlightQty = 1;
+    let currentSpotlightSize = 'M';
 
-    // Render Master Shop Grid
     function renderShopGrid(items) {
       const grid = document.getElementById('shopCatalogGrid');
       if (items.length === 0) {
@@ -1020,7 +718,7 @@
                 src="${p.image}" 
                 alt="${p.name}" 
                 class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
-                onerror="this.onerror=null; this.src='azure.jpeg';"
+                onerror="this.onerror=null; this.src='${p.fallback}';"
               />
               <span class="absolute top-3 left-3 bg-[#23201D] text-white text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium">${p.tag}</span>
             </div>
@@ -1046,7 +744,6 @@
       lucide.createIcons();
     }
 
-    // Apply Catalog Filters
     function applyShopFilters() {
       const cat = document.getElementById('filterCategory').value;
       const fab = document.getElementById('filterFabric').value;
@@ -1080,45 +777,14 @@
       document.getElementById('mainSpotlightImg').src = src;
     }
 
-    function adjustSpotlightQty(delta) {
-      spotlightQty = Math.max(1, spotlightQty + delta);
-      document.getElementById('spotlightQty').textContent = spotlightQty;
-    }
-
-    function addToBagSpotlight() {
-      addToCart('azure-bloom', 'M', spotlightQty);
-    }
-
-    function buyNowSpotlight() {
-      addToBagSpotlight();
-      toggleCartDrawer(true);
-    }
-
-    function addBundleToBag() {
-      addToCart('azure-bloom', 'M');
-      alert("Added 'Azure Bloom Dress + Handloom Scarf + Brass Hoops' Bundle to Bag!");
-    }
-
-    function switchTab(tab) {
-      ['desc', 'care', 'ship'].forEach(t => {
-        document.getElementById(`tabContent-${t}`).classList.add('hidden');
-        document.getElementById(`tabBtn-${t}`).className = 'py-2 px-3 text-stone-500 hover:text-[#23201D]';
+    function selectSpotlightSize(btnEl, size) {
+      currentSpotlightSize = size;
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.className = 'size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium';
       });
-      document.getElementById(`tabContent-${tab}`).classList.remove('hidden');
-      document.getElementById(`tabBtn-${tab}`).className = 'py-2 px-3 border-b-2 border-[#23201D] font-semibold text-[#23201D]';
+      btnEl.className = 'size-btn px-3 py-1.5 border border-[#23201D] bg-[#23201D] text-white font-medium';
     }
 
-    function showHotspotItem(item) {
-      if (item === 'corset') alert('Inspecting: Sunlit Khadi Corset Top (₹2,499) - Off-shoulder corset cut.');
-      if (item === 'skirt') alert('Inspecting: Plaid Front-Slit Skirt (₹2,451) - Tailored with belt detail.');
-    }
-
-    function addAllHotspotLook() {
-      addToCart('sunlit-rebellion', 'M');
-      alert("Added 'The Sunlit Rebellion Look' to your bag!");
-    }
-
-    // Cart Handlers
     function addToCart(productId, size, quantity = 1) {
       const p = masterCatalog.find(item => item.id === productId);
       if (!p) return;
@@ -1158,7 +824,7 @@
           subtotal += item.price * item.quantity;
           return `
             <div class="flex gap-4 pb-4 border-b border-stone-200">
-              <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover" />
+              <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover" onerror="this.src='${item.fallback}'" />
               <div class="flex-1 space-y-1">
                 <div class="flex justify-between">
                   <h5 class="font-serif text-base font-medium text-stone-900">${item.name}</h5>
@@ -1212,13 +878,25 @@
     function handleSearch(val) {
       const results = document.getElementById('searchResults');
       if (!val.trim()) { results.innerHTML = ''; return; }
-      const hits = masterCatalog.filter(p => p.name.toLowerCase().includes(val.toLowerCase()) || p.fabric.toLowerCase().includes(val.toLowerCase()) || p.category.toLowerCase().includes(val.toLowerCase()));
+      const hits = masterCatalog.filter(p => 
+        p.name.toLowerCase().includes(val.toLowerCase()) || 
+        p.fabric.toLowerCase().includes(val.toLowerCase()) || 
+        p.category.toLowerCase().includes(val.toLowerCase())
+      );
       results.innerHTML = hits.map(h => `
         <div onclick="filterShop('category', '${h.category}'); toggleSearchModal(false);" class="p-2 hover:bg-stone-100 cursor-pointer flex justify-between">
           <span>${h.name} (${h.fabric})</span>
           <span class="font-semibold">₹${h.price}</span>
         </div>
       `).join('') || '<p class="text-stone-400">No matches found.</p>';
+    }
+
+    function showWishlistToast() {
+      alert("Wishlist feature: You have saved items in your private atelier list.");
+    }
+
+    function showAccountNotice() {
+      alert("Sign In / Atelier Account portal opens shortly.");
     }
 
     function toggleMobileNav() {

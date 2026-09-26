@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MARUSHOBHA | Custom. Character. Class. — Grace has a new address</title>
+  <title>MARUSHOBHA | Custom. Character. Class. — Heritage Wear Atelier</title>
   <meta name="description" content="Premium contemporary women's fashion inspired by Indian craftsmanship, traditional fabrics and modern silhouettes. Heritage × Modernity × Comfort × Character." />
 
   <!-- Favicon -->
@@ -52,7 +52,6 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #FAF7F2; }
     ::-webkit-scrollbar-thumb { background: #B88E4F; border-radius: 3px; }
-    .badge-blur { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
     .img-zoom { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
     .group:hover .img-zoom { transform: scale(1.05); }
   </style>
@@ -89,13 +88,13 @@
         <a href="#contact" class="hover:text-[#B88E4F] transition-colors">Contact</a>
       </nav>
 
-      <!-- Center Brand Logo & Illustrated Emblem -->
+      <!-- Center Brand Logo & Emblem -->
       <a href="#home" class="text-center group flex items-center gap-2.5 py-1">
         <img 
           src="LOGO.jpeg" 
           alt="Marushobha Emblem" 
           class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
-          onerror="this.onerror=null; this.src='favicon_2.jpeg'; if(!this.src) this.src='https://placehold.co/80x80/FAF7F2/B88E4F?text=MS';"
+          onerror="this.onerror=null; this.src='favicon_2.jpeg';"
         />
         <div class="flex flex-col text-left">
           <span class="font-serif text-xl sm:text-2xl tracking-[0.22em] font-semibold text-[#23201D] group-hover:text-[#B88E4F] transition-colors">
@@ -131,8 +130,39 @@
     </div>
   </header>
 
+  <!-- HERO SECTION -->
+  <section id="home" class="relative min-h-[92vh] flex items-center justify-center text-center overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="MAINLOGO-copy-0.jpeg" 
+        alt="Marushobha Campaign Background" 
+        class="w-full h-full object-cover object-center filter brightness-95"
+        onerror="this.onerror=null; this.src='BACKGROUND.jpeg';"
+      />
+      <!-- Soft gradient overlay that preserves background clarity -->
+      <div class="absolute inset-0 bg-gradient-to-t from-[#FAF7F2]/60 via-transparent to-black/20"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 py-32 relative z-10 space-y-6">
+      <div class="inline-flex items-center gap-3 bg-white/70 backdrop-blur-md px-5 py-2 rounded-full border border-stone-200/50 shadow-sm">
+        <span class="w-8 h-[1px] bg-[#B88E4F]"></span>
+        <span class="text-[11px] uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Heritage &times; Modernity &times; Comfort &times; Character</span>
+        <span class="w-8 h-[1px] bg-[#B88E4F]"></span>
+      </div>
+
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#shop" class="w-full sm:w-auto inline-block bg-[#23201D] text-white text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#B88E4F] transition-all duration-300 font-medium shadow-md">
+          Shop New Arrivals
+        </a>
+        <a href="#spotlight" class="w-full sm:w-auto inline-block bg-white/90 backdrop-blur-sm border border-[#23201D] text-[#23201D] text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#23201D] hover:text-white transition-all duration-300 font-medium">
+          View Spotlight Piece
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- SHOP BY CATEGORY -->
-  <section id="home" class="py-24 max-w-7xl mx-auto px-6">
+  <section class="py-24 max-w-7xl mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
       <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Visual Curations</span>
       <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">Shop By Category</h2>
@@ -179,7 +209,7 @@
     <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
       <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Atelier Catalog</span>
       <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Main Boutique</h2>
-      <p class="text-[#6E665D] text-sm font-light">Each garment is individually priced according to its craft complexity, embroidery, and handloom lineage.</p>
+      <p class="text-[#6E665D] text-sm font-light">Filter by craft tradition, category, silhouette, or fabric.</p>
     </div>
 
     <!-- Filter Bar -->
@@ -262,52 +292,61 @@
     </div>
   </section>
 
-  <!-- EDITORIAL SPOTLIGHT SUITE (Dedicated to Scarlet Ruffle Variations) -->
+  <!-- EDITORIAL SPOTLIGHT SUITE (Dynamic Piece Viewer) -->
   <section id="spotlight" class="py-24 bg-[#F4ECE1]/40 border-t border-[#23201D]/10">
     <div class="max-w-7xl mx-auto px-6">
       
       <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
         <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Spotlight Release</span>
-        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Scarlet Ruffle Edit</h2>
-        <p class="text-[#6E665D] text-sm font-light">Explore angles, tiered ruffles, and craftsmanship details of our signature release.</p>
+        <h2 id="spotlightCollectionTitle" class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Scarlet Ruffle Edit</h2>
+        <p class="text-[#6E665D] text-sm font-light">Click below to explore different individual pieces from our current curation.</p>
       </div>
 
       <div class="bg-white p-6 sm:p-12 border border-stone-200 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Big Gallery & Switcher (Strictly Scarlet Ruffle angles/closeups) -->
+        <!-- Big Gallery Preview -->
         <div class="lg:col-span-7 space-y-4">
           <div class="h-[520px] bg-stone-100 overflow-hidden relative border border-stone-200">
-            <img id="mainSpotlightImg" src="MS00007.jpeg" alt="Scarlet Ruffle Front View" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80'" />
-            <span class="absolute top-4 left-4 bg-[#23201D] text-white text-[9px] uppercase tracking-widest px-3 py-1 font-medium">Bespoke Bandhani</span>
+            <img id="mainSpotlightImg" src="MS00007.jpeg" alt="Spotlight Item" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80'" />
+            <span id="spotlightTagBadge" class="absolute top-4 left-4 bg-[#23201D] text-white text-[9px] uppercase tracking-widest px-3 py-1 font-medium">Bespoke Bandhani</span>
           </div>
 
-          <!-- Focused Thumbnails for Scarlet Ruffle Dress only -->
-          <div class="grid grid-cols-3 gap-3">
-            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F] transition-all">
-              <img src="MS00007.jpeg" alt="Full Silhouette" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
+          <!-- Thumbnail Switcher with Different Distinct Garments -->
+          <div class="grid grid-cols-6 gap-2">
+            <button onclick="selectSpotlightItem('scarlet-ruffle')" class="h-20 bg-stone-100 border-2 border-[#23201D] overflow-hidden spotlight-thumb" data-id="scarlet-ruffle">
+              <img src="MS00007.jpeg" alt="Scarlet Ruffle" class="w-full h-full object-cover object-top" />
             </button>
-            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F] transition-all opacity-80 hover:opacity-100">
-              <img src="MS00007.jpeg" alt="Tiered Ruffle Detail" class="w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
+            <button onclick="selectSpotlightItem('violet-leaf')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden spotlight-thumb" data-id="violet-leaf">
+              <img src="MS00006.jpeg" alt="Violet Leaf" class="w-full h-full object-cover object-top" />
             </button>
-            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F] transition-all opacity-80 hover:opacity-100">
-              <img src="MS00007.jpeg" alt="Halter Tie Neckline" class="w-full h-full object-cover object-bottom" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
+            <button onclick="selectSpotlightItem('rose-plaid')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden spotlight-thumb" data-id="rose-plaid">
+              <img src="MS00008.jpeg" alt="Rose Plaid" class="w-full h-full object-cover object-top" />
+            </button>
+            <button onclick="selectSpotlightItem('ajrakh-denim-set')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden spotlight-thumb" data-id="ajrakh-denim-set">
+              <img src="MS00009.jpeg" alt="Ajrakh Denim Set" class="w-full h-full object-cover object-top" />
+            </button>
+            <button onclick="selectSpotlightItem('indigo-bandhani-set')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden spotlight-thumb" data-id="indigo-bandhani-set">
+              <img src="MS00010.jpeg" alt="Bandhani Denim" class="w-full h-full object-cover object-top" />
+            </button>
+            <button onclick="selectSpotlightItem('midnight-noir')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden spotlight-thumb" data-id="midnight-noir">
+              <img src="MS00003.jpeg" alt="Midnight Noir" class="w-full h-full object-cover object-top" />
             </button>
           </div>
         </div>
 
-        <!-- Product Purchase Card -->
+        <!-- Distinct Product Purchase Card -->
         <div class="lg:col-span-5 space-y-6">
           <div>
-            <span class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Traditional Bandhani &times; Cascade Ruffles</span>
-            <h3 class="font-serif text-3xl sm:text-4xl text-[#23201D] mt-1">Scarlet Ruffle Dress</h3>
+            <span id="spotlightSubtitle" class="text-[10px] uppercase tracking-widest text-[#B88E4F] font-semibold">Traditional Bandhani &times; Cascade Ruffles</span>
+            <h3 id="spotlightTitle" class="font-serif text-3xl sm:text-4xl text-[#23201D] mt-1">Scarlet Ruffle Dress</h3>
             <div class="flex items-center gap-3 mt-2">
-              <span class="text-xl font-medium text-[#23201D]">₹5,890</span>
+              <span id="spotlightPrice" class="text-xl font-medium text-[#23201D]">₹5,890</span>
               <div class="flex items-center text-amber-500 text-xs gap-1">
                 <span>★★★★★</span>
                 <span class="text-stone-500 text-[11px]">(4.9 | 32 Reviews)</span>
               </div>
             </div>
-            <p class="text-xs text-[#6E665D] mt-2 font-light">A timeless blend of romance and elegance crafted in Bandhani perfection with graceful flowing tiers.</p>
+            <p id="spotlightDesc" class="text-xs text-[#6E665D] mt-2 font-light">A timeless blend of romance and elegance crafted in Bandhani perfection with graceful flowing tiers.</p>
           </div>
 
           <div>
@@ -315,7 +354,7 @@
               <span class="font-medium text-stone-700">Select Size:</span>
               <button onclick="alert('Size Guide: XS (32) | S (34) | M (36) | L (38) | XL (40)')" class="text-[10px] uppercase tracking-wider text-[#B88E4F] underline">Size Guide</button>
             </div>
-            <div class="flex gap-2 text-xs">
+            <div class="flex gap-2 text-xs" id="spotlightSizesContainer">
               <button onclick="selectSpotlightSize(this, 'XS')" class="size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium">XS</button>
               <button onclick="selectSpotlightSize(this, 'S')" class="size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium">S</button>
               <button onclick="selectSpotlightSize(this, 'M')" class="size-btn px-3 py-1.5 border border-[#23201D] bg-[#23201D] text-white font-medium">M</button>
@@ -325,10 +364,10 @@
           </div>
 
           <div class="space-y-3 pt-2">
-            <button onclick="addToCart('scarlet-ruffle', currentSpotlightSize)" class="w-full bg-[#23201D] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#B88E4F] transition-colors font-medium">
+            <button onclick="addSpotlightToCart()" class="w-full bg-[#23201D] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#B88E4F] transition-colors font-medium">
               Add To Bag
             </button>
-            <button onclick="addToCart('scarlet-ruffle', currentSpotlightSize); toggleCartDrawer(true);" class="w-full bg-[#B88E4F] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#966E33] transition-colors font-medium">
+            <button onclick="addSpotlightToCart(); toggleCartDrawer(true);" class="w-full bg-[#B88E4F] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#966E33] transition-colors font-medium">
               Buy It Now
             </button>
           </div>
@@ -494,7 +533,7 @@
   </div>
 
   <!-- FLOATING WHATSAPP CONCIERGE -->
-  <a href="https://wa.me/918700944947?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20pieces." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
+  <a href="https://wa.me/919999999999?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20pieces." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
     <i data-lucide="message-circle" class="w-5 h-5"></i>
     <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 text-xs font-medium uppercase tracking-wider">Styling Concierge</span>
   </a>
@@ -645,6 +684,7 @@
 
     let cart = [];
     let currentSpotlightSize = 'M';
+    let currentSpotlightId = 'scarlet-ruffle';
 
     function renderShopGrid(items) {
       const grid = document.getElementById('shopCatalogGrid');
@@ -716,8 +756,34 @@
       document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
     }
 
-    function switchGalleryImg(src) {
-      document.getElementById('mainSpotlightImg').src = src;
+    function selectSpotlightItem(id) {
+      const p = masterCatalog.find(item => item.id === id);
+      if (!p) return;
+      currentSpotlightId = id;
+
+      document.getElementById('mainSpotlightImg').src = p.image;
+      document.getElementById('spotlightCollectionTitle').textContent = p.name;
+      document.getElementById('spotlightSubtitle').textContent = `${p.fabric} &times; ${p.category}`;
+      document.getElementById('spotlightTitle').textContent = p.name;
+      document.getElementById('spotlightPrice').textContent = `₹${p.price.toLocaleString('en-IN')}`;
+      document.getElementById('spotlightDesc').textContent = p.description;
+      document.getElementById('spotlightTagBadge').textContent = p.tag;
+
+      // Update thumb borders
+      document.querySelectorAll('.spotlight-thumb').forEach(btn => {
+        if (btn.getAttribute('data-id') === id) {
+          btn.className = 'h-20 bg-stone-100 border-2 border-[#23201D] overflow-hidden spotlight-thumb';
+        } else {
+          btn.className = 'h-20 bg-stone-100 border border-stone-300 overflow-hidden spotlight-thumb';
+        }
+      });
+
+      // Update sizes buttons
+      const sizeContainer = document.getElementById('spotlightSizesContainer');
+      sizeContainer.innerHTML = p.sizes.map((sz, idx) => `
+        <button onclick="selectSpotlightSize(this, '${sz}')" class="size-btn px-3 py-1.5 border ${idx === 2 || idx === 0 ? 'border-[#23201D] bg-[#23201D] text-white' : 'border-stone-300 hover:border-[#23201D]'} font-medium">${sz}</button>
+      `).join('');
+      currentSpotlightSize = p.sizes[2] || p.sizes[0];
     }
 
     function selectSpotlightSize(btnEl, size) {
@@ -726,6 +792,10 @@
         b.className = 'size-btn px-3 py-1.5 border border-stone-300 hover:border-[#23201D] font-medium';
       });
       btnEl.className = 'size-btn px-3 py-1.5 border border-[#23201D] bg-[#23201D] text-white font-medium';
+    }
+
+    function addSpotlightToCart() {
+      addToCart(currentSpotlightId, currentSpotlightSize);
     }
 
     function addToCart(productId, size, quantity = 1) {
@@ -805,7 +875,7 @@
       const items = cart.map(i => `${i.name} (Size: ${i.size}, Qty: ${i.quantity})`).join('\n');
       const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
       const msg = encodeURIComponent(`Hello Marushobha, I would like to place an order for:\n\n${items}\n\nTotal: ₹${total.toLocaleString('en-IN')}`);
-      window.open(`https://wa.me/918700944947?text=${msg}`, '_blank');
+      window.open(`https://wa.me/919999999999?text=${msg}`, '_blank');
     }
 
     function toggleSearchModal(open) {

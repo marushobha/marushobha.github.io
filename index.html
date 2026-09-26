@@ -1,346 +1,774 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURA APPAREL | Modern Minimalist Clothing</title>
+  <title>MARUSHOBHA | Grace Has a New Address</title>
+  <meta name="description" content="Contemporary womenswear rooted in Indian craftsmanship. Where heritage meets modern expression." />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cormorant Garamond & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Montserrat"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              cream: '#FAF7F2',
+              sand: '#F3EDE2',
+              gold: '#C5A059',
+              goldDark: '#A8843E',
+              indigo: '#1A2332',
+              charcoal: '#222222',
+              muted: '#71717A',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
   <style>
-    /* CSS Reset & Base Variables */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
     }
-
-    :root {
-      --bg-color: #fcfcfc;
-      --text-color: #1a1a1a;
-      --accent-color: #555555;
-      --light-gray: #f2f2f2;
-      --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
     }
-
-    body {
-      font-family: var(--font-main);
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      line-height: 1.6;
+    ::-webkit-scrollbar-thumb {
+      background: #C5A059;
+      border-radius: 3px;
     }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Navigation Bar */
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(252, 252, 252, 0.95);
-      backdrop-filter: blur(5px);
-      border-bottom: 1px solid #eaeaea;
-      z-index: 100;
-    }
-
-    nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.2rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
-
-    .nav-links a {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: #999;
-    }
-
-    .nav-icons {
-      display: flex;
-      gap: 1.2rem;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 80vh;
-      background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),
-                  url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #ffffff;
-      padding: 0 1rem;
-    }
-
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 300;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      letter-spacing: 1px;
-      margin-bottom: 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 0.8rem 2.2rem;
-      background-color: #ffffff;
-      color: #1a1a1a;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s, color 0.3s;
-    }
-
-    .btn:hover {
-      background-color: #1a1a1a;
-      color: #ffffff;
-    }
-
-    /* Featured Products Section */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 1.8rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 3rem;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2.5rem;
-    }
-
-    .product-card {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-image {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-      background-color: var(--light-gray);
-      margin-bottom: 1rem;
-      transition: opacity 0.2s ease;
-    }
-
-    .product-card:hover .product-image {
-      opacity: 0.9;
-    }
-
-    .product-info {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      font-size: 0.95rem;
-      letter-spacing: 0.5px;
-    }
-
-    .product-name {
-      font-weight: 500;
-    }
-
-    .product-price {
-      color: var(--accent-color);
-    }
-
-    /* Footer */
-    footer {
-      background-color: #111;
-      color: #fff;
-      padding: 3rem 2rem;
-      margin-top: 4rem;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 2rem;
-    }
-
-    .footer-section h4 {
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-    }
-
-    .footer-section ul {
-      list-style: none;
-    }
-
-    .footer-section ul li {
-      margin-bottom: 0.5rem;
-      font-size: 0.85rem;
-      color: #aaa;
-    }
-
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 2rem auto 0 auto;
-      padding-top: 1.5rem;
-      border-top: 1px solid #222;
-      text-align: center;
-      font-size: 0.8rem;
-      color: #666;
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none; /* Can be replaced with a hamburger menu */
-      }
-      
-      .hero h1 {
-        font-size: 2.2rem;
-      }
+    .badge-blur {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
   </style>
 </head>
-<body>
 
-  <!-- Navigation -->
-  <header>
-    <nav>
-      <div class="logo">Aura</div>
-      <ul class="nav-links">
-        <li><a href="#new">New Arrivals</a></li>
-        <li><a href="#women">Women</a></li>
-        <li><a href="#men">Men</a></li>
-        <li><a href="#collection">Collection</a></li>
-      </ul>
-      <div class="nav-icons">
-        <span>Search</span>
-        <span>Cart (0)</span>
+<body class="bg-[#FAF7F2] text-[#222222] font-sans antialiased selection:bg-[#C5A059] selection:text-white flex flex-col min-h-screen">
+
+  <!-- TOP PROMO BANNER -->
+  <aside aria-label="Announcement" class="bg-[#1A2332] text-white text-[11px] tracking-[0.22em] uppercase py-2.5 px-4 text-center font-medium flex items-center justify-center gap-3">
+    <span>Crafted with Indian Handlooms</span>
+    <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#C5A059]"></span>
+    <span>Complimentary Shipping Pan-India Above ₹2,999</span>
+  </aside>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#222222]/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      
+      <!-- Mobile Menu Toggle Button -->
+      <button id="mobileMenuBtn" aria-label="Open Mobile Menu" class="lg:hidden p-2 text-stone-800 hover:text-[#C5A059] transition-colors focus:outline-none">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+
+      <!-- Desktop Navigation Left -->
+      <nav class="hidden lg:flex items-center space-x-8 text-[11px] tracking-[0.22em] uppercase font-medium">
+        <a href="#signature" class="hover:text-[#C5A059] transition-colors">Signature Fusion</a>
+        <a href="#collection" class="hover:text-[#C5A059] transition-colors">Boutique</a>
+        <a href="#fabrics" class="hover:text-[#C5A059] transition-colors">Fabric Stories</a>
+        <a href="#about" class="hover:text-[#C5A059] transition-colors">Our Motive</a>
+      </nav>
+
+      <!-- Brand Logo Center -->
+      <a href="#" class="text-center group flex flex-col items-center">
+        <span class="font-serif text-2xl sm:text-3xl tracking-[0.28em] font-semibold text-[#222222] group-hover:text-[#C5A059] transition-colors">
+          MARUSHOBHA
+        </span>
+        <span class="text-[9px] tracking-[0.38em] text-[#71717A] uppercase -mt-0.5">Heritage Reimagined</span>
+      </a>
+
+      <!-- Right Utility Actions -->
+      <div class="flex items-center space-x-6 text-[#222222]">
+        <a href="#contact" class="hidden sm:inline-block text-[11px] uppercase tracking-[0.2em] font-medium hover:text-[#C5A059] transition-colors">
+          Contact
+        </a>
+        <button onclick="toggleCartDrawer(true)" class="relative p-1.5 hover:text-[#C5A059] transition-colors" title="Shopping Bag">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-[#C5A059] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+        </button>
       </div>
-    </nav>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobileMenu" class="hidden lg:hidden bg-[#FAF7F2] border-b border-stone-200 px-6 py-6 space-y-4">
+      <a href="#signature" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#C5A059]">Signature Fusion</a>
+      <a href="#collection" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#C5A059]">Boutique</a>
+      <a href="#fabrics" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#C5A059]">Fabric Stories</a>
+      <a href="#about" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#C5A059]">Our Motive</a>
+      <a href="#contact" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#C5A059]">Contact</a>
+    </div>
   </header>
 
-  <!-- Hero Banner -->
-  <section class="hero">
-    <h1>Autumn Essentials</h1>
-    <p>Minimalist silhouettes crafted for everyday comfort.</p>
-    <a href="#shop" class="btn">Explore Now</a>
+  <!-- HERO SECTION -->
+  <section class="relative min-h-[85vh] flex items-center justify-center text-center px-6 py-24 bg-gradient-to-b from-[#FAF7F2] via-[#F3EDE2]/60 to-[#FAF7F2] overflow-hidden">
+    <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#1A2332]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto space-y-6 relative z-10">
+      <span class="inline-block text-xs uppercase tracking-[0.35em] text-[#C5A059] font-semibold border-b border-[#C5A059]/40 pb-1">
+        Grace Has a New Address
+      </span>
+      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-light text-[#222222] tracking-tight leading-[1.15]">
+        Indian Roots.<br />
+        <span class="italic font-normal text-[#1A2332]">Modern Silhouettes.</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-[#71717A] text-sm sm:text-base leading-relaxed font-light">
+        Why should traditional Indian fabrics be confined to traditional silhouettes? We blend the airy lightness of Kota Doria, handspun Khadi, and artisanal Bandhani with tailored denim and modern urban forms.
+      </p>
+      <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="#collection" class="w-full sm:w-auto inline-block bg-[#1A2332] text-white text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#C5A059] transition-all duration-300 font-medium shadow-sm hover:shadow-md">
+          Explore Boutique
+        </a>
+        <a href="#signature" class="w-full sm:w-auto inline-block border border-[#222222] text-[#222222] text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#222222] hover:text-white transition-all duration-300 font-medium">
+          The Signature Pairing
+        </a>
+      </div>
+    </div>
   </section>
 
-  <!-- Product Grid -->
-  <section class="container" id="shop">
-    <h2 class="section-title">Curated Selection</h2>
-    <div class="product-grid">
+  <!-- BRAND PILLARS -->
+  <section class="py-14 border-y border-[#222222]/10 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="space-y-1.5">
+        <h4 class="font-serif text-2xl font-normal text-[#222222]">Comfort</h4>
+        <p class="text-xs text-[#71717A] tracking-wider font-light">Weightless cuts crafted for continuous daily movement</p>
+      </div>
+      <div class="space-y-1.5">
+        <h4 class="font-serif text-2xl font-normal text-[#222222]">Craft</h4>
+        <p class="text-xs text-[#71717A] tracking-wider font-light">Artisanal weaves from Kota, Rajasthan & western looms</p>
+      </div>
+      <div class="space-y-1.5">
+        <h4 class="font-serif text-2xl font-normal text-[#222222]">Versatility</h4>
+        <p class="text-xs text-[#71717A] tracking-wider font-light">Desk to brunch, weekday poise to evening outings</p>
+      </div>
+      <div class="space-y-1.5">
+        <h4 class="font-serif text-2xl font-normal text-[#222222]">Character</h4>
+        <p class="text-xs text-[#71717A] tracking-wider font-light">Garments designed to carry and express your own story</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE CONCEPT: KOTA DORIA X DENIM -->
+  <section id="signature" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
       
-      <!-- Product Item 1 -->
-      <div class="product-card">
-        <img class="product-image" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Classic White Tee" />
-        <div class="product-info">
-          <span class="product-name">Heavyweight Cotton Tee</span>
-          <span class="product-price">$45.00</span>
+      <!-- Description -->
+      <div class="space-y-6">
+        <div class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#C5A059] font-medium">
+          <span class="w-8 h-[1px] bg-[#C5A059]"></span>
+          Signature Design Concept
+        </div>
+        <h2 class="font-serif text-3xl sm:text-5xl font-light text-[#222222] leading-tight">
+          Kota Doria <span class="italic font-normal text-[#C5A059]">&times;</span> Contemporary Denim
+        </h2>
+        <p class="text-[#71717A] text-sm sm:text-base leading-relaxed font-light">
+          Traditional lightness meets contemporary attitude. Kota Doria is prized for its signature square-check weave (<em class="text-[#222222] font-serif">khat</em>), rendering it weightless, airy, and translucent.
+        </p>
+        <p class="text-[#71717A] text-sm sm:text-base leading-relaxed font-light">
+          By counterbalancing this artisanal delicacy with crisp, structured modern denim, Marushobha establishes a completely fresh design language: effortlessly casual yet deeply refined.
+        </p>
+        
+        <div class="grid grid-cols-2 gap-6 pt-2">
+          <div class="border-l-2 border-[#C5A059] pl-4 space-y-1">
+            <span class="block text-xs uppercase tracking-widest text-[#71717A]">Delicate Khat Weave</span>
+            <p class="text-sm font-medium text-[#222222]">Breezy, fluid, and breathable drape</p>
+          </div>
+          <div class="border-l-2 border-[#1A2332] pl-4 space-y-1">
+            <span class="block text-xs uppercase tracking-widest text-[#71717A]">Urban Construction</span>
+            <p class="text-sm font-medium text-[#222222]">Tailored denim trousers & vests</p>
+          </div>
+        </div>
+
+        <div class="pt-4">
+          <button onclick="quickView('buttercup')" class="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] font-medium border-b border-[#222222] pb-1 hover:text-[#C5A059] hover:border-[#C5A059] transition-all">
+            Examine "Buttercup" Signature Set <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
         </div>
       </div>
 
-      <!-- Product Item 2 -->
-      <div class="product-card">
-        <img class="product-image" src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" alt="Wool Overcoat" />
-        <div class="product-info">
-          <span class="product-name">Tailored Wool Coat</span>
-          <span class="product-price">$280.00</span>
+      <!-- Conceptual Double Visual -->
+      <div class="grid grid-cols-2 gap-4 sm:gap-6">
+        <div class="space-y-3">
+          <div class="h-72 sm:h-96 bg-stone-200 overflow-hidden relative shadow-sm group">
+            <img src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=700&q=80" alt="Authentic Handloom Weave" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+            <span class="absolute bottom-3 left-3 bg-white/90 badge-blur text-[10px] tracking-widest uppercase px-3 py-1 font-medium">Textile Roots</span>
+          </div>
+          <p class="text-[11px] text-[#71717A] tracking-wide uppercase font-medium">Handloom Square Weave</p>
         </div>
-      </div>
-
-      <!-- Product Item 3 -->
-      <div class="product-card">
-        <img class="product-image" src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Oversized Knit Sweater" />
-        <div class="product-info">
-          <span class="product-name">Cashmere Blend Knit</span>
-          <span class="product-price">$120.00</span>
-        </div>
-      </div>
-
-      <!-- Product Item 4 -->
-      <div class="product-card">
-        <img class="product-image" src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=600&q=80" alt="Denim Trousers" />
-        <div class="product-info">
-          <span class="product-name">Relaxed Denim Trousers</span>
-          <span class="product-price">$95.00</span>
+        
+        <div class="space-y-3 pt-8">
+          <div class="h-72 sm:h-96 bg-stone-200 overflow-hidden relative shadow-sm group">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80" alt="Modern Tailored Silhouette" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+            <span class="absolute bottom-3 left-3 bg-[#1A2332]/90 badge-blur text-white text-[10px] tracking-widest uppercase px-3 py-1 font-medium">Urban Silhouette</span>
+          </div>
+          <p class="text-[11px] text-[#71717A] tracking-wide uppercase font-medium">Western Construction</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>About Aura</h4>
-        <p style="color: #aaa; font-size: 0.85rem; max-width: 250px;">
-          Timeless wardrobe staples designed with sustainability, form, and durability in mind.
-        </p>
+  <!-- BOUTIQUE COLLECTION / CATALOG -->
+  <section id="collection" class="py-24 bg-[#F3EDE2]/40 border-t border-[#222222]/10">
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+        <span class="text-xs uppercase tracking-[0.3em] text-[#C5A059] font-semibold">The Wardrobe Edit</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-light text-[#222222]">Curated Collections</h2>
+        <p class="text-[#71717A] text-sm font-light">Versatile pieces made to accompany you across your day's chapters.</p>
       </div>
-      <div class="footer-section">
-        <h4>Customer Care</h4>
-        <ul>
-          <li><a href="#">Shipping & Returns</a></li>
-          <li><a href="#">Size Guide</a></li>
-          <li><a href="#">Track Order</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
+
+      <!-- Filter Buttons -->
+      <div class="flex items-center justify-center flex-wrap gap-2 sm:gap-3 mb-12 text-xs uppercase tracking-[0.18em]">
+        <button onclick="filterProducts('all')" class="filter-btn active-filter px-4 py-2 border border-[#222222] bg-[#1A2332] text-white transition-all font-medium" data-filter="all">All Pieces</button>
+        <button onclick="filterProducts('signature')" class="filter-btn px-4 py-2 border border-[#222222]/20 bg-white hover:border-[#222222] transition-all font-medium text-[#71717A]" data-filter="signature">Signature Co-ords</button>
+        <button onclick="filterProducts('dresses')" class="filter-btn px-4 py-2 border border-[#222222]/20 bg-white hover:border-[#222222] transition-all font-medium text-[#71717A]" data-filter="dresses">Dresses & Sets</button>
+        <button onclick="filterProducts('khadi')" class="filter-btn px-4 py-2 border border-[#222222]/20 bg-white hover:border-[#222222] transition-all font-medium text-[#71717A]" data-filter="khadi">Khadi Studio</button>
+        <button onclick="filterProducts('bandhani')" class="filter-btn px-4 py-2 border border-[#222222]/20 bg-white hover:border-[#222222] transition-all font-medium text-[#71717A]" data-filter="bandhani">Lehariya & Bandhani</button>
       </div>
-      <div class="footer-section">
-        <h4>Follow</h4>
-        <ul>
-          <li><a href="#">Instagram</a></li>
-          <li><a href="#">Pinterest</a></li>
-          <li><a href="#">Newsletter</a></li>
-        </ul>
+
+      <!-- Product Grid -->
+      <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Products populated via JavaScript -->
       </div>
+
     </div>
-    <div class="footer-bottom">
-      &copy; 2026 Aura Apparel. All rights reserved.
+  </section>
+
+  <!-- FABRIC STORIES -->
+  <section id="fabrics" class="py-24 max-w-7xl mx-auto px-6">
+    <div class="max-w-3xl mb-14 space-y-3">
+      <span class="text-xs uppercase tracking-[0.3em] text-[#C5A059] font-medium">Textile Lineage</span>
+      <h2 class="font-serif text-3xl sm:text-5xl font-light text-[#222222]">Fabrics We Celebrate</h2>
+      <p class="text-[#71717A] text-sm sm:text-base leading-relaxed font-light">
+        We look at fabrics not as raw materials, but as cultural archives. Here are the textiles at the foundation of our silhouettes.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <!-- Fabric 1 -->
+      <div class="bg-white p-8 border border-[#222222]/10 hover:border-[#C5A059] transition-all duration-300 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="text-[11px] font-semibold text-[#C5A059] uppercase tracking-widest block mb-2">Weightless Grace</span>
+          <h3 class="font-serif text-2xl font-normal text-[#222222] mb-3">Kota Doria</h3>
+          <p class="text-xs text-[#71717A] leading-relaxed font-light">
+            Distinctive square checks called <em>khats</em> created through a delicate intertwining of fine cotton and silk threads. Imparts an airy, translucent drape without bulk.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-stone-100 flex items-center justify-between text-[11px] uppercase tracking-wider text-[#71717A]">
+          <span>Origin: Kota, Rajasthan</span>
+          <span class="font-medium text-[#222222]">Handloom</span>
+        </div>
+      </div>
+
+      <!-- Fabric 2 -->
+      <div class="bg-white p-8 border border-[#222222]/10 hover:border-[#C5A059] transition-all duration-300 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="text-[11px] font-semibold text-[#C5A059] uppercase tracking-widest block mb-2">Simplicity & Character</span>
+          <h3 class="font-serif text-2xl font-normal text-[#222222] mb-3">Handspun Khadi</h3>
+          <p class="text-xs text-[#71717A] leading-relaxed font-light">
+            Textured, breathe-easy handspun yarn that softens with each wear. We explore Khadi through sharp collars, architectural lines, and tailored coordinates.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-stone-100 flex items-center justify-between text-[11px] uppercase tracking-wider text-[#71717A]">
+          <span>Origin: Artisanal Clusters</span>
+          <span class="font-medium text-[#222222]">Handspun</span>
+        </div>
+      </div>
+
+      <!-- Fabric 3 -->
+      <div class="bg-white p-8 border border-[#222222]/10 hover:border-[#C5A059] transition-all duration-300 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="text-[11px] font-semibold text-[#C5A059] uppercase tracking-widest block mb-2">Rhythm & Color</span>
+          <h3 class="font-serif text-2xl font-normal text-[#222222] mb-3">Lehariya & Bandhani</h3>
+          <p class="text-xs text-[#71717A] leading-relaxed font-light">
+            Wave patterns and resist-dyed dots bringing centuries of celebratory flair. We temper their vibrant rhythm with minimalist cuts and neutral denim layers.
+          </p>
+        </div>
+        <div class="pt-6 mt-6 border-t border-stone-100 flex items-center justify-between text-[11px] uppercase tracking-wider text-[#71717A]">
+          <span>Origin: Western India</span>
+          <span class="font-medium text-[#222222]">Resist Dye</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BRAND STORY / OUR MOTIVE -->
+  <section id="about" class="py-24 bg-[#1A2332] text-white relative overflow-hidden">
+    <div class="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
+      
+      <span class="inline-block text-xs uppercase tracking-[0.35em] text-[#C5A059] font-medium border-b border-[#C5A059]/40 pb-1">
+        Our Motive & Belief
+      </span>
+      
+      <h2 class="font-serif text-3xl sm:text-5xl font-light leading-snug">
+        “Fashion can be modern without losing its roots.”
+      </h2>
+
+      <p class="text-stone-300 text-sm sm:text-base leading-relaxed font-light max-w-2xl mx-auto">
+        Marushobha was born from a simple question: <strong class="font-medium text-white">Why should traditional Indian fabrics be limited to traditional clothing?</strong>
+      </p>
+
+      <p class="text-stone-400 text-xs sm:text-sm leading-relaxed font-light max-w-2xl mx-auto">
+        We believe fabrics with centuries of heritage deserve a place in the contemporary everyday wardrobe. Our clothing is designed for the woman who values individuality, subtle luxury, and garments with their own voice.
+      </p>
+
+      <div class="pt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs uppercase tracking-[0.25em] text-stone-300">
+        <span class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#C5A059]"></i> Comfort</span>
+        <span class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#C5A059]"></i> Character</span>
+        <span class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-[#C5A059]"></i> Confidence</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SIGNUP -->
+  <section class="py-20 bg-stone-100/90 text-center border-b border-stone-200">
+    <div class="max-w-xl mx-auto px-6 space-y-4">
+      <span class="text-xs uppercase tracking-[0.3em] text-[#C5A059] font-semibold">The Marushobha Journal</span>
+      <h3 class="font-serif text-3xl text-[#222222] font-light">Be the First to Discover What’s Next</h3>
+      <p class="text-xs text-[#71717A] font-light leading-relaxed">
+        Receive seasonal lookbooks, fabric chronicles, and private preview access for limited edition drops.
+      </p>
+
+      <form id="newsletterForm" onsubmit="handleNewsletter(event)" class="pt-4 flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+        <input type="email" required placeholder="Enter your email address" class="flex-1 px-4 py-3 text-xs bg-white border border-stone-300 focus:outline-none focus:border-[#C5A059]" />
+        <button type="submit" class="bg-[#1A2332] text-white text-xs uppercase tracking-[0.2em] px-7 py-3 hover:bg-[#C5A059] transition-colors font-medium">
+          Subscribe
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact" class="bg-[#FAF7F2] py-16 text-[#222222] text-xs">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+      
+      <!-- Brand column -->
+      <div class="space-y-4 md:col-span-1">
+        <span class="font-serif text-2xl tracking-[0.25em] font-semibold text-[#222222] block">MARUSHOBHA</span>
+        <p class="text-[#71717A] leading-relaxed font-light">
+          Grace has a new address. Contemporary womenswear balancing traditional craft with clean urban utility.
+        </p>
+        <p class="text-stone-400 text-[11px]">&copy; 2026 Marushobha. All Rights Reserved.</p>
+      </div>
+
+      <!-- Navigation links -->
+      <div>
+        <h5 class="text-[#222222] uppercase tracking-[0.2em] font-semibold mb-4 text-[11px]">Boutique</h5>
+        <ul class="space-y-2.5 text-[#71717A]">
+          <li><a href="#signature" class="hover:text-[#C5A059] transition-colors">Buttercup × Denim Edit</a></li>
+          <li><a href="#collection" class="hover:text-[#C5A059] transition-colors">Handspun Khadi Sets</a></li>
+          <li><a href="#collection" class="hover:text-[#C5A059] transition-colors">Lehariya Wave Line</a></li>
+          <li><a href="#collection" class="hover:text-[#C5A059] transition-colors">Contemporary Co-ords</a></li>
+        </ul>
+      </div>
+
+      <!-- Customer support -->
+      <div>
+        <h5 class="text-[#222222] uppercase tracking-[0.2em] font-semibold mb-4 text-[11px]">Client Concierge</h5>
+        <ul class="space-y-2.5 text-[#71717A]">
+          <li><a href="#" class="hover:text-[#C5A059] transition-colors">Bespoke Fitting & Size Guide</a></li>
+          <li><a href="#" class="hover:text-[#C5A059] transition-colors">Complimentary Shipping Policy</a></li>
+          <li><a href="#" class="hover:text-[#C5A059] transition-colors">Artisanal Fabric Care Guide</a></li>
+          <li><a href="#" class="hover:text-[#C5A059] transition-colors">Returns & Exchange Protocol</a></li>
+        </ul>
+      </div>
+
+      <!-- Direct Contact & Atelier -->
+      <div>
+        <h5 class="text-[#222222] uppercase tracking-[0.2em] font-semibold mb-4 text-[11px]">Atelier Inquiries</h5>
+        <div class="space-y-2.5 text-[#71717A] font-light">
+          <p><span class="text-[#222222] font-medium">Email:</span> <a href="mailto:marushobha.jj@gmail.com" class="hover:text-[#C5A059] transition-colors">marushobha.jj@gmail.com</a></p>
+          <p><span class="text-[#222222] font-medium">Instagram:</span> <a href="https://instagram.com/marushobha_" target="_blank" rel="noopener noreferrer" class="hover:text-[#C5A059] transition-colors">@marushobha_</a></p>
+          <p class="pt-2 text-stone-500">Design Studio & Workshop: Jaipur &bull; Mumbai</p>
+        </div>
+      </div>
+
     </div>
   </footer>
 
+  <!-- QUICK VIEW MODAL -->
+  <div id="quickViewModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeQuickView()" class="absolute top-5 right-5 text-stone-400 hover:text-[#222222] focus:outline-none">
+        <i data-lucide="x" class="w-6 h-6"></i>
+      </button>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 items-center">
+        <div class="h-80 sm:h-96 bg-stone-100 overflow-hidden">
+          <img id="qvImage" src="" alt="" class="w-full h-full object-cover object-top" />
+        </div>
+
+        <div class="space-y-4">
+          <span id="qvTag" class="text-[10px] uppercase tracking-widest text-[#C5A059] font-semibold"></span>
+          <h3 id="qvTitle" class="font-serif text-2xl sm:text-3xl text-[#222222]"></h3>
+          <p id="qvPrice" class="text-base font-semibold text-[#1A2332]"></p>
+          <p id="qvFabric" class="text-xs uppercase tracking-wider text-[#C5A059] font-medium"></p>
+          <p id="qvDescription" class="text-xs text-[#71717A] leading-relaxed font-light"></p>
+
+          <!-- Size Selector -->
+          <div class="pt-2">
+            <span class="block text-[11px] uppercase tracking-wider text-stone-600 mb-2 font-medium">Select Size:</span>
+            <div id="qvSizes" class="flex gap-2 text-xs"></div>
+          </div>
+
+          <div class="pt-4 flex gap-3">
+            <button id="qvAddBtn" class="flex-1 bg-[#1A2332] text-white text-xs uppercase tracking-widest py-3.5 hover:bg-[#C5A059] transition-colors font-medium">
+              Add To Bag
+            </button>
+            <a id="qvWhatsappBtn" href="#" target="_blank" class="p-3 border border-stone-300 hover:border-emerald-600 text-stone-700 hover:text-emerald-600 transition-colors flex items-center justify-center" title="Inquire on WhatsApp">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE-OUT SHOPPING BAG DRAWER -->
+  <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden transition-opacity"></div>
+  <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-stone-200 flex items-center justify-between">
+      <div>
+        <h4 class="font-serif text-xl text-[#222222]">Your Shopping Bag</h4>
+        <p class="text-[11px] text-[#71717A]">Marushobha Heritage Atelier</p>
+      </div>
+      <button onclick="toggleCartDrawer(false)" class="p-1 text-stone-400 hover:text-stone-800">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Items List -->
+    <div id="cartItemsList" class="flex-1 overflow-y-auto p-6 space-y-4">
+      <div id="emptyCartMessage" class="text-center py-16 text-[#71717A] space-y-3">
+        <i data-lucide="shopping-bag" class="w-12 h-12 mx-auto stroke-1 text-stone-300"></i>
+        <p class="text-sm font-light">Your shopping bag is currently empty.</p>
+        <button onclick="toggleCartDrawer(false)" class="text-xs uppercase tracking-widest text-[#C5A059] font-medium underline">
+          Discover The Collection
+        </button>
+      </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-6 border-t border-stone-200 bg-stone-50 space-y-4">
+      <div class="flex justify-between text-xs tracking-wider uppercase text-stone-600">
+        <span>Estimated Subtotal</span>
+        <span id="cartSubtotal" class="font-semibold text-stone-900">₹0</span>
+      </div>
+      <p class="text-[11px] text-stone-400 font-light">Taxes and pan-India shipping calculated at checkout.</p>
+      <button onclick="handleCheckout()" class="w-full bg-[#1A2332] text-white text-xs uppercase tracking-[0.22em] py-4 hover:bg-[#C5A059] transition-colors font-medium">
+        Proceed to Checkout
+      </button>
+    </div>
+  </aside>
+
+  <!-- FLOATING WHATSAPP STYLING CONCIERGE -->
+  <a href="https://wa.me/919999999999?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20collection." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
+    <i data-lucide="message-circle" class="w-5 h-5"></i>
+    <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 text-xs font-medium uppercase tracking-wider">Styling Concierge</span>
+  </a>
+
+  <!-- APPLICATION SCRIPTS -->
+  <script>
+    // Product Catalog Database
+    const catalog = [
+      {
+        id: "buttercup",
+        category: "signature",
+        name: "Buttercup Ensemble",
+        fabric: "Kota Doria × Structured Denim",
+        price: 4890,
+        tag: "Signature Pairing",
+        image: "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=800&q=80",
+        description: "Light, playful, and distinct. Featuring a handwoven Kota Doria overlay paired with tailored soft denim trousers. Seamlessly transitions from workday meetings to relaxed evening gatherings.",
+        sizes: ["XS", "S", "M", "L", "XL"]
+      },
+      {
+        id: "lehariya-shift",
+        category: "bandhani",
+        name: "Lehariya Minimal Shift",
+        fabric: "Natural Cotton × Wave Dye",
+        price: 3950,
+        tag: "Hand Dyed",
+        image: "https://images.unsplash.com/photo-1596783049557-41808b8b0e8b?auto=format&fit=crop&w=800&q=80",
+        description: "Flowing diagonal wave patterns reimagined on an easy modern shift silhouette. Soft, breathable hand-spun cotton that feels effortless on the skin.",
+        sizes: ["S", "M", "L", "XL"]
+      },
+      {
+        id: "khadi-coord",
+        category: "khadi",
+        name: "Khadi Studio Co-ord",
+        fabric: "Handspun Khadi × Minimal Detailing",
+        price: 5400,
+        tag: "Sustainable Loom",
+        image: "https://images.unsplash.com/photo-1550639525-c97d455acf70?auto=format&fit=crop&w=800&q=80",
+        description: "Structured jacket-style tunic with wide-leg trousers. Naturally textured raw character built for understated elegance and enduring comfort.",
+        sizes: ["XS", "S", "M", "L"]
+      },
+      {
+        id: "bandhani-dress",
+        category: "bandhani",
+        name: "Bandhani Tiered Dress",
+        fabric: "Hand-tied Bandhani × Lightweight Linen",
+        price: 4600,
+        tag: "Artisanal",
+        image: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80",
+        description: "Classic micro-tie resist dye motifs arranged on modern airy tiers. Finished with delicate hand-stitched detailing along the neckline and hem.",
+        sizes: ["S", "M", "L"]
+      },
+      {
+        id: "doria-tunic",
+        category: "dresses",
+        name: "Kota Doria Sheer Tunic",
+        fabric: "Pure Kota Doria × Breathable Cotton Slip",
+        price: 3800,
+        tag: "Weightless",
+        image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=800&q=80",
+        description: "Airy translucent sheer tunic accented with the signature khat weave. Delivered with a tone-on-tone soft cotton inner slip for versatile styling.",
+        sizes: ["XS", "S", "M", "L", "XL"]
+      },
+      {
+        id: "denim-fusion-vest",
+        category: "signature",
+        name: "Heritage Denim Fusion Vest",
+        fabric: "Washed Denim × Lehariya Piping",
+        price: 3200,
+        tag: "Statement Cut",
+        image: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80",
+        description: "A tailored western denim vest elevated with artisanal Lehariya wave-pattern binding along the lapels and inside seams.",
+        sizes: ["S", "M", "L"]
+      }
+    ];
+
+    // Shopping Bag State
+    let cart = [];
+    let selectedSize = 'M';
+
+    // Render Product Catalog
+    function renderProducts(items) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = items.map(product => `
+        <div class="group bg-white p-4 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-stone-100">
+          <div>
+            <div class="h-96 w-full bg-stone-100 overflow-hidden relative">
+              <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+              <span class="absolute top-3 left-3 bg-[#1A2332] text-white text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium">${product.tag}</span>
+              <button onclick="quickView('${product.id}')" class="absolute bottom-3 right-3 bg-white/95 text-[#222222] p-2.5 shadow-md hover:bg-[#C5A059] hover:text-white transition-colors" title="Quick View">
+                <i data-lucide="eye" class="w-4 h-4"></i>
+              </button>
+            </div>
+            
+            <div class="pt-5 space-y-1">
+              <div class="flex justify-between items-baseline">
+                <h3 class="font-serif text-xl font-medium text-[#222222]">${product.name}</h3>
+                <span class="text-sm font-semibold text-[#1A2332]">₹${product.price.toLocaleString('en-IN')}</span>
+              </div>
+              <p class="text-xs text-[#C5A059] uppercase tracking-wider font-medium">${product.fabric}</p>
+              <p class="text-xs text-[#71717A] line-clamp-2 pt-1 font-light leading-relaxed">${product.description}</p>
+            </div>
+          </div>
+
+          <div class="pt-5 mt-4 border-t border-stone-100 flex items-center justify-between">
+            <span class="text-[11px] text-[#71717A] uppercase tracking-widest">${product.sizes.join(' • ')}</span>
+            <button onclick="addToCart('${product.id}', '${product.sizes[0]}')" class="text-xs uppercase tracking-widest font-semibold text-[#1A2332] hover:text-[#C5A059] transition-colors flex items-center gap-1">
+              Add To Bag <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // Filter Products
+    function filterProducts(category) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === category) {
+          btn.classList.add('bg-[#1A2332]', 'text-white', 'border-[#222222]');
+          btn.classList.remove('bg-white', 'text-[#71717A]');
+        } else {
+          btn.classList.remove('bg-[#1A2332]', 'text-white', 'border-[#222222]');
+          btn.classList.add('bg-white', 'text-[#71717A]');
+        }
+      });
+
+      if (category === 'all') {
+        renderProducts(catalog);
+      } else {
+        const filtered = catalog.filter(item => item.category === category);
+        renderProducts(filtered);
+      }
+    }
+
+    // Quick View Modal
+    function quickView(productId) {
+      const item = catalog.find(p => p.id === productId);
+      if (!item) return;
+
+      document.getElementById('qvImage').src = item.image;
+      document.getElementById('qvImage').alt = item.name;
+      document.getElementById('qvTag').textContent = item.tag;
+      document.getElementById('qvTitle').textContent = item.name;
+      document.getElementById('qvPrice').textContent = `₹${item.price.toLocaleString('en-IN')}`;
+      document.getElementById('qvFabric').textContent = item.fabric;
+      document.getElementById('qvDescription').textContent = item.description;
+
+      selectedSize = item.sizes[0];
+      const sizesContainer = document.getElementById('qvSizes');
+      sizesContainer.innerHTML = item.sizes.map(size => `
+        <button onclick="selectSize(this, '${size}')" class="size-btn px-3 py-1.5 border ${size === selectedSize ? 'border-[#1A2332] bg-[#1A2332] text-white' : 'border-stone-300 text-stone-700 hover:border-stone-500'} uppercase font-medium">
+          ${size}
+        </button>
+      `).join('');
+
+      document.getElementById('qvAddBtn').onclick = () => {
+        addToCart(item.id, selectedSize);
+        closeQuickView();
+      };
+
+      const waText = encodeURIComponent(`Hello Marushobha, I am interested in inquiring about the "${item.name}" (₹${item.price}).`);
+      document.getElementById('qvWhatsappBtn').href = `https://wa.me/919999999999?text=${waText}`;
+
+      document.getElementById('quickViewModal').classList.remove('hidden');
+    }
+
+    function selectSize(btnEl, size) {
+      selectedSize = size;
+      document.querySelectorAll('.size-btn').forEach(b => {
+        b.className = 'size-btn px-3 py-1.5 border border-stone-300 text-stone-700 hover:border-stone-500 uppercase font-medium';
+      });
+      btnEl.className = 'size-btn px-3 py-1.5 border border-[#1A2332] bg-[#1A2332] text-white uppercase font-medium';
+    }
+
+    function closeQuickView() {
+      document.getElementById('quickViewModal').classList.add('hidden');
+    }
+
+    // Shopping Bag Functions
+    function addToCart(productId, size) {
+      const product = catalog.find(p => p.id === productId);
+      if (!product) return;
+
+      const existingIndex = cart.findIndex(i => i.id === productId && i.size === size);
+      if (existingIndex > -1) {
+        cart[existingIndex].quantity += 1;
+      } else {
+        cart.push({ ...product, size: size, quantity: 1 });
+      }
+
+      updateCartUI();
+      toggleCartDrawer(true);
+    }
+
+    function updateCartQuantity(index, delta) {
+      cart[index].quantity += delta;
+      if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+      document.getElementById('cartCountBadge').textContent = totalCount;
+
+      const itemsContainer = document.getElementById('cartItemsList');
+      const emptyMsg = document.getElementById('emptyCartMessage');
+
+      if (cart.length === 0) {
+        emptyMsg.classList.remove('hidden');
+        itemsContainer.innerHTML = '';
+        itemsContainer.appendChild(emptyMsg);
+        document.getElementById('cartSubtotal').textContent = '₹0';
+      } else {
+        emptyMsg.classList.add('hidden');
+        let subtotal = 0;
+
+        itemsContainer.innerHTML = cart.map((item, index) => {
+          subtotal += item.price * item.quantity;
+          return `
+            <div class="flex gap-4 pb-4 border-b border-stone-200">
+              <img src="${item.image}" alt="${item.name}" class="w-16 h-20 object-cover" />
+              <div class="flex-1 space-y-1">
+                <div class="flex justify-between">
+                  <h5 class="font-serif text-base font-medium text-stone-900">${item.name}</h5>
+                  <span class="text-xs font-semibold">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
+                </div>
+                <p class="text-[11px] text-[#C5A059] uppercase">${item.size} &bull; ${item.fabric.split('×')[0]}</p>
+                <div class="flex items-center gap-2 pt-2">
+                  <button onclick="updateCartQuantity(${index}, -1)" class="w-6 h-6 border border-stone-300 flex items-center justify-center text-xs hover:bg-stone-100">-</button>
+                  <span class="text-xs font-medium px-2">${item.quantity}</span>
+                  <button onclick="updateCartQuantity(${index}, 1)" class="w-6 h-6 border border-stone-300 flex items-center justify-center text-xs hover:bg-stone-100">+</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        document.getElementById('cartSubtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+      }
+      lucide.createIcons();
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cartDrawer');
+      const backdrop = document.getElementById('cartDrawerBackdrop');
+      if (open) {
+        backdrop.classList.remove('hidden');
+        setTimeout(() => drawer.classList.remove('translate-x-full'), 10);
+      } else {
+        drawer.classList.add('translate-x-full');
+        setTimeout(() => backdrop.classList.add('hidden'), 300);
+      }
+    }
+
+    function handleCheckout() {
+      if (cart.length === 0) {
+        alert("Your shopping bag is empty.");
+        return;
+      }
+      const itemsText = cart.map(i => `${i.name} (Size: ${i.size}, Qty: ${i.quantity})`).join('\n');
+      const total = cart.reduce((sum, i) => sum + i.price * i.quantity, 0);
+      const checkoutMsg = encodeURIComponent(`Hello Marushobha, I would like to place an order for:\n\n${itemsText}\n\nTotal: ₹${total.toLocaleString('en-IN')}`);
+      window.open(`https://wa.me/919999999999?text=${checkoutMsg}`, '_blank');
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      alert("Welcome to the Marushobha Journal. Thank you for subscribing.");
+      e.target.reset();
+    }
+
+    function toggleMobileNav() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+
+    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileNav);
+
+    // Initial Load
+    renderProducts(catalog);
+    lucide.createIcons();
+  </script>
 </body>
 </html>

@@ -53,17 +53,6 @@
     ::-webkit-scrollbar-track { background: #FAF7F2; }
     ::-webkit-scrollbar-thumb { background: #B88E4F; border-radius: 3px; }
     .badge-blur { backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-    .hotspot-pulse::before {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 9999px;
-      background-color: rgba(184, 142, 79, 0.4);
-      animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
-    }
-    @keyframes ping {
-      75%, 100% { transform: scale(2); opacity: 0; }
-    }
     .img-zoom { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
     .group:hover .img-zoom { transform: scale(1.05); }
   </style>
@@ -142,46 +131,8 @@
     </div>
   </header>
 
-  <!-- HERO SECTION (Grace has a new address moved below main title) -->
-  <section id="home" class="relative min-h-[90vh] flex items-center justify-center text-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <img 
-        src="MAINLOGO-copy-0.jpeg" 
-        alt="Marushobha Campaign Background" 
-        class="w-full h-full object-cover object-center filter brightness-[0.88]"
-        onerror="this.onerror=null; this.src='BACKGROUND.jpeg'; if(!this.src) this.src='https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1800&q=80';"
-      />
-      <div class="absolute inset-0 bg-gradient-to-t from-[#FAF7F2] via-[#FAF7F2]/45 to-[#23201D]/40"></div>
-    </div>
-
-    <div class="max-w-4xl mx-auto px-6 py-28 relative z-10 space-y-6">
-      <div class="inline-flex items-center gap-3">
-        <span class="w-10 h-[1px] bg-[#B88E4F]"></span>
-        <span class="text-xs uppercase tracking-[0.35em] text-[#B88E4F] font-semibold">Heritage &times; Modernity &times; Comfort &times; Character</span>
-        <span class="w-10 h-[1px] bg-[#B88E4F]"></span>
-      </div>
-
-      <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-[#23201D] tracking-tight leading-[1.08]">
-        Contemporary Craft <span class="italic font-normal text-[#966E33] block mt-2">Redefined.</span>
-      </h1>
-
-      <p class="max-w-2xl mx-auto text-[#23201D]/90 text-sm sm:text-base leading-relaxed font-light">
-        Grace has a new address. Discover womenswear rooted in Indian heritage, modern silhouettes, and thoughtful artisan details.
-      </p>
-
-      <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#shop" class="w-full sm:w-auto inline-block bg-[#23201D] text-white text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#B88E4F] transition-all duration-300 font-medium shadow-md">
-          Shop New Arrivals
-        </a>
-        <a href="#spotlight" class="w-full sm:w-auto inline-block bg-white/90 backdrop-blur-sm border border-[#23201D] text-[#23201D] text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#23201D] hover:text-white transition-all duration-300 font-medium">
-          View Spotlight Look
-        </a>
-      </div>
-    </div>
-  </section>
-
   <!-- SHOP BY CATEGORY -->
-  <section class="py-24 max-w-7xl mx-auto px-6">
+  <section id="home" class="py-24 max-w-7xl mx-auto px-6">
     <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
       <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Visual Curations</span>
       <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">Shop By Category</h2>
@@ -311,43 +262,35 @@
     </div>
   </section>
 
-  <!-- EDITORIAL SPOTLIGHT SUITE -->
+  <!-- EDITORIAL SPOTLIGHT SUITE (Dedicated to Scarlet Ruffle Variations) -->
   <section id="spotlight" class="py-24 bg-[#F4ECE1]/40 border-t border-[#23201D]/10">
     <div class="max-w-7xl mx-auto px-6">
       
       <div class="text-center max-w-2xl mx-auto mb-14 space-y-3">
         <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Spotlight Release</span>
         <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Scarlet Ruffle Edit</h2>
-        <p class="text-[#6E665D] text-sm font-light">Interactive preview with multi-angle gallery and size selection.</p>
+        <p class="text-[#6E665D] text-sm font-light">Explore angles, tiered ruffles, and craftsmanship details of our signature release.</p>
       </div>
 
       <div class="bg-white p-6 sm:p-12 border border-stone-200 shadow-md grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Big Gallery & Switcher -->
+        <!-- Big Gallery & Switcher (Strictly Scarlet Ruffle angles/closeups) -->
         <div class="lg:col-span-7 space-y-4">
           <div class="h-[520px] bg-stone-100 overflow-hidden relative border border-stone-200">
-            <img id="mainSpotlightImg" src="MS00007.jpeg" alt="Scarlet Ruffle" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80'" />
+            <img id="mainSpotlightImg" src="MS00007.jpeg" alt="Scarlet Ruffle Front View" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=800&q=80'" />
             <span class="absolute top-4 left-4 bg-[#23201D] text-white text-[9px] uppercase tracking-widest px-3 py-1 font-medium">Bespoke Bandhani</span>
           </div>
 
-          <div class="grid grid-cols-6 gap-2">
-            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="MS00007.jpeg" alt="Scarlet Ruffle" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
+          <!-- Focused Thumbnails for Scarlet Ruffle Dress only -->
+          <div class="grid grid-cols-3 gap-3">
+            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F] transition-all">
+              <img src="MS00007.jpeg" alt="Full Silhouette" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
             </button>
-            <button onclick="switchGalleryImg('MS00006.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="MS00006.jpeg" alt="Violet Leaf" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=400&q=80'" />
+            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F] transition-all opacity-80 hover:opacity-100">
+              <img src="MS00007.jpeg" alt="Tiered Ruffle Detail" class="w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
             </button>
-            <button onclick="switchGalleryImg('MS00008.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="MS00008.jpeg" alt="Rose Plaid" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=400&q=80'" />
-            </button>
-            <button onclick="switchGalleryImg('MS00009.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="MS00009.jpeg" alt="Ajrakh Denim Set" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=400&q=80'" />
-            </button>
-            <button onclick="switchGalleryImg('MS00010.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="MS00010.jpeg" alt="Bandhani Denim" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?auto=format&fit=crop&w=400&q=80'" />
-            </button>
-            <button onclick="switchGalleryImg('MS00011.jpeg')" class="h-20 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F]">
-              <img src="MS00011.jpeg" alt="Indigo Bow" class="w-full h-full object-cover object-top" onerror="this.src='https://images.unsplash.com/photo-1550639525-c97d455acf70?auto=format&fit=crop&w=400&q=80'" />
+            <button onclick="switchGalleryImg('MS00007.jpeg')" class="h-24 bg-stone-100 border border-stone-300 overflow-hidden hover:border-[#B88E4F] transition-all opacity-80 hover:opacity-100">
+              <img src="MS00007.jpeg" alt="Halter Tie Neckline" class="w-full h-full object-cover object-bottom" onerror="this.src='https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=400&q=80'" />
             </button>
           </div>
         </div>
@@ -551,7 +494,7 @@
   </div>
 
   <!-- FLOATING WHATSAPP CONCIERGE -->
-  <a href="https://wa.me/919999999999?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20pieces." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
+  <a href="https://wa.me/918700944947?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20pieces." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
     <i data-lucide="message-circle" class="w-5 h-5"></i>
     <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 text-xs font-medium uppercase tracking-wider">Styling Concierge</span>
   </a>
@@ -862,7 +805,7 @@
       const items = cart.map(i => `${i.name} (Size: ${i.size}, Qty: ${i.quantity})`).join('\n');
       const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
       const msg = encodeURIComponent(`Hello Marushobha, I would like to place an order for:\n\n${items}\n\nTotal: ₹${total.toLocaleString('en-IN')}`);
-      window.open(`https://wa.me/919999999999?text=${msg}`, '_blank');
+      window.open(`https://wa.me/918700944947?text=${msg}`, '_blank');
     }
 
     function toggleSearchModal(open) {

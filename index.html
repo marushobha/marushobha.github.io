@@ -81,20 +81,19 @@
       <nav class="hidden lg:flex items-center space-x-7 text-[11px] tracking-[0.22em] uppercase font-medium">
         <a href="#home" class="hover:text-[#B88E4F] transition-colors">Home</a>
         <a href="#shop" class="hover:text-[#B88E4F] transition-colors">Shop</a>
-        <a href="#collections" class="hover:text-[#B88E4F] transition-colors">Collections</a>
-        <a href="#ruffles" class="hover:text-[#B88E4F] transition-colors">Ruffle Dresses</a>
+        <a href="#spotlight" class="hover:text-[#B88E4F] transition-colors">Scarlet Edit</a>
         <a href="#fabrics" class="hover:text-[#B88E4F] transition-colors">Our Fabrics</a>
         <a href="#story" class="hover:text-[#B88E4F] transition-colors">Our Story</a>
         <a href="#contact" class="hover:text-[#B88E4F] transition-colors">Contact</a>
       </nav>
 
-      <!-- Center Brand Logo & Emblem (Fully Visible) -->
-      <a href="#home" class="text-center group flex items-center gap-2.5 py-1">
+      <!-- Center Brand Logo & Emblem -->
+      <a href="#home" class="text-center group flex items-center gap-3 py-1">
         <img 
-          src="LOGO.jpeg" 
+          src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=300&q=80" 
           alt="Marushobha Emblem" 
-          class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105 duration-300"
-          onerror="this.onerror=null; this.src='favicon_2.jpeg';"
+          class="h-12 w-12 rounded-full object-cover border border-[#B88E4F]/40 shadow-sm transition-transform group-hover:scale-105 duration-300"
+          onerror="this.onerror=null; this.src='LOGO.jpeg';"
         />
         <div class="flex flex-col text-left">
           <span class="font-serif text-xl sm:text-2xl tracking-[0.22em] font-semibold text-[#23201D] group-hover:text-[#B88E4F] transition-colors">
@@ -122,16 +121,15 @@
     <div id="mobileMenu" class="hidden lg:hidden bg-[#FAF7F2] border-b border-stone-200 px-6 py-6 space-y-4 shadow-xl">
       <a href="#home" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Home</a>
       <a href="#shop" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Shop</a>
-      <a href="#collections" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Collections</a>
-      <a href="#ruffles" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Ruffle Dresses</a>
+      <a href="#spotlight" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Scarlet Edit</a>
       <a href="#fabrics" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Our Fabrics</a>
       <a href="#story" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Our Story</a>
       <a href="#contact" onclick="toggleMobileNav()" class="block text-xs uppercase tracking-widest py-1 font-medium hover:text-[#B88E4F]">Contact</a>
     </div>
   </header>
 
-  <!-- HERO SECTION (Clean, Unobscured Background, No Over-Writing) -->
-  <section id="home" class="relative min-h-[92vh] flex items-end justify-center text-center overflow-hidden pb-16">
+  <!-- HERO SECTION (Fully visible background image, zero text over-writing) -->
+  <section id="home" class="relative min-h-[92vh] flex items-end justify-center text-center overflow-hidden pb-12">
     <div class="absolute inset-0 z-0">
       <img 
         src="MAINLOGO-copy-0.jpeg" 
@@ -139,25 +137,17 @@
         class="w-full h-full object-cover object-center filter brightness-100"
         onerror="this.onerror=null; this.src='BACKGROUND.jpeg';"
       />
-      <!-- Subtle bottom gradient only to frame buttons -->
-      <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#FAF7F2]/90 to-transparent"></div>
+      <!-- Soft gradient frame at the bottom for navigation buttons only -->
+      <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#FAF7F2]/80 to-transparent"></div>
     </div>
 
-    <div class="max-w-4xl mx-auto px-6 relative z-10 space-y-4">
-      <div class="inline-flex items-center gap-3 bg-white/80 backdrop-blur-md px-6 py-2.5 rounded-full border border-stone-200/60 shadow-sm">
-        <span class="w-8 h-[1px] bg-[#B88E4F]"></span>
-        <span class="text-[11px] uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Heritage &times; Modernity &times; Comfort &times; Character</span>
-        <span class="w-8 h-[1px] bg-[#B88E4F]"></span>
-      </div>
-
-      <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <a href="#shop" class="w-full sm:w-auto inline-block bg-[#23201D] text-white text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#B88E4F] transition-all duration-300 font-medium shadow-md">
-          Shop New Arrivals
-        </a>
-        <a href="#ruffles" class="w-full sm:w-auto inline-block bg-white/90 backdrop-blur-sm border border-[#23201D] text-[#23201D] text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#23201D] hover:text-white transition-all duration-300 font-medium">
-          Explore Ruffle Dresses
-        </a>
-      </div>
+    <div class="max-w-4xl mx-auto px-6 relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="#shop" class="w-full sm:w-auto inline-block bg-[#23201D] text-white text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#B88E4F] transition-all duration-300 font-medium shadow-md">
+        Shop New Arrivals
+      </a>
+      <a href="#spotlight" class="w-full sm:w-auto inline-block bg-white/90 backdrop-blur-sm border border-[#23201D] text-[#23201D] text-xs uppercase tracking-[0.25em] px-9 py-4 hover:bg-[#23201D] hover:text-white transition-all duration-300 font-medium">
+        View Scarlet Ruffle Edit
+      </a>
     </div>
   </section>
 
@@ -204,17 +194,17 @@
     </div>
   </section>
 
-  <!-- DEDICATED RUFFLE DRESSES SUITE (Each Dress Separate) -->
-  <section id="ruffles" class="py-24 bg-[#F4ECE1]/40 border-t border-[#23201D]/10">
+  <!-- THE SCARLET RUFFLE EDIT (Separated Image-wise Individual Cards) -->
+  <section id="spotlight" class="py-24 bg-[#F4ECE1]/40 border-t border-[#23201D]/10">
     <div class="max-w-7xl mx-auto px-6">
       <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-        <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Signature Silhouettes</span>
-        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Ruffle Dress Edit</h2>
-        <p class="text-[#6E665D] text-sm font-light">Each unique dress features its own distinct craft, fabric drape, and individual purchase option.</p>
+        <span class="text-xs uppercase tracking-[0.3em] text-[#B88E4F] font-semibold">Curated Spotlight</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-normal text-[#23201D]">The Scarlet Ruffle Edit</h2>
+        <p class="text-[#6E665D] text-sm font-light">Each distinct ruffle design is showcased in its own independent card with unique pricing and options.</p>
       </div>
 
-      <div id="ruffleDressesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Dynamically populated unique ruffle dresses -->
+      <div id="scarletRuffleGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Dynamically rendered individual separate ruffle pieces -->
       </div>
     </div>
   </section>
@@ -408,7 +398,7 @@
   <footer class="bg-[#FAF7F2] py-14 border-t border-stone-200 text-[#23201D] text-xs">
     <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
       <div class="flex items-center gap-3">
-        <img src="LOGO.jpeg" alt="Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'" />
+        <img src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=150&q=80" alt="Logo" class="h-10 w-10 rounded-full object-cover" onerror="this.style.display='none'" />
         <div>
           <span class="font-serif text-lg tracking-[0.2em] font-semibold block">MARUSHOBHA</span>
           <span class="text-[8.5px] tracking-[0.3em] text-[#B88E4F] uppercase font-medium">Custom &bull; Character &bull; Class</span>
@@ -462,27 +452,13 @@
   </div>
 
   <!-- FLOATING WHATSAPP CONCIERGE -->
-  <a href="https://wa.me/919999999999?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20pieces." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
+  <a href="https://wa.me/918700944947?text=Hello%20Marushobha,%20I%20would%20like%20to%20inquire%20about%20your%20pieces." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3.5 rounded-full shadow-lg hover:bg-[#20b858] transition-transform hover:scale-105 flex items-center gap-2 group" title="Chat with Stylist">
     <i data-lucide="message-circle" class="w-5 h-5"></i>
     <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 text-xs font-medium uppercase tracking-wider">Styling Concierge</span>
   </a>
 
   <script>
     const masterCatalog = [
-      {
-        id: "violet-leaf",
-        name: "Violet Leaf Ruffle Dress",
-        category: "Dresses",
-        fabric: "Cotton",
-        color: "Violet",
-        price: 4650,
-        availability: "In Stock",
-        sizes: ["XS", "S", "M", "L"],
-        tag: "100% Cotton &bull; Ruffle Hem",
-        image: "MS00006.jpeg",
-        fallback: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80",
-        description: "Pure cotton tailored mini dress featuring a structured square neckline, angled layered corset waist, and graceful ruffle skirt tiers."
-      },
       {
         id: "scarlet-ruffle",
         name: "Scarlet Ruffle Maxi Dress",
@@ -496,6 +472,20 @@
         image: "MS00007.jpeg",
         fallback: "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=80",
         description: "Red and white traditional Bandhani with cascading asymmetric ruffles, halter strap tie, and flowing silhouette."
+      },
+      {
+        id: "violet-leaf",
+        name: "Violet Leaf Ruffle Dress",
+        category: "Dresses",
+        fabric: "Cotton",
+        color: "Violet",
+        price: 4650,
+        availability: "In Stock",
+        sizes: ["XS", "S", "M", "L"],
+        tag: "100% Cotton &bull; Ruffle Hem",
+        image: "MS00006.jpeg",
+        fallback: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80",
+        description: "Pure cotton tailored mini dress featuring a structured square neckline, angled layered corset waist, and graceful ruffle skirt tiers."
       },
       {
         id: "rose-plaid",
@@ -613,15 +603,14 @@
 
     let cart = [];
 
-    function renderRuffleDresses() {
-      const ruffleContainer = document.getElementById('ruffleDressesGrid');
-      // Filter for dresses featuring ruffles
-      const ruffleItems = masterCatalog.filter(p => p.category === 'Dresses');
+    function renderScarletEdit() {
+      const container = document.getElementById('scarletRuffleGrid');
+      const items = masterCatalog.filter(p => ['scarlet-ruffle', 'violet-leaf', 'rose-plaid'].includes(p.id));
 
-      ruffleContainer.innerHTML = ruffleItems.map(d => `
+      container.innerHTML = items.map(d => `
         <div class="group bg-white p-5 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between border border-stone-200">
           <div>
-            <div class="h-[420px] w-full bg-stone-100 overflow-hidden relative mb-4">
+            <div class="h-[440px] w-full bg-stone-100 overflow-hidden relative mb-4">
               <img src="${d.image}" alt="${d.name}" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" onerror="this.src='${d.fallback}'" />
               <span class="absolute top-3 left-3 bg-[#23201D] text-white text-[9px] uppercase tracking-widest px-2.5 py-1 font-medium">${d.tag}</span>
             </div>
@@ -793,7 +782,7 @@
       const items = cart.map(i => `${i.name} (Size: ${i.size}, Qty: ${i.quantity})`).join('\n');
       const total = cart.reduce((s, i) => s + i.price * i.quantity, 0);
       const msg = encodeURIComponent(`Hello Marushobha, I would like to place an order for:\n\n${items}\n\nTotal: ₹${total.toLocaleString('en-IN')}`);
-      window.open(`https://wa.me/919999999999?text=${msg}`, '_blank');
+      window.open(`https://wa.me/918700944947?text=${msg}`, '_blank');
     }
 
     function toggleSearchModal(open) {
@@ -836,7 +825,7 @@
     document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileNav);
 
     // Initial Render
-    renderRuffleDresses();
+    renderScarletEdit();
     renderShopGrid(masterCatalog);
     lucide.createIcons();
   </script>

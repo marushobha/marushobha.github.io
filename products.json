@@ -1,0 +1,279 @@
+[
+  {
+    "id": 1,
+    "slug": "boat-neck-halter-dress",
+    "name": "Boat-Neck Halter Dress",
+    "description": "A floral-print dress featuring a halter neckline with a back-neck tie, a fitted waist, and a flared skirt for a playful and elegant look.",
+    "colour": "Floral",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Not specified",
+    "care": "Follow the garment care label. Handle the printed fabric gently and avoid harsh bleach.",
+    "category": "Western Collection",
+    "tag": "Floral · Halter Neck",
+    "images": [
+      {
+        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg",
+        "alt": "Boat-Neck Halter Dress product view"
+      },
+      {
+        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-model-views.png",
+        "alt": "Boat-Neck Halter Dress product view"
+      },
+      {
+        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-detail-views.png",
+        "alt": "Boat-Neck Halter Dress product view"
+      }
+    ],
+    "img": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg"
+  },
+  {
+    "id": 2,
+    "slug": "mustard-muse-shirt",
+    "name": "Mustard Muse Shirt",
+    "description": "A mustard-checkered shirt made from handwoven cotton, featuring a contrasting brown pocket, wooden buttons, statement flared cuffs, and brown piping for a modern, effortless look.",
+    "colour": "Mustard",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "category": "Western Collection",
+    "tag": "Handwoven Cotton · Checked",
+    "images": [
+      {
+        "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg",
+        "alt": "Mustard Muse Shirt product view"
+      },
+      {
+        "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-front-view.png",
+        "alt": "Mustard Muse Shirt product view"
+      }
+    ],
+    "img": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg"
+  },
+  {
+    "id": 3,
+    "slug": "bow-palazzo-pants",
+    "name": "Bow Palazzo Pants",
+    "description": "A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist, paired with a sleeveless plum top for an elegant, contemporary look.",
+    "colour": "Olive Green",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton (as provided)",
+    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "category": "Western Collection",
+    "tag": "Handwoven Cotton · Wide Leg",
+    "images": [
+      {
+        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg",
+        "alt": "Bow Palazzo Pants product view"
+      },
+      {
+        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-model-views.png",
+        "alt": "Bow Palazzo Pants product view"
+      },
+      {
+        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-detail-views.png",
+        "alt": "Bow Palazzo Pants product view"
+      }
+    ],
+    "img": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg"
+  },
+  {
+    "id": 4,
+    "slug": "chashni-set",
+    "name": "Chashni Set",
+    "description": "A feminine pink off-shoulder top made from handwoven cotton, featuring a delicate ruffled neckline, paired with flowing white wide-leg pants made from handwoven cotton for a soft, elegant, and effortless look.",
+    "colour": "Pink and White",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "category": "Western Collection",
+    "tag": "Handwoven Cotton · Two-Piece Set",
+    "images": [
+      {
+        "src": "assets/products/chashni-set/chashni-set-main.jpeg",
+        "alt": "Chashni Set product view"
+      },
+      {
+        "src": "assets/products/chashni-set/chashni-set-top-details.png",
+        "alt": "Chashni Set product view"
+      }
+    ],
+    "img": "assets/products/chashni-set/chashni-set-main.jpeg"
+  },
+  {
+    "id": 5,
+    "slug": "dune-belle-corset",
+    "name": "Dune Belle Corset",
+    "description": "A chic beige corset top made from handwoven cotton, featuring structured cups, wide shoulder straps, and elegant vertical pintuck detailing, paired with matching high-waisted, wide-leg trousers made from handwoven cotton for a refined, contemporary look.",
+    "colour": "Beige",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "DRY CLEAN ONLY. Do not machine wash, soak, or wring. Store carefully to help maintain the corset's structure.",
+    "category": "Marushobha Luxe",
+    "tag": "Handwoven Cotton · Corset Set",
+    "images": [
+      {
+        "src": "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg",
+        "alt": "Dune Belle Corset product view"
+      },
+      {
+        "src": "assets/products/dune-belle-corset/dune-belle-corset-front-view.jpeg",
+        "alt": "Dune Belle Corset product view"
+      },
+      {
+        "src": "assets/products/dune-belle-corset/dune-belle-corset-detail-views.png",
+        "alt": "Dune Belle Corset product view"
+      }
+    ],
+    "img": "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg"
+  },
+  {
+    "id": 6,
+    "slug": "lotus-cuff-shirt",
+    "name": "Lotus Cuff Shirt",
+    "description": "A sky-blue striped shirt made from handwoven cotton, featuring a classic collar, button-down front, voluminous sleeves, and unique petal-shaped cuffs for a soft, elegant look.",
+    "colour": "Sky Blue",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "category": "Indian Collection",
+    "tag": "Handwoven Cotton · Petal Cuffs",
+    "images": [
+      {
+        "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg",
+        "alt": "Lotus Cuff Shirt product view"
+      },
+      {
+        "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-model-views.jpeg",
+        "alt": "Lotus Cuff Shirt product view"
+      }
+    ],
+    "img": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg"
+  },
+  {
+    "id": 7,
+    "slug": "thar-ki-phoolwari",
+    "name": "Thar Ki Phoolwari",
+    "description": "A pink floral-print top featuring a square neckline, broad shoulder straps, a fitted silhouette, and adjustable side-string detailing for a stylish, feminine look. Made from handwoven cotton.",
+    "colour": "Pink Floral",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "category": "Indian Collection",
+    "tag": "Handwoven Cotton · Side-String Top",
+    "images": [
+      {
+        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg",
+        "alt": "Thar Ki Phoolwari product view"
+      },
+      {
+        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-detail.jpeg",
+        "alt": "Thar Ki Phoolwari product view"
+      },
+      {
+        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-model-views.png",
+        "alt": "Thar Ki Phoolwari product view"
+      }
+    ],
+    "img": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg"
+  },
+  {
+    "id": 8,
+    "slug": "madhuban-side-string-top",
+    "name": "Madhuban Side-String Top",
+    "description": "A handwoven cotton top featuring a square neckline, broad shoulder straps, a playful multicolour print, and adjustable side-string detailing with decorative tassels.",
+    "colour": "Multicolour",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "category": "Indian Collection",
+    "tag": "Handwoven Cotton · Side-String Top",
+    "images": [
+      {
+        "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg",
+        "alt": "Madhuban Side-String Top product view"
+      },
+      {
+        "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-detail.jpeg",
+        "alt": "Madhuban Side-String Top product view"
+      }
+    ],
+    "img": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg"
+  },
+  {
+    "id": 9,
+    "slug": "maharani-fusion-top",
+    "name": "Maharani Fusion Top",
+    "description": "A two-piece fusion top featuring a black-and-red Bandhani-print top with a V-neckline and flared sleeves, paired with a maroon handwoven cotton corset featuring a sweetheart neckline and adjustable back lace-up detailing.",
+    "colour": "Black, Red and Maroon",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "price": "COMING SOON",
+    "fabric": "Bandhani-print top with handwoven cotton corset",
+    "care": "DRY CLEAN ONLY because this set includes a structured corset. Do not machine wash, soak, or wring. Store carefully to help maintain its shape.",
+    "category": "Indian Collection",
+    "tag": "Bandhani Print · Two-Piece Fusion Top",
+    "images": [
+      {
+        "src": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg",
+        "alt": "Maharani Fusion Top product view"
+      },
+      {
+        "src": "assets/products/maharani-fusion-top/maharani-fusion-top-detail.jpeg",
+        "alt": "Maharani Fusion Top product view"
+      }
+    ],
+    "img": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg"
+  }
+]

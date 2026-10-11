@@ -281,4 +281,93 @@ document.getElementById("authForm").addEventListener("submit", async (event) => 
       const verifier = await getRecaptchaVerifier();
       confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, verifier);
       phoneInput.value = phoneNumber;
-      phoneInput.readOnly =
+      phoneInput.readOnly = true;
+      otpWrap.classList.remove("hidden");
+      otpInput.required = true;
+      otpInput.focus();
+      changePhone.classList.remove("hidden");
+      button.textContent = "Verify OTP";
+      showStatus("Verification code sent by SMS. Enter the code to continue.");
+    } else {
+      const result = await confirmationResult.confirm(otpInput.value.trim());
+      if (window.authMode === "signup") {
+        const name = document.getElementById("authName").value.trim();
+        if (name && result.user.displayName !== name) await updateProfile(result.user, { displayName: name });
+      }
+      confirmationResult = null;
+      showStatus("You're signed in to Marushobha successfully.");
+      document.getElementById("authModal").classList.remove("open");
+    }
+  } catch (error) {
+    console.error("Firebase phone authentication error:", error);
+    const messages = {
+      "auth/invalid-phone-number": "That mobile number is invalid. Include the country code, for example +919876543210.",
+      "auth/too-many-requests": "Too many attempts. Please wait and try again later.",
+      "auth/operation-not-allowed": "Phone sign-in is not enabled yet. Enable Phone under Firebase Authentication sign-in providers.",
+      "auth/captcha-check-failed": "reCAPTCHA verification failed. Please try again.",
+      "auth/invalid-verification-code": "That OTP is incorrect. Check the SMS and try again.",
+      "auth/code-expired": "That OTP has expired. Please request a new code."
+    };
+    showStatus(messages[error.code] || error.message || "Unable to complete phone sign-in. Check Firebase settings and try again.", true);
+    if (error.code && error.code.startsWith("auth/captcha")) {
+      try { if (recaptchaVerifier) await recaptchaVerifier.clear(); } catch (_) {}
+      recaptchaVerifier = null;
+      document.getElementById("recaptcha-container").innerHTML = "";
+    }
+  } finally {
+    button.disabled = false;
+  }
+});
+
+document.getElementById("googleAuth").addEventListener("click", async () => {
+  const button = document.getElementById("googleAuth");
+  button.disabled = true;
+  try {
+    await signInWithPopup(auth, provider);
+    showStatus("You're signed in to Marushobha with Google.");
+    document.getElementById("authModal").classList.remove("open");
+  } catch (error) {
+    console.error("Firebase Google authentication error:", error);
+    const messages = {
+      "auth/popup-closed-by-user": "The Google sign-in window was closed before completion.",
+      "auth/unauthorized-domain": "This website domain is not authorized. Add it in Firebase Authentication settings.",
+      "auth/operation-not-allowed": "Google sign-in is not enabled yet. Enable Google under Firebase Authentication sign-in providers."
+    };
+    showStatus(messages[error.code] || error.message || "Google sign-in could not be completed.", true);
+  } finally { button.disabled = false; }
+});
+
+onAuthStateChanged(auth, (user) => {
+  const accountButton = document.getElementById("accountOpen");
+  if (user) {
+    const display = user.displayName || user.phoneNumber || user.email || "My Account";
+    accountButton.title = display;
+    accountButton.setAttribute("aria-label", "Signed in: " + display + ". Open account options");
+    accountButton.textContent = "✓";
+    let signOutButton = document.getElementById("firebaseSignSignOut");
+    if (!signOutButton) {
+      signOutButton = document.createElement("button");
+      signOutButton.id = "firebaseSignOut";
+      signOutButton.type = "button";
+      signOutButton.className = "add";
+      signOutButton.textContent = "Sign Out";
+      signOutButton.style.marginTop = "10px";
+      document.querySelector(".auth-modal").appendChild(signOutButton);
+      signOutButton.addEventListener("click", async () => {
+        try { await signOut(auth); confirmationResult = null; showStatus("You have signed out."); }
+        catch (error) { showStatus(error.message || "Unable to sign out.", true); }
+      });
+    }
+    signOutButton.classList.remove("hidden");
+  } else {
+    accountButton.title = "Account";
+    accountButton.setAttribute("aria-label", "Sign in or create account");
+    accountButton.textContent = "♙";
+    const signOutButton = document.getElementById("firebaseSignOut");
+    if (signOutButton) signOutButton.classList.add("hidden");
+  }
+});
+</script>
+
+</body>
+</html>

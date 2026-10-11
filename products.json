@@ -18,19 +18,19 @@
     "tag": "Floral · Halter Neck",
     "images": [
       {
-        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg",
+        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpg",
         "alt": "Boat-Neck Halter Dress product view"
       },
       {
-        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-model-views.png",
+        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-model-views.jpg",
         "alt": "Boat-Neck Halter Dress product view"
       },
       {
-        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-detail-views.png",
+        "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-detail-views.jpg",
         "alt": "Boat-Neck Halter Dress product view"
       }
     ],
-    "img": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg"
+    "img": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpg"
   },
   {
     "id": 2,
@@ -51,15 +51,15 @@
     "tag": "Handwoven Cotton · Checked",
     "images": [
       {
-        "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg",
+        "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpg",
         "alt": "Mustard Muse Shirt product view"
       },
       {
-        "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-front-view.png",
+        "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-front-view.jpg",
         "alt": "Mustard Muse Shirt product view"
       }
     ],
-    "img": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg"
+    "img": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpg"
   },
   {
     "id": 3,
@@ -80,19 +80,19 @@
     "tag": "Handwoven Cotton · Wide Leg",
     "images": [
       {
-        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg",
+        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpg",
         "alt": "Bow Palazzo Pants product view"
       },
       {
-        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-model-views.png",
+        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-model-views.jpg",
         "alt": "Bow Palazzo Pants product view"
       },
       {
-        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-detail-views.png",
+        "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-detail-views.jpg",
         "alt": "Bow Palazzo Pants product view"
       }
     ],
-    "img": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg"
+    "img": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpg"
   },
   {
     "id": 4,
@@ -113,15 +113,15 @@
     "tag": "Handwoven Cotton · Two-Piece Set",
     "images": [
       {
-        "src": "assets/products/chashni-set/chashni-set-main.jpeg",
+        "src": "assets/products/chashni-set/chashni-set-main.jpg",
         "alt": "Chashni Set product view"
       },
       {
-        "src": "assets/products/chashni-set/chashni-set-top-details.png",
+        "src": "assets/products/chashni-set/chashni-set-top-details.jpg",
         "alt": "Chashni Set product view"
       }
     ],
-    "img": "assets/products/chashni-set/chashni-set-main.jpeg"
+    "img": "assets/products/chashni-set/chashni-set-main.jpg"
   },
   {
     "id": 5,
@@ -142,19 +142,19 @@
     "tag": "Handwoven Cotton · Corset Set",
     "images": [
       {
-        "src": "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg",
+        "src": "assets/products/dune-belle-corset/dune-belle-corset-main.jpg",
         "alt": "Dune Belle Corset product view"
       },
       {
-        "src": "assets/products/dune-belle-corset/dune-belle-corset-front-view.jpeg",
+        "src": "assets/products/dune-belle-corset/dune-belle-corset-front-view.jpg",
         "alt": "Dune Belle Corset product view"
       },
       {
-        "src": "assets/products/dune-belle-corset/dune-belle-corset-detail-views.png",
+        "src": "assets/products/dune-belle-corset/dune-belle-corset-detail-views.jpg",
         "alt": "Dune Belle Corset product view"
       }
     ],
-    "img": "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg"
+    "img": "assets/products/dune-belle-corset/dune-belle-corset-main.jpg"
   },
   {
     "id": 6,
@@ -175,15 +175,15 @@
     "tag": "Handwoven Cotton · Petal Cuffs",
     "images": [
       {
-        "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg",
+        "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpg",
         "alt": "Lotus Cuff Shirt product view"
       },
       {
-        "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-model-views.jpeg",
+        "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-model-views.jpg",
         "alt": "Lotus Cuff Shirt product view"
       }
     ],
-    "img": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg"
+    "img": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpg"
   },
   {
     "id": 7,
@@ -204,19 +204,19 @@
     "tag": "Handwoven Cotton · Side-String Top",
     "images": [
       {
-        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg",
+        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpg",
         "alt": "Thar Ki Phoolwari product view"
       },
       {
-        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-detail.jpeg",
+        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-detail.jpg",
         "alt": "Thar Ki Phoolwari product view"
       },
       {
-        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-model-views.png",
+        "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-model-views.jpg",
         "alt": "Thar Ki Phoolwari product view"
       }
     ],
-    "img": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg"
+    "img": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpg"
   },
   {
     "id": 8,
@@ -237,15 +237,15 @@
     "tag": "Handwoven Cotton · Side-String Top",
     "images": [
       {
-        "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg",
+        "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpg",
         "alt": "Madhuban Side-String Top product view"
       },
       {
-        "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-detail.jpeg",
+        "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-detail.jpg",
         "alt": "Madhuban Side-String Top product view"
       }
     ],
-    "img": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg"
+    "img": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpg"
   },
   {
     "id": 9,
@@ -266,14 +266,14 @@
     "tag": "Bandhani Print · Two-Piece Fusion Top",
     "images": [
       {
-        "src": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg",
+        "src": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpg",
         "alt": "Maharani Fusion Top product view"
       },
       {
-        "src": "assets/products/maharani-fusion-top/maharani-fusion-top-detail.jpeg",
+        "src": "assets/products/maharani-fusion-top/maharani-fusion-top-detail.jpg",
         "alt": "Maharani Fusion Top product view"
       }
     ],
-    "img": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg"
+    "img": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpg"
   }
 ]

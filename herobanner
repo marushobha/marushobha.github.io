@@ -1,6 +1,6 @@
 .hero-panel {
   min-height: 520px;
-  background: url('assets/marushobhahomepagehero.pnj') center/cover no-repeat;
+  background: url('assets/marushobhahomepagehero.png') center/cover no-repeat;
   display: flex;
   align-items: flex-end;
   padding: clamp(26px, 7vw, 50px);

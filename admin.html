@@ -161,6 +161,10 @@ const firebaseConfig = {
 
 const OWNER_UID = "RKTOLCgYgCYnVZnr8ufBoC8dKUt2";
 
+// Replace this with the full URL shown in Cloudflare Workers & Pages >
+// marushobha-delhivery > Overview.
+const WORKER_URL = "https://https://marushobha-delhivery.marushobha-jj.workers.dev";
+
 const $ = (id) => document.getElementById(id);
 const status = (message) => { $("status").textContent = message; };
 let auth, db, currentUser = null;
@@ -182,21 +186,73 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
 });
 
 $("signInBtn").addEventListener("click", async () => {
-  try { await signInWithPopup(auth, new GoogleAuthProvider()); }
-  catch (e) { status("Sign-in failed: " + e.message); }
+  status("Opening Google sign-in…");
+  try {
+    await signInWithPopup(auth, new GoogleAuthProvider());
+    // onAuthStateChanged verifies the signed-in account with the Worker.
+  } catch (e) {
+    console.error("Google sign-in failed:", e);
+    status("Sign-in failed: " + e.message);
+  }
 });
 $("signOutBtn").addEventListener("click", async () => { try { await signOut(auth); } catch(e) { status(e.message); } });
 
+async function verifyOwnerWithWorker(user) {
+  if (!WORKER_URL || WORKER_URL.includes("REPLACE-WITH-YOUR-CLOUDFLARE-WORKER-URL")) {
+    throw new Error("Setup required: add your Cloudflare Worker URL in admin.html before testing owner login.");
+  }
+
+  const idToken = await user.getIdToken(true);
+  const response = await fetch(`${WORKER_URL.replace(/\/$/, "")}/admin-check`, {
+    method: "POST",
+    headers: { "Authorization": `Bearer ${idToken}` }
+  });
+
+  let result;
+  try {
+    result = await response.json();
+  } catch (_) {
+    throw new Error("The Worker returned an unreadable response. Check its /admin-check endpoint.");
+  }
+
+  if (!response.ok || result.ok !== true) {
+    throw new Error(result.error || "Owner access was denied by the Cloudflare Worker.");
+  }
+
+  // Additional client-side check; Firestore Security Rules must also enforce access.
+  if (user.uid !== OWNER_UID) {
+    throw new Error("This Google account is not the designated Marushobha owner account.");
+  }
+}
+
 onAuthStateChanged(auth, async user => {
   currentUser = user;
+  $("app").classList.add("hidden");
   $("signInBtn").classList.toggle("hidden", !!user);
   $("signOutBtn").classList.toggle("hidden", !user);
-  $("account").textContent = user ? `${user.email || "Signed in"} · UID: ${user.uid}` : "";
-  $("app").classList.toggle("hidden", !user);
-  if (!user) { status("Sign in with the authorized owner account."); return; }
-  if (user.uid !== OWNER_UID) { status("Unauthorized account. Use the designated owner login."); $("app").classList.add("hidden"); return; }
-  status("Signed in as owner. Loading dashboard data...");
-  await loadAllData();
+  $("account").textContent = user ? `${user.email || "Signed in"} · Verifying owner access…` : "";
+
+  if (!user) {
+    status("Sign in with the authorized owner Google account.");
+    return;
+  }
+
+  status("Verifying owner access…");
+  try {
+    await verifyOwnerWithWorker(user);
+    if (!auth.currentUser || auth.currentUser.uid !== user.uid) return;
+    $("account").textContent = `${user.email || "Owner"} · Owner verified`;
+    $("app").classList.remove("hidden");
+    status("Owner verified. Loading dashboard data...");
+    await loadAllData();
+  } catch (e) {
+    console.error("Owner verification failed:", e);
+    $("app").classList.add("hidden");
+    status("Owner login blocked: " + e.message);
+    try { await signOut(auth); } catch (signOutError) {
+      console.error("Could not sign out unauthorized account:", signOutError);
+    }
+  }
 });
 
 async function loadAllData() {

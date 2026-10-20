@@ -149,6 +149,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebas
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
   authDomain: "marushobha-1e31f.firebaseapp.com",
@@ -158,9 +159,6 @@ const firebaseConfig = {
   appId: "1:997754535596:web:aafc83bad8c3d413cf6909",
   measurementId: "G-DLWGD0ZDQ1"
 };
-
-const OWNER_UID = "oJc7jH1JqXW4zX6qT2t7R9vP1s13";
-
 const $ = (id) => document.getElementById(id);
 const status = (message) => { $("status").textContent = message; };
 let auth, db, currentUser = null;

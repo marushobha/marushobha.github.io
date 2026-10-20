@@ -1,0 +1,53 @@
+
+<h2>Marushobha Checkout</h2>
+
+<form id="checkoutForm">
+  <label>Product</label>
+  <select id="product" required>
+    <option value="">Choose a product</option>
+    <option value="thar-ki-phoolwari">Thar Ki Phoolwari</option>
+    <option value="lotus-cuff-shirt">Lotus Cuff Shirt</option>
+    <option value="mustard-muse-shirt">Mustard Muse Shirt</option>
+    <option value="bow-palazzo-pants">Bow Palazzo Pants</option>
+    <option value="chashni-set">Chashni Set</option>
+    <option value="dune-belle-corset">Dune Belle Corset</option>
+  </select>
+
+  <label>Size</label>
+  <select id="size" required>
+    <option value="">Choose a size</option>
+    <option>XS</option>
+    <option>S</option>
+    <option>M</option>
+    <option>L</option>
+  </select>
+
+  <label>Quantity</label>
+  <input id="quantity" type="number"
+         min="1" max="5" value="1" required>
+
+  <label>Full name</label>
+  <input id="name" required maxlength="100">
+
+  <label>Mobile number</label>
+  <input id="phone" type="tel"
+         pattern="[0-9]{10}" required>
+
+  <label>Full delivery address</label>
+  <textarea id="address" required maxlength="500"></textarea>
+
+  <label>City</label>
+  <input id="city" required>
+
+  <label>State</label>
+  <input id="state" required>
+
+  <label>PIN code</label>
+  <input id="pincode" inputmode="numeric"
+         pattern="[0-9]{6}" required>
+
+  <button type="submit">Place Order</button>
+  <p id="orderMessage" role="status"></p>
+</form>
+
+<script type="module" src="./checkout.js"></script>

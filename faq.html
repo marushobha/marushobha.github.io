@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marushobha | Frequently Asked Questions & Customer Care</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#211d1b;background:#f7f4ef}
+*{box-sizing:border-box}body{margin:0}
+header{background:#211d1b;color:#fff;padding:22px 18px;text-align:center}
+header h1{margin:0;font-size:1.4rem;letter-spacing:.08em}
+header p{margin:6px 0 0;color:#e5d8c9;font-size:.9rem}
+main{max-width:850px;margin:30px auto;padding:0 16px}
+.panel{background:white;border:1px solid #e8e0d7;border-radius:16px;padding:24px;margin-bottom:24px;box-shadow:0 4px 18px #25170a08}
+h2{font-size:1.15rem;margin-top:0;color:#211d1b;border-bottom:1px solid #eee6de;padding-bottom:10px}
+.faq-item{border-bottom:1px solid #eee6de;padding:14px 0}
+.faq-question{font-weight:650;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:0.98rem}
+.faq-answer{margin-top:8px;color:#6d655f;font-size:0.92rem;line-height:1.5;display:none}
+.faq-item.active .faq-answer{display:block}
+.muted{color:#6d655f;font-size:0.9rem}
+label{display:block;font-size:0.88rem;font-weight:650;margin:12px 0 6px}
+input,textarea{width:100%;padding:11px;border:1px solid #d8cec3;border-radius:9px;font:inherit;background:#fff}
+button{border:0;border-radius:9px;padding:12px 18px;font-weight:650;cursor:pointer;background:#28211d;color:#fff;margin-top:14px}
+button:disabled{opacity:.5;cursor:not-allowed}
+#formStatus{margin-top:12px;padding:10px;border-radius:8px;font-size:0.9rem;white-space:pre-wrap}
+.success-bg{background:#e1f3e5;color:#1d6f34}
+.error-bg{background:#fde8e8;color:#9b1c1c}
+.back-link{display:inline-block;margin-bottom:20px;color:#211d1b;text-decoration:none;font-weight:600;font-size:0.9rem}
+.back-link:hover{text-decoration:underline}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>MARUSHOBHA</h1>
+  <p>Custom. Character. Class. · Help & Support Center</p>
+</header>
+
+<main>
+  <a href="/" class="back-link">← Back to Home & Shop</a>
+
+  <!-- STATIC FAQs (Only you control what appears here) -->
+  <section class="panel">
+    <h2>Frequently Asked Questions</h2>
+    
+    <div class="faq-item">
+      <div class="faq-question"><span>How do I track my order?</span><span>+</span></div>
+      <div class="faq-answer">Once your order is shipped via Delhivery, you will receive a tracking link via email and WhatsApp to follow your package live.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>What are the shipping charges?</span><span>+</span></div>
+      <div class="faq-answer">We offer standard shipping across India. Exact delivery rates are calculated at checkout based on your delivery pincode.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>What is your return and exchange policy?</span><span>+</span></div>
+      <div class="faq-answer">Items can be returned or exchanged within 7 days of delivery, provided they are unworn, unwashed, and have original tags attached.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question"><span>How do I care for handwoven garments?</span><span>+</span></div>
+      <div class="faq-answer">We recommend gentle hand washing separately in cold water with mild detergent. Do not soak or bleach.</div>
+    </div>
+  </section>
+
+  <!-- PRIVATE CUSTOMER CARE FORM (Submissions go ONLY to Admin Dashboard / Gmail) -->
+  <section class="panel">
+    <h2>Have a Private Question? Get in Touch</h2>
+    <p class="muted">Send us your inquiry below. This goes directly to our secure admin support team and is never displayed publicly.</p>
+    
+    <form id="customerCareForm">
+      <div>
+        <label for="careName">Your Name *</label>
+        <input type="text" id="careName" required placeholder="e.g. Ananya Sharma">
+      </div>
+      <div>
+        <label for="careContact">Email or Phone Number *</label>
+        <input type="text" id="careContact" required placeholder="e.g. ananya@gmail.com or 9876543210">
+      </div>
+      <div>
+        <label for="careMessage">Your Message / Question *</label>
+        <textarea id="careMessage" rows="4" required placeholder="Ask about sizing, custom orders, or delivery status..."></textarea>
+      </div>
+      <button type="submit" id="submitBtn">Send Private Message</button>
+      <div id="formStatus" class="hidden"></div>
+    </form>
+  </section>
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
+  authDomain: "marushobha-1e31f.firebaseapp.com",
+  projectId: "marushobha-1e31f",
+  storageBucket: "marushobha-1e31f.firebasestorage.app",
+  messagingSenderId: "997754535596",
+  appId: "1:997754535596:web:aafc83bad8c3d413cf6909",
+  measurementId: "G-DLWGD0ZDQ1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const WORKER_URL = "https://marushobha-delhivery.marushobha-jj.workers.dev/";
+
+// Accordion Toggle Logic for Static FAQs
+document.querySelectorAll(".faq-question").forEach(q => {
+  q.addEventListener("click", () => {
+    const item = q.parentElement;
+    item.classList.toggle("active");
+    const span = q.querySelector("span:last-child");
+    span.textContent = item.classList.contains("active") ? "−" : "+";
+  });
+});
+
+// Form Submission Logic (Saves privately to Firestore & triggers email)
+const form = document.getElementById("customerCareForm");
+const submitBtn = document.getElementById("submitBtn");
+const statusDiv = document.getElementById("formStatus");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  submitBtn.disabled = true;
+  statusDiv.className = "muted";
+  statusDiv.textContent = "Sending your message...";
+  statusDiv.classList.remove("hidden");
+
+  const name = document.getElementById("careName").value.trim();
+  const contact = document.getElementById("careContact").value.trim();
+  const message = document.getElementById("careMessage").value.trim();
+
+  try {
+    // 1. Save securely into Firestore collection 'customerCare' (Visible only in Admin)
+    await addDoc(collection(db, "customerCare"), {
+      name,
+      contact,
+      message,
+      status: "Unread",
+      createdAt: serverTimestamp()
+    });
+
+    // 2. Trigger email alert via Cloudflare Worker
+    try {
+      await fetch(`${WORKER_URL.replace(/\/$/, "")}/send-email`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, contact, message, to: "marushobha.jj@gmail.com" })
+      });
+    } catch (workerErr) {
+      console.log("Worker email notification skipped or failed, but Firestore saved successfully:", workerErr);
+    }
+
+    statusDiv.className = "success-bg";
+    statusDiv.textContent = "Thank you! Your message has been sent successfully. We will get back to you shortly.";
+    form.reset();
+  } catch (err) {
+    console.error("Submission error:", err);
+    statusDiv.className = "error-bg";
+    statusDiv.textContent = "Failed to send message: " + err.message + ". Please try messaging us on WhatsApp instead.";
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>

@@ -12,6 +12,8 @@
 @media(max-width:680px){.nav{min-height:66px;padding:10px 15px}.brand-logo{width:68px;height:54px}.links{display:none}.menu-toggle{display:grid}.nav-actions{gap:7px}.hero{padding:0;margin-top:10px}.hero-panel{min-height:auto}.hero h1{font-size:clamp(2.5rem,12vw,4rem)}.section{padding:54px 15px}.category-grid{gap:10px}.category,.category img{min-height:230px}.category-label{padding:26px 10px 12px}.category-label h3{font-size:1.08rem}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.product-info{padding:9px 0}.product-info h3{font-size:.84rem}.product-bottom{align-items:flex-start;flex-direction:column}.add{width:100%}.toolbar{align-items:stretch}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.filters select{width:100%;min-width:0}.searchbox{width:100%}.story-inner{grid-template-columns:1fr;padding:45px 15px}.story-image{max-height:340px;order:2}.values{gap:10px}.value strong{font-size:.95rem}.value p{font-size:.76rem}.support-grid{gap:8px}.support-card{padding:17px 9px}.support-card h3{font-size:.85rem}.footer-inner{grid-template-columns:1fr 1fr;gap:28px}.footer-brand{grid-column:1/-1}.modal-body{grid-template-columns:1fr}.modal-body img{max-height:280px;object-position:center 30%}.admin-grid{grid-template-columns:1fr}.mobile-nav{position:absolute;top:100%;left:0;right:0;background:var(--ivory);padding:12px 18px 18px;border-bottom:1px solid var(--line);box-shadow:0 12px 20px #0000000b}.mobile-nav.open{display:grid;gap:0}.mobile-nav a{padding:12px 0;border-bottom:1px solid var(--line)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 </style>
+<!-- Load Razorpay Checkout script -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
 <div class="announcement">CONTEMPORARY WOMENSWEAR · INDIAN INSPIRATION</div>
@@ -119,13 +121,31 @@
     <p class="auth-terms">By continuing, you agree to our Terms & Conditions and Privacy Policy.</p>
   </div>
 </div>
+
 <div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-label="Product details">
   <div class="modal"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div id="modalContent"></div></div>
 </div>
+
+<!-- Shipping & Checkout Details Modal -->
+<div class="modal-backdrop" id="checkoutModal" role="dialog" aria-modal="true" aria-label="Shipping Details">
+  <div class="modal" style="width:min(460px,100%);padding:30px">
+    <button class="modal-close" id="checkoutClose" aria-label="Close">×</button>
+    <h2>Shipping Details</h2>
+    <p style="color:var(--muted);font-size:.88rem">Please enter your delivery address and contact information before payment.</p>
+    <form id="shippingForm" style="display:grid;gap:12px;margin-top:15px">
+      <div><label for="shipName" style="font-size:.82rem">Full Name</label><input class="field" id="shipName" required placeholder="Enter your full name" style="width:100%;margin-top:5px"></div>
+      <div><label for="shipPhone" style="font-size:.82rem">Mobile Number</label><input class="field" id="shipPhone" type="tel" required placeholder="10-digit mobile number" style="width:100%;margin-top:5px"></div>
+      <div><label for="shipEmail" style="font-size:.82rem">Email Address</label><input class="field" id="shipEmail" type="email" required placeholder="your@email.com" style="width:100%;margin-top:5px"></div>
+      <div><label for="shipAddress" style="font-size:.82rem">Delivery Address</label><textarea class="field" id="shipAddress" required placeholder="House no., Street, City, State, Pincode" style="width:100%;margin-top:5px;min-height:80px;resize:vertical"></textarea></div>
+      <button class="btn" type="submit" style="width:100%;margin-top:10px">Proceed to Secure Payment</button>
+    </form>
+  </div>
+</div>
+
 <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true">
   <div class="cart-head"><h2>Shopping Bag</h2><button class="iconbtn" id="cartClose" aria-label="Close bag">×</button></div>
   <div id="cartItems"></div><div class="cart-total"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
-  <p class="admin-note">Checkout and payments are not connected in this demo.</p><button class="btn" style="width:100%" id="checkoutBtn">Continue to Checkout</button><div class="notice" id="checkoutNotice" role="status">Connect a secure checkout provider to accept orders.</div>
+  <button class="btn" style="width:100%" id="checkoutBtn">Proceed to Checkout</button>
 </aside>
 
 <script>
@@ -378,12 +398,65 @@ function renderCart(){
    renderCart();
  }));
 }
+
 function openCart(){document.getElementById("cartDrawer").classList.add("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","false")}
 document.getElementById("cartOpen").addEventListener("click",openCart);
 document.getElementById("cartClose").addEventListener("click",()=>{document.getElementById("cartDrawer").classList.remove("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","true")});
 document.getElementById("modalClose").addEventListener("click",()=>document.getElementById("productModal").classList.remove("open"));
+document.getElementById("productModal").classList.remove("open");
 document.getElementById("productModal").addEventListener("click",e=>{if(e.target.id==="productModal")e.currentTarget.classList.remove("open")});
-document.getElementById("checkoutBtn").addEventListener("click",()=>{const n=document.getElementById("checkoutNotice");n.style.display="block";n.scrollIntoView({block:"nearest"})});
+
+// Checkout and Shipping Form Handlers
+document.getElementById("checkoutBtn").addEventListener("click",()=>{
+  if(cart.length === 0) {
+    alert("Your shopping bag is empty.");
+    return;
+  }
+  document.getElementById("cartDrawer").classList.remove("open");
+  document.getElementById("checkoutModal").classList.add("open");
+});
+document.getElementById("checkoutClose").addEventListener("click",()=>document.getElementById("checkoutModal").classList.remove("open"));
+
+document.getElementById("shippingForm").addEventListener("submit", (e)=>{
+  e.preventDefault();
+  const name = document.getElementById("shipName").value.trim();
+  const phone = document.getElementById("shipPhone").value.trim();
+  const email = document.getElementById("shipEmail").value.trim();
+  const address = document.getElementById("shipAddress").value.trim();
+
+  const totalAmount = cart.reduce((n,x)=>n+products.find(p=>p.id===x.id).price*x.qty,0);
+
+  document.getElementById("checkoutModal").classList.remove("open");
+
+  // Open Razorpay Payment Gateway
+  const options = {
+    "key": "YOUR_RAZORPAY_KEY_ID", // Replace with your live or test Razorpay Key ID
+    "amount": totalAmount * 100, // Amount in paise (e.g., ₹2000 = 200000)
+    "currency": "INR",
+    "name": "Marushobha",
+    "description": "Order Payment",
+    "handler": function (response){
+      alert("Payment Successful! Payment ID: " + response.razorpay_payment_id + "\nThank you for shopping with Marushobha, " + name + "!");
+      cart = [];
+      renderCart();
+      renderProducts();
+    },
+    "prefill": {
+      "name": name,
+      "email": email,
+      "contact": phone
+    },
+    "notes": {
+      "shipping_address": address
+    },
+    "theme": {
+      "color": "#49382d"
+    }
+  };
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+});
+
 document.getElementById("menuToggle").addEventListener("click",()=>{const nav=document.getElementById("mobileNav"),btn=document.getElementById("menuToggle"),open=nav.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"×":"☰"});
 document.querySelectorAll("#mobileNav a").forEach(a=>a.addEventListener("click",()=>{document.getElementById("mobileNav").classList.remove("open");document.getElementById("menuToggle").setAttribute("aria-expanded","false");document.getElementById("menuToggle").textContent="☰"}));
 document.getElementById("questionForm").addEventListener("submit",e=>{

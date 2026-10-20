@@ -145,9 +145,9 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
 </main>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
@@ -160,9 +160,6 @@ const firebaseConfig = {
 };
 
 const OWNER_UID = "RKTOLCgYgCYnVZnr8ufBoC8dKUt2";
-
-// Replace this with the full URL shown in Cloudflare Workers & Pages >
-// marushobha-delhivery > Overview.
 const WORKER_URL = "https://marushobha-delhivery.marushobha-jj.workers.dev/";
 
 const $ = (id) => document.getElementById(id);
@@ -189,7 +186,6 @@ $("signInBtn").addEventListener("click", async () => {
   status("Opening Google sign-in…");
   try {
     await signInWithPopup(auth, new GoogleAuthProvider());
-    // onAuthStateChanged verifies the signed-in account with the Worker.
   } catch (e) {
     console.error("Google sign-in failed:", e);
     status("Sign-in failed: " + e.message);
@@ -219,7 +215,6 @@ async function verifyOwnerWithWorker(user) {
     throw new Error(result.error || "Owner access was denied by the Cloudflare Worker.");
   }
 
-  // Additional client-side check; Firestore Security Rules must also enforce access.
   if (user.uid !== OWNER_UID) {
     throw new Error("This Google account is not the designated Marushobha owner account.");
   }

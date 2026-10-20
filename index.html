@@ -534,3 +534,185 @@ onAuthStateChanged(auth, (user) => {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Marushobha — Custom. Character. Class. Contemporary womenswear inspired by Indian craftsmanship.">
+<title>Marushobha | Custom. Character. Class.</title>
+<style>
+:root{--ivory:#f7f3ed;--sand:#e5d7c7;--brown:#49382d;--ink:#25221f;--muted:#766b61;--white:#fff;--line:#e6ded5;--accent:#9b7556}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ivory);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}button,input,select,textarea{font:inherit}button,a{cursor:pointer}a{color:inherit;text-decoration:none}.announcement{text-align:center;padding:8px 12px;background:var(--brown);color:white;font-size:.72rem;letter-spacing:.13em}.header{position:sticky;top:0;z-index:20;background:rgba(247,243,237,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}.nav{max-width:1200px;margin:auto;min-height:76px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand-lockup{display:flex;align-items:center;flex:0 0 auto}.brand-logo{display:block;width:82px;height:62px;object-fit:contain;mix-blend-mode:multiply}.footer-logo{display:block;width:170px;max-width:100%;height:auto;object-fit:contain;background:#f7f0e5;margin-bottom:14px}.auth-logo{display:block;width:190px;max-width:100%;height:auto;margin:0 auto;mix-blend-mode:multiply}.tagline{font-size:.62rem;letter-spacing:.16em;color:var(--muted);margin-top:3px}.links{display:flex;gap:24px;align-items:center;font-size:.82rem}.links a:hover,.footer a:hover{color:var(--accent)}.nav-actions{display:flex;gap:12px;align-items:center}.iconbtn,.menu-toggle{border:1px solid var(--line);background:transparent;border-radius:50%;width:39px;height:39px;display:grid;place-items:center;color:var(--ink)}.menu-toggle{display:none;border-radius:8px}.hero{max-width:1200px;margin:22px auto 0;padding:0 22px}.hero-panel{position:relative;width:100%;overflow:hidden;background:var(--sand)}.hero-panel img{width:100%;height:auto;max-height:600px;object-fit:cover;display:block}.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;border:1px solid var(--brown);background:var(--brown);color:white;padding:12px 20px;letter-spacing:.06em;font-size:.75rem;text-transform:uppercase;transition:.2s}.btn:hover{background:var(--accent);border-color:var(--accent)}.btn.light{background:var(--ivory);color:var(--brown);border-color:var(--ivory)}.btn.outline{background:transparent;color:var(--brown)}.section{max-width:1200px;margin:0 auto;padding:76px 22px}.section-head{text-align:center;margin-bottom:30px}.section-head .eyebrow{color:var(--muted)}h2{font-family:Georgia,serif;font-weight:normal;font-size:clamp(1.8rem,3vw,2.7rem);margin:8px 0 12px}.section-head p{color:var(--muted);max-width:560px;margin:0 auto}.category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.category{position:relative;min-height:290px;overflow:hidden;background:var(--sand)}.category img{width:100%;height:100%;min-height:290px;object-fit:cover;display:block;transition:transform .5s}.category:hover img{transform:scale(1.04)}.category-label{position:absolute;bottom:0;left:0;right:0;padding:36px 16px 16px;color:white;background:linear-gradient(transparent,rgba(20,15,12,.75))}.category-label h3{font-family:Georgia,serif;font-size:1.35rem;font-weight:normal;margin:0 0 3px}.category-label span{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:22px 0}.filters{display:flex;gap:9px;flex-wrap:wrap}.filters select,.searchbox,.field{border:1px solid #d9cec2;background:#fffdf9;color:var(--ink);padding:10px 12px;min-height:42px;max-width:100%}.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}.product{min-width:0}.product-image{position:relative;background:#e9e1d7;overflow:hidden;aspect-ratio:3/4}.product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.product:hover .product-image img{transform:scale(1.025)}.wish{position:absolute;right:10px;top:10px;border:0;border-radius:50%;width:36px;height:36px;background:#fffdf0dd;font-size:1.1rem}.product-info{padding:12px 0}.product-info h3{font-size:.91rem;font-weight:500;margin:0 0 5px}.product-info p{font-size:.82rem;color:var(--muted);margin:0 0 10px}.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:bold;font-size:.9rem}.add{border:1px solid var(--brown);background:transparent;color:var(--brown);padding:8px 10px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em}.add:hover{background:var(--brown);color:white}.story{background:#e9dfd3}.story-inner{max-width:1200px;margin:auto;padding:68px 22px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}.story-image{width:100%;max-height:470px;object-fit:cover}.story p{color:#66594d}.values{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}.value{border-top:1px solid #cbb9a7;padding-top:12px}.value strong{font-family:Georgia,serif;font-size:1.05rem;font-weight:normal}.value p{font-size:.82rem}.support-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.support-card{padding:22px 16px;border:1px solid var(--line);background:#fffdf9;text-align:center}.support-card h3{font-size:.95rem;font-weight:500}.support-card p{font-size:.82rem;color:var(--muted);overflow-wrap:anywhere}.support-card a{color:var(--brown);text-decoration:underline;text-underline-offset:3px}.faq-wrap{max-width:760px;margin:30px auto 0}.faq-wrap form{display:grid;gap:10px}.faq-wrap textarea{min-height:100px;resize:vertical}.faq-list{display:grid;gap:10px;margin-top:24px}.faq-item{background:#fffdf9;border:1px solid var(--line);padding:15px}.faq-item small{color:var(--muted)}.footer{background:#2f2722;color:#f8f2ea;padding:45px 22px 22px}.footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}.footer .wordmark{font-size:1.2rem}.footer p,.footer a{font-size:.83rem;color:#ded2c7}.footer h3{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:normal}.footer-col{display:grid;align-content:start;gap:9px}.copyright{max-width:1200px;margin:28px auto 0;border-top:1px solid #5c5047;padding-top:18px;color:#c9bbb0;font-size:.73rem}.modal-backdrop{position:fixed;inset:0;background:#17120fc2;z-index:50;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{background:var(--ivory);width:min(720px,100%);max-height:90vh;overflow:auto;padding:24px;position:relative}.modal-close{position:absolute;right:15px;top:12px;border:0;background:transparent;font-size:1.5rem}.modal-body{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding-top:15px}.modal-body img{width:100%;aspect-ratio:3/4;object-fit:cover}.modal-body select,.modal-body input{width:100%;margin:7px 0 12px}.cart-drawer{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--ivory);z-index:60;box-shadow:-10px 0 35px #0002;padding:24px;transform:translateX(110%);transition:transform .25s;overflow:auto}.cart-drawer.open{transform:translateX(0)}.cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.cart-row{display:grid;grid-template-columns:70px 1fr auto;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}.cart-row img{width:70px;height:90px;object-fit:cover}.cart-row p{font-size:.82rem;color:var(--muted);margin:4px 0}.cart-total{display:flex;justify-content:space-between;margin:22px 0;font-weight:bold}.notice{padding:12px;background:#e6eee4;color:#2e5932;margin:10px 0;display:none}.admin{background:#eee5da;padding:40px 22px}.admin-inner{max-width:1000px;margin:auto}.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.admin-card{padding:18px;background:#fffdf9;border:1px solid var(--line)}.admin-card h3{margin-top:0;font-family:Georgia,serif;font-weight:normal}.admin-note{font-size:.85rem;color:var(--muted)}.hidden{display:none!important}.mobile-nav{display:none}.auth-modal{width:min(460px,100%);padding:30px}.auth-brand{text-align:center;margin:8px 0 20px}.auth-brand .wordmark{font-size:1.1rem}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);margin:18px 0}.auth-tab{border:0;border-bottom:2px solid transparent;background:transparent;padding:12px;color:var(--muted)}.auth-tab.active{border-bottom-color:var(--brown);color:var(--brown);font-weight:bold}.auth-form{display:grid;gap:12px}.auth-form label{font-size:.82rem}.auth-form input{width:100%;margin-top:5px}.google-btn{width:100%;display:flex;justify-content:center;align-items:center;gap:10px;border:1px solid #cfc5bb;background:#fffdf9;color:var(--ink);padding:12px}.auth-divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.75rem;margin:15px 0}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:var(--line);flex:1}.auth-status{font-size:.82rem;color:var(--brown);background:#eee5da;padding:12px;margin-top:12px;display:none}.auth-terms{font-size:.72rem;color:var(--muted);text-align:center}.account-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){.links{gap:13px}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.support-grid{grid-template-columns:repeat(2,1fr)}.story-inner{gap:25px}.footer-inner{grid-template-columns:1.5fr 1fr 1fr}}
+@media(max-width:680px){.nav{min-height:66px;padding:10px 15px}.brand-logo{width:68px;height:54px}.links{display:none}.menu-toggle{display:grid}.nav-actions{gap:7px}.hero{padding:0;margin-top:10px}.hero-panel{min-height:auto}.hero h1{font-size:clamp(2.5rem,12vw,4rem)}.section{padding:54px 15px}.category-grid{gap:10px}.category,.category img{min-height:230px}.category-label{padding:26px 10px 12px}.category-label h3{font-size:1.08rem}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.product-info{padding:9px 0}.product-info h3{font-size:.84rem}.product-bottom{align-items:flex-start;flex-direction:column}.add{width:100%}.toolbar{align-items:stretch}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.filters select{width:100%;min-width:0}.searchbox{width:100%}.story-inner{grid-template-columns:1fr;padding:45px 15px}.story-image{max-height:340px;order:2}.values{gap:10px}.value strong{font-size:.95rem}.value p{font-size:.76rem}.support-grid{gap:8px}.support-card{padding:17px 9px}.support-card h3{font-size:.85rem}.footer-inner{grid-template-columns:1fr 1fr;gap:28px}.footer-brand{grid-column:1/-1}.modal-body{grid-template-columns:1fr}.modal-body img{max-height:280px;object-position:center 30%}.admin-grid{grid-template-columns:1fr}.mobile-nav{position:absolute;top:100%;left:0;right:0;background:var(--ivory);padding:12px 18px 18px;border-bottom:1px solid var(--line);box-shadow:0 12px 20px #0000000b}.mobile-nav.open{display:grid;gap:0}.mobile-nav a{padding:12px 0;border-bottom:1px solid var(--line)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="announcement">CONTEMPORARY WOMENSWEAR · INDIAN INSPIRATION</div>
+<header class="header">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand-lockup" href="#home" aria-label="Marushobha home"><img class="brand-logo" src="assets/marushobhalogo.jpeg" alt="Marushobha — Custom. Character. Class."></a>
+    <div class="links"><a href="#home">Home</a><a href="#shop">Shop</a><a href="#story">Our Story</a><a href="#contact">Contact Us</a></div>
+    <div class="nav-actions">
+      <button class="iconbtn" id="searchFocus" aria-label="Search products">⌕</button>
+      <button class="iconbtn" id="accountOpen" aria-label="Sign in or create account" title="Account">♙</button>
+      <button class="iconbtn" id="cartOpen" aria-label="Open shopping bag">Bag <span id="cartCount">0</span></button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobileNav"><a href="#home">Home</a><a href="#shop">Shop All Products</a><a href="#story">Our Story</a><a href="#contact">Contact Us</a></div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-panel">
+    <img src="marushobhabanner.jpg" alt="Marushobha — Custom. Character. Class." loading="eager">
+  </div>
+</section>
+
+<section class="section" id="shop" style="padding-top:20px">
+  <div class="section-head"><div class="eyebrow">The Edit</div><h2>Shop the Collection</h2><p>Browse the collection and find your next favourite.</p></div>
+  <div class="toolbar">
+    <input class="searchbox" id="searchInput" type="search" placeholder="Search products…" aria-label="Search products" style="max-width:260px">
+    <div class="filters">
+      <select id="categoryFilter" aria-label="Filter by collection"><option value="">All Collections</option><option>Western Collection</option><option>Indian Collection</option><option>Marushobha Luxe</option></select>
+      <select id="sizeFilter" aria-label="Filter by size"><option value="">All Sizes</option><option>XS</option><option>S</option><option>M</option><option>L</option></select>
+      <select id="colourFilter" aria-label="Filter by colour"><option value="">All Colours</option><option>Floral</option><option>Mustard</option><option>Olive Green</option><option>Pink and White</option><option>Beige</option><option>Sky Blue</option><option>Pink Floral</option><option>Multicolour</option><option>Black, Red and Maroon</option></select>
+      <select id="sortFilter" aria-label="Sort products"><option value="featured">Sort: Featured</option><option value="new">Newest</option></select>
+    </div>
+  </div>
+  <p id="productCount" class="admin-note" aria-live="polite"></p>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-inner">
+    <div>
+      <div class="eyebrow">The Marushobha Story</div><h2>Heritage Meets Modern</h2>
+      <p>Marushobha brings Indian-inspired fabrics, thoughtful details, and contemporary silhouettes together. We believe clothing can feel effortless, express individuality, and carry a story of its own.</p>
+      <p>Rooted in Indian craftsmanship and designed for modern expression, every collection celebrates character, creativity, and personal style.</p>
+      <div class="values">
+        <div class="value"><strong>Our Philosophy</strong><p>Style with meaning.</p></div>
+        <div class="value"><strong>Our Roots</strong><p>Inspired by Indian craft.</p></div>
+        <div class="value"><strong>Our Approach</strong><p>Designed with intention.</p></div>
+      </div>
+    </div>
+    <img class="story-image" loading="lazy" src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=900&q=80" alt="Textile and design inspiration">
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-head"><div class="eyebrow">We are here to help</div><h2>Contact Marushobha</h2><p>Questions about a product or your order? Get in touch with us.</p></div>
+  <div class="support-grid">
+    <div class="support-card"><h3>Instagram</h3><p>@marushobha_</p><a href="https://www.instagram.com/marushobha_/" target="_blank" rel="noopener">Visit Instagram ↗</a></div>
+    <div class="support-card"><h3>Facebook</h3><p>Marushobha Official Page</p><a href="https://www.facebook.com/profile.php?id=61595238090358" target="_blank" rel="noopener">Visit Facebook ↗</a></div>
+    <div class="support-card"><h3>Email</h3><p>marushobha.jj@gmail.com</p><a href="mailto:marushobha.jj@gmail.com">Send an email ↗</a></div>
+    <div class="support-card"><h3>WhatsApp & Queries</h3><p>8700944947</p><a href="https://wa.me/918700944947" target="_blank" rel="noopener">Chat on WhatsApp ↗</a><p><a href="tel:+918700944947">Call us ↗</a></p></div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="padding-top:10px">
+  <div class="section-head"><div class="eyebrow">Customer Care</div><h2>Frequently Asked Questions</h2><p>Send us your question. This demo stores questions only in this browser; a live site needs a secure owner-managed backend.</p></div>
+  <div class="faq-wrap">
+    <form id="questionForm">
+      <input class="field" id="questionName" placeholder="Your name" required maxlength="80">
+      <input class="field" id="questionEmail" type="email" placeholder="Your email" required maxlength="150">
+      <textarea class="field" id="questionText" placeholder="How can we help you?" required maxlength="1000"></textarea>
+      <button class="btn" type="submit">Submit Question</button>
+      <div class="notice" id="questionNotice" role="status">Your question was saved in this browser demo.</div>
+    </form>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<section class="section" id="account" style="padding-top:10px">
+  <div class="section-head"><div class="eyebrow">Your Marushobha</div><h2>Your Account, Your Style</h2><p>Sign in to make your shopping experience personal. Create an account using your mobile number or Google account.</p></div>
+  <div class="account-actions"><button class="btn" id="accountSignup">Create Account</button><button class="btn outline" id="accountSignin">Sign In</button></div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><img class="footer-logo" src="assets/marushobhalogo.jpeg" alt="Marushobha — Custom. Character. Class."><p>Wear Your Story.</p><p>Contemporary fashion inspired by Indian craftsmanship.</p></div>
+    <div class="footer-col"><h3>Explore</h3><a href="#shop">Shop All</a><a href="#new">New Arrivals</a><a href="#western">Western Collection</a><a href="#indian">Indian Collection</a><a href="#luxe">Marushobha Luxe</a><a href="#story">Our Story</a></div>
+    <div class="footer-col"><h3>Customer Care</h3><a href="#contact">Contact Us</a><a href="#faq">Frequently Asked Questions</a><a href="#shipping">Shipping & Delivery</a><a href="#returns">Returns & Exchanges</a><a href="#privacy">Privacy Policy</a><a href="#terms">Terms & Conditions</a></div>
+  </div>
+  <div class="copyright">© <span id="year"></span> Marushobha. All rights reserved. <span style="float:right"><a href="https://www.instagram.com/marushobha_/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61595238090358" target="_blank" rel="noopener">Facebook</a></span></div>
+</footer>
+
+<div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-label="Customer sign in and sign up">
+  <div class="modal auth-modal">
+    <button class="modal-close" id="authClose" aria-label="Close">×</button>
+    <div class="auth-brand"><img class="auth-logo" src="assets/marushobhalogo.jpeg" alt="Marushobha — Custom. Character. Class."></div>
+    <h2 id="authTitle" style="text-align:center;font-size:2rem">Welcome Back</h2>
+    <p id="authSubtitle" style="text-align:center;color:var(--muted);font-size:.88rem">Sign in to continue your style journey.</p>
+    <div class="auth-tabs"><button class="auth-tab active" id="signinTab" type="button">Sign In</button><button class="auth-tab" id="signupTab" type="button">Create Account</button></div>
+    <form class="auth-form" id="authForm">
+      <div id="authNameWrap" class="hidden"><label for="authName">Full name</label><input class="field" id="authName" autocomplete="name" placeholder="Enter your full name"></div>
+      <div><label for="authPhone">Mobile number</label><input class="field" id="authPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number (India +91)" pattern="[0-9+() -]{10,18}" required></div>
+      <div id="otpWrap" class="hidden"><label for="authOtp">Verification code (OTP)</label><input class="field" id="authOtp" type="text" inputmode="numeric" autocomplete="one-time-code" placeholder="Enter the SMS code" pattern="[0-9]{4,8}" maxlength="8"></div>
+      <div id="recaptcha-container"></div>
+      <button class="btn" type="submit" id="mobileContinue">Continue with Mobile</button>
+      <button class="add hidden" type="button" id="changePhone">Use a different number</button>
+    </form>
+    <div class="auth-divider">OR</div>
+    <button class="google-btn" id="googleAuth" type="button"><strong style="font-size:1.05rem;color:#4285F4">G</strong><span id="googleLabel">Continue with Google</span></button>
+    <div class="auth-status" id="authStatus" role="status"></div>
+    <p class="auth-terms">By continuing, you agree to our Terms & Conditions and Privacy Policy.</p>
+  </div>
+</div>
+<div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-label="Product details">
+  <div class="modal"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div id="modalContent"></div></div>
+</div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true">
+  <div class="cart-head"><h2>Shopping Bag</h2><button class="iconbtn" id="cartClose" aria-label="Close bag">×</button></div>
+  <div id="cartItems"></div><div class="cart-total"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
+  <p class="admin-note">Checkout and payments are not connected in this demo.</p><button class="btn" style="width:100%" id="checkoutBtn">Continue to Checkout</button><div class="notice" id="checkoutNotice" role="status">Connect a secure checkout provider to accept orders.</div>
+</aside>
+
+<script>
+const products = [
+  {
+    "id": 1,
+    "slug": "boat-neck-halter-dress",
+    "name": "Boat-Neck Halter Dress",
+    "description": "A floral-print dress featuring a halter neckline with a back-neck tie, a fitted waist, and a flared skirt for a playful and elegant look.",
+    "colour": "Floral",
+    "sizes": ["XS", "S", "M", "L"],
+    "price": "COMING SOON",
+    "fabric": "Not specified",
+    "care": "Follow the garment care label. Handle the printed fabric gently and avoid harsh bleach.",
+    "category": "Western Collection",
+    "tag": "Floral · Halter Neck",
+    "images": [
+      { "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg", "alt": "Boat-Neck Halter Dress product view" },
+      { "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-model-views.png", "alt": "Boat-Neck Halter Dress product view" },
+      { "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-detail-views.png", "alt": "Boat-Neck Halter Dress product view" }
+    ],
+    "img": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg"
+  },
+  {
+    "id": 2,
+    "slug": "mustard-muse-shirt",
+    "name": "Mustard Muse Shirt",
+    "description": "A mustard-checkered shirt made from handwoven cotton, featuring a contrasting brown pocket, wooden buttons, statement flared cuffs, and brown piping for a modern, effortless look.",
+    "colour": "Mustard",
+    "sizes": ["XS", "S", "M", "L"],
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "category": "Western Collection",
+    "tag": "Handwoven Cotton · Checked",
+    "images": [
+      { "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg", "alt": "Mustard Muse Shirt product view" },
+      { "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-front-view.png", "alt": "Mustard Muse Shirt product view" }
+    ],
+    "img": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg"
+  },
+  {
+    "id": 3,
+    "slug": "bow-palazzo-pants",
+    "name": "Bow Palazzo Pants",
+    "description": "A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist, paired with a sleeveless plum top for

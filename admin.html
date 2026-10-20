@@ -1,22 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marushobha | Owner Admin Dashboard</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#211d1b;background:#f7f4ef}
+*{box-sizing:border-box}body{margin:0}header{background:#211d1b;color:#fff;padding:22px 18px}
+header h1{margin:0;font-size:1.35rem;letter-spacing:.08em}header p{margin:7px 0 0;color:#e5d8c9;font-size:.92rem}
+main{max-width:1150px;margin:24px auto;padding:0 14px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:16px}
+.stat-card{background:white;border:1px solid #e8e0d7;border-radius:16px;padding:18px;box-shadow:0 4px 18px #25170a08}
+.stat-card h3{margin:0 0 6px;font-size:.85rem;color:#6d655f;text-transform:uppercase;letter-spacing:.05em}
+.stat-card .stat-value{font-size:1.8rem;font-weight:700;color:#211d1b;margin:0}
+.panel{background:white;border:1px solid #e8e0d7;border-radius:16px;padding:18px;margin-bottom:16px;box-shadow:0 4px 18px #25170a08}
+h2{font-size:1.05rem;margin:0 0 14px}.muted{color:#6d655f;font-size:.9rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+button{border:0;border-radius:9px;padding:11px 14px;font-weight:650;cursor:pointer;background:#28211d;color:#fff}
+button.secondary{background:#eee7df;color:#29221e}button.danger{background:#a42d2d}button:disabled{opacity:.5;cursor:not-allowed}
+input,textarea,select{width:100%;padding:11px;border:1px solid #d8cec3;border-radius:9px;font:inherit;background:#fff}
+label{display:block;font-size:.88rem;font-weight:650;margin:10px 0 6px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.full{grid-column:1/-1}
+#status{padding:10px 12px;border-radius:9px;background:#f2eee8;margin-top:12px;white-space:pre-wrap}.hidden{display:none!important}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #eee6de;vertical-align:top;font-size:.9rem}th{font-size:.8rem;color:#6d655f}
+.product-img{width:42px;height:52px;object-fit:cover;border-radius:6px;background:#eee}.actions{display:flex;gap:6px;flex-wrap:wrap}.actions button{padding:6px 10px;font-size:.78rem}
+.badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:.75rem;font-weight:600;background:#eee7df;color:#29221e}
+.badge.success{background:#e1f3e5;color:#1d6f34}
+.tab-nav{display:flex;gap:8px;margin-bottom:16px;border-bottom:1px solid #e8e0d7;padding-bottom:10px}
+.tab-btn{background:#eee7df;color:#29221e;border-radius:8px;padding:8px 14px;font-size:.85rem;cursor:pointer}
+.tab-btn.active{background:#211d1b;color:#fff}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.table-wrap{overflow-x:auto}header h1{font-size:1.15rem}main{margin:14px auto}.panel{padding:14px}}
+</style>
+</head>
+<body>
+<header><h1>MARUSHOBHA</h1><p>Owner Control Center · Orders, Wishlists & Inventory</p></header>
+<main>
+  <section class="panel">
+    <h2>Owner Authentication</h2>
+    <p class="muted">Sign in with your authorized store administrator Google account.</p>
+    <div class="row"><button id="signInBtn">Sign in with Google</button><button id="signOutBtn" class="secondary hidden">Sign out</button><span id="account" class="muted"></span></div>
+    <div id="status" role="status">Add your Firebase web config and owner UID in this file before use.</div>
+  </section>
+
+  <section id="app" class="hidden">
+    <!-- Quick Stats Overview -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Total Orders Placed</h3>
+        <p class="stat-value" id="totalOrdersCount">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Total Catalog Items</h3>
+        <p class="stat-value" id="totalProductsCount">0</p>
+      </div>
+      <div class="stat-card">
+        <h3>Active Customer Wishlists</h3>
+        <p class="stat-value" id="totalWishlistsCount">0</p>
+      </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="tab-nav">
+      <button class="tab-btn active" data-tab="ordersTab">Customer Orders</button>
+      <button class="tab-btn" data-tab="inventoryTab">Inventory & Products</button>
+      <button class="tab-btn" data-tab="wishlistTab">Customer Wishlists</button>
+    </div>
+
+    <!-- Tab 1: Orders -->
+    <section id="ordersTab" class="panel tab-content">
+      <div class="row" style="justify-content:space-between">
+        <h2>Customer Orders</h2>
+        <button id="refreshOrdersBtn" class="secondary">Refresh Orders</button>
+      </div>
+      <p class="muted">Read from Firestore collection <code>orders</code>.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Order ID</th><th>Customer Details</th><th>Items</th><th>Total Amount</th><th>Status</th><th>Date</th></tr>
+          </thead>
+          <tbody id="orderRows"><tr><td colspan="6">Loading orders...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab 2: Inventory & Products -->
+    <section id="inventoryTab" class="panel tab-content hidden">
+      <div class="row" style="justify-content:space-between">
+        <h2>Product Inventory & Quick Stock Update</h2>
+        <button id="refreshProductsBtn" class="secondary">Refresh List</button>
+      </div>
+      <p class="muted">Manage stock quantities or add/edit items in the <code>products</code> collection.</p>
+      
+      <!-- Add/Edit Form -->
+      <form id="productForm" style="background:#fdfcfb;border:1px solid #e8e0d7;padding:16px;border-radius:12px;margin-bottom:20px">
+        <input id="productId" type="hidden">
+        <h3 id="formTitle" style="font-size:0.95rem;margin-top:0">Add New Product</h3>
+        <div class="grid">
+          <div><label for="name">Product Name *</label><input id="name" required maxlength="120" placeholder="e.g. Bandhani Fusion Kurta"></div>
+          <div><label for="collection">Collection</label><select id="collection"><option>New Arrivals</option><option>Best seller</option><option>Western collection</option><option>Indian collection</option><option>Marushobha Luxe</option><option>Limited Edition</option></select></div>
+          <div><label for="price">Price (INR) *</label><input id="price" required type="number" min="0" step="1" placeholder="Enter price"></div>
+          <div><label for="stock">Stock Quantity *</label><input id="stock" required type="number" min="0" step="1" value="10"></div>
+          <div><label for="sizes">Available Sizes</label><input id="sizes" placeholder="XS, S, M, L, XL"></div>
+          <div><label for="fabric">Fabric / Composition</label><input id="fabric" placeholder="e.g. Pure Silk / Handloom Cotton"></div>
+          <div class="full">
+            <label for="imageFile">Product Image (Upload from Computer)</label>
+            <input id="imageFile" type="file" accept="image/*">
+            <p class="muted" style="margin-top:4px;">Images are automatically compressed and converted for instant storage.</p>
+          </div>
+          <div class="full"><label for="description">Description</label><textarea id="description" rows="2" maxlength="2000" placeholder="Product details..."></textarea></div>
+          <div><label for="active">Visibility</label><select id="active"><option value="true">Visible on storefront</option><option value="false">Hidden</option></select></div>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <button type="submit" id="saveBtn">Save Product</button>
+          <button type="button" class="secondary" id="cancelEditBtn">Cancel</button>
+        </div>
+      </form>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Image</th><th>Product Name</th><th>Price</th><th>Stock Qty</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="productRows"><tr><td colspan="5">Loading inventory...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Tab 3: Wishlists -->
+    <section id="wishlistTab" class="panel tab-content hidden">
+      <div class="row" style="justify-content:space-between">
+        <h2>Customer Wishlists</h2>
+        <button id="refreshWishlistBtn" class="secondary">Refresh Wishlists</button>
+      </div>
+      <p class="muted">Read from Firestore collection <code>wishlists</code> to understand customer demand.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Customer Email / ID</th><th>Wishlisted Items</th><th>Last Updated</th></tr>
+          </thead>
+          <tbody id="wishlistRows"><tr><td colspan="3">Loading wishlists...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+</main>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
+  authDomain: "marushobha-1e31f.firebaseapp.com",
+  projectId: "marushobha-1e31f",
+  storageBucket: "marushobha-1e31f.firebasestorage.app",
+  messagingSenderId: "997754535596",
+  appId: "1:997754535596:web:aafc83bad8c3d413cf6909",
+  measurementId: "G-DLWGD0ZDQ1"
+};
+
+// Set your authorized owner UID here after signing in once
+const OWNER_UID = "REPLACE_WITH_YOUR_FIREBASE_AUTH_UID";
+
+const $ = (id) => document.getElementById(id);
+const status = (message) => { $("status").textContent = message; };
+const configReady = !Object.values(firebaseConfig).some(v => String(v).includes("REPLACE_WITH"));
+let auth, db, currentUser = null;
+let products = [], orders = [], wishlists = [];
+let currentImageBase64 = "";
+
+if (configReady) {
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+} else {
+  $("signInBtn").disabled = true;
+  status("Setup required: replace firebaseConfig placeholders before signing in.");
+}
+
+// Tab Switching Logic
+document.querySelectorAll(".tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".tab-content").forEach(c => c.classList.add("hidden"));
+    btn.classList.add("active");
+    $(btn.dataset.tab).classList.remove("hidden");
+  });
+});
+
+$("signInBtn").addEventListener("click", async () => {
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+  catch (e) { status("Sign-in failed: " + e.message); }
+});
+$("signOutBtn").addEventListener("click", async () => { try { await signOut(auth); } catch(e) { status(e.message); } });
+
+onAuthStateChanged(auth || {}, async user => {
+  currentUser = user;
+  $("signInBtn").classList.toggle("hidden", !!user);
+  $("signOutBtn").classList.toggle("hidden", !user);
+  $("account").textContent = user ? `${user.email || "Signed in"} · UID: ${user.uid}` : "";
+  $("app").classList.toggle("hidden", !user);
+  if (!user) { status(configReady ? "Sign in with the authorized owner account." : "Configure Firebase before use."); return; }
+  if (OWNER_UID.startsWith("REPLACE_WITH")) {
+    status(`Signed in successfully! Your Firebase UID is: ${user.uid}\n\nCopy this UID and paste it into the OWNER_UID variable in your code to unlock the dashboard.`);
+    return;
+  }
+  if (user.uid !== OWNER_UID) { status("Unauthorized account. Use the designated owner login."); $("app").classList.add("hidden"); return; }
+  status("Signed in as owner. Loading dashboard data...");
+  await loadAllData();
+});
+
+async function loadAllData() {
+  await Promise.all([loadProducts(), loadOrders(), loadWishlists()]);
+  status("Dashboard data loaded successfully.");
+}
+
+async function loadProducts() {
+  try {
+    const snap = await getDocs(query(collection(db, "products"), orderBy("name")));
+    products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    $("totalProductsCount").textContent = products.length;
+    renderProducts();
+  } catch (e) { console.error("Products load error:", e); status("Could not load products: " + e.message); }
+}
+
+async function loadOrders() {
+  try {
+    const snap = await getDocs(collection(db, "orders"));
+    orders = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    $("totalOrdersCount").textContent = orders.length;
+    renderOrders();
+  } catch (e) { console.error("Orders load error:", e); }
+}
+
+async function loadWishlists() {
+  try {
+    const snap = await getDocs(collection(db, "wishlists"));
+    wishlists = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    $("totalWishlistsCount").textContent = wishlists.length;
+    renderWishlists();
+  } catch (e) { console.error("Wishlists load error:", e); }
+}
+
 function renderOrders() {
   const body = $("orderRows"); body.replaceChildren();
   if (!orders.length) { body.innerHTML = '<tr><td colspan="6">No orders placed on your website yet.</td></tr>'; return; }
   for (const o of orders) {
-    const waybill = o.delhiveryResponse?.packages?.[0]?.waybill || "Processing AWB...";
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td><code>${o.id.slice(0, 8)}...</code><br><small class="muted">AWB: ${waybill}</small></td>
-      <td><strong>${o.customerName || "Guest"}</strong><br><span class="muted">${o.phone || o.email || ""}</span></td>
+      <td><code>${o.id.slice(0, 8)}...</code></td>
+      <td><strong>${o.customerName || o.email || "Guest"}</strong><br><span class="muted">${o.phone || o.email || ""}</span></td>
       <td>${Array.isArray(o.items) ? o.items.map(i => `${i.name} (x${i.quantity || 1})`).join(", ") : "—"}</td>
-      <td>₹${Number(o.totalAmount || 0).toLocaleString("en-IN")}</td>
-      <td><span class="badge success">${o.shippingStatus || "Manifested"}</span></td>
-      <td class="actions">
-        ${o.delhiveryResponse?.packages?.[0]?.waybill ? 
-          `<button class="secondary" onclick="window.open('https://track.delhivery.com/p/${waybill}', '_blank')">Track</button>` : 
-          `<span class="muted">Syncing...</span>`
-        }
-      </td>
+      <td>₹${Number(o.totalAmount || o.amount || 0).toLocaleString("en-IN")}</td>
+      <td><span class="badge success">${o.status || "Paid / Confirmed"}</span></td>
+      <td class="muted">${o.createdAt?.toDate ? o.createdAt.toDate().toLocaleDateString() : "Recent"}</td>
     `;
     body.append(tr);
   }
 }
+
+function renderWishlists() {
+  const body = $("wishlistRows"); body.replaceChildren();
+  if (!wishlists.length) { body.innerHTML = '<tr><td colspan="3">No customer wishlists recorded yet.</td></tr>'; return; }
+  for (const w of wishlists) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${w.userEmail || w.userId || "Customer"}</strong></td>
+      <td>${Array.isArray(w.items) ? w.items.map(i => i.name || i).join(", ") : (w.itemNames || "Saved items")}</td>
+      <td class="muted">Active</td>
+    `;
+    body.append(tr);
+  }
+}
+
+function renderProducts() {
+  const body = $("productRows"); body.replaceChildren();
+  if (!products.length) { body.innerHTML = '<tr><td colspan="5">No products found in inventory.</td></tr>'; return; }
+  for (const p of products) {
+    const tr = document.createElement("tr");
+    const imgTd = document.createElement("td");
+    if (p.imageUrl) { const img = document.createElement("img"); img.className="product-img"; img.src=p.imageUrl; img.alt=p.name; imgTd.append(img); }
+    else imgTd.textContent = "—";
+    
+    const nameTd = document.createElement("td"); nameTd.innerHTML = `<strong>${p.name}</strong><br><span class="muted">₹${Number(p.price || 0).toLocaleString("en-IN")}</span>`;
+    
+    const stockTd = document.createElement("td");
+    const stockInput = document.createElement("input");
+    stockInput.type = "number"; stockInput.min = "0"; stockInput.value = p.stock ?? 0;
+    stockInput.style.width = "80px"; stockInput.style.padding = "6px";
+    stockInput.addEventListener("change", async () => {
+      const newStock = Number(stockInput.value);
+      if (newStock < 0) return;
+      try {
+        await updateDoc(doc(db, "products", p.id), { stock: newStock, updatedAt: serverTimestamp() });
+        status(`Updated stock for "${p.name}" to ${newStock}.`);
+      } catch(err) { status("Stock update failed: " + err.message); }
+    });
+    stockTd.append(stockInput);
+
+    const actionTd = document.createElement("td"); actionTd.className="actions";
+    const edit = document.createElement("button"); edit.textContent="Edit Details"; edit.className="secondary"; edit.addEventListener("click",()=>editProduct(p));
+    const del = document.createElement("button"); del.textContent="Delete"; del.className="danger"; del.addEventListener("click",()=>removeProduct(p));
+    actionTd.append(edit,del);
+
+    tr.append(imgTd, nameTd, stockTd, actionTd);
+    body.append(tr);
+  }
+}
+
+// Convert uploaded computer image to compressed Base64
+$("imageFile").addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const MAX_WIDTH = 600;
+      const MAX_HEIGHT = 750;
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+      } else {
+        if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+      currentImageBase64 = canvas.toDataURL("image/jpeg", 0.85);
+      status("Image loaded from computer successfully.");
+    };
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+function editProduct(p) {
+  $("productId").value = p.id;
+  $("name").value = p.name || "";
+  $("collection").value = p.collection || "New Arrivals";
+  $("price").value = p.price ?? "";
+  $("stock").value = p.stock ?? 10;
+  $("sizes").value = Array.isArray(p.sizes) ? p.sizes.join(", ") : (p.sizes || "");
+  $("fabric").value = p.fabric || "";
+  currentImageBase64 = p.imageUrl || "";
+  $("description").value = p.description || "";
+  $("active").value = String(p.active !== false);
+  $("formTitle").textContent = "Edit Product Details";
+  $("saveBtn").textContent = "Update Product";
+  window.scrollTo({top: 300, behavior: "smooth"});
+}
+
+function clearForm() {
+  $("productForm").reset();
+  $("productId").value = "";
+  $("stock").value = "10";
+  currentImageBase64 = "";
+  $("formTitle").textContent = "Add New Product";
+  $("saveBtn").textContent = "Save Product";
+}
+
+$("cancelEditBtn").addEventListener("click", clearForm);
+$("refreshOrdersBtn").addEventListener("click", loadOrders);
+$("refreshProductsBtn").addEventListener("click", loadProducts);
+$("refreshWishlistBtn").addEventListener("click", loadWishlists);
+
+$("productForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!currentUser || currentUser.uid !== OWNER_UID) return status("Owner sign-in required.");
+  const price = Number($("price").value), stock = Number($("stock").value);
+  const name = $("name").value.trim();
+  if (!name || !Number.isFinite(price) || price < 0 || !Number.isFinite(stock) || stock < 0) {
+    return status("Please enter a valid product name, price, and stock quantity.");
+  }
+  
+  const data = {
+    name,
+    collection: $("collection").value,
+    price,
+    stock,
+    sizes: $("sizes").value.split(",").map(s => s.trim()).filter(Boolean),
+    fabric: $("fabric").value.trim(),
+    imageUrl: currentImageBase64,
+    description: $("description").value.trim(),
+    active: $("active").value === "true",
+    updatedAt: serverTimestamp()
+  };
+
+  $("saveBtn").disabled = true;
+  status("Saving product...");
+  try {
+    const id = $("productId").value;
+    if (id) {
+      await updateDoc(doc(db, "products", id), data);
+    } else {
+      await addDoc(collection(db, "products"), { ...data, createdAt: serverTimestamp() });
+    }
+    clearForm();
+    await loadProducts();
+    status("Product saved successfully!");
+  } catch(err) {
+    status("Save failed: " + err.message);
+  } finally {
+    $("saveBtn").disabled = false;
+  }
+});
+
+async function removeProduct(p) {
+  if (!currentUser || currentUser.uid !== OWNER_UID) return status("Owner sign-in required.");
+  if (!confirm(`Delete "${p.name}"? This cannot be undone.`)) return;
+  try {
+    await deleteDoc(doc(db, "products", p.id));
+    await loadProducts();
+    status("Product deleted.");
+  } catch(e) {
+    status("Delete failed: " + e.message);
+  }
+}
+</script>
+</body>
+</html>

@@ -17,19 +17,23 @@ main{max-width:1150px;margin:24px auto;padding:0 14px}
 h2{font-size:1.05rem;margin:0 0 14px}.muted{color:#6d655f;font-size:.9rem}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 button{border:0;border-radius:9px;padding:11px 14px;font-weight:650;cursor:pointer;background:#28211d;color:#fff}
-button.secondary{background:#eee7df;color:#29221e}button.danger{background:#a42d2d}button:disabled{opacity:.5;cursor:not-allowed}
+button.secondary{background:#eee7df;color:#29221e}button.danger{background:#a42d2d}button.success{background:#1d6f34}button:disabled{opacity:.5;cursor:not-allowed}
 input,textarea,select{width:100%;padding:11px;border:1px solid #d8cec3;border-radius:9px;font:inherit;background:#fff}
 label{display:block;font-size:.88rem;font-weight:650;margin:10px 0 6px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}.full{grid-column:1/-1}
+.stock-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.stock-box{background:#fdfcfb;border:1px solid #e8e0d7;padding:8px;border-radius:8px;text-align:center}
+.stock-box label{font-size:.75rem;margin:0 0 4px;color:#6d655f}
+.stock-box input{text-align:center;padding:6px}
 #status{padding:10px 12px;border-radius:9px;background:#f2eee8;margin-top:12px;white-space:pre-wrap}.hidden{display:none!important}
 table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px;border-bottom:1px solid #eee6de;vertical-align:top;font-size:.9rem}th{font-size:.8rem;color:#6d655f}
-.product-img{width:42px;height:52px;object-fit:cover;border-radius:6px;background:#eee}.actions{display:flex;gap:6px;flex-wrap:wrap}.actions button{padding:6px 10px;font-size:.78rem}
+.product-img{width:48px;height:60px;object-fit:cover;border-radius:6px;background:#eee}.actions{display:flex;gap:6px;flex-wrap:wrap}.actions button{padding:6px 10px;font-size:.78rem}
 .badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:.75rem;font-weight:600;background:#eee7df;color:#29221e}
-.badge.success{background:#e1f3e5;color:#1d6f34}
+.badge.success{background:#e1f3e5;color:#1d6f34}.badge.warning{background:#fef3d6;color:#8a6100}.badge.danger{background:#fde8e8;color:#a42d2d}
 .tab-nav{display:flex;gap:8px;margin-bottom:16px;border-bottom:1px solid #e8e0d7;padding-bottom:10px}
 .tab-btn{background:#eee7df;color:#29221e;border-radius:8px;padding:8px 14px;font-size:.85rem;cursor:pointer}
 .tab-btn.active{background:#211d1b;color:#fff}
-@media(max-width:650px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.table-wrap{overflow-x:auto}header h1{font-size:1.15rem}main{margin:14px auto}.panel{padding:14px}}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.stock-grid{grid-template-columns:repeat(2,1fr)}.full{grid-column:auto}.table-wrap{overflow-x:auto}header h1{font-size:1.15rem}main{margin:14px auto}.panel{padding:14px}}
 </style>
 </head>
 <body>
@@ -61,22 +65,22 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
 
     <!-- Navigation Tabs -->
     <div class="tab-nav">
-      <button class="tab-btn active" data-tab="ordersTab">Customer Orders</button>
-      <button class="tab-btn" data-tab="inventoryTab">Inventory & Products</button>
+      <button class="tab-btn active" data-tab="ordersTab">Customer Orders & Approvals</button>
+      <button class="tab-btn" data-tab="inventoryTab">Inventory & Size Quantities</button>
       <button class="tab-btn" data-tab="wishlistTab">Customer Wishlists</button>
     </div>
 
     <!-- Tab 1: Orders -->
     <section id="ordersTab" class="panel tab-content">
       <div class="row" style="justify-content:space-between">
-        <h2>Customer Orders</h2>
+        <h2>Customer Orders & Fulfillment</h2>
         <button id="refreshOrdersBtn" class="secondary">Refresh Orders</button>
       </div>
-      <p class="muted">Read from Firestore collection <code>orders</code>.</p>
+      <p class="muted">Approve, fulfill, or review customer orders and delivery addresses from Firestore collection <code>orders</code>.</p>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Order ID</th><th>Customer Details</th><th>Items</th><th>Total Amount</th><th>Status</th><th>Date</th></tr>
+            <tr><th>Order ID</th><th>Customer Details & Address</th><th>Items & Bag Details</th><th>Total</th><th>Status & Approval</th><th>Actions</th></tr>
           </thead>
           <tbody id="orderRows"><tr><td colspan="6">Loading orders...</td></tr></tbody>
         </table>
@@ -86,10 +90,10 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
     <!-- Tab 2: Inventory & Products -->
     <section id="inventoryTab" class="panel tab-content hidden">
       <div class="row" style="justify-content:space-between">
-        <h2>Product Inventory & Quick Stock Update</h2>
+        <h2>Product Inventory & Size-wise Stock</h2>
         <button id="refreshProductsBtn" class="secondary">Refresh List</button>
       </div>
-      <p class="muted">Manage stock quantities or add/edit items in the <code>products</code> collection.</p>
+      <p class="muted">Manage stock quantities per size (XS, S, M, L) and upload/update product imagery.</p>
       
       <!-- Add/Edit Form -->
       <form id="productForm" style="background:#fdfcfb;border:1px solid #e8e0d7;padding:16px;border-radius:12px;margin-bottom:20px">
@@ -99,13 +103,25 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
           <div><label for="name">Product Name *</label><input id="name" required maxlength="120" placeholder="e.g. Bandhani Fusion Kurta"></div>
           <div><label for="collection">Collection</label><select id="collection"><option>New Arrival Collection</option><option>Indian Collection</option><option>Western Collection</option><option>Marushobha Luxe</option></select></div>
           <div><label for="price">Price (INR or COMING SOON) *</label><input id="price" required placeholder="Enter price or COMING SOON"></div>
-          <div><label for="sizes">Available Sizes</label><input id="sizes" placeholder="XS, S, M, L"></div>
           <div><label for="colour">Colour</label><input id="colour" placeholder="e.g. Floral / Mustard"></div>
-          <div><label for="fabric">Fabric / Composition</label><input id="fabric" placeholder="e.g. Handwoven cotton"></div>
+          
           <div class="full">
-            <label for="imageFile">Product Image (Upload from Computer)</label>
+            <label>Stock Quantity per Size</label>
+            <div class="stock-grid">
+              <div class="stock-box"><label>XS Stock</label><input id="stockXS" type="number" min="0" value="5"></div>
+              <div class="stock-box"><label>S Stock</label><input id="stockS" type="number" min="0" value="5"></div>
+              <div class="stock-box"><label>M Stock</label><input id="stockM" type="number" min="0" value="5"></div>
+              <div class="stock-box"><label>L Stock</label><input id="stockL" type="number" min="0" value="5"></div>
+            </div>
+          </div>
+
+          <div><label for="fabric">Fabric / Composition</label><input id="fabric" placeholder="e.g. Handwoven cotton"></div>
+          <div>
+            <label for="imageFile">Product Image</label>
             <input id="imageFile" type="file" accept="image/*">
-            <p class="muted" style="margin-top:4px;">Images are automatically compressed and converted for instant storage.</p>
+          </div>
+          <div class="full">
+            <div id="imagePreviewContainer" style="margin-top:8px"></div>
           </div>
           <div class="full"><label for="description">Description</label><textarea id="description" rows="2" maxlength="2000" placeholder="Product details..."></textarea></div>
         </div>
@@ -118,9 +134,9 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>Image</th><th>Product Name</th><th>Price</th><th>Sizes</th><th>Actions</th></tr>
+            <tr><th>Image</th><th>Product Name & Price</th><th>Size-wise Stock</th><th>Actions</th></tr>
           </thead>
-          <tbody id="productRows"><tr><td colspan="5">Loading inventory...</td></tr></tbody>
+          <tbody id="productRows"><tr><td colspan="4">Loading inventory...</td></tr></tbody>
         </table>
       </div>
     </section>
@@ -290,17 +306,53 @@ function renderOrders() {
   if (!orders.length) { body.innerHTML = '<tr><td colspan="6">No orders placed on your website yet.</td></tr>'; return; }
   for (const o of orders) {
     const tr = document.createElement("tr");
+    
+    const customerDetails = `
+      <strong>${o.customerName || o.name || o.email || "Customer"}</strong><br>
+      <span class="muted">📞 ${o.phone || "—"}</span><br>
+      <span class="muted">✉️ ${o.email || "—"}</span><br>
+      <span class="muted">📍 ${o.address || o.deliveryAddress || "—"}</span>
+    `;
+
+    const itemsDetails = Array.isArray(o.items) ? o.items.map(i => `
+      <div style="margin-bottom:4px">
+        • <strong>${i.name || "Item"}</strong> 
+        <span class="badge">Size: ${i.size || "Standard"}</span> 
+        <span class="muted">(Qty: ${i.qty || i.quantity || 1})</span>
+      </div>
+    `).join("") : "—";
+
+    const statusBadge = o.status === "Approved" ? '<span class="badge success">Approved & Processing</span>' :
+                        o.status === "Shipped" ? '<span class="badge success">Shipped</span>' :
+                        '<span class="badge warning">Pending Approval</span>';
+
     tr.innerHTML = `
       <td><code>${o.id.slice(0, 8)}...</code></td>
-      <td><strong>${o.customerName || o.email || "Guest"}</strong><br><span class="muted">${o.phone || o.email || ""}</span></td>
-      <td>${Array.isArray(o.items) ? o.items.map(i => `${i.name} (x${i.quantity || 1})`).join(", ") : "—"}</td>
-      <td>₹${Number(o.totalAmount || o.amount || 0).toLocaleString("en-IN")}</td>
-      <td><span class="badge success">${o.status || "Paid / Confirmed"}</span></td>
-      <td class="muted">${o.createdAt?.toDate ? o.createdAt.toDate().toLocaleDateString() : "Recent"}</td>
+      <td>${customerDetails}</td>
+      <td>${itemsDetails}</td>
+      <td><strong>₹${Number(o.totalAmount || o.amount || 0).toLocaleString("en-IN")}</strong></td>
+      <td>${statusBadge}</td>
+      <td>
+        <div class="actions">
+          <button class="success" onclick="updateOrderStatus('${o.id}', 'Approved')">Approve</button>
+          <button class="secondary" onclick="updateOrderStatus('${o.id}', 'Shipped')">Mark Shipped</button>
+        </div>
+      </td>
     `;
     body.append(tr);
   }
 }
+
+window.updateOrderStatus = async function(orderId, newStatus) {
+  if (!currentUser || currentUser.uid !== OWNER_UID) return status("Owner sign-in required.");
+  try {
+    await updateDoc(doc(db, "orders", orderId), { status: newStatus, updatedAt: serverTimestamp() });
+    status(`Order status updated to "${newStatus}".`);
+    await loadOrders();
+  } catch (e) {
+    status("Failed to update status: " + e.message);
+  }
+};
 
 function renderWishlists() {
   const body = $("wishlistRows"); body.replaceChildren();
@@ -318,7 +370,7 @@ function renderWishlists() {
 
 function renderProducts() {
   const body = $("productRows"); body.replaceChildren();
-  if (!products.length) { body.innerHTML = '<tr><td colspan="5">No products found in inventory.</td></tr>'; return; }
+  if (!products.length) { body.innerHTML = '<tr><td colspan="4">No products found in inventory.</td></tr>'; return; }
   for (const p of products) {
     const tr = document.createElement("tr");
     const imgTd = document.createElement("td");
@@ -327,22 +379,29 @@ function renderProducts() {
     else imgTd.textContent = "—";
     
     const priceDisplay = typeof p.price === "number" ? "₹" + p.price.toLocaleString("en-IN") : p.price;
-    const nameTd = document.createElement("td"); nameTd.innerHTML = `<strong>${p.name}</strong><br><span class="muted">${priceDisplay}</span>`;
+    const nameTd = document.createElement("td"); 
+    nameTd.innerHTML = `<strong>${p.name}</strong><br><span class="muted">${priceDisplay}</span><br><span class="badge">${p.collection || "Collection"}</span>`;
     
-    const sizesTd = document.createElement("td");
-    sizesTd.textContent = Array.isArray(p.sizes) ? p.sizes.join(", ") : (p.sizes || "—");
+    const stock = p.stock || { XS: 5, S: 5, M: 5, L: 5 };
+    const stockTd = document.createElement("td");
+    stockTd.innerHTML = `
+      XS: <strong>${stock.XS ?? 5}</strong> | 
+      S: <strong>${stock.S ?? 5}</strong> | 
+      M: <strong>${stock.M ?? 5}</strong> | 
+      L: <strong>${stock.L ?? 5}</strong>
+    `;
 
     const actionTd = document.createElement("td"); actionTd.className="actions";
     const edit = document.createElement("button"); edit.textContent="Edit Details"; edit.className="secondary"; edit.addEventListener("click",()=>editProduct(p));
     const del = document.createElement("button"); del.textContent="Delete"; del.className="danger"; del.addEventListener("click",()=>removeProduct(p));
     actionTd.append(edit,del);
 
-    tr.append(imgTd, nameTd, sizesTd, actionTd);
+    tr.append(imgTd, nameTd, stockTd, actionTd);
     body.append(tr);
   }
 }
 
-// Convert uploaded computer image to compressed Base64
+// Convert uploaded computer image to compressed Base64 & Preview
 $("imageFile").addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -367,7 +426,9 @@ $("imageFile").addEventListener("change", (e) => {
       const ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0, width, height);
       currentImageBase64 = canvas.toDataURL("image/jpeg", 0.85);
-      status("New image loaded from computer successfully.");
+      
+      $("imagePreviewContainer").innerHTML = `<img src="${currentImageBase64}" style="width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ccc">`;
+      status("Image loaded and compressed successfully.");
     };
     img.src = event.target.result;
   };
@@ -379,10 +440,22 @@ function editProduct(p) {
   $("name").value = p.name || "";
   $("collection").value = p.collection || "New Arrival Collection";
   $("price").value = p.price ?? "";
-  $("sizes").value = Array.isArray(p.sizes) ? p.sizes.join(", ") : (p.sizes || "");
   $("colour").value = p.colour || "";
   $("fabric").value = p.fabric || "";
+  
+  const stock = p.stock || { XS: 5, S: 5, M: 5, L: 5 };
+  $("stockXS").value = stock.XS ?? 5;
+  $("stockS").value = stock.S ?? 5;
+  $("stockM").value = stock.M ?? 5;
+  $("stockL").value = stock.L ?? 5;
+
   currentImageBase64 = p.img || p.imageUrl || (p.images?.[0]?.src) || ""; 
+  if (currentImageBase64) {
+    $("imagePreviewContainer").innerHTML = `<img src="${currentImageBase64}" style="width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ccc">`;
+  } else {
+    $("imagePreviewContainer").innerHTML = "";
+  }
+
   $("description").value = p.description || "";
   $("formTitle").textContent = "Edit Product Details";
   $("saveBtn").textContent = "Update Product";
@@ -394,6 +467,7 @@ function clearForm() {
   $("productId").value = "";
   currentImageBase64 = "";
   $("imageFile").value = "";
+  $("imagePreviewContainer").innerHTML = "";
   $("formTitle").textContent = "Add New Product";
   $("saveBtn").textContent = "Save Product";
 }
@@ -415,14 +489,22 @@ $("productForm").addEventListener("submit", async e => {
     return status("Please enter a valid product name and price.");
   }
   
-  const sizesArr = $("sizes").value.split(",").map(s => s.trim()).filter(Boolean);
+  const stockData = {
+    XS: parseInt($("stockXS").value) || 0,
+    S: parseInt($("stockS").value) || 0,
+    M: parseInt($("stockM").value) || 0,
+    L: parseInt($("stockL").value) || 0
+  };
+
+  const sizesArr = ["XS", "S", "M", "L"];
   
   const data = {
     name,
     slug: name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
     collection: $("collection").value,
     price: priceVal,
-    sizes: sizesArr.length ? sizesArr : ["XS", "S", "M", "L"],
+    sizes: sizesArr,
+    stock: stockData,
     colour: $("colour").value.trim() || "Standard",
     fabric: $("fabric").value.trim() || "Handwoven cotton",
     img: currentImageBase64,

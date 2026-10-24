@@ -142,13 +142,14 @@
 <section class="section" id="faq" style="padding-top:10px">
   <div class="section-head"><div class="eyebrow">Customer Care</div><h2>Frequently Asked Questions</h2><p>Send us your question.</p></div>
   <div class="faq-wrap">
-    <!-- Formspree Native Direct Integration Form -->
-    <form id="formspree-faq" action="https://formspree.io/f/meaaobgg" method="POST" onsubmit="submitFormspree(event)">
-      <input class="field" id="questionName" name="name" placeholder="Your name" required maxlength="80">
-      <input class="field" id="questionEmail" name="email" type="email" placeholder="Your email" required maxlength="150">
+    <!-- Marushobha FAQ contact form (Formspree) -->
+    <form id="formspree-faq" action="https://formspree.io/f/meaaobgg" method="POST">
+      <input class="field" id="questionName" name="name" type="text" placeholder="Your name" autocomplete="name" required maxlength="80">
+      <input class="field" id="questionEmail" name="email" type="email" placeholder="Your email" autocomplete="email" required maxlength="150">
       <textarea class="field" id="questionText" name="message" placeholder="How can we help you?" required maxlength="1000"></textarea>
       <input type="hidden" name="_subject" value="New Customer Question via Marushobha FAQ">
       <button class="btn" type="submit" id="formspree-btn">Submit Question</button>
+      <p id="formspree-status" role="status" aria-live="polite" style="margin:4px 0;color:var(--brown);overflow-wrap:anywhere"></p>
     </form>
   </div>
 </section>
@@ -970,6 +971,65 @@ onAuthStateChanged(auth, (user) => {
     updateAccountIconState();
   }
 });
+</script>
+
+
+<!-- Formspree FAQ form handler: shows visible success/error feedback without leaving the page -->
+<script>
+(() => {
+  const form = document.getElementById("formspree-faq");
+  const button = document.getElementById("formspree-btn");
+  const status = document.getElementById("formspree-status");
+
+  if (!form || !button || !status) {
+    console.error("Marushobha FAQ form setup error: required form elements were not found.");
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const originalButtonText = button.textContent;
+    button.disabled = true;
+    button.textContent = "Sending...";
+    status.textContent = "Sending your question...";
+    status.style.color = "var(--brown)";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+
+      let result = {};
+      try { result = await response.json(); } catch (_) { /* Non-JSON response */ }
+
+      if (!response.ok) {
+        const details = Array.isArray(result.errors)
+          ? result.errors.map((item) => item.message).filter(Boolean).join(" ")
+          : "";
+        throw new Error(details || `Form submission failed (HTTP ${response.status}). Check the Formspree endpoint and form settings.`);
+      }
+
+      status.textContent = "Thank you! Your question has been submitted successfully.";
+      status.style.color = "#2e5932";
+      form.reset();
+    } catch (error) {
+      console.error("Marushobha Formspree submission error:", error);
+      if (error instanceof TypeError) {
+        status.textContent = "We could not connect to the form service. Check your internet connection and the Formspree endpoint, then try again.";
+      } else {
+        status.textContent = error.message || "Your question could not be sent. Please try again.";
+      }
+      status.style.color = "#8a2e24";
+    } finally {
+      button.disabled = false;
+      button.textContent = originalButtonText || "Submit Question";
+    }
+  });
+})();
 </script>
 
 </body>

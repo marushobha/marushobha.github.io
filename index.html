@@ -151,7 +151,6 @@
       <button class="btn" type="submit" id="formspree-btn">Submit Question</button>
       <div class="notice" id="formspree-status" role="status" style="display:none;"></div>
     </form>
-    <div class="faq-list" id="faqList"></div>
   </div>
 </section>
 
@@ -654,7 +653,7 @@ document.getElementById("shippingForm").addEventListener("submit", async (e)=>{
 document.getElementById("menuToggle").addEventListener("click",()=>{const nav=document.getElementById("mobileNav"),btn=document.getElementById("menuToggle"),open=nav.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"×":"☰"});
 document.querySelectorAll("#mobileNav a").forEach(a=>a.addEventListener("click",()=>{document.getElementById("mobileNav").classList.remove("open");document.getElementById("menuToggle").setAttribute("aria-expanded","false");document.getElementById("menuToggle").textContent="☰"}));
 
-// Formspree AJAX Handler for FAQ Questions with instant display
+// Formspree AJAX Handler (Direct to Formspree without local demo storage)
 function submitFormspree(event) {
   event.preventDefault();
   const form = event.target;
@@ -664,30 +663,15 @@ function submitFormspree(event) {
   btn.disabled = true;
   btn.textContent = 'Sending...';
 
-  const formData = new FormData(form);
-  const qData = {
-    name: formData.get("name"),
-    question: formData.get("message"),
-    date: new Date().toLocaleDateString()
-  };
-
   fetch(form.action, {
     method: 'POST',
-    body: formData,
+    body: new FormData(form),
     headers: { 'Accept': 'application/json' }
   }).then(response => {
     if (response.ok) {
       status.textContent = 'Thank you! Your question has been sent successfully.';
       status.style.color = '#2e5932';
       status.style.display = 'block';
-      
-      // Save and display immediately in the FAQ list
-      let items = [];
-      try { items = JSON.parse(sessionStorage.getItem("marushobha-demo-questions") || "[]"); } catch {}
-      items.unshift(qData);
-      try { sessionStorage.setItem("marushobha-demo-questions", JSON.stringify(items)); } catch {}
-      renderFaqs();
-
       form.reset();
     } else {
       status.textContent = 'Oops! There was a problem submitting your form.';
@@ -704,12 +688,6 @@ function submitFormspree(event) {
     btn.textContent = 'Submit Question';
   });
 }
-
-function renderFaqs(){
-  let items=[];try{items=JSON.parse(sessionStorage.getItem("marushobha-demo-questions")||"[]")}catch{}
-  document.getElementById("faqList").innerHTML=items.slice(0,5).map(x=>`<div class="faq-item"><small>Question submitted by ${escapeHtml(x.name)} · ${escapeHtml(x.date)}</small><p>${escapeHtml(x.question)}</p><small>Reply: Our team will respond through the contact details you provided.</small></div>`).join("")
-}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 
 window.authMode="signin";
 let authMode="signin";
@@ -804,7 +782,7 @@ document.getElementById("changePhone").addEventListener("click",()=>{
 });
 
 document.getElementById("year").textContent=new Date().getFullYear();
-renderProducts(); renderCart(); renderWishlist(); renderFaqs();
+renderProducts(); renderCart(); renderWishlist();
 </script>
 
 <!-- Firebase Firestore & Authentication Integration -->

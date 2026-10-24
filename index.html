@@ -80,7 +80,6 @@
   <div class="support-grid">
     <div class="support-card">
       <div style="margin-bottom:8px">
-        <!-- Instagram Original Colorful Gradient SVG -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
           <defs>
             <radialGradient id="insta-grad" cx="30%" cy="107%" r="150%">
@@ -103,7 +102,6 @@
 
     <div class="support-card">
       <div style="margin-bottom:8px">
-        <!-- Facebook Original Blue SVG -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2">
           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
         </svg>
@@ -115,7 +113,6 @@
 
     <div class="support-card">
       <div style="margin-bottom:8px">
-        <!-- Gmail Original Colorful SVG -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
           <path fill="#4285F4" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6z"/>
           <path fill="#EA4335" d="M12 13L2 6v12h20V6l-10 7z"/>
@@ -129,7 +126,6 @@
 
     <div class="support-card">
       <div style="margin-bottom:8px">
-        <!-- WhatsApp Original Green SVG -->
         <svg width="28" height="28" viewBox="0 0 24 24" fill="#25D366">
           <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
@@ -145,7 +141,6 @@
 <section class="section" id="faq" style="padding-top:10px">
   <div class="section-head"><div class="eyebrow">Customer Care</div><h2>Frequently Asked Questions</h2><p>Send us your question.</p></div>
   <div class="faq-wrap">
-    <!-- Formspree Integration Form -->
     <form id="formspree-faq" action="https://formspree.io/f/meaaobgg" method="POST" onsubmit="submitFormspree(event)">
       <input class="field" id="questionName" name="name" placeholder="Your name" required maxlength="80">
       <input class="field" id="questionEmail" name="email" type="email" placeholder="Your email" required maxlength="150">
@@ -244,170 +239,138 @@
 <script>
 const fixedProducts = [
   {
-    "id": 1,
+    "id": "fixed-1",
     "slug": "boat-neck-halter-dress",
     "name": "Boat-Neck Halter Dress",
     "description": "A floral-print dress featuring a halter neckline with a back-neck tie, a fitted waist, and a flared skirt for a playful and elegant look.",
     "colour": "Floral",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
     "fabric": "Not specified",
     "care": "Follow the garment care label. Handle the printed fabric gently and avoid harsh bleach.",
     "category": "Western Collection",
     "tag": "Floral · Halter Neck",
-    "images": [
-      { "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg", "alt": "Boat-Neck Halter Dress product view" },
-      { "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-model-views.png", "alt": "Boat-Neck Halter Dress product view" },
-      { "src": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-detail-views.png", "alt": "Boat-Neck Halter Dress product view" }
-    ],
     "img": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg"
   },
   {
-    "id": 2,
+    "id": "fixed-2",
     "slug": "mustard-muse-shirt",
     "name": "Mustard Muse Shirt",
     "description": "A mustard-checkered shirt made from handwoven cotton, featuring a contrasting brown pocket, wooden buttons, statement flared cuffs, and brown piping for a modern, effortless look.",
     "colour": "Mustard",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
     "fabric": "Handwoven cotton",
-    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "care": "Gentle hand wash separately in cold water with mild detergent.",
     "category": "Western Collection",
     "tag": "Handwoven Cotton · Checked",
-    "images": [
-      { "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg", "alt": "Mustard Muse Shirt product view" },
-      { "src": "assets/products/mustard-muse-shirt/mustard-muse-shirt-front-view.png", "alt": "Mustard Muse Shirt product view" }
-    ],
     "img": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg"
   },
   {
-    "id": 3,
+    "id": "fixed-3",
     "slug": "bow-palazzo-pants",
     "name": "Bow Palazzo Pants",
-    "description": "A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist, paired with a sleeveless plum top for an elegant, contemporary look.",
+    "description": "A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist.",
     "colour": "Olive Green",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
-    "fabric": "Handwoven cotton (as provided)",
-    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately in cold water with mild detergent.",
     "category": "Western Collection",
     "tag": "Handwoven Cotton · Wide Leg",
-    "images": [
-      { "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg", "alt": "Bow Palazzo Pants product view" },
-      { "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-model-views.png", "alt": "Bow Palazzo Pants product view" },
-      { "src": "assets/products/bow-palazzo-pants/bow-palazzo-pants-detail-views.png", "alt": "Bow Palazzo Pants product view" }
-    ],
     "img": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg"
   },
   {
-    "id": 4,
+    "id": "fixed-4",
     "slug": "chashni-set",
     "name": "Chashni Set",
-    "description": "A feminine pink off-shoulder top made from handwoven cotton, featuring a delicate ruffled neckline, paired with flowing white wide-leg pants made from handwoven cotton for a soft, elegant, and effortless look.",
+    "description": "A feminine pink off-shoulder top made from handwoven cotton, featuring a delicate ruffled neckline, paired with flowing white wide-leg pants.",
     "colour": "Pink and White",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
     "fabric": "Handwoven cotton",
-    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "care": "Gentle hand wash separately in cold water with mild detergent.",
     "category": "Western Collection",
     "tag": "Handwoven Cotton · Two-Piece Set",
-    "images": [
-      { "src": "assets/products/chashni-set/chashni-set-main.jpeg", "alt": "Chashni Set product view" },
-      { "src": "assets/products/chashni-set/chashni-set-top-details.png", "alt": "Chashni Set product view" }
-    ],
     "img": "assets/products/chashni-set/chashni-set-main.jpeg"
   },
   {
-    "id": 5,
+    "id": "fixed-5",
     "slug": "dune-belle-corset",
     "name": "Dune Belle Corset",
-    "description": "A chic beige corset top made from handwoven cotton, featuring structured cups, wide shoulder straps, and elegant vertical pintuck detailing, paired with matching high-waisted, wide-leg trousers made from handwoven cotton for a refined, contemporary look.",
+    "description": "A chic beige corset top made from handwoven cotton, featuring structured cups, wide shoulder straps, and elegant vertical pintuck detailing.",
     "colour": "Beige",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
     "fabric": "Handwoven cotton",
-    "care": "DRY CLEAN ONLY. Do not machine wash, soak, or wring. Store carefully to help maintain the corset's structure.",
+    "care": "DRY CLEAN ONLY.",
     "category": "Marushobha Luxe",
     "tag": "Handwoven Cotton · Corset Set",
-    "images": [
-      { "src": "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg", "alt": "Dune Belle Corset product view" },
-      { "src": "assets/products/dune-belle-corset/dune-belle-corset-front-view.jpeg", "alt": "Dune Belle Corset product view" },
-      { "src": "assets/products/dune-belle-corset/dune-belle-corset-detail-views.png", "alt": "Dune Belle Corset product view" }
-    ],
     "img": "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg"
   },
   {
-    "id": 6,
+    "id": "fixed-6",
     "slug": "lotus-cuff-shirt",
     "name": "Lotus Cuff Shirt",
-    "description": "A sky-blue striped shirt made from handwoven cotton, featuring a classic collar, button-down front, voluminous sleeves, and unique petal-shaped cuffs for a soft, elegant look.",
+    "description": "A sky-blue striped shirt made from handwoven cotton, featuring a classic collar, button-down front, voluminous sleeves, and unique petal-shaped cuffs.",
     "colour": "Sky Blue",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
     "fabric": "Handwoven cotton",
-    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "care": "Gentle hand wash separately in cold water with mild detergent.",
     "category": "Indian Collection",
     "tag": "Handwoven Cotton · Petal Cuffs",
-    "images": [
-      { "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg", "alt": "Lotus Cuff Shirt product view" },
-      { "src": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-model-views.jpeg", "alt": "Lotus Cuff Shirt product view" }
-    ],
     "img": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg"
   },
   {
-    "id": 7,
+    "id": "fixed-7",
     "slug": "thar-ki-phoolwari",
     "name": "Thar Ki Phoolwari",
-    "description": "A pink floral-print top featuring a square neckline, broad shoulder straps, a fitted silhouette, and adjustable side-string detailing for a stylish, feminine look. Made from handwoven cotton.",
+    "description": "A pink floral-print top featuring a square neckline, broad shoulder straps, a fitted silhouette, and adjustable side-string detailing.",
     "colour": "Pink Floral",
     "sizes": ["XS", "S", "M", "L"],
-    "price": 2000,
     "stock": { "XS": 1, "S": 1, "M": 1, "L": 1 },
+    "price": 2000,
     "fabric": "Handwoven cotton",
-    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "care": "Gentle hand wash separately in cold water with mild detergent.",
     "category": "New Arrival Collection",
     "tag": "Handwoven Cotton · Side-String Top",
-    "images": [
-      { "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg", "alt": "Thar Ki Phoolwari product view" },
-      { "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-detail.jpeg", "alt": "Thar Ki Phoolwari product view" },
-      { "src": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-model-views.png", "alt": "Thar Ki Phoolwari product view" }
-    ],
     "img": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg"
   },
   {
-    "id": 8,
+    "id": "fixed-8",
     "slug": "madhuban-side-string-top",
     "name": "Madhuban Side-String Top",
-    "description": "A handwoven cotton top featuring a square neckline, broad shoulder straps, a playful multicolour print, and adjustable side-string detailing with decorative tassels.",
+    "description": "A handwoven cotton top featuring a square neckline, broad shoulder straps, a playful multicolour print, and adjustable side-string detailing.",
     "colour": "Multicolour",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
     "fabric": "Handwoven cotton",
-    "care": "Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.",
+    "care": "Gentle hand wash separately in cold water with mild detergent.",
     "category": "Indian Collection",
     "tag": "Handwoven Cotton · Side-String Top",
-    "images": [
-      { "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg", "alt": "Madhuban Side-String Top product view" },
-      { "src": "assets/products/madhuban-side-string-top/madhuban-side-string-top-detail.jpeg", "alt": "Madhuban Side-String Top product view" }
-    ],
     "img": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg"
   },
   {
-    "id": 9,
+    "id": "fixed-9",
     "slug": "maharani-fusion-top",
     "name": "Maharani Fusion Top",
-    "description": "A two-piece fusion top featuring a black-and-red Bandhani-print top with a V-neckline and flared sleeves, paired with a maroon handwoven cotton corset featuring a sweetheart neckline and adjustable back lace-up detailing.",
+    "description": "A two-piece fusion top featuring a black-and-red Bandhani-print top with a V-neckline and flared sleeves, paired with a maroon handwoven cotton corset.",
     "colour": "Black, Red and Maroon",
     "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
     "price": "COMING SOON",
     "fabric": "Bandhani-print top with handwoven cotton corset",
-    "care": "DRY CLEAN ONLY because this set includes a structured corset. Do not machine wash, soak, or wring. Store carefully to help maintain its shape.",
+    "care": "DRY CLEAN ONLY.",
     "category": "Indian Collection",
     "tag": "Bandhani Print · Two-Piece Fusion Top",
-    "images": [
-      { "src": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg", "alt": "Maharani Fusion Top product view" },
-      { "src": "assets/products/maharani-fusion-top/maharani-fusion-top-detail.jpeg", "alt": "Maharani Fusion Top product view" }
-    ],
     "img": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg"
   }
 ];
@@ -415,7 +378,6 @@ const fixedProducts = [
 let products = [...fixedProducts];
 let cart = [];
 let wishlist = [];
-let userProfile = { name: "", phone: "", email: "", address: "" };
 
 const fmt = n => typeof n === "number" ? "₹" + n.toLocaleString("en-IN") : n;
 const grid = document.getElementById("productGrid");
@@ -428,19 +390,20 @@ function renderProducts(){
   const q = document.getElementById("searchInput").value.toLowerCase();
   const sort = document.getElementById("sortFilter").value;
 
-  if(cat) list = list.filter(p => p.category === cat);
-  if(size) list = list.filter(p => p.sizes.includes(size));
+  if(cat) list = list.filter(p => (p.collection || p.category) === cat);
+  if(size) list = list.filter(p => p.sizes?.includes(size));
   if(colour) list = list.filter(p => p.colour === colour);
-  if(q) list = list.filter(p => (p.name + " " + p.category + " " + (p.tag || "")).toLowerCase().includes(q));
+  if(q) list = list.filter(p => (p.name + " " + (p.collection || p.category) + " " + (p.tag || "")).toLowerCase().includes(q));
   if(sort === "new") list.sort((a,b) => (b.id || 0) - (a.id || 0));
 
   document.getElementById("productCount").textContent = `${list.length} product${list.length === 1 ? "" : "s"} shown`;
   
   grid.innerHTML = list.length ? list.map(p => {
     const isWished = wishlist.includes(p.id);
+    const displayImg = p.img || p.imageUrl || (p.images?.[0]?.src) || "";
     return `<article class="product">
       <div class="product-image">
-        <img loading="lazy" src="${p.img}" alt="${p.name}">
+        <img loading="lazy" src="${displayImg}" alt="${p.name}">
         <button class="wish" aria-label="Add ${p.name} to wishlist" data-wish="${p.id}" style="color:${isWished ? '#9b3d45' : 'inherit'}">${isWished ? '♥' : '♡'}</button>
       </div>
       <div class="product-info">
@@ -477,10 +440,11 @@ function renderWishlist() {
   const el = document.getElementById("wishlistItems");
   document.getElementById("wishlistCount").textContent = wishlist.length;
   el.innerHTML = wishlist.length ? wishlist.map(id => {
-    const p = products.find(x => x.id === id);
+    const p = products.find(x => x.id == id);
     if (!p) return "";
+    const displayImg = p.img || p.imageUrl || "";
     return `<div class="cart-row">
-      <img src="${p.img}" alt="">
+      <img src="${displayImg}" alt="">
       <div>
         <strong>${p.name}</strong>
         <p>${fmt(p.price)}</p>
@@ -495,7 +459,7 @@ function renderWishlist() {
     openProduct(b.dataset.wishView);
   }));
   el.querySelectorAll("[data-wish-remove]").forEach(b => b.addEventListener("click", () => {
-    toggleWishlist(+b.dataset.wishRemove);
+    toggleWishlist(b.dataset.wishRemove);
   }));
 }
 
@@ -507,32 +471,36 @@ function openProduct(id){
   const p = products.find(x => x.id == id);
   if(!p) return;
   
-  const gallery = p.images ? p.images.map((im,i)=>`<button type="button" class="gallery-thumb" data-gallery="${i}" aria-label="View image ${i+1}" style="border:1px solid var(--line);padding:0;background:white;cursor:pointer"><img src="${im.src}" alt="${im.alt}" style="width:64px;height:78px;object-fit:cover;display:block"></button>`).join("") : "";
+  const stock = p.stock || { XS: 5, S: 5, M: 5, L: 5 };
+  const sizes = ["XS", "S", "M", "L"];
 
-  let sizeOptionsHtml = "";
-  if(p.stock) {
-    sizeOptionsHtml = `<div style="margin:10px 0;"><label for="modalSizeSelect"><strong>Select Size</strong></label><select id="modalSizeSelect" class="field" style="margin-top:5px;">` +
-      p.sizes.map(s => {
-        const qty = p.stock[s] !== undefined ? p.stock[s] : 5;
-        return `<option value="${s}">${s} (${qty} left)</option>`;
-      }).join("") +
-    `</select></div>`;
-  } else {
-    sizeOptionsHtml = `<div style="margin:10px 0;"><label for="modalSizeSelect"><strong>Select Size</strong></label><select id="modalSizeSelect" class="field" style="margin-top:5px;">` +
-      p.sizes.map(s => `<option value="${s}">${s}</option>`).join("") +
-    `</select></div>`;
-  }
+  let sizeOptionsHtml = `<div style="margin:10px 0;"><label for="modalSizeSelect"><strong>Select Size</strong></label><select id="modalSizeSelect" class="field" style="margin-top:5px;">`;
+  
+  let allSoldOut = true;
+  sizes.forEach(s => {
+    const qty = stock[s] !== undefined ? stock[s] : 0;
+    if (qty > 0) {
+      allSoldOut = false;
+      sizeOptionsHtml += `<option value="${s}">${s} (${qty} left)</option>`;
+    } else {
+      sizeOptionsHtml += `<option value="${s}" disabled style="color:#aaa;">${s} - Out of Stock</option>`;
+    }
+  });
+  sizeOptionsHtml += `</select></div>`;
 
-  let actionBtnHtml = `<div style="display:flex;gap:10px;margin-top:10px;"><button class="btn" style="flex:1" id="modalAddToCart">Add to Bag</button><button class="add" style="flex:1" id="modalAddToWishlist">${wishlist.includes(p.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}</button></div>`;
+  let actionBtnHtml = allSoldOut 
+    ? `<button class="btn" style="width:100%;margin-top:10px;background:#a42d2d;border-color:#a42d2d" disabled>Sold Out</button>`
+    : `<div style="display:flex;gap:10px;margin-top:10px;"><button class="btn" style="flex:1" id="modalAddToCart">Add to Bag</button><button class="add" style="flex:1" id="modalAddToWishlist">${wishlist.includes(p.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}</button></div>`;
+
+  const displayImg = p.img || p.imageUrl || "";
 
   document.getElementById("modalContent").innerHTML = `
     <div class="modal-body">
       <div>
-        <img id="modalHeroImage" src="${p.img}" alt="${p.name}" style="width:100%;aspect-ratio:3/4;object-fit:cover">
-        ${gallery ? `<div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:9px">${gallery}</div>` : ''}
+        <img id="modalHeroImage" src="${displayImg}" alt="${p.name}" style="width:100%;aspect-ratio:3/4;object-fit:cover">
       </div>
       <div>
-        <div class="eyebrow">${p.category}</div>
+        <div class="eyebrow">${p.collection || p.category || "Collection"}</div>
         <h2>${p.name}</h2>
         <p class="price">${fmt(p.price)}</p>
         <p>${p.description}</p>
@@ -542,10 +510,6 @@ function openProduct(id){
         ${actionBtnHtml}
       </div>
     </div>`;
-  
-  if(p.images) {
-    document.querySelectorAll("[data-gallery]").forEach(b => b.addEventListener("click",()=>{document.getElementById("modalHeroImage").src = p.images[+b.dataset.gallery].src;}));
-  }
 
   const addBtn = document.getElementById("modalAddToCart");
   if(addBtn) {
@@ -586,7 +550,8 @@ function renderCart(){
   el.innerHTML = cart.length ? cart.map((x, i) => {
     const p = products.find(prod => prod.id == x.id);
     if (!p) return "";
-    return `<div class="cart-row"><img src="${p.img}" alt=""><div><strong>${p.name}</strong><p>Size: ${x.size}</p><p>${fmt(p.price)} × ${x.qty}</p><button class="add" data-remove="${i}">Remove</button></div><div>${fmt(typeof p.price === "number" ? p.price * x.qty : 0)}</div></div>`;
+    const displayImg = p.img || p.imageUrl || "";
+    return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name}</strong><p>Size: ${x.size}</p><p>${fmt(p.price)} × ${x.qty}</p><button class="add" data-remove="${i}">Remove</button></div><div>${fmt(typeof p.price === "number" ? p.price * x.qty : 0)}</div></div>`;
   }).join("") : `<p>Your shopping bag is empty.</p>`;
 
   el.querySelectorAll("[data-remove]").forEach(b => b.addEventListener("click", () => {
@@ -611,6 +576,7 @@ document.getElementById("checkoutBtn").addEventListener("click", () => {
 });
 document.getElementById("checkoutClose").addEventListener("click", () => document.getElementById("checkoutModal").classList.remove("open"));
 
+// Razorpay Checkout, Order Saving & Automatic Stock Deduction
 document.getElementById("shippingForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const name = document.getElementById("shipName").value.trim();
@@ -631,8 +597,49 @@ document.getElementById("shippingForm").addEventListener("submit", async (e) => 
     "currency": "INR",
     "name": "Marushobha",
     "description": "Order Payment",
-    "handler": function (response){
+    "handler": async function (response){
       alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+      
+      try {
+        const dbMod = await import("https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js");
+        if (window.firestoreDb) {
+          // Save order
+          await dbMod.addDoc(dbMod.collection(window.firestoreDb, "orders"), {
+            customerName: name,
+            phone: phone,
+            email: email,
+            address: address,
+            items: cart.map(i => {
+              const p = products.find(prod => prod.id == i.id);
+              return { name: p ? p.name : "Product", size: i.size, qty: i.qty, price: p?.price || 0 };
+            }),
+            totalAmount: totalAmount,
+            status: "Pending Approval",
+            createdAt: dbMod.serverTimestamp()
+          });
+
+          // Deduct stock per size in Firestore
+          for (const item of cart) {
+            let docId = String(item.id);
+            if (docId.startsWith("fixed-")) {
+              docId = docId.replace("fixed-", "prod_");
+            }
+            const productRef = dbMod.doc(window.firestoreDb, "products", docId);
+            const productSnap = await dbMod.getDoc(productRef);
+            if (productSnap.exists()) {
+              const pData = productSnap.data();
+              let stock = pData.stock || { XS: 5, S: 5, M: 5, L: 5 };
+              if (stock[item.size] !== undefined) {
+                stock[item.size] = Math.max(0, stock[item.size] - item.qty);
+                await dbMod.updateDoc(productRef, { stock: stock });
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Error saving order or updating stock:", e);
+      }
+
       cart = [];
       renderCart();
     },
@@ -643,7 +650,7 @@ document.getElementById("shippingForm").addEventListener("submit", async (e) => 
   rzp1.open();
 });
 
-// Formspree AJAX Handler for FAQ Questions
+// Formspree FAQ Handler
 function submitFormspree(event) {
   event.preventDefault();
   const form = event.target;
@@ -670,7 +677,7 @@ function submitFormspree(event) {
     }
     btn.disabled = false;
     btn.textContent = 'Submit Question';
-  }).catch(error => {
+  }).catch(() => {
     status.textContent = 'Oops! There was a network error.';
     status.style.color = 'red';
     status.style.display = 'block';
@@ -697,7 +704,7 @@ renderCart();
 renderWishlist();
 </script>
 
-<!-- Firebase Firestore Integration for Dynamic Admin Products -->
+<!-- Firebase Firestore Integration for Dynamic Admin Products, Images, Stock & Edits -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
 import { getFirestore, collection, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
@@ -714,31 +721,46 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+window.firestoreDb = db; 
 
-// Listen to Firestore products and merge them with fixed products
-const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+const q = query(collection(db, "products"), orderBy("name"));
 onSnapshot(q, (snapshot) => {
   let dbProducts = [];
   snapshot.forEach((docSnap) => {
     const data = docSnap.data();
+    const resolvedImage = data.img || data.imageUrl || (data.images?.[0]?.src) || "";
+
     dbProducts.push({
       id: docSnap.id,
       name: data.name || "Untitled Product",
       description: data.description || "",
       colour: data.colour || "Not specified",
       sizes: Array.isArray(data.sizes) ? data.sizes : ["XS", "S", "M", "L"],
-      price: Number(data.price) || 0,
+      stock: data.stock || { XS: 5, S: 5, M: 5, L: 5 },
+      price: isNaN(data.price) ? data.price : Number(data.price),
       fabric: data.fabric || "Handwoven cotton",
       care: data.care || "Gentle hand wash.",
-      category: data.category || "New Arrival Collection",
+      collection: data.collection || data.category || "New Arrival Collection",
+      category: data.collection || data.category || "New Arrival Collection",
       tag: data.tag || "Handcrafted",
-      img: data.image || "",
-      images: [{ src: data.image || "", alt: data.name }]
+      img: resolvedImage
     });
   });
 
-  // Combine fixed products with newly added admin products
-  window.products = [...fixedProducts, ...dbProducts];
+  // Merge fixed products with admin edits/overrides
+  let mergedProducts = fixedProducts.map(fp => {
+    const found = dbProducts.find(dp => dp.name.trim().toLowerCase() === fp.name.trim().toLowerCase() || dp.id === fp.id.replace("fixed-", "prod_"));
+    return found ? { ...fp, ...found, img: found.img || fp.img } : fp;
+  });
+
+  // Append new custom products added from admin
+  dbProducts.forEach(dp => {
+    if (!mergedProducts.some(p => p.name.trim().toLowerCase() === dp.name.trim().toLowerCase() || p.id === dp.id)) {
+      mergedProducts.push(dp);
+    }
+  });
+
+  window.products = mergedProducts;
   products = window.products;
   renderProducts();
 }, (error) => {

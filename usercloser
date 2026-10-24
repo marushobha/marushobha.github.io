@@ -1,0 +1,11 @@
+// Close Authentication Modal when clicking the '×' button or backdrop
+document.getElementById("authClose").addEventListener("click", () => {
+  document.getElementById("authModal").classList.remove("open");
+});
+
+// Optional: Close modal if clicking outside the modal box on the dark backdrop
+document.getElementById("authModal").addEventListener("click", (e) => {
+  if (e.target.id === "authModal") {
+    document.getElementById("authModal").classList.remove("open");
+  }
+});

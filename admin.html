@@ -93,7 +93,7 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
         <h2>Product Inventory & Size-wise Stock</h2>
         <button id="refreshProductsBtn" class="secondary">Refresh List</button>
       </div>
-      <p class="muted">Manage stock quantities per size (XS, S, M, L) and add images via storage upload or web/Google link.</p>
+      <p class="muted">Manage stock quantities per size (XS, S, M, L), edit catalog items, and manage product images.</p>
       
       <!-- Add/Edit Form -->
       <form id="productForm" style="background:#fdfcfb;border:1px solid #e8e0d7;padding:16px;border-radius:12px;margin-bottom:20px">
@@ -171,7 +171,7 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, doc, setDoc, updateDoc, deleteDoc, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
@@ -186,17 +186,17 @@ const firebaseConfig = {
 const OWNER_UID = "RKTOLCgYgCYnVZnr8ufBoC8dKUt2";
 const WORKER_URL = "https://marushobha-delhivery.marushobha-jj.workers.dev/";
 
-// The 9 fixed products present on your website
+// The 9 default products on your website
 const fixedProducts = [
-  { id: "fixed-1", name: "Boat-Neck Halter Dress", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg" },
-  { id: "fixed-2", name: "Mustard Muse Shirt", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg" },
-  { id: "fixed-3", name: "Bow Palazzo Pants", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg" },
-  { id: "fixed-4", name: "Chashni Set", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/chashni-set/chashni-set-main.jpeg" },
-  { id: "fixed-5", name: "Dune Belle Corset", price: "COMING SOON", collection: "Marushobha Luxe", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg" },
-  { id: "fixed-6", name: "Lotus Cuff Shirt", price: "COMING SOON", collection: "Indian Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg" },
-  { id: "fixed-7", name: "Thar Ki Phoolwari", price: 2000, collection: "New Arrival Collection", stock: { XS: 1, S: 1, M: 1, L: 1 }, img: "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg" },
-  { id: "fixed-8", name: "Madhuban Side-String Top", price: "COMING SOON", collection: "Indian Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg" },
-  { id: "fixed-9", name: "Maharani Fusion Top", price: "COMING SOON", collection: "Indian Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg" }
+  { id: "fixed-1", name: "Boat-Neck Halter Dress", price: "COMING SOON", collection: "Western Collection", colour: "Floral", fabric: "Not specified", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg", description: "A floral-print dress featuring a halter neckline with a back-neck tie, a fitted waist, and a flared skirt for a playful and elegant look." },
+  { id: "fixed-2", name: "Mustard Muse Shirt", price: "COMING SOON", collection: "Western Collection", colour: "Mustard", fabric: "Handwoven cotton", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg", description: "A mustard-checkered shirt made from handwoven cotton, featuring a contrasting brown pocket, wooden buttons, statement flared cuffs, and brown piping." },
+  { id: "fixed-3", name: "Bow Palazzo Pants", price: "COMING SOON", collection: "Western Collection", colour: "Olive Green", fabric: "Handwoven cotton", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg", description: "A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist." },
+  { id: "fixed-4", name: "Chashni Set", price: "COMING SOON", collection: "Western Collection", colour: "Pink and White", fabric: "Handwoven cotton", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/chashni-set/chashni-set-main.jpeg", description: "A feminine pink off-shoulder top made from handwoven cotton, featuring a delicate ruffled neckline, paired with flowing white wide-leg pants." },
+  { id: "fixed-5", name: "Dune Belle Corset", price: "COMING SOON", collection: "Marushobha Luxe", colour: "Beige", fabric: "Handwoven cotton", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg", description: "A chic beige corset top made from handwoven cotton, featuring structured cups, wide shoulder straps, and elegant vertical pintuck detailing." },
+  { id: "fixed-6", name: "Lotus Cuff Shirt", price: "COMING SOON", collection: "Indian Collection", colour: "Sky Blue", fabric: "Handwoven cotton", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg", description: "A sky-blue striped shirt made from handwoven cotton, featuring a classic collar, button-down front, voluminous sleeves, and unique petal-shaped cuffs." },
+  { id: "fixed-7", name: "Thar Ki Phoolwari", price: 2000, collection: "New Arrival Collection", colour: "Pink Floral", fabric: "Handwoven cotton", stock: { XS: 1, S: 1, M: 1, L: 1 }, img: "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg", description: "A pink floral-print top featuring a square neckline, broad shoulder straps, a fitted silhouette, and adjustable side-string detailing." },
+  { id: "fixed-8", name: "Madhuban Side-String Top", price: "COMING SOON", collection: "Indian Collection", colour: "Multicolour", fabric: "Handwoven cotton", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg", description: "A handwoven cotton top featuring a square neckline, broad shoulder straps, a playful multicolour print, and adjustable side-string detailing." },
+  { id: "fixed-9", name: "Maharani Fusion Top", price: "COMING SOON", collection: "Indian Collection", colour: "Black, Red and Maroon", fabric: "Bandhani-print top with handwoven cotton corset", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg", description: "A two-piece fusion top featuring a black-and-red Bandhani-print top with a V-neckline and flared sleeves, paired with a maroon handwoven cotton corset." }
 ];
 
 const $ = (id) => document.getElementById(id);
@@ -297,8 +297,19 @@ async function loadProducts() {
     const snap = await getDocs(query(collection(db, "products"), orderBy("name")));
     const dbProducts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     
-    // Combine fixed catalog items and dynamic Firestore products
-    products = [...fixedProducts, ...dbProducts];
+    // Merge fixed catalog with Firestore overrides/additions
+    products = fixedProducts.map(fp => {
+      const found = dbProducts.find(dp => dp.name === fp.name || dp.id === fp.id);
+      return found ? { ...fp, ...found } : fp;
+    });
+
+    // Add any extra custom Firestore products that aren't in fixed list
+    dbProducts.forEach(dp => {
+      if (!products.some(p => p.id === dp.id || p.name === dp.name)) {
+        products.push(dp);
+      }
+    });
+
     $("totalProductsCount").textContent = products.length;
     renderProducts();
   } catch (e) { 
@@ -418,14 +429,13 @@ function renderProducts() {
     `;
 
     const actionTd = document.createElement("td"); actionTd.className="actions";
-    
-    // Only allow editing/deleting Firestore items (not hardcoded fixed array items unless copied)
+    const edit = document.createElement("button"); edit.textContent="Edit Details"; edit.className="secondary"; edit.addEventListener("click",()=>editProduct(p));
+    actionTd.append(edit);
+
+    // Allow deleting only custom added products (not default catalog items)
     if (!p.id.toString().startsWith("fixed-")) {
-      const edit = document.createElement("button"); edit.textContent="Edit Details"; edit.className="secondary"; edit.addEventListener("click",()=>editProduct(p));
       const del = document.createElement("button"); del.textContent="Delete"; del.className="danger"; del.addEventListener("click",()=>removeProduct(p));
-      actionTd.append(edit,del);
-    } else {
-      actionTd.innerHTML = '<span class="muted">Default Catalog</span>';
+      actionTd.append(del);
     }
 
     tr.append(imgTd, nameTd, stockTd, actionTd);
@@ -504,7 +514,7 @@ function editProduct(p) {
   }
 
   $("description").value = p.description || "";
-  $("formTitle").textContent = "Edit Product Details";
+  $("formTitle").textContent = `Edit Product: ${p.name}`;
   $("saveBtn").textContent = "Update Product";
   window.scrollTo({top: 300, behavior: "smooth"});
 }
@@ -545,6 +555,7 @@ $("productForm").addEventListener("submit", async e => {
   };
 
   const sizesArr = ["XS", "S", "M", "L"];
+  const id = $("productId").value;
   
   const data = {
     name,
@@ -567,8 +578,11 @@ $("productForm").addEventListener("submit", async e => {
   $("saveBtn").disabled = true;
   status("Saving product...");
   try {
-    const id = $("productId").value;
-    if (id) {
+    if (id && id.toString().startsWith("fixed-")) {
+      // Save fixed product override into Firestore using its name as document ID or custom ID
+      const firestoreDocId = id.replace("fixed-", "prod_");
+      await setDoc(doc(db, "products", firestoreDocId), data, { merge: true });
+    } else if (id) {
       await updateDoc(doc(db, "products", id), data);
     } else {
       await addDoc(collection(db, "products"), { ...data, createdAt: serverTimestamp() });

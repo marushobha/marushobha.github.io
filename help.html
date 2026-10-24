@@ -2,59 +2,38 @@
   <h3>Ask a Question</h3>
   <p style="color: #666; font-size: 14px;">Have a question? Type it below and it will go straight to the form.</p>
   
-  <form id="faq-google-form" onsubmit="submitToGoogleForm(event)">
-      <textarea id="user-question" name="entry.YOUR_NUMBERS" rows="4" placeholder="Type your question here..." required style="width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box;"></textarea>
+  <!-- Hidden iframe captures the response so the user stays on your page -->
+  <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted){alert('Question submitted successfully!'); document.getElementById('faq-google-form').reset(); submitted=false;}"></iframe>
+
+  <!-- 
+    Instructions:
+    1. Replace YOUR_FORM_ID with your actual Google Form ID.
+    2. Replace entry.YOUR_NUMBERS with your actual entry number (e.g. entry.123456789).
+  -->
+  <form 
+    id="faq-google-form" 
+    action="https://docs.google.com/forms/d/e/1FAIpQLSd7jQhaSrvyreO8erC-hapECbrJLcfSM-GVHeysINdErUsvxA/formResponse" 
+    method="POST" 
+    target="hidden_iframe" 
+    onsubmit="submitted=true;"
+  >
+      <textarea 
+        name="entry.51357124" 
+        rows="4" 
+        placeholder="Type your question here..." 
+        required 
+        style="width: 100%; padding: 10px; margin-bottom: 10px; box-sizing: border-box;"
+      ></textarea>
       
-      <button type="submit" id="submit-btn" style="width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Submit Question</button>
+      <button 
+        type="submit" 
+        style="width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;"
+      >
+        Submit Question
+      </button>
   </form>
-  <p id="form-status" style="font-size: 14px; text-align: center; margin-top: 10px; display: none;"></p>
 </div>
 
 <script>
-  function submitToGoogleForm(event) {
-    event.preventDefault();
-    
-    const questionBox = document.getElementById('user-question');
-    const submitBtn = document.getElementById('submit-btn');
-    const statusMsg = document.getElementById('form-status');
-    
-    const userQuery = questionBox.value;
-    if (!userQuery.trim()) return;
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Submitting...';
-
-    // Replace YOUR_FORM_ID with your actual Form ID
-    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSd7jQhaSrvyreO8erC-hapECbrJLcfSM-GVHeysINdErUsvxA/formResponse';
-    
-    const formData = new URLSearchParams();
-    // Replace entry.YOUR_NUMBERS with your actual entry numbers
-    formData.append('entry.51357124', userQuery);
-
-    fetch(formUrl, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: formData
-    })
-    .then(() => {
-      statusMsg.textContent = 'Thank you! Your question has been submitted.';
-      statusMsg.style.color = 'green';
-      statusMsg.style.display = 'block';
-      questionBox.value = '';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Question';
-
-      setTimeout(() => {
-        statusMsg.style.display = 'none';
-      }, 5000);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-      statusMsg.textContent = 'Something went wrong. Please try again.';
-      statusMsg.style.color = 'red';
-      statusMsg.style.display = 'block';
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Submit Question';
-    });
-  }
+  let submitted = false;
 </script>

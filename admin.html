@@ -93,7 +93,7 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
         <h2>Product Inventory & Size-wise Stock</h2>
         <button id="refreshProductsBtn" class="secondary">Refresh List</button>
       </div>
-      <p class="muted">Manage stock quantities per size (XS, S, M, L) and upload/update product imagery.</p>
+      <p class="muted">Manage stock quantities per size (XS, S, M, L) and add images via storage upload or web/Google link.</p>
       
       <!-- Add/Edit Form -->
       <form id="productForm" style="background:#fdfcfb;border:1px solid #e8e0d7;padding:16px;border-radius:12px;margin-bottom:20px">
@@ -116,10 +116,18 @@ table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:10px 8px
           </div>
 
           <div><label for="fabric">Fabric / Composition</label><input id="fabric" placeholder="e.g. Handwoven cotton"></div>
+          
           <div>
-            <label for="imageFile">Product Image</label>
-            <input id="imageFile" type="file" accept="image/*">
+            <label for="imageUrlInput">Product Image Link (Google / Web URL)</label>
+            <input id="imageUrlInput" type="url" placeholder="https://... or paste image link">
           </div>
+
+          <div class="full">
+            <label for="imageFile">OR Upload Product Image from Device Storage</label>
+            <input id="imageFile" type="file" accept="image/*">
+            <p class="muted" style="margin-top:4px;">You can either paste a web image link or pick a file from your device.</p>
+          </div>
+
           <div class="full">
             <div id="imagePreviewContainer" style="margin-top:8px"></div>
           </div>
@@ -178,11 +186,24 @@ const firebaseConfig = {
 const OWNER_UID = "RKTOLCgYgCYnVZnr8ufBoC8dKUt2";
 const WORKER_URL = "https://marushobha-delhivery.marushobha-jj.workers.dev/";
 
+// The 9 fixed products present on your website
+const fixedProducts = [
+  { id: "fixed-1", name: "Boat-Neck Halter Dress", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg" },
+  { id: "fixed-2", name: "Mustard Muse Shirt", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg" },
+  { id: "fixed-3", name: "Bow Palazzo Pants", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg" },
+  { id: "fixed-4", name: "Chashni Set", price: "COMING SOON", collection: "Western Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/chashni-set/chashni-set-main.jpeg" },
+  { id: "fixed-5", name: "Dune Belle Corset", price: "COMING SOON", collection: "Marushobha Luxe", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg" },
+  { id: "fixed-6", name: "Lotus Cuff Shirt", price: "COMING SOON", collection: "Indian Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg" },
+  { id: "fixed-7", name: "Thar Ki Phoolwari", price: 2000, collection: "New Arrival Collection", stock: { XS: 1, S: 1, M: 1, L: 1 }, img: "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg" },
+  { id: "fixed-8", name: "Madhuban Side-String Top", price: "COMING SOON", collection: "Indian Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg" },
+  { id: "fixed-9", name: "Maharani Fusion Top", price: "COMING SOON", collection: "Indian Collection", stock: { XS: 5, S: 5, M: 5, L: 5 }, img: "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg" }
+];
+
 const $ = (id) => document.getElementById(id);
 const status = (message) => { $("status").textContent = message; };
 let auth, db, currentUser = null;
 let products = [], orders = [], wishlists = [];
-let currentImageBase64 = "";
+let currentImageSource = "";
 
 const app = initializeApp(firebaseConfig);
 auth = getAuth(app);
@@ -274,12 +295,17 @@ async function loadAllData() {
 async function loadProducts() {
   try {
     const snap = await getDocs(query(collection(db, "products"), orderBy("name")));
-    products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    const dbProducts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    
+    // Combine fixed catalog items and dynamic Firestore products
+    products = [...fixedProducts, ...dbProducts];
     $("totalProductsCount").textContent = products.length;
     renderProducts();
   } catch (e) { 
     console.error("Products load error:", e); 
-    status("Could not load products: " + e.message); 
+    products = [...fixedProducts];
+    $("totalProductsCount").textContent = products.length;
+    renderProducts();
   }
 }
 
@@ -392,16 +418,32 @@ function renderProducts() {
     `;
 
     const actionTd = document.createElement("td"); actionTd.className="actions";
-    const edit = document.createElement("button"); edit.textContent="Edit Details"; edit.className="secondary"; edit.addEventListener("click",()=>editProduct(p));
-    const del = document.createElement("button"); del.textContent="Delete"; del.className="danger"; del.addEventListener("click",()=>removeProduct(p));
-    actionTd.append(edit,del);
+    
+    // Only allow editing/deleting Firestore items (not hardcoded fixed array items unless copied)
+    if (!p.id.toString().startsWith("fixed-")) {
+      const edit = document.createElement("button"); edit.textContent="Edit Details"; edit.className="secondary"; edit.addEventListener("click",()=>editProduct(p));
+      const del = document.createElement("button"); del.textContent="Delete"; del.className="danger"; del.addEventListener("click",()=>removeProduct(p));
+      actionTd.append(edit,del);
+    } else {
+      actionTd.innerHTML = '<span class="muted">Default Catalog</span>';
+    }
 
     tr.append(imgTd, nameTd, stockTd, actionTd);
     body.append(tr);
   }
 }
 
-// Convert uploaded computer image to compressed Base64 & Preview
+// Option A: Live Image URL (Google / Web link)
+$("imageUrlInput").addEventListener("input", (e) => {
+  const url = e.target.value.trim();
+  if (url) {
+    currentImageSource = url;
+    $("imagePreviewContainer").innerHTML = `<img src="${url}" style="width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ccc" onerror="this.src='';this.alt='Invalid image URL';">`;
+    status("Image link loaded.");
+  }
+});
+
+// Option B: Upload file from computer storage
 $("imageFile").addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -425,10 +467,11 @@ $("imageFile").addEventListener("change", (e) => {
       canvas.height = height;
       const ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0, width, height);
-      currentImageBase64 = canvas.toDataURL("image/jpeg", 0.85);
+      currentImageSource = canvas.toDataURL("image/jpeg", 0.85);
       
-      $("imagePreviewContainer").innerHTML = `<img src="${currentImageBase64}" style="width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ccc">`;
-      status("Image loaded and compressed successfully.");
+      $("imageUrlInput").value = ""; 
+      $("imagePreviewContainer").innerHTML = `<img src="${currentImageSource}" style="width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ccc">`;
+      status("Image loaded from device storage successfully.");
     };
     img.src = event.target.result;
   };
@@ -449,10 +492,14 @@ function editProduct(p) {
   $("stockM").value = stock.M ?? 5;
   $("stockL").value = stock.L ?? 5;
 
-  currentImageBase64 = p.img || p.imageUrl || (p.images?.[0]?.src) || ""; 
-  if (currentImageBase64) {
-    $("imagePreviewContainer").innerHTML = `<img src="${currentImageBase64}" style="width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ccc">`;
+  currentImageSource = p.img || p.imageUrl || (p.images?.[0]?.src) || ""; 
+  if (currentImageSource) {
+    if (currentImageSource.startsWith("http")) {
+      $("imageUrlInput").value = currentImageSource;
+    }
+    $("imagePreviewContainer").innerHTML = `<img src="${currentImageSource}" style="width:70px;height:90px;object-fit:cover;border-radius:6px;border:1px solid #ccc">`;
   } else {
+    $("imageUrlInput").value = "";
     $("imagePreviewContainer").innerHTML = "";
   }
 
@@ -465,8 +512,9 @@ function editProduct(p) {
 function clearForm() {
   $("productForm").reset();
   $("productId").value = "";
-  currentImageBase64 = "";
+  currentImageSource = "";
   $("imageFile").value = "";
+  $("imageUrlInput").value = "";
   $("imagePreviewContainer").innerHTML = "";
   $("formTitle").textContent = "Add New Product";
   $("saveBtn").textContent = "Save Product";
@@ -507,12 +555,12 @@ $("productForm").addEventListener("submit", async e => {
     stock: stockData,
     colour: $("colour").value.trim() || "Standard",
     fabric: $("fabric").value.trim() || "Handwoven cotton",
-    img: currentImageBase64,
-    imageUrl: currentImageBase64,
+    img: currentImageSource,
+    imageUrl: currentImageSource,
     description: $("description").value.trim() || "Contemporary designer piece.",
     tag: $("fabric").value.trim() ? `${$("fabric").value.trim()} · Collection` : "Marushobha Piece",
     care: "Gentle hand wash separately in cold water with mild detergent.",
-    images: currentImageBase64 ? [{ src: currentImageBase64, alt: name }] : [],
+    images: currentImageSource ? [{ src: currentImageSource, alt: name }] : [],
     updatedAt: serverTimestamp()
   };
 

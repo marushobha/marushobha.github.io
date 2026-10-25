@@ -31,37 +31,120 @@
     <div class="zoom-hint">Pinch to zoom on mobile · Use + / − or mouse wheel</div>
   </div>
 </div>
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
+  authDomain: "marushobha-1e31f.firebaseapp.com",
+  projectId: "marushobha-1e31f",
+  storageBucket: "marushobha-1e31f.firebasestorage.app",
+  messagingSenderId: "997754535596",
+  appId: "1:997754535596:web:aafc83bad8c3d413cf6909",
+  measurementId: "G-DLWGD0ZDQ1"
+};
+const db = getFirestore(initializeApp(firebaseConfig));
+
 const fmt = value => typeof value === "number" ? "₹" + value.toLocaleString("en-IN") : (value || "COMING SOON");
 const slugFromName = name => (name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 let product = null, images = [], activeIndex = 0, zoom = 1, panX = 0, panY = 0;
 const $ = id => document.getElementById(id);
 function esc(s){return String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function productImages(p){
-  const arr = Array.isArray(p.images) ? p.images.map(x=>typeof x==="string"?{src:x,alt:p.name}:{src:x.src||x.url||x.image,alt:x.alt||p.name}).filter(x=>x.src) : [];
-  if(!arr.length && (p.img||p.imageUrl)) arr.push({src:p.img||p.imageUrl,alt:p.name});
-  return arr;
+  const found = [];
+  const add = v => {
+    if (!v) return;
+    if (Array.isArray(v)) { v.forEach(add); return; }
+    if (typeof v === "string") { found.push({src:v,alt:p.name || "Marushobha product"}); return; }
+    if (typeof v === "object") {
+      const src = v.src || v.url || v.imageUrl || v.image || v.downloadURL || v.downloadUrl || v.photoURL;
+      if (src) found.push({src,alt:v.alt || p.name || "Marushobha product"});
+    }
+  };
+  add(p.images); add(p.imageUrls); add(p.gallery); add(p.productImages);
+  add(p.img); add(p.imageUrl); add(p.image); add(p.mainImage); add(p.photo); add(p.photoURL);
+  const seen = new Set();
+  return found.filter(x => { if (seen.has(x.src)) return false; seen.add(x.src); return true; });
 }
+
 async function loadProduct(){
   const params = new URLSearchParams(location.search);
   const slug = params.get("slug") || "";
-  const id = params.get("id");
-  try{
+  const id = params.get("id") || "";
+  const requestedName = params.get("name") || "";
+  let firestoreProducts = [], jsonProducts = [], firestoreError = null;
+
+  // Read products created or edited by the Admin Dashboard.
+  try {
+    const snap = await getDocs(collection(db, "products"));
+    firestoreProducts = snap.docs.map(d => {
+      const data = d.data() || {};
+      const name = data.name || data.productName || data.title || "";
+      return {
+        ...data, id: data.id || d.id, name,
+        slug: data.slug || slugFromName(name),
+        description: data.description || data.productDescription || data.details || "",
+        collection: data.collection || data.category || data.collectionName || "",
+        colour: data.colour || data.color || data.colourName || data.colorName || "",
+        fabric: data.fabric || data.material || data.composition || "",
+        tag: data.tag || data.designDetails || data.details || "",
+        care: data.care || data.careInstructions || "",
+        images: data.images || data.imageUrls || data.gallery || data.productImages || []
+      };
+    });
+  } catch (err) {
+    firestoreError = err;
+    console.error("Could not load Firestore products:", err);
+  }
+
+  // Keep products.json as a fallback for the original catalogue.
+  try {
     const response = await fetch("products.json", {cache:"no-store"});
-    if(!response.ok) throw new Error("products.json could not be loaded");
-    const list = await response.json();
-    product = list.find(p => (p.slug || slugFromName(p.name)) === slug || (id && String(p.id) === id));
-  }catch(err){
-    $("productRoot").innerHTML = `<div class="error"><strong>Could not load product data.</strong><p>Please open this website through your hosting URL, not directly as a file, and make sure products.json is uploaded beside product.html.</p><p>${esc(err.message)}</p></div>`;
+    if (response.ok) {
+      const list = await response.json();
+      if (Array.isArray(list)) jsonProducts = list;
+    }
+  } catch (err) {
+    console.warn("products.json fallback could not be loaded:", err);
+  }
+
+  const allProducts = [...firestoreProducts];
+  for (const item of jsonProducts) {
+    const itemName = item.name || item.productName || item.title || "";
+    const itemSlug = item.slug || slugFromName(itemName);
+    const exists = allProducts.some(p =>
+      (p.id && item.id && String(p.id) === String(item.id)) ||
+      ((p.slug || slugFromName(p.name)) && (p.slug || slugFromName(p.name)) === itemSlug)
+    );
+    if (!exists) allProducts.push({...item, name:itemName, slug:itemSlug});
+  }
+
+  product = allProducts.find(p =>
+    (id && String(p.id) === id) ||
+    (slug && (p.slug || slugFromName(p.name || p.productName || p.title)) === slug) ||
+    (requestedName && String(p.name || p.productName || p.title).toLowerCase() === requestedName.toLowerCase())
+  );
+
+  if (!product) {
+    const message = firestoreError
+      ? "Firebase products could not be read. Check Firestore read rules and the browser console."
+      : "Return to the shop and select the product again. Confirm the new product exists in Firestore Database → products.";
+    $("productRoot").innerHTML = `<div class="error"><strong>Product not found.</strong><p>${esc(message)}</p><a class="back" href="index.html#shop">Back to Shop</a></div>`;
     return;
   }
-  if(!product){$("productRoot").innerHTML='<div class="error"><strong>Product not found.</strong><p>Return to the shop and select the product again.</p><a class="back" href="index.html#shop">Back to Shop</a></div>';return;}
+
+  product.name = product.name || product.productName || product.title || "Marushobha Product";
+  product.slug = product.slug || slugFromName(product.name);
   images = productImages(product);
-  if(!images.length){$("productRoot").innerHTML='<div class="error">No product images are listed for this item in products.json.</div>';return;}
   document.title = `${product.name} | Marushobha`;
   $("crumbName").textContent = product.name;
+  if (!images.length) {
+    $("productRoot").innerHTML = `<div class="error"><strong>Product details loaded, but no image was found.</strong><p>Check the image fields in its Firestore document: img, imageUrl, or images.</p></div>`;
+    return;
+  }
   render();
 }
+
 function render(){
   const thumbs = images.map((im,i)=>`<button class="thumb ${i===activeIndex?'active':''}" data-thumb="${i}" aria-label="Show image ${i+1}"><img src="${esc(im.src)}" alt="${esc(im.alt)}"></button>`).join("");
   $("productRoot").innerHTML = `<section class="layout">

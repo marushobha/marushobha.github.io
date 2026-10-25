@@ -40,6 +40,8 @@
 .dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 @media(max-width:600px){.dashboard-modal{padding:20px 16px}.dashboard-layout{grid-template-columns:1fr;gap:16px}.dashboard-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-nav button{text-align:center;padding:9px 6px;font-size:.82rem}.dashboard-cards{grid-template-columns:1fr}.dashboard-profile-grid{grid-template-columns:1fr}.dashboard-top h2{font-size:1.5rem}}
 
+.nav-actions #wishlistOpen{color:#b4234d;background:#fff0f4;border-color:#edb5c4}.nav-actions #cartOpen{color:#176b4d;background:#eaf6ef;border-color:#a9d7bd}.nav-actions #accountOpen{color:#6e4b36;background:#f0e7dd;border-color:#d5c1ad}.iconbtn span{min-width:15px;text-align:center}
+ .product-image-link{display:block;width:100%;height:100%;} .product-image-link img{display:block;width:100%;height:100%;object-fit:cover;}
 </style>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -307,12 +309,7 @@
 <div class="modal-backdrop" id="checkoutModal" role="dialog" aria-modal="true" aria-label="Shipping Details">
   <div class="modal" style="width:min(460px,100%);padding:30px">
     <button class="modal-close" id="checkoutClose" aria-label="Close" type="button">×</button>
-    <h2>Shipping Details</h2>
-    <div id="checkoutOrderSummary" style="margin:16px 0;padding:14px;background:#fffdf9;border:1px solid var(--line)">
-      <h3 style="margin:0 0 10px;font-family:Georgia,serif;font-weight:normal">Review Your Items</h3>
-      <div id="checkoutOrderItems"></div>
-      <div style="display:flex;justify-content:space-between;font-weight:bold;border-top:1px solid var(--line);padding-top:10px;margin-top:10px"><span>Subtotal</span><span id="checkoutOrderTotal">₹0</span></div>
-    </div>
+    <h2>Shipping Details</h2><div id="checkoutOrderSummary" style="border:1px solid var(--line);padding:12px;margin:12px 0;max-height:220px;overflow:auto"></div>
     <form id="shippingForm" style="display:grid;gap:12px;margin-top:15px">
       <div><label style="font-size:.82rem">Full Name</label><input class="field" id="shipName" required style="width:100%;margin-top:5px"></div>
       <div><label style="font-size:.82rem">Mobile Number</label><input class="field" id="shipPhone" type="tel" required style="width:100%;margin-top:5px"></div>
@@ -477,8 +474,16 @@ let products = [...fixedProducts];
 let cart=[];
 let wishlist=[];
 let userProfile = { name: "", phone: "", email: "", address: "" };
+const STORE_BASE_CART="marushobha_cart_v1_", STORE_BASE_WISH="marushobha_wishlist_v1_";
+let activeCustomerUid = null;
+function cartStoreKey(){return activeCustomerUid?STORE_BASE_CART+activeCustomerUid:null;}
+function wishStoreKey(){return activeCustomerUid?STORE_BASE_WISH+activeCustomerUid:null;}
+function readCustomerList(key){try{const v=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(v)?v:[]}catch{return[]}}
+function saveCustomerLists(){if(!activeCustomerUid)return;localStorage.setItem(cartStoreKey(),JSON.stringify(cart));localStorage.setItem(wishStoreKey(),JSON.stringify(wishlist));}
+function requireCustomerSignIn(){if(isLoggedIn&&activeCustomerUid)return true;setAuthMode("signin");document.getElementById("authModal").classList.add("open");showStatus("Please sign in with Google or your mobile number to use your bag and wishlist.");return false;}
 
-const fmt=n=>typeof n==="number"?"₹"+n.toLocaleString("en-IN"):n;
+
+const fmt=n=>typeof n==="number"?"₹"+n.toLocaleString("en-IN"):(n||"COMING SOON");
 const grid=document.getElementById("productGrid");
 
 function renderProducts(){
@@ -498,11 +503,11 @@ function renderProducts(){
   document.getElementById("productCount").textContent=`${list.length} product${list.length===1?"":"s"} shown`;
   
   grid.innerHTML=list.length?list.map(p=>{
-    const isWished = wishlist.includes(p.id);
+    const isWished = wishlist.some(w => (typeof w==="object" ? String(w.productId||w.id||w.slug)===String(p.id) || String(w.name||"").toLowerCase()===String(p.name).toLowerCase() : String(w)===String(p.id)));
     const displayImg = p.img || p.imageUrl || "";
     return `<article class="product">
       <div class="product-image">
-        <img loading="lazy" src="${displayImg}" alt="${p.name}" data-product-view="${p.id}" style="cursor:pointer" title="View product details">
+        <a class="product-image-link" href="product.html?slug=${encodeURIComponent(p.slug || p.name)}" aria-label="View ${p.name} details"><img loading="lazy" src="${displayImg}" alt="${p.name}"></a>
         <button class="wish" aria-label="Add ${p.name} to wishlist" data-wish="${p.id}" style="color:${isWished?'#9b3d45':'inherit'}">${isWished?'♥':'♡'}</button>
       </div>
       <div class="product-info">
@@ -510,19 +515,13 @@ function renderProducts(){
         <p>${p.tag || p.description || ''}</p>
         <div class="product-bottom">
           <span class="price">${fmt(p.price)}</span>
-          <button class="add" data-view="${p.id}">View Details</button>
+          <button class="add" data-view="${p.slug || p.name}">View Details</button>
         </div>
       </div>
     </article>`;
   }).join(""):`<p>No products match these filters.</p>`;
   
-  // Product images and View Details buttons open the dedicated product.html page.
-  const goToProductPage = id => {
-    if (id === undefined || id === null || id === "") return;
-    window.location.href = `product.html?id=${encodeURIComponent(id)}`;
-  };
-  grid.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>goToProductPage(b.dataset.view)));
-  grid.querySelectorAll("[data-product-view]").forEach(img=>img.addEventListener("click",()=>goToProductPage(img.dataset.productView)));
+  grid.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>{location.href=`product.html?slug=${encodeURIComponent(b.dataset.view)}`;}));
   grid.querySelectorAll("[data-wish]").forEach(b=>b.addEventListener("click",e=>{
     e.stopPropagation();
     toggleWishlist(b.dataset.wish);
@@ -530,42 +529,29 @@ function renderProducts(){
 }
 
 function toggleWishlist(id) {
-  const index = wishlist.indexOf(id);
-  if(index > -1) {
-    wishlist.splice(index, 1);
-  } else {
-    wishlist.push(id);
+  if(!requireCustomerSignIn()) return;
+  const index = wishlist.findIndex(w => String(typeof w==="object"?(w.productId||w.id||w.slug):w)===String(id));
+  if(index > -1) wishlist.splice(index,1);
+  else {
+    const p=products.find(x=>String(x.id)===String(id));
+    wishlist.push(p ? {id:p.id,productId:p.id,slug:p.slug||String(p.name||"").toLowerCase().replace(/[^a-z0-9]+/g,"-"),name:p.name,image:p.img||p.imageUrl||"",img:p.img||p.imageUrl||"",price:p.price,displayPrice:fmt(p.price)} : id);
   }
+  saveCustomerLists();
   document.getElementById("wishlistCount").textContent = wishlist.length;
-  renderProducts();
-  renderWishlist();
+  renderProducts(); renderWishlist();
 }
 
 function renderWishlist() {
   const el = document.getElementById("wishlistItems");
   document.getElementById("wishlistCount").textContent = wishlist.length;
-  el.innerHTML = wishlist.length ? wishlist.map(id => {
-    const p = products.find(x => x.id == id);
+  el.innerHTML = wishlist.length ? wishlist.map(item => {
+    const p = typeof item==="object" ? (products.find(x=>String(x.id)===String(item.productId||item.id)||String(x.name||"").toLowerCase()===String(item.name||"").toLowerCase())||item) : products.find(x=>String(x.id)===String(item));
     if (!p) return "";
-    const displayImg = p.img || p.imageUrl || "";
-    return `<div class="cart-row">
-      <img src="${displayImg}" alt="">
-      <div>
-        <strong>${p.name}</strong>
-        <p>${fmt(p.price)}</p>
-        <button class="add" data-wish-view="${p.id}">View Details</button>
-        <button class="add" data-wish-remove="${p.id}" style="margin-left:5px">Remove</button>
-      </div>
-    </div>`;
+    const displayImg = p.img || p.image || p.imageUrl || "";
+    return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name||"Product"}</strong><p>${fmt(p.price ?? p.displayPrice)}</p><button class="add" data-wish-view="${p.id||p.productId||item}">View Details</button><button class="add" data-wish-remove="${p.id||p.productId||item}" style="margin-left:5px">Remove</button></div></div>`;
   }).join("") : `<p>Your wishlist is empty.</p>`;
-
-  el.querySelectorAll("[data-wish-view]").forEach(b=>b.addEventListener("click",() => {
-    document.getElementById("wishlistDrawer").classList.remove("open");
-    openProduct(b.dataset.wishView);
-  }));
-  el.querySelectorAll("[data-wish-remove]").forEach(b=>b.addEventListener("click",() => {
-    toggleWishlist(b.dataset.wishRemove);
-  }));
+  el.querySelectorAll("[data-wish-view]").forEach(b=>b.addEventListener("click",()=>{document.getElementById("wishlistDrawer").classList.remove("open");openProduct(b.dataset.wishView);}));
+  el.querySelectorAll("[data-wish-remove]").forEach(b=>b.addEventListener("click",()=>toggleWishlist(b.dataset.wishRemove)));
 }
 
 ["categoryFilter","sizeFilter","colourFilter","sortFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderProducts));
@@ -589,8 +575,7 @@ function openProduct(id){
      sizeOptionsHtml += `<option value="${s}" disabled style="color:#aaa;">${s} - Out of Stock</option>`;
    }
  });
- sizeOptionsHtml += `</select></div>`;
- const quantitySelectorHtml = `<div style="margin:10px 0;"><label for="modalProductQuantity"><strong>Quantity</strong></label><input id="modalProductQuantity" class="field" type="number" min="1" max="99" value="1" inputmode="numeric" style="margin-top:5px;"></div>`;
+ sizeOptionsHtml += `</select></div><div style="margin:10px 0;"><label for="modalQuantity"><strong>Quantity</strong></label><input id="modalQuantity" class="field" type="number" min="1" max="99" value="1" style="width:100%;margin-top:5px"></div>`;
 
  let actionBtnHtml = allSoldOut 
    ? `<button class="btn" style="width:100%;margin-top:10px;background:#a42d2d;border-color:#a42d2d" disabled>Sold Out</button>`
@@ -598,14 +583,13 @@ function openProduct(id){
 
  const displayImg = p.img || p.imageUrl || "";
 
- document.getElementById("modalContent").innerHTML=`<div class="modal-body"><div><img id="modalHeroImage" src="${displayImg}" alt="${p.name}" style="width:100%;aspect-ratio:3/4;object-fit:cover"></div><div><div class="eyebrow">${p.collection || p.category || "Collection"}</div><h2>${p.name}</h2><p class="price">${fmt(p.price)}</p><p>${p.description}</p><p><strong>Fabric</strong><br>${p.fabric || 'Handwoven cotton'}</p>${sizeOptionsHtml}${quantitySelectorHtml}<p><strong>Care instructions</strong><br>${p.care || 'Gentle hand wash.'}</p>${actionBtnHtml}</div></div>`;
+ document.getElementById("modalContent").innerHTML=`<div class="modal-body"><div><img id="modalHeroImage" src="${displayImg}" alt="${p.name}" style="width:100%;aspect-ratio:3/4;object-fit:cover"></div><div><div class="eyebrow">${p.collection || p.category || "Collection"}</div><h2>${p.name}</h2><p class="price">${fmt(p.price)}</p><p>${p.description}</p><p><strong>Fabric</strong><br>${p.fabric || 'Handwoven cotton'}</p>${sizeOptionsHtml}<p><strong>Care instructions</strong><br>${p.care || 'Gentle hand wash.'}</p>${actionBtnHtml}</div></div>`;
  
  const addBtn = document.getElementById("modalAddToCart");
  if(addBtn) {
    addBtn.addEventListener("click", () => {
      const selectedSize = document.getElementById("modalSizeSelect").value;
-     const requestedQty = Math.max(1, Math.min(99, parseInt(document.getElementById("modalProductQuantity").value, 10) || 1));
-     addToCart(p.id, selectedSize, requestedQty);
+     addToCart(p.id, selectedSize, Math.max(1,Math.min(99,parseInt(document.getElementById("modalQuantity").value||"1",10)||1)));
      document.getElementById("productModal").classList.remove("open");
      openCart();
    });
@@ -623,72 +607,30 @@ function openProduct(id){
 }
 
 function addToCart(id,size,quantity=1){
-  const requestedQty=Math.max(1,Math.min(99,parseInt(quantity,10)||1));
-  const existing=cart.find(x=>x.id===id&&x.size===size);
-  if(existing) existing.qty=Math.min(99,(parseInt(existing.qty,10)||1)+requestedQty);
-  else cart.push({id,size,qty:requestedQty});
-  renderCart();
+  if(!requireCustomerSignIn()) return;
+  const existing=cart.find(x=>String(x.id||x.productId)===String(id)&&x.size===size);
+  if(existing){existing.qty=Math.max(1,Number(existing.qty||existing.quantity)||1)+quantity;existing.quantity=existing.qty;}
+  else {const p=products.find(x=>String(x.id)===String(id));if(p)cart.push({id:p.id,productId:p.id,name:p.name,slug:p.slug||String(p.name||"").toLowerCase().replace(/[^a-z0-9]+/g,"-"),image:p.img||p.imageUrl||"",img:p.img||p.imageUrl||"",price:typeof p.price==="number"?p.price:null,displayPrice:fmt(p.price),size,qty:quantity,quantity:quantity});}
+  saveCustomerLists(); renderCart();
 }
 
 function renderCart(){
- const totalQty=cart.reduce((n,x)=>n+(parseInt(x.qty,10)||1),0);
- const subtotal=cart.reduce((n,x)=>{
-   const p=products.find(prod=>prod.id == x.id);
-   return n+(typeof p?.price==="number"?p.price*(parseInt(x.qty,10)||1):0);
- },0);
- document.getElementById("cartCount").textContent=totalQty;
- document.getElementById("cartTotal").textContent=fmt(subtotal);
+ const qtyOf=x=>Math.max(1,Number(x.qty||x.quantity)||1);
+ document.getElementById("cartCount").textContent=cart.reduce((n,x)=>n+qtyOf(x),0);
+ document.getElementById("cartTotal").textContent=fmt(cart.reduce((n,x)=>{const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;const price=typeof p.price==="number"?p.price:(Number(x.price)||0);return n+price*qtyOf(x);},0));
  const el=document.getElementById("cartItems");
  el.innerHTML=cart.length?cart.map((x,i)=>{
-   const p=products.find(prod=>prod.id == x.id);
-   if(!p) return "";
-   const displayImg = p.img || p.imageUrl || "";
-   const qty=Math.max(1,parseInt(x.qty,10)||1);
-   return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name}</strong><p>Size: ${x.size}</p><p>${fmt(p.price)} each</p><div style="display:flex;align-items:center;gap:8px;margin:8px 0"><button type="button" class="iconbtn" data-qty-change="-1" data-qty-index="${i}" aria-label="Decrease quantity" style="width:30px;height:30px">−</button><input class="field" data-qty-input="${i}" type="number" min="1" max="99" value="${qty}" aria-label="Quantity for ${p.name}" style="width:60px;min-height:30px;padding:4px;text-align:center"><button type="button" class="iconbtn" data-qty-change="1" data-qty-index="${i}" aria-label="Increase quantity" style="width:30px;height:30px">+</button></div><p>Item total: ${fmt(typeof p.price==="number"?p.price*qty:0)}</p><button class="add" data-remove="${i}">Remove</button></div></div>`
+   const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;
+   const displayImg=p.img||p.image||p.imageUrl||"",qty=qtyOf(x),price=typeof p.price==="number"?p.price:(Number(x.price)||0);
+   return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name||"Product"}</strong><p>Size: ${x.size||"Not selected"}</p><p>${fmt(price)} × ${qty}</p><div style="display:flex;align-items:center;gap:8px;margin:7px 0"><button type="button" class="add" data-qty-minus="${i}" aria-label="Decrease quantity">−</button><strong>${qty}</strong><button type="button" class="add" data-qty-plus="${i}" aria-label="Increase quantity">+</button></div><button class="add" data-remove="${i}">Remove</button></div><div>${fmt(price*qty)}</div></div>`;
  }).join(""):`<p>Your shopping bag is empty.</p>`;
- el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{
-   cart.splice(+b.dataset.remove,1);
-   renderCart();
- }));
- el.querySelectorAll("[data-qty-change]").forEach(b=>b.addEventListener("click",()=>{
-   const i=+b.dataset.qtyIndex;
-   if(!cart[i])return;
-   cart[i].qty=Math.max(1,Math.min(99,(parseInt(cart[i].qty,10)||1)+(+b.dataset.qtyChange)));
-   renderCart();
- }));
- el.querySelectorAll("[data-qty-input]").forEach(input=>input.addEventListener("change",()=>{
-   const i=+input.dataset.qtyInput;
-   if(!cart[i])return;
-   cart[i].qty=Math.max(1,Math.min(99,parseInt(input.value,10)||1));
-   renderCart();
- }));
- renderCheckoutSummary();
+ el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{cart.splice(+b.dataset.remove,1);saveCustomerLists();renderCart();}));
+ el.querySelectorAll("[data-qty-minus]").forEach(b=>b.addEventListener("click",()=>changeCartQty(+b.dataset.qtyMinus,-1)));
+ el.querySelectorAll("[data-qty-plus]").forEach(b=>b.addEventListener("click",()=>changeCartQty(+b.dataset.qtyPlus,1)));
 }
 
-function renderCheckoutSummary(){
- const items=document.getElementById("checkoutOrderItems");
- if(!items)return;
- items.innerHTML=cart.length?cart.map((x,i)=>{
-   const p=products.find(prod=>prod.id == x.id);
-   if(!p)return "";
-   const qty=Math.max(1,parseInt(x.qty,10)||1);
-   return `<div style="display:flex;justify-content:space-between;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)"><div style="min-width:0"><strong>${p.name}</strong><div style="font-size:.8rem;color:var(--muted)">Size: ${x.size} · ${fmt(p.price)} each</div><div style="display:flex;align-items:center;gap:7px;margin-top:6px"><button type="button" class="iconbtn" data-checkout-qty-change="-1" data-checkout-qty-index="${i}" aria-label="Decrease quantity" style="width:29px;height:29px">−</button><input class="field" data-checkout-qty-input="${i}" type="number" min="1" max="99" value="${qty}" aria-label="Checkout quantity for ${p.name}" style="width:58px;min-height:29px;padding:3px;text-align:center"><button type="button" class="iconbtn" data-checkout-qty-change="1" data-checkout-qty-index="${i}" aria-label="Increase quantity" style="width:29px;height:29px">+</button></div></div><strong>${fmt(typeof p.price==="number"?p.price*qty:0)}</strong></div>`;
- }).join(""):`<p>Your shopping bag is empty.</p>`;
- const subtotal=cart.reduce((n,x)=>{const p=products.find(prod=>prod.id==x.id);return n+(typeof p?.price==="number"?p.price*(parseInt(x.qty,10)||1):0)},0);
- const totalEl=document.getElementById("checkoutOrderTotal");
- if(totalEl)totalEl.textContent=fmt(subtotal);
- items.querySelectorAll("[data-checkout-qty-change]").forEach(b=>b.addEventListener("click",()=>{
-   const i=+b.dataset.checkoutQtyIndex;if(!cart[i])return;
-   cart[i].qty=Math.max(1,Math.min(99,(parseInt(cart[i].qty,10)||1)+(+b.dataset.checkoutQtyChange)));
-   renderCart();
- }));
- items.querySelectorAll("[data-checkout-qty-input]").forEach(input=>input.addEventListener("change",()=>{
-   const i=+input.dataset.checkoutQtyInput;if(!cart[i])return;
-   cart[i].qty=Math.max(1,Math.min(99,parseInt(input.value,10)||1));
-   renderCart();
- }));
-}
-
+function changeCartQty(index,delta){const item=cart[index];if(!item)return;const qty=Math.max(1,Math.min(99,Math.max(1,Number(item.qty||item.quantity)||1)+delta));item.qty=qty;item.quantity=qty;saveCustomerLists();renderCart();}
+function renderCheckoutOrderSummary(){const el=document.getElementById("checkoutOrderSummary");if(!el)return;el.innerHTML=cart.length?cart.map((x,i)=>{const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;const qty=Math.max(1,Number(x.qty||x.quantity)||1),price=typeof p.price==="number"?p.price:(Number(x.price)||0);return `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><strong>${p.name||"Product"}</strong><div style="font-size:.85rem;margin:4px 0">Size: ${x.size||"Not selected"} · ${fmt(price)} each</div><div style="display:flex;align-items:center;gap:8px"><button type="button" class="add" data-checkout-minus="${i}">−</button><strong>Qty: ${qty}</strong><button type="button" class="add" data-checkout-plus="${i}">+</button><span style="margin-left:auto">${fmt(price*qty)}</span></div></div>`}).join("")+`<p style="text-align:right"><strong>Total: ${fmt(cart.reduce((n,x)=>{const p=products.find(prod=>String(prod.id)===String(x.id||x.productId))||x;return n+(typeof p.price==="number"?p.price:(Number(x.price)||0))*Math.max(1,Number(x.qty||x.quantity)||1)},0))}</strong></p>`:`<p>Your bag is empty.</p>`;el.querySelectorAll("[data-checkout-minus]").forEach(b=>b.addEventListener("click",()=>{changeCartQty(+b.dataset.checkoutMinus,-1);renderCheckoutOrderSummary()}));el.querySelectorAll("[data-checkout-plus]").forEach(b=>b.addEventListener("click",()=>{changeCartQty(+b.dataset.checkoutPlus,1);renderCheckoutOrderSummary()}));}
 function openCart(){document.getElementById("cartDrawer").classList.add("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","false")}
 function openWishlist(){document.getElementById("wishlistDrawer").classList.add("open");document.getElementById("wishlistDrawer").setAttribute("aria-hidden","false")}
 
@@ -714,8 +656,8 @@ document.getElementById("checkoutBtn").addEventListener("click",()=>{
     if(document.getElementById("shipAddress")) document.getElementById("shipAddress").value = userProfile.address;
   }
 
-  renderCheckoutSummary();
   document.getElementById("cartDrawer").classList.remove("open");
+  renderCheckoutOrderSummary();
   document.getElementById("checkoutModal").classList.add("open");
 });
 document.getElementById("checkoutClose").addEventListener("click",()=>document.getElementById("checkoutModal").classList.remove("open"));
@@ -729,8 +671,8 @@ document.getElementById("shippingForm").addEventListener("submit", async (e)=>{
   const address = document.getElementById("shipAddress").value.trim();
 
   const totalAmount = cart.reduce((n,x)=>{
-    const p=products.find(prod=>prod.id == x.id);
-    return n+(typeof p?.price==="number"?p.price*x.qty:0);
+    const p=products.find(prod=>prod.id == (x.id||x.productId));
+    return n+(typeof p?.price==="number"?p.price*Math.max(1,Number(x.qty||x.quantity)||1):0);
   },0);
 
   document.getElementById("checkoutModal").classList.remove("open");
@@ -754,7 +696,7 @@ document.getElementById("shippingForm").addEventListener("submit", async (e)=>{
             address: address,
             items: cart.map(i => {
               const p = products.find(prod => prod.id == i.id);
-              return { name: p ? p.name : "Product", size: i.size, qty: i.qty, price: p?.price || 0 };
+              return { name: p ? p.name : (i.name||"Product"), size: i.size, qty: Math.max(1,Number(i.qty||i.quantity)||1), price: p?.price || i.price || 0 };
             }),
             totalAmount: totalAmount,
             status: "Pending Approval",
@@ -772,7 +714,7 @@ document.getElementById("shippingForm").addEventListener("submit", async (e)=>{
               const pData = productSnap.data();
               let stock = pData.stock || { XS: 5, S: 5, M: 5, L: 5 };
               if (stock[item.size] !== undefined) {
-                stock[item.size] = Math.max(0, stock[item.size] - item.qty);
+                stock[item.size] = Math.max(0, stock[item.size] - Math.max(1,Number(item.qty||item.quantity)||1));
                 await dbMod.updateDoc(productRef, { stock: stock });
               }
             }
@@ -1211,6 +1153,9 @@ function updateProfileDisplay() {
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     isLoggedIn = true;
+    activeCustomerUid=user.uid;
+    cart=readCustomerList(cartStoreKey()); wishlist=readCustomerList(wishStoreKey());
+    renderCart(); renderWishlist(); renderProducts();
     userProfile.name = user.displayName || user.email || "Valued Customer";
     userProfile.phone = user.phoneNumber || "Not Provided";
     userProfile.email = user.email || "Not Provided";
@@ -1218,8 +1163,14 @@ onAuthStateChanged(auth, async (user) => {
     updateAccountIconState();
     updateProfileDisplay();
     await loadCustomerProfile(user);
+    const returnPage=new URLSearchParams(location.search).get("return");
+    if(new URLSearchParams(location.search).get("signin")==="1" && ["bag.html","wishlist.html"].includes(returnPage)){
+      location.replace(returnPage);
+    }
   } else {
-    isLoggedIn = false;
+    isLoggedIn = false; activeCustomerUid=null; cart=[]; wishlist=[];
+    document.getElementById("cartCount").textContent="0"; document.getElementById("wishlistCount").textContent="0";
+    renderCart(); renderWishlist(); renderProducts();
     userProfile = { name: "", phone: "", email: "", address: "" };
     updateAccountIconState();
   }

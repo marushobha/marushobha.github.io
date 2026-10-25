@@ -279,14 +279,20 @@ async function loadProduct(){
         seenImageUrls.add(image.src);
         return true;
       });
+      const isValidNumericPrice = value => typeof value === "number" && Number.isFinite(value) && value > 0;
       const currentPriceIsSet = current.price !== undefined && current.price !== null && current.price !== "";
       const itemPriceIsSet = item.price !== undefined && item.price !== null && item.price !== "";
+      // Keep homepage catalogue price authoritative when Firestore contains a
+      // stale text placeholder such as "COMING SOON" for a priced product.
+      // A valid numeric Firestore price is still respected.
+      const resolvedPrice = isValidNumericPrice(current.price)
+        ? current.price
+        : (isValidNumericPrice(item.price) ? item.price
+          : (currentPriceIsSet ? current.price : (itemPriceIsSet ? item.price : "COMING SOON")));
       allProducts[index] = {
         ...item,
         ...current,
-        // Use the same explicit catalogue price as the homepage. Missing/blank
-        // Firestore prices must not erase the local product price.
-        price: currentPriceIsSet ? current.price : (itemPriceIsSet ? item.price : "COMING SOON"),
+        price: resolvedPrice,
         name: current.name || current.productName || current.title || itemName,
         slug: current.slug || itemSlug,
         images: uniqueImages,

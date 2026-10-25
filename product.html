@@ -143,7 +143,14 @@ async function loadProduct(){
 
   // Read products created or edited by the Admin Dashboard.
   try {
-    const snap = await getDocs(collection(db, "products"));
+    // Do not let a stalled Firestore request keep the page on "Loading..." forever.
+    const snap = await Promise.race([
+      getDocs(collection(db, "products")),
+      new Promise((_, reject) => setTimeout(
+        () => reject(new Error("Firestore product request timed out; using local catalogue fallback.")),
+        7000
+      ))
+    ]);
     firestoreProducts = snap.docs.map(d => {
       const data = d.data() || {};
       const name = data.name || data.productName || data.title || "";
@@ -272,11 +279,14 @@ async function loadProduct(){
     }
   }
 
-  product = allProducts.find(p =>
-    (id && String(p.id) === id) ||
-    (slug && (p.slug || slugFromName(p.name || p.productName || p.title)) === slug) ||
-    (requestedName && String(p.name || p.productName || p.title).toLowerCase() === requestedName.toLowerCase())
-  );
+  const normalizedRequestedSlug = slugFromName(decodeURIComponent(slug.replace(/\+/g, " ")));
+  product = allProducts.find(p => {
+    const pName = p.name || p.productName || p.title || "";
+    const pSlug = slugFromName(p.slug || pName);
+    return (id && String(p.id) === id) ||
+      (slug && (pSlug === normalizedRequestedSlug || String(p.slug || "").toLowerCase() === slug.toLowerCase())) ||
+      (requestedName && String(pName).trim().toLowerCase() === decodeURIComponent(requestedName).trim().toLowerCase());
+  });
 
   if (!product) {
     const message = firestoreError

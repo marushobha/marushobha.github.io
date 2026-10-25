@@ -1,29 +1,1258 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Your Wishlist | Marushobha</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Marushobha — Custom. Character. Class. Contemporary womenswear inspired by Indian craftsmanship.">
+<title>Marushobha | Custom. Character. Class.</title>
+<link rel="icon" type="image/jpeg" href="assets/marushobhalogo.jpeg">
 <style>
-:root{--ink:#241d1a;--muted:#766b65;--line:#e8dfda;--paper:#fffdfb;--accent:#714438}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
-header{padding:20px 5%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}.brand{font-family:Georgia,serif;letter-spacing:3px;font-size:23px;text-decoration:none;color:var(--ink)}nav{display:flex;gap:18px}a{color:var(--accent)}nav a{font-size:14px}
-main{max-width:1100px;margin:38px auto;padding:0 20px}h1{font-family:Georgia,serif;font-size:34px;font-weight:400;margin:0 0 8px}.sub{color:var(--muted);margin-bottom:28px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}.card{border:1px solid var(--line);padding:12px}.card img{width:100%;height:300px;object-fit:cover;background:#f5efeb}.name{font-family:Georgia,serif;font-size:20px;margin:14px 0 7px}.meta{color:var(--muted);font-size:14px;line-height:1.6}.buttons{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.buttons button{border:1px solid var(--line);background:white;padding:10px;cursor:pointer;color:var(--ink)}.buttons .primary{background:var(--accent);border-color:var(--accent);color:white}.empty{padding:50px 20px;text-align:center;border:1px dashed var(--line);color:var(--muted)}.empty a{display:inline-block;margin-top:14px}
-@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card img{height:230px}}@media(max-width:480px){.grid{grid-template-columns:1fr}.card img{height:320px}}
-</style></head><body>
-<header><a class="brand" href="index.html">MARUSHOBHA</a><nav><a href="index.html">Continue Shopping</a><a href="bag.html">Bag</a><a href="index.html#account" id="profileLink">♙ Profile</a></nav></header>
-<main><h1>Your Wishlist</h1><div class="sub">Your saved Marushobha favourites.</div><div id="authRequired" class="empty" hidden>Please sign in to view your personal wishlist.<br><a href="index.html?signin=1&return=wishlist.html">Sign in with Google or Mobile OTP</a></div><div id="items"></div></main>
+:root{--ivory:#f7f3ed;--sand:#e5d7c7;--brown:#49382d;--ink:#25221f;--muted:#766b61;--white:#fff;--line:#e6ded5;--accent:#9b7556}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ivory);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}button,input,select,textarea{font:inherit}button,a{cursor:pointer}a{color:inherit;text-decoration:none}.announcement{overflow:hidden;white-space:nowrap;padding:9px 0;background:var(--brown);color:white;font-size:.72rem;letter-spacing:.08em}.announcement-track{display:inline-flex;min-width:max-content;animation:marushobha-marquee 32s linear infinite}.announcement-track span{padding:0 36px}.announcement:hover .announcement-track{animation-play-state:paused}@keyframes marushobha-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}.header{position:sticky;top:0;z-index:20;background:rgba(247,243,237,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}.nav{max-width:1200px;margin:auto;min-height:76px;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand-lockup{display:flex;align-items:center;flex:0 0 auto}.brand-logo{display:block;width:82px;height:62px;object-fit:contain;mix-blend-mode:multiply}.footer-logo{display:block;width:170px;max-width:100%;height:auto;object-fit:contain;background:#f7f0e5;margin-bottom:14px}.auth-logo{display:block;width:190px;max-width:100%;height:auto;margin:0 auto;mix-blend-mode:multiply}.tagline{font-size:.62rem;letter-spacing:.16em;color:var(--muted);margin-top:3px}.links{display:flex;gap:24px;align-items:center;font-size:.82rem}.links a:hover,.footer a:hover{color:var(--accent)}.nav-actions{display:flex;gap:12px;align-items:center}.iconbtn,.menu-toggle{border:1px solid var(--line);background:transparent;border-radius:50%;width:39px;height:39px;display:grid;place-items:center;color:var(--ink)}.menu-toggle{display:none;border-radius:8px}.hero{max-width:1200px;margin:22px auto 0;padding:0 22px}.hero-panel{position:relative;width:100%;overflow:hidden;background:var(--sand)}.hero-panel img{width:100%;height:auto;max-height:600px;object-fit:cover;display:block}.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;border:1px solid var(--brown);background:var(--brown);color:white;padding:12px 20px;letter-spacing:.06em;font-size:.75rem;text-transform:uppercase;transition:.2s}.btn:hover{background:var(--accent);border-color:var(--accent)}.btn.light{background:var(--ivory);color:var(--brown);border-color:var(--ivory)}.btn.outline{background:transparent;color:var(--brown)}.section{max-width:1200px;margin:0 auto;padding:76px 22px}.section-head{text-align:center;margin-bottom:30px}.section-head .eyebrow{color:var(--muted)}h2{font-family:Georgia,serif;font-weight:normal;font-size:clamp(1.8rem,3vw,2.7rem);margin:8px 0 12px}.section-head p{color:var(--muted);max-width:560px;margin:0 auto}.category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.category{position:relative;min-height:290px;overflow:hidden;background:var(--sand)}.category img{width:100%;height:100%;min-height:290px;object-fit:cover;display:block;transition:transform .5s}.category:hover img{transform:scale(1.04)}.category-label{position:absolute;bottom:0;left:0;right:0;padding:36px 16px 16px;color:white;background:linear-gradient(transparent,rgba(20,15,12,.75))}.category-label h3{font-family:Georgia,serif;font-size:1.35rem;font-weight:normal;margin:0 0 3px}.category-label span{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin:22px 0}.filters{display:flex;gap:9px;flex-wrap:wrap}.filters select,.searchbox,.field{border:1px solid #d9cec2;background:#fffdf9;color:var(--ink);padding:10px 12px;min-height:42px;max-width:100%}.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}.product{min-width:0}.product-image{position:relative;background:#e9e1d7;overflow:hidden;aspect-ratio:3/4}.product-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.product:hover .product-image img{transform:scale(1.025)}.wish{position:absolute;right:10px;top:10px;border:0;border-radius:50%;width:36px;height:36px;background:#fffdf0dd;font-size:1.1rem;cursor:pointer;display:grid;place-items:center}.product-info{padding:12px 0}.product-info h3{font-size:.91rem;font-weight:500;margin:0 0 5px}.product-info p{font-size:.82rem;color:var(--muted);margin:0 0 10px}.product-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:bold;font-size:.9rem}.add{border:1px solid var(--brown);background:transparent;color:var(--brown);padding:8px 10px;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em}.add:hover{background:var(--brown);color:white}.story{background:#e9dfd3}.story-inner{max-width:1200px;margin:auto;padding:68px 22px;display:grid;grid-template-columns:1fr;gap:48px;align-items:center}.story-image{width:100%;max-height:none;object-fit:cover;display:block}.story p{color:#66594d}.values{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:26px}.value{border-top:1px solid #cbb9a7;padding-top:12px}.value strong{font-family:Georgia,serif;font-size:1.05rem;font-weight:normal}.value p{font-size:.82rem}.support-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.support-card{padding:22px 16px;border:1px solid var(--line);background:#fffdf9;text-align:center}.support-card h3{font-size:.95rem;font-weight:500}.support-card p{font-size:.82rem;color:var(--muted);overflow-wrap:anywhere}.support-card a{color:var(--brown);text-decoration:underline;text-underline-offset:3px}.faq-wrap{max-width:760px;margin:30px auto 0}.faq-wrap form{display:grid;gap:10px}.faq-wrap textarea{min-height:100px;resize:vertical}.faq-list{display:grid;gap:10px;margin-top:24px}.faq-item{background:#fffdf9;border:1px solid var(--line);padding:15px}.faq-item small{color:var(--muted)}.footer{background:#2f2722;color:#f8f2ea;padding:45px 22px 22px}.footer-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:35px}.footer .wordmark{font-size:1.2rem}.footer p,.footer a{font-size:.83rem;color:#ded2c7}.footer h3{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:normal}.footer-col{display:grid;align-content:start;gap:9px}.copyright{max-width:1200px;margin:28px auto 0;border-top:1px solid #5c5047;padding-top:18px;color:#c9bbb0;font-size:.73rem}.policy-area{max-width:1200px;margin:0 auto;padding:26px 22px 8px;border-top:1px solid #5c5047}.policy-area h3{font-family:Georgia,serif;font-weight:normal;font-size:1.45rem;margin:0 0 14px}.policy-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}.policy-list details{border:1px solid #5c5047;padding:12px 14px;background:#382f29}.policy-list summary{cursor:pointer;color:#f8f2ea;font-size:.86rem;letter-spacing:.03em}.policy-content{color:#ded2c7;font-size:.82rem;padding-top:10px}.policy-content h4{color:#fff;font-weight:normal;margin:14px 0 4px}.policy-content p,.policy-content li{font-size:.82rem;color:#ded2c7}.policy-content ul{padding-left:20px}.policy-content a{color:#fff;text-decoration:underline;text-underline-offset:3px}.policy-warning{font-size:.78rem;color:#e8c8a5;margin:8px 0 14px}.policy-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:12px}.policy-links a{font-size:.8rem;text-decoration:underline;text-underline-offset:3px}@media(max-width:680px){.policy-area{padding:24px 15px 8px}.policy-list{grid-template-columns:1fr}.announcement-track{animation-duration:38s}}
+.modal-backdrop{position:fixed;inset:0;background:#17120fc2;z-index:50;display:none;align-items:center;justify-content:center;padding:18px}.modal-backdrop.open{display:flex}.modal{background:var(--ivory);width:min(720px,100%);max-height:90vh;overflow:auto;padding:24px;position:relative}.modal-close{position:absolute;right:15px;top:12px;border:0;background:transparent;font-size:1.6rem;cursor:pointer;z-index:99;padding:4px 8px;line-height:1}.modal-body{display:grid;grid-template-columns:1fr 1fr;gap:22px;padding-top:15px}.modal-body img{width:100%;aspect-ratio:3/4;object-fit:cover}.modal-body select,.modal-body input{width:100%;margin:7px 0 12px}.cart-drawer{position:fixed;inset:0 0 0 auto;width:min(420px,100%);background:var(--ivory);z-index:60;box-shadow:-10px 0 35px #0002;padding:24px;transform:translateX(110%);transition:transform .25s;overflow:auto}.cart-drawer.open{transform:translateX(0)}.cart-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.cart-row{display:grid;grid-template-columns:70px 1fr auto;gap:12px;padding:16px 0;border-bottom:1px solid var(--line)}.cart-row img{width:70px;height:90px;object-fit:cover}.cart-row p{font-size:.82rem;color:var(--muted);margin:4px 0}.cart-total{display:flex;justify-content:space-between;margin:22px 0;font-weight:bold}.notice{padding:12px;background:#e6eee4;color:#2e5932;margin:10px 0;display:none}.admin{background:#eee5da;padding:40px 22px}.admin-inner{max-width:1000px;margin:auto}.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.admin-card{padding:18px;background:#fffdf9;border:1px solid var(--line)}.admin-card h3{margin-top:0;font-family:Georgia,serif;font-weight:normal}.admin-note{font-size:.85rem;color:var(--muted)}.hidden{display:none!important}.mobile-nav{display:none}.auth-modal{width:min(460px,100%);padding:30px}.auth-brand{text-align:center;margin:8px 0 20px}.auth-brand .wordmark{font-size:1.1rem}.auth-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);margin:18px 0}.auth-tab{border:0;border-bottom:2px solid transparent;background:transparent;padding:12px;color:var(--muted);cursor:pointer}.auth-tab.active{border-bottom-color:var(--brown);color:var(--brown);font-weight:bold}.auth-form{display:grid;gap:12px}.auth-form label{font-size:.82rem}.auth-form input{width:100%;margin-top:5px}.google-btn{width:100%;display:flex;justify-content:center;align-items:center;gap:10px;border:1px solid #cfc5bb;background:#fffdf9;color:var(--ink);padding:12px;cursor:pointer}.auth-divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.75rem;margin:15px 0}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:var(--line);flex:1}.auth-status{font-size:.82rem;color:var(--brown);background:#eee5da;padding:12px;margin-top:12px;display:none}.auth-terms{font-size:.72rem;color:var(--muted);text-align:center}.account-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+@media(max-width:900px){.links{gap:13px}.category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.support-grid{grid-template-columns:repeat(2,1fr)}.story-inner{gap:25px}.footer-inner{grid-template-columns:1.5fr 1fr 1fr}}
+@media(max-width:680px){.nav{min-height:66px;padding:10px 15px}.brand-logo{width:68px;height:54px}.links{display:none}.menu-toggle{display:grid}.nav-actions{gap:7px}.hero{padding:0;margin-top:10px}.hero-panel{min-height:auto}.section{padding:54px 15px}.category-grid{gap:10px}.category,.category img{min-height:230px}.category-label{padding:26px 10px 12px}.category-label h3{font-size:1.08rem}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.product-info{padding:9px 0}.product-info h3{font-size:.84rem}.product-bottom{align-items:flex-start;flex-direction:column}.add{width:100%}.toolbar{align-items:stretch}.filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%}.filters select{width:100%;min-width:0}.searchbox{width:100%}.story-inner{grid-template-columns:1fr;padding:45px 15px}.story-image{max-height:340px;order:2}.values{gap:10px}.value strong{font-size:.95rem}.value p{font-size:.76rem}.support-grid{gap:8px}.support-card{padding:17px 9px}.support-card h3{font-size:.85rem}.footer-inner{grid-template-columns:1fr 1fr;gap:28px}.footer-brand{grid-column:1/-1}.modal-body{grid-template-columns:1fr}.modal-body img{max-height:280px;object-position:center 30%}.admin-grid{grid-template-columns:1fr}.mobile-nav{position:absolute;top:100%;left:0;right:0;background:var(--ivory);padding:12px 18px 18px;border-bottom:1px solid var(--line);box-shadow:0 12px 20px #0000000b}.mobile-nav.open{display:grid;gap:0}.mobile-nav a{padding:12px 0;border-bottom:1px solid var(--line)}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+
+/* Customer dashboard draft */
+.dashboard-modal{width:min(900px,100%);padding:24px;}
+.dashboard-top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 34px 18px 0;border-bottom:1px solid var(--line)}
+.dashboard-top h2{margin:0;font-size:1.8rem}
+.dashboard-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:22px;padding-top:20px}
+.dashboard-nav{display:grid;align-content:start;gap:7px}
+.dashboard-nav button{text-align:left;border:1px solid transparent;background:transparent;padding:11px 12px;color:var(--ink);cursor:pointer}
+.dashboard-nav button.active,.dashboard-nav button:hover{background:#e9dfd3;border-color:#d7c6b4}
+.dashboard-content{min-width:0}
+.dashboard-panel{display:none}
+.dashboard-panel.active{display:block}
+.dashboard-welcome{background:#e9dfd3;padding:20px;margin-bottom:16px}
+.dashboard-welcome p{margin:5px 0 0;color:var(--muted);font-size:.9rem}
+.dashboard-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:20px}
+.dashboard-card{background:#fffdf9;border:1px solid var(--line);padding:15px}
+.dashboard-card strong{display:block;font-family:Georgia,serif;font-weight:normal;font-size:1.2rem;margin-bottom:5px}
+.dashboard-card span{font-size:.78rem;color:var(--muted)}
+.dashboard-empty{border:1px dashed #cdbba9;background:#fffdf9;padding:22px;text-align:center}
+.dashboard-empty p{color:var(--muted);font-size:.86rem}
+.dashboard-profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.dashboard-field{background:#fffdf9;border:1px solid var(--line);padding:13px;overflow-wrap:anywhere}
+.dashboard-field small{display:block;color:var(--muted);margin-bottom:5px}
+.dashboard-note{font-size:.78rem;color:var(--muted);margin-top:12px}
+.dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+@media(max-width:600px){.dashboard-modal{padding:20px 16px}.dashboard-layout{grid-template-columns:1fr;gap:16px}.dashboard-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-nav button{text-align:center;padding:9px 6px;font-size:.82rem}.dashboard-cards{grid-template-columns:1fr}.dashboard-profile-grid{grid-template-columns:1fr}.dashboard-top h2{font-size:1.5rem}}
+
+.nav-actions #wishlistOpen{color:#b4234d;background:#fff0f4;border-color:#edb5c4}.nav-actions #cartOpen{color:#176b4d;background:#eaf6ef;border-color:#a9d7bd}.nav-actions #accountOpen{color:#6e4b36;background:#f0e7dd;border-color:#d5c1ad}.iconbtn span{min-width:15px;text-align:center}
+ .product-image-link{display:block;width:100%;height:100%;} .product-image-link img{display:block;width:100%;height:100%;object-fit:cover;}
+</style>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+<div class="announcement" role="region" aria-label="Store notices"><div class="announcement-track"><span>RETURNS & EXCHANGES: Report damaged, defective or incorrect items within 24 hours of delivery · Size exchange subject to availability</span><span>PAYMENT: Prepaid orders only · No Cash on Delivery · Online payment activation is in progress; checkout must be enabled before placing orders</span><span>RETURNS & EXCHANGES: Report damaged, defective or incorrect items within 24 hours of delivery · Size exchange subject to availability</span><span>PAYMENT: Prepaid orders only · No Cash on Delivery · Online payment activation is in progress; checkout must be enabled before placing orders</span></div></div>
+<header class="header">
+  <nav class="nav" aria-label="Main navigation">
+    <a class="brand-lockup" href="#home" aria-label="Marushobha home"><img class="brand-logo" src="assets/marushobhalogo.jpeg" alt="Marushobha — Custom. Character. Class."></a>
+    <div class="links"><a href="#home">Home</a><a href="#shop">Shop</a><a href="#story">Our Story</a><a href="#contact">Contact Us</a></div>
+    <div class="nav-actions">
+      <button class="iconbtn" id="searchFocus" aria-label="Search products">⌕</button>
+      <button class="iconbtn" id="wishlistOpen" aria-label="Open wishlist" title="Wishlist" style="position:relative">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        <span id="wishlistCount" style="position:absolute;top:2px;right:2px;background:var(--brown);color:white;font-size:0.6rem;padding:1px 4px;border-radius:50%">0</span>
+      </button>
+      <button class="iconbtn" id="accountOpen" aria-label="Account or Sign In" title="Account">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      </button>
+      <button class="iconbtn" id="cartOpen" aria-label="Open shopping bag" title="Shopping Bag" style="position:relative">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span id="cartCount" style="position:absolute;top:2px;right:2px;background:var(--brown);color:white;font-size:0.6rem;padding:1px 4px;border-radius:50%">0</span>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </nav>
+  <div class="mobile-nav" id="mobileNav"><a href="#home">Home</a><a href="#shop">Shop All Products</a><a href="#story">Our Story</a><a href="#contact">Contact Us</a></div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="hero-panel">
+    <img src="marushobhabanner.jpg" alt="Marushobha — Custom. Character. Class." loading="eager">
+  </div>
+</section>
+
+<section class="section" id="shop" style="padding-top:20px">
+  <div class="section-head"><div class="eyebrow">The Edit</div><h2>Shop the Collection</h2><p>Browse the collection and find your next favourite.</p></div>
+  <div class="toolbar">
+    <input class="searchbox" id="searchInput" type="search" placeholder="Search products…" aria-label="Search products" style="max-width:260px">
+    <div class="filters">
+      <select id="categoryFilter" aria-label="Filter by collection">
+        <option value="">All Collections</option>
+        <option>New Arrival Collection</option>
+        <option>Indian Collection</option>
+        <option>Western Collection</option>
+        <option>Marushobha Luxe</option>
+      </select>
+      <select id="sizeFilter" aria-label="Filter by size"><option value="">All Sizes</option><option>XS</option><option>S</option><option>M</option><option>L</option></select>
+      <select id="colourFilter" aria-label="Filter by colour"><option value="">All Colours</option><option>Floral</option><option>Mustard</option><option>Olive Green</option><option>Pink and White</option><option>Beige</option><option>Sky Blue</option><option>Pink Floral</option><option>Multicolour</option><option>Black, Red and Maroon</option></select>
+      <select id="sortFilter" aria-label="Sort products"><option value="featured">Sort: Featured</option><option value="new">Newest</option></select>
+    </div>
+  </div>
+  <p id="productCount" class="admin-note" aria-live="polite"></p>
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<section class="story" id="story">
+  <div class="story-inner" style="grid-template-columns:1fr;">
+    <div>
+      <img class="story-image" loading="lazy" src="ourstoryimage.jpg" alt="Marushobha Our Story" style="width:100%;max-height:none;object-fit:cover;display:block;">
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="section-head"><div class="eyebrow">We are here to help</div><h2>Contact Marushobha</h2><p>Questions about a product or your order? Get in touch with us.</p></div>
+  <div class="support-grid">
+    <div class="support-card">
+      <div style="margin-bottom:8px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <defs>
+            <radialGradient id="insta-grad" cx="30%" cy="107%" r="150%">
+              <stop offset="0%" stop-color="#fdf497"/>
+              <stop offset="5%" stop-color="#fdf497"/>
+              <stop offset="45%" stop-color="#fd5949"/>
+              <stop offset="60%" stop-color="#d6249f"/>
+              <stop offset="90%" stop-color="#285AEB"/>
+            </radialGradient>
+          </defs>
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" fill="url(#insta-grad)"/>
+          <path stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3>Instagram</h3>
+      <p>@marushobha_</p>
+      <a href="https://www.instagram.com/marushobha_/" target="_blank" rel="noopener">Visit Instagram ↗</a>
+    </div>
+
+    <div class="support-card">
+      <div style="margin-bottom:8px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#1877F2">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+      </div>
+      <h3>Facebook</h3>
+      <p>Marushobha Official Page</p>
+      <a href="https://www.facebook.com/profile.php?id=61595238090358" target="_blank" rel="noopener">Visit Facebook ↗</a>
+    </div>
+
+    <div class="support-card">
+      <div style="margin-bottom:8px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+          <path fill="#4285F4" d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6z"/>
+          <path fill="#EA4335" d="M12 13L2 6v12h20V6l-10 7z"/>
+          <path fill="#FBBC05" d="M2 6l10 7L22 6"/>
+        </svg>
+      </div>
+      <h3>Email</h3>
+      <p>marushobha.jj@gmail.com</p>
+      <a href="mailto:marushobha.jj@gmail.com">Send an email ↗</a>
+    </div>
+
+    <div class="support-card">
+      <div style="margin-bottom:8px">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#25D366">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+        </svg>
+      </div>
+      <h3>WhatsApp & Queries</h3>
+      <p>8700944947</p>
+      <a href="https://wa.me/918700944947" target="_blank" rel="noopener">Chat on WhatsApp ↗</a>
+      <p><a href="tel:+918700944947">Call us ↗</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="padding-top:10px">
+  <div class="section-head"><div class="eyebrow">Customer Care</div><h2>Frequently Asked Questions</h2><p>Send us your question.</p></div>
+  <div class="faq-wrap">
+    <!-- Marushobha FAQ contact form (Formspree) -->
+    <form id="formspree-faq" action="https://formspree.io/f/meaaobgg" method="POST">
+      <input class="field" id="questionName" name="name" type="text" placeholder="Your name" autocomplete="name" required maxlength="80">
+      <input class="field" id="questionEmail" name="email" type="email" placeholder="Your email" autocomplete="email" required maxlength="150">
+      <textarea class="field" id="questionText" name="message" placeholder="How can we help you?" required maxlength="1000"></textarea>
+      <input type="hidden" name="_subject" value="New Customer Question via Marushobha FAQ">
+      <button class="btn" type="submit" id="formspree-btn">Submit Question</button>
+      <p id="formspree-status" role="status" aria-live="polite" style="margin:4px 0;color:var(--brown);overflow-wrap:anywhere"></p>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="account" style="padding-top:10px;display:none">
+  <div class="section-head"><div class="eyebrow">Your Marushobha</div><h2>Your Account, Your Style</h2><p>Sign in to make your shopping experience personal.</p></div>
+  <div class="account-actions"><button class="btn" id="accountSignup" type="button">Create Account</button><button class="btn outline" id="accountSignin" type="button">Sign In</button></div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><img class="footer-logo" src="assets/marushobhalogo.jpeg" alt="Marushobha — Custom. Character. Class."><p>Wear Your Story.</p><p>Contemporary fashion inspired by Indian craftsmanship.</p></div>
+    <div class="footer-col"><h3>Explore</h3><a href="#shop">Shop All</a><a href="#story">Our Story</a></div>
+    <div class="footer-col"><h3>Customer Care</h3><a href="#contact">Contact Us</a><a href="#faq">Frequently Asked Questions</a></div>
+  </div>
+  <section class="policy-area" id="policies" aria-label="Store policies">
+    <h3>Customer Policies</h3>
+    <p class="policy-warning">Before launch: confirm that checkout, shipping and refund processes match these policies. These policy drafts do not replace legal advice.</p>
+    <div class="policy-list">
+      <details id="return-policy"><summary>Return, Exchange & Refund Policy</summary><div class="policy-content">
+        <p>Marushobha aims to provide accurate product information and quality clothing. Please inspect your order after delivery.</p>
+        <h4>Damaged, defective or incorrect items</h4><p>Please contact us within 24 hours of delivery at <a href="mailto:marushobha.jj@gmail.com">marushobha.jj@gmail.com</a> or WhatsApp <a href="https://wa.me/918700944947" target="_blank" rel="noopener">8700944947</a>. Include your order details and, where reasonably available, photographs of the item and packaging. An unboxing video may help but its absence alone will not automatically invalidate a claim. For a verified damaged, defective or incorrect item, Marushobha will arrange or bear reasonable return shipping costs.</p>
+        <h4>Size exchanges</h4><p>Size exchanges may be requested subject to availability. Items should be unused, unwashed, unaltered and returned with original tags and packaging. Contact us before sending an item back so we can provide instructions.</p>
+        <h4>Change-of-mind returns</h4><p>We generally do not accept returns for change of mind or ordering the wrong size. This does not limit any consumer rights or remedies that cannot legally be excluded under applicable law.</p>
+        <h4>Refunds</h4><p>If an approved exchange cannot be fulfilled because the requested size is unavailable, we will discuss the applicable refund process with you. Where legally permitted and agreed, refunds may be sent to bank-account details supplied by the customer during the return process. Once a refund is approved and processed, the amount will generally be credited within 7–10 business days. Actual credit time may vary by bank, payment provider and refund method. If the amount is not credited within this period, contact us with your order number and refund reference. This timeline does not override any shorter period required by applicable law or payment-provider requirements.</p>
+      </div></details>
+      <details id="shipping-policy"><summary>Shipping Policy</summary><div class="policy-content">
+        <p>Orders are intended to be processed within 2–3 business days after payment confirmation. Estimated delivery is generally 5–8 business days after dispatch for serviceable Indian locations; remote areas, courier delays, weather and other events may affect delivery.</p>
+        <p>Delhivery is the intended shipping partner, subject to serviceability and confirmation of the live fulfilment arrangement. Shipping charges and delivery estimates must be shown before checkout is enabled. Do not rely on a live Delhivery rate unless the integration is active and tested.</p>
+        <p>Please provide a complete address, PIN code and reachable phone number. Tracking details will be shared when available. If a parcel arrives damaged or contains the wrong item, contact us within 24 hours of delivery. We will review the issue and advise the next steps.</p>
+      </div></details>
+      <details id="terms-policy"><summary>Terms & Conditions</summary><div class="policy-content">
+        <p>This website is operated under the business name MARUSHOBHA, intended as a sole proprietorship. Product images are representative; colours may vary slightly by screen. Product descriptions, fabric composition, available sizes, prices and delivery estimates should be reviewed carefully before ordering.</p>
+        <p>All orders are intended to be prepaid; Cash on Delivery is not offered. However, online payment activation is currently in progress, so do not accept or advertise live orders until the payment and order flow has been tested. An order is not confirmed as paid until payment is verified by the payment provider.</p>
+        <p>Order acceptance, cancellations, exchanges, refunds, intellectual property, website availability and third-party services are subject to applicable law. Nothing in these terms excludes consumer rights that cannot legally be excluded. We may update these terms when needed; the version published on the website should show the effective date.</p>
+      </div></details>
+      <details id="privacy-policy"><summary>Privacy Policy</summary><div class="policy-content">
+        <p>MARUSHOBHA should collect only the personal information needed to operate the website, respond to enquiries, manage accounts and orders, arrange delivery, process payments when enabled, prevent fraud and meet legal obligations.</p>
+        <p>Depending on the features actually enabled, information may include name, email, phone number, delivery address, account/authentication details, order information, customer messages and limited technical data. Firebase/Google authentication, a payment provider, a courier such as Delhivery or analytics tools should be named as data processors/recipients only when they are actually used.</p>
+        <p>Information should be accessed only by authorised people, protected with appropriate safeguards, retained only as needed for the stated purposes and legal obligations, and not sold to advertisers. Customers may contact us to ask about their personal information or raise a privacy concern.</p>
+        <p><strong>Privacy contact:</strong> <a href="mailto:marushobha.jj@gmail.com">marushobha.jj@gmail.com</a>. This draft must be checked against the website's actual Firebase, form, analytics, payment and shipping configuration and updated for applicable Indian data-protection requirements before launch.</p>
+      </div></details>
+      <details id="payment-policy"><summary>Payment Policy</summary><div class="policy-content">
+        <p>Marushobha intends to accept prepaid orders only; Cash on Delivery is not available. Online payment activation is currently in progress. Do not place or accept live orders until an active payment method is displayed at checkout and successful, failed, cancelled and refunded transactions have been tested.</p>
+        <p>When online payments are enabled, the payment options, total amount, applicable shipping charges and any other charges should be displayed before the customer confirms payment. An order must not be marked paid until payment confirmation is received and verified. Never send card PINs, passwords or OTPs to Marushobha by email or WhatsApp.</p>
+        <p>Approved refunds will generally be credited within 7–10 business days after processing. Actual credit time may vary by bank, payment provider and refund method. If the amount is not credited within this period, contact us with your order number and refund reference. This timeline does not override any shorter period required by applicable law or payment-provider requirements. For payment questions, contact <a href="mailto:marushobha.jj@gmail.com">marushobha.jj@gmail.com</a> or WhatsApp <a href="https://wa.me/918700944947" target="_blank" rel="noopener">8700944947</a>.</p>
+      </div></details>
+    </div>
+    <div class="policy-links"><a href="#return-policy">Returns & Refunds</a><a href="#shipping-policy">Shipping</a><a href="#terms-policy">Terms & Conditions</a><a href="#privacy-policy">Privacy</a><a href="#payment-policy">Payments</a></div>
+  </section>
+  <div class="copyright">© <span id="year"></span> Marushobha. All rights reserved. <span style="float:right"><a href="https://www.instagram.com/marushobha_/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.facebook.com/profile.php?id=61595238090358" target="_blank" rel="noopener">Facebook</a></span></div>
+</footer>
+
+<!-- Auth Modal (Sign In / Sign Up) -->
+<div class="modal-backdrop" id="authModal" role="dialog" aria-modal="true" aria-label="Customer sign in and sign up">
+  <div class="modal auth-modal">
+    <button class="modal-close" id="authClose" aria-label="Close" type="button">×</button>
+    <div class="auth-brand"><img class="auth-logo" src="assets/marushobhalogo.jpeg" alt="Marushobha"></div>
+    <h2 id="authTitle" style="text-align:center;font-size:2rem">Welcome Back</h2>
+    <p id="authSubtitle" style="text-align:center;color:var(--muted);font-size:.88rem">Sign in to continue your style journey.</p>
+    <div class="auth-tabs"><button class="auth-tab active" id="signinTab" type="button">Sign In</button><button class="auth-tab" id="signupTab" type="button">Create Account</button></div>
+    <form class="auth-form" id="authForm">
+      <div id="authDetailsWrap" class="hidden" style="display:grid;gap:10px">
+        <div><label for="authFullName">Full Name</label><input class="field" id="authFullName" placeholder="Enter your full name" style="width:100%;margin-top:4px"></div>
+        <div><label for="authEmailAddr">Email Address</label><input class="field" id="authEmailAddr" type="email" placeholder="your@email.com" style="width:100%;margin-top:4px"></div>
+        <div><label for="authDeliveryAddr">Delivery Address</label><textarea class="field" id="authDeliveryAddr" placeholder="House no., Street, City, State, Pincode" style="width:100%;margin-top:4px;min-height:60px;resize:vertical"></textarea></div>
+      </div>
+      <div><label for="authPhone">Mobile number</label><input class="field" id="authPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number" required></div>
+      <div id="otpWrap" class="hidden"><label for="authOtp">Verification code (OTP)</label><input class="field" id="authOtp" type="text" inputmode="numeric" placeholder="Enter the SMS code"></div>
+      <div id="recaptcha-container"></div>
+      <button class="btn" type="submit" id="mobileContinue">Continue with Mobile</button>
+      <button class="add hidden" type="button" id="changePhone">Use a different number</button>
+    </form>
+    <div class="auth-divider">OR</div>
+    <button class="google-btn" id="googleAuth" type="button"><strong style="font-size:1.05rem;color:#4285F4">G</strong><span id="googleLabel">Continue with Google</span></button>
+    <div class="auth-status" id="authStatus" role="status"></div>
+    <p class="auth-terms">By continuing, you agree to our Terms & Conditions and Privacy Policy.</p>
+  </div>
+</div>
+
+<!-- Customer Dashboard Draft: order history and saved data require verified backend integration -->
+<div class="modal-backdrop" id="profileModal" role="dialog" aria-modal="true" aria-label="My Marushobha Dashboard">
+  <div class="modal dashboard-modal">
+    <button class="modal-close" id="profileClose" aria-label="Close dashboard" type="button">×</button>
+    <div class="dashboard-top"><div><div class="eyebrow">MARUSHOBHA · YOUR ACCOUNT</div><h2>My Dashboard</h2></div><span style="font-size:.78rem;color:var(--muted)">Wear Your Story.</span></div>
+    <div class="dashboard-layout">
+      <nav class="dashboard-nav" aria-label="Dashboard sections">
+        <button type="button" class="active" data-dashboard-tab="overview">Overview</button>
+        <button type="button" data-dashboard-tab="orders">My Orders</button>
+        <button type="button" data-dashboard-tab="profile">Profile Details</button>
+        <button type="button" data-dashboard-tab="wishlist">Wishlist</button>
+        <button type="button" data-dashboard-tab="support">Help & Support</button>
+      </nav>
+      <div class="dashboard-content">
+        <section class="dashboard-panel active" data-dashboard-panel="overview">
+          <div class="dashboard-welcome"><div style="font-size:.72rem;letter-spacing:.12em;text-transform:uppercase">Welcome back</div><h3 id="dashboardWelcomeName" style="font-family:Georgia,serif;font-weight:normal;font-size:1.55rem;margin:5px 0">Your Marushobha account</h3><p>Manage your account and keep your shopping details close.</p></div>
+          <div class="dashboard-cards"><div class="dashboard-card"><strong>My Orders</strong><span>Order history will appear here once order processing is connected.</span></div><div class="dashboard-card"><strong>Profile</strong><span>Review your contact information and delivery details.</span></div><div class="dashboard-card"><strong>Customer Care</strong><span>We're here to help with product and order questions.</span></div></div>
+          <h3 style="font-family:Georgia,serif;font-weight:normal">Recent activity</h3><div class="dashboard-empty"><strong>No orders to show yet</strong><p>Your order history and tracking will appear here after a verified order system is connected.</p><button type="button" class="btn" data-dashboard-go="orders">View My Orders</button></div>
+        </section>
+        <section class="dashboard-panel" data-dashboard-panel="orders"><h3 style="font-family:Georgia,serif;font-weight:normal">My Orders</h3><div class="dashboard-empty"><strong>Order history is not connected yet</strong><p>This is a dashboard draft. Orders, payment status, shipment tracking and refunds must be connected to a secure backend before they can be displayed accurately.</p></div><p class="dashboard-note">Please do not rely on this page as proof of purchase or payment until the order system is implemented.</p></section>
+        <section class="dashboard-panel" data-dashboard-panel="profile">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap"><h3 style="font-family:Georgia,serif;font-weight:normal;margin:0">Profile Details</h3><button class="btn outline" id="editProfileBtn" type="button">Edit Details</button></div>
+          <div class="dashboard-profile-grid" id="profileReadView" style="margin-top:14px"><div class="dashboard-field"><small>Full name</small><strong id="profileNameDisplay">Not provided</strong></div><div class="dashboard-field"><small>Contact mobile number</small><strong id="profilePhoneDisplay">Not provided</strong></div><div class="dashboard-field"><small>Sign-in email</small><strong id="profileEmailDisplay">Not provided</strong></div><div class="dashboard-field"><small>Delivery address</small><strong id="profileAddressDisplay">Not provided</strong></div></div>
+          <form id="profileEditForm" class="hidden" style="display:grid;gap:12px;margin-top:16px">
+            <div><label for="editProfileName" style="font-size:.82rem">Full name</label><input class="field" id="editProfileName" name="name" autocomplete="name" maxlength="100" required style="width:100%;margin-top:5px"></div>
+            <div><label for="editProfilePhone" style="font-size:.82rem">Contact mobile number</label><input class="field" id="editProfilePhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" style="width:100%;margin-top:5px"><p class="dashboard-note">This is your contact number for orders. It does not change the phone number used for Firebase sign-in.</p></div>
+            <div><label for="editProfileEmail" style="font-size:.82rem">Sign-in email (read-only)</label><input class="field" id="editProfileEmail" name="email" type="email" readonly aria-readonly="true" style="width:100%;margin-top:5px;background:#eee8e0"></div>
+            <div><label for="editProfileAddress" style="font-size:.82rem">Delivery address</label><textarea class="field" id="editProfileAddress" name="address" autocomplete="street-address" maxlength="500" rows="3" style="width:100%;margin-top:5px;resize:vertical"></textarea></div>
+            <div class="dashboard-actions"><button class="btn" id="saveProfileBtn" type="submit">Save Changes</button><button class="btn outline" id="cancelProfileEditBtn" type="button">Cancel</button></div>
+          </form>
+          <div id="profileSaveStatus" class="auth-status" role="status" aria-live="polite"></div>
+          <p class="dashboard-note">Your editable contact and delivery details are saved to your customer profile when Firestore access is configured. Your sign-in email is shown for reference and is not changed here.</p>
+        </section>
+        <section class="dashboard-panel" data-dashboard-panel="wishlist"><h3 style="font-family:Georgia,serif;font-weight:normal">My Wishlist</h3><div class="dashboard-empty"><strong>Wishlist preview</strong><p>Use the heart icon on products to save favourites. Persistent wishlist syncing across devices requires a verified customer-data integration.</p><button type="button" class="btn" data-dashboard-go="overview">Back to Overview</button></div></section>
+        <section class="dashboard-panel" data-dashboard-panel="support"><h3 style="font-family:Georgia,serif;font-weight:normal">Help & Support</h3><p>For help with products, orders, exchanges or refunds, contact Marushobha:</p><div class="dashboard-profile-grid"><div class="dashboard-field"><small>Email</small><a href="mailto:marushobha.jj@gmail.com">marushobha.jj@gmail.com</a></div><div class="dashboard-field"><small>WhatsApp</small><a href="https://wa.me/918700944947" target="_blank" rel="noopener">Message customer care</a></div></div><p class="dashboard-note">Please include your order reference if you have one. Never send your password, payment PIN or OTP to customer support.</p><div class="dashboard-actions"><a class="btn outline" href="#policies" id="dashboardPolicyLink">Read Store Policies</a></div></section>
+      </div>
+    </div>
+    <div class="dashboard-actions" style="border-top:1px solid var(--line);padding-top:16px;justify-content:space-between"><span class="dashboard-note">Secure sign-in provided by Firebase Authentication.</span><button class="btn" id="profileSignOutBtn" type="button" style="background:#8a2e24;border-color:#8a2e24">Sign Out</button></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="productModal" role="dialog" aria-modal="true" aria-label="Product details">
+  <div class="modal"><button class="modal-close" id="modalClose" aria-label="Close" type="button">×</button><div id="modalContent"></div></div>
+</div>
+
+<div class="modal-backdrop" id="checkoutModal" role="dialog" aria-modal="true" aria-label="Shipping Details">
+  <div class="modal" style="width:min(460px,100%);padding:30px">
+    <button class="modal-close" id="checkoutClose" aria-label="Close" type="button">×</button>
+    <h2>Shipping Details</h2><div id="checkoutOrderSummary" style="border:1px solid var(--line);padding:12px;margin:12px 0;max-height:220px;overflow:auto"></div>
+    <form id="shippingForm" style="display:grid;gap:12px;margin-top:15px">
+      <div><label style="font-size:.82rem">Full Name</label><input class="field" id="shipName" required style="width:100%;margin-top:5px"></div>
+      <div><label style="font-size:.82rem">Mobile Number</label><input class="field" id="shipPhone" type="tel" required style="width:100%;margin-top:5px"></div>
+      <div><label style="font-size:.82rem">Email Address</label><input class="field" id="shipEmail" type="email" required style="width:100%;margin-top:5px"></div>
+      <div><label style="font-size:.82rem">Delivery Address</label><textarea class="field" id="shipAddress" required style="width:100%;margin-top:5px;min-height:80px"></textarea></div>
+      <button class="btn" type="submit" style="width:100%;margin-top:10px">Proceed to Secure Payment</button>
+    </form>
+  </div>
+</div>
+
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true">
+  <div class="cart-head"><h2>Shopping Bag</h2><button class="iconbtn" id="cartClose" aria-label="Close bag" type="button">×</button></div>
+  <div id="cartItems"></div><div class="cart-total"><span>Subtotal</span><span id="cartTotal">₹0</span></div>
+  <button class="btn" style="width:100%" id="checkoutBtn">Proceed to Checkout</button>
+</aside>
+
+<aside class="cart-drawer" id="wishlistDrawer" aria-label="Wishlist" aria-hidden="true">
+  <div class="cart-head"><h2>My Wishlist</h2><button class="iconbtn" id="wishlistClose" aria-label="Close wishlist" type="button">×</button></div>
+  <div id="wishlistItems" style="padding:15px 0"></div>
+</aside>
+
 <script>
-const WISH_BASE="marushobha_wishlist_v1_",CART_BASE="marushobha_cart_v1_";function wishKey(){return window.marushobhaUid?WISH_BASE+window.marushobhaUid:null}function cartKey(){return window.marushobhaUid?CART_BASE+window.marushobhaUid:null}
-function read(base){const k=base===WISH_BASE?wishKey():cartKey();if(!k)return[];try{let v=JSON.parse(localStorage.getItem(k)||"[]");return Array.isArray(v)?v:[]}catch{return[]}}
-function save(base,v){const k=base===WISH_BASE?wishKey():cartKey();if(k)localStorage.setItem(k,JSON.stringify(v))}
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function money(v,d){if(d&&d!=="Coming soon")return d;let n=Number(v);return Number.isFinite(n)&&n>0?"₹"+n.toLocaleString("en-IN"):"Price coming soon"}
-function render(){let el=document.getElementById("items");if(!window.marushobhaUid){document.getElementById("authRequired").hidden=false;el.innerHTML="";return;}document.getElementById("authRequired").hidden=true;let list=read(WISH_BASE);if(!list.length){el.innerHTML='<div class="empty">Your wishlist is empty.<br><a href="index.html">Discover the collection</a></div>';return}
-el.innerHTML='<div class="grid">'+list.map((p,i)=>`<article class="card"><img src="${esc(p.image||"")}" alt="${esc(p.name)}" onerror="this.style.visibility='hidden'"><div class="name">${esc(p.name||"Product")}</div><div class="meta">Size: ${esc(p.size||"Choose on product page")}<br>${esc(money(p.price,p.displayPrice))}</div><div class="buttons"><button class="primary" onclick="moveToBag(${i})">Add to Bag</button><button onclick="removeItem(${i})">Remove</button></div></article>`).join("")+'</div>'}
-function moveToBag(i){let w=read(WISH_BASE),p=w[i];if(!p)return;let c=read(CART_BASE),key=p.key||`${p.slug||p.productId||p.id}::${p.size||"XS"}`,existing=c.find(x=>x.key===key || (String(x.productId||x.id||x.slug)===String(p.productId||p.id||p.slug) && String(x.size||"")===String(p.size||"XS")));if(existing){existing.quantity=Math.min(99,Math.max(1,Number(existing.quantity||existing.qty)||1)+1);existing.qty=existing.quantity;existing.key=existing.key||key;}else c.push({...p,id:p.id??p.productId,productId:p.productId||p.id,key,quantity:Math.max(1,Number(p.quantity||p.qty)||1),qty:Math.max(1,Number(p.quantity||p.qty)||1),size:p.size||"XS"});save(CART_BASE,c);w.splice(i,1);save(WISH_BASE,w);render();alert("Product moved to your bag.")}
-function removeItem(i){let w=read(WISH_BASE);w.splice(i,1);save(WISH_BASE,w);render()}
-window.renderMarushobhaWishlist=render;window.addEventListener("storage",render);render();
-</script><script type="module">
-import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
-const config={apiKey:"AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",authDomain:"marushobha-1e31f.firebaseapp.com",projectId:"marushobha-1e31f",storageBucket:"marushobha-1e31f.firebasestorage.app",messagingSenderId:"997754535596",appId:"1:997754535596:web:aafc83bad8c3d413cf6909"};
-const app=getApps().length?getApps()[0]:initializeApp(config);onAuthStateChanged(getAuth(app),user=>{window.marushobhaUid=user?.uid||null;const a=document.getElementById("profileLink");if(a)a.href=user?"index.html#account":"index.html?signin=1&return=wishlist.html";window.renderMarushobhaWishlist?.();});
-</script></body></html>
+const fixedProducts = [
+  {
+    "id": "fixed-1",
+    "slug": "boat-neck-halter-dress",
+    "name": "Boat-Neck Halter Dress",
+    "description": "A floral-print dress featuring a halter neckline with a back-neck tie, a fitted waist, and a flared skirt for a playful and elegant look.",
+    "colour": "Floral",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Not specified",
+    "care": "Follow the garment care label.",
+    "category": "Western Collection",
+    "tag": "Floral · Halter Neck",
+    "img": "assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg"
+  },
+  {
+    "id": "fixed-2",
+    "slug": "mustard-muse-shirt",
+    "name": "Mustard Muse Shirt",
+    "description": "A mustard-checkered shirt made from handwoven cotton, featuring a contrasting brown pocket, wooden buttons, statement flared cuffs, and brown piping.",
+    "colour": "Mustard",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately.",
+    "category": "Western Collection",
+    "tag": "Handwoven Cotton · Checked",
+    "img": "assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg"
+  },
+  {
+    "id": "fixed-3",
+    "slug": "bow-palazzo-pants",
+    "name": "Bow Palazzo Pants",
+    "description": "A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist.",
+    "colour": "Olive Green",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately.",
+    "category": "Western Collection",
+    "tag": "Handwoven Cotton · Wide Leg",
+    "img": "assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg"
+  },
+  {
+    "id": "fixed-4",
+    "slug": "chashni-set",
+    "name": "Chashni Set",
+    "description": "A feminine pink off-shoulder top made from handwoven cotton, featuring a delicate ruffled neckline, paired with flowing white wide-leg pants.",
+    "colour": "Pink and White",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately.",
+    "category": "Western Collection",
+    "tag": "Handwoven Cotton · Two-Piece Set",
+    "img": "assets/products/chashni-set/chashni-set-main.jpeg"
+  },
+  {
+    "id": "fixed-5",
+    "slug": "dune-belle-corset",
+    "name": "Dune Belle Corset",
+    "description": "A chic beige corset top made from handwoven cotton, featuring structured cups, wide shoulder straps, and elegant vertical pintuck detailing.",
+    "colour": "Beige",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "DRY CLEAN ONLY.",
+    "category": "Marushobha Luxe",
+    "tag": "Handwoven Cotton · Corset Set",
+    "img": "assets/products/dune-belle-corset/dune-belle-corset-main.jpeg"
+  },
+  {
+    "id": "fixed-6",
+    "slug": "lotus-cuff-shirt",
+    "name": "Lotus Cuff Shirt",
+    "description": "A sky-blue striped shirt made from handwoven cotton, featuring a classic collar, button-down front, voluminous sleeves, and unique petal-shaped cuffs.",
+    "colour": "Sky Blue",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately.",
+    "category": "Indian Collection",
+    "tag": "Handwoven Cotton · Petal Cuffs",
+    "img": "assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg"
+  },
+  {
+    "id": "fixed-7",
+    "slug": "thar-ki-phoolwari",
+    "name": "Thar Ki Phoolwari",
+    "description": "A pink floral-print top featuring a square neckline, broad shoulder straps, a fitted silhouette, and adjustable side-string detailing.",
+    "colour": "Pink Floral",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 1, "S": 1, "M": 1, "L": 1 },
+    "price": 2000,
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately.",
+    "category": "New Arrival Collection",
+    "tag": "Handwoven Cotton · Side-String Top",
+    "img": "assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg"
+  },
+  {
+    "id": "fixed-8",
+    "slug": "madhuban-side-string-top",
+    "name": "Madhuban Side-String Top",
+    "description": "A handwoven cotton top featuring a square neckline, broad shoulder straps, a playful multicolour print, and adjustable side-string detailing.",
+    "colour": "Multicolour",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Handwoven cotton",
+    "care": "Gentle hand wash separately.",
+    "category": "Indian Collection",
+    "tag": "Handwoven Cotton · Side-String Top",
+    "img": "assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg"
+  },
+  {
+    "id": "fixed-9",
+    "slug": "maharani-fusion-top",
+    "name": "Maharani Fusion Top",
+    "description": "A two-piece fusion top featuring a black-and-red Bandhani-print top with a V-neckline and flared sleeves, paired with a maroon handwoven cotton corset.",
+    "colour": "Black, Red and Maroon",
+    "sizes": ["XS", "S", "M", "L"],
+    "stock": { "XS": 5, "S": 5, "M": 5, "L": 5 },
+    "price": "COMING SOON",
+    "fabric": "Bandhani-print top with handwoven cotton corset",
+    "care": "DRY CLEAN ONLY.",
+    "category": "Indian Collection",
+    "tag": "Bandhani Print · Two-Piece Fusion Top",
+    "img": "assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg"
+  }
+];
+
+let products = [...fixedProducts];
+let cart=[];
+let wishlist=[];
+let userProfile = { name: "", phone: "", email: "", address: "" };
+const STORE_BASE_CART="marushobha_cart_v1_", STORE_BASE_WISH="marushobha_wishlist_v1_";
+let activeCustomerUid = null;
+function cartStoreKey(){return activeCustomerUid?STORE_BASE_CART+activeCustomerUid:null;}
+function wishStoreKey(){return activeCustomerUid?STORE_BASE_WISH+activeCustomerUid:null;}
+function readCustomerList(key){try{const v=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(v)?v:[]}catch{return[]}}
+function saveCustomerLists(){if(!activeCustomerUid)return;localStorage.setItem(cartStoreKey(),JSON.stringify(cart));localStorage.setItem(wishStoreKey(),JSON.stringify(wishlist));}
+function requireCustomerSignIn(){if(isLoggedIn&&activeCustomerUid)return true;setAuthMode("signin");document.getElementById("authModal").classList.add("open");showStatus("Please sign in with Google or your mobile number to use your bag and wishlist.");return false;}
+
+
+const fmt=n=>typeof n==="number"?"₹"+n.toLocaleString("en-IN"):(n||"COMING SOON");
+const hasVisiblePrice=p=>typeof p?.price==="number" && Number.isFinite(p.price) && p.price>0;
+function productIsOutOfStock(p){
+  const status=String(p?.status||p?.availability||p?.stockStatus||"").toLowerCase();
+  if(status.includes("out of stock")||status==="sold out"||status==="unavailable") return true;
+  if(typeof p?.stockQuantity==="number" && p.stockQuantity<=0) return true;
+  if(typeof p?.inventory==="number" && p.inventory<=0) return true;
+  if(p?.stock && typeof p.stock==="object") { const values=Object.values(p.stock).filter(v=>typeof v==="number"); if(values.length && values.every(v=>v<=0)) return true; }
+  return false;
+}
+const grid=document.getElementById("productGrid");
+
+function renderProducts(){
+  let list=[...products];
+  const cat=document.getElementById("categoryFilter").value;
+  const size=document.getElementById("sizeFilter").value;
+  const colour=document.getElementById("colourFilter").value;
+  const q=document.getElementById("searchInput").value.toLowerCase();
+  const sort=document.getElementById("sortFilter").value;
+
+  if(cat) list=list.filter(p=>(p.collection || p.category) === cat);
+  if(size) list=list.filter(p=>p.sizes?.includes(size));
+  if(colour) list=list.filter(p=>p.colour === colour);
+  if(q) list=list.filter(p=>(p.name + " " + (p.collection || p.category) + " " + (p.tag || "")).toLowerCase().includes(q));
+  if(sort==="new") list.sort((a,b)=>(b.id || 0)-(a.id || 0));
+
+  document.getElementById("productCount").textContent=`${list.length} product${list.length===1?"":"s"} shown`;
+  
+  grid.innerHTML=list.length?list.map(p=>{
+    const isWished = wishlist.some(w => (typeof w==="object" ? String(w.productId||w.id||w.slug)===String(p.id) || String(w.name||"").toLowerCase()===String(p.name).toLowerCase() : String(w)===String(p.id)));
+    const displayImg = p.img || p.imageUrl || "";
+    return `<article class="product">
+      <div class="product-image">
+        <a class="product-image-link" href="product.html?slug=${encodeURIComponent(p.slug || p.name)}" aria-label="View ${p.name} details"><img loading="lazy" src="${displayImg}" alt="${p.name}"></a>
+        <button class="wish" aria-label="${hasVisiblePrice(p)?'Add '+p.name+' to wishlist':'Wishlist unavailable until price is announced for '+p.name}" data-wish="${p.id}" ${!hasVisiblePrice(p)?'disabled title="Coming soon products cannot be wishlisted"':''} style="color:${isWished?'#9b3d45':'inherit'};${!hasVisiblePrice(p)?'opacity:.4;cursor:not-allowed;':''}">${isWished?'♥':'♡'}</button>
+      </div>
+      <div class="product-info">
+        <h3>${p.name}</h3>
+        <p>${p.tag || p.description || ''}</p>
+        <div class="product-bottom">
+          <span class="price">${fmt(p.price)}</span>
+          <button class="add" data-view="${p.slug || p.name}">View Details</button>
+        </div>
+      </div>
+    </article>`;
+  }).join(""):`<p>No products match these filters.</p>`;
+  
+  grid.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",()=>{location.href=`product.html?slug=${encodeURIComponent(b.dataset.view)}`;}));
+  grid.querySelectorAll("[data-wish]").forEach(b=>b.addEventListener("click",e=>{
+    e.stopPropagation();
+    toggleWishlist(b.dataset.wish);
+  }));
+}
+
+function toggleWishlist(id) {
+  const target=products.find(x=>String(x.id)===String(id));
+  if(target && !hasVisiblePrice(target)){alert("This product is Coming Soon. Wishlist will be available when its price is announced.");return;}
+  if(!requireCustomerSignIn()) return;
+  const index = wishlist.findIndex(w => String(typeof w==="object"?(w.productId||w.id||w.slug):w)===String(id));
+  if(index > -1) wishlist.splice(index,1);
+  else {
+    const p=products.find(x=>String(x.id)===String(id));
+    wishlist.push(p ? {id:p.id,productId:p.id,slug:p.slug||String(p.name||"").toLowerCase().replace(/[^a-z0-9]+/g,"-"),name:p.name,image:p.img||p.imageUrl||"",img:p.img||p.imageUrl||"",price:p.price,displayPrice:fmt(p.price)} : id);
+  }
+  saveCustomerLists();
+  document.getElementById("wishlistCount").textContent = wishlist.length;
+  renderProducts(); renderWishlist();
+}
+
+function renderWishlist() {
+  const el = document.getElementById("wishlistItems");
+  document.getElementById("wishlistCount").textContent = wishlist.length;
+  el.innerHTML = wishlist.length ? wishlist.map(item => {
+    const p = typeof item==="object" ? (products.find(x=>String(x.id)===String(item.productId||item.id)||String(x.name||"").toLowerCase()===String(item.name||"").toLowerCase())||item) : products.find(x=>String(x.id)===String(item));
+    if (!p) return "";
+    const displayImg = p.img || p.image || p.imageUrl || "";
+    return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name||"Product"}</strong><p>${fmt(p.price ?? p.displayPrice)}</p><button class="add" data-wish-view="${p.id||p.productId||item}">View Details</button><button class="add" data-wish-remove="${p.id||p.productId||item}" style="margin-left:5px">Remove</button></div></div>`;
+  }).join("") : `<p>Your wishlist is empty.</p>`;
+  el.querySelectorAll("[data-wish-view]").forEach(b=>b.addEventListener("click",()=>{document.getElementById("wishlistDrawer").classList.remove("open");openProduct(b.dataset.wishView);}));
+  el.querySelectorAll("[data-wish-remove]").forEach(b=>b.addEventListener("click",()=>toggleWishlist(b.dataset.wishRemove)));
+}
+
+["categoryFilter","sizeFilter","colourFilter","sortFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderProducts));
+document.getElementById("searchInput").addEventListener("input",renderProducts);
+document.getElementById("searchFocus").addEventListener("click",()=>{document.getElementById("searchInput").focus();document.getElementById("shop").scrollIntoView()});
+
+function openProduct(id){
+ const p=products.find(x=>x.id == id);if(!p)return;
+ 
+ const stock = p.stock || { XS: 5, S: 5, M: 5, L: 5 };
+ const sizes = ["XS", "S", "M", "L"];
+
+ let sizeOptionsHtml = `<div style="margin:10px 0;"><label for="modalSizeSelect"><strong>Select Size</strong></label><select id="modalSizeSelect" class="field" style="margin-top:5px;">`;
+ let allSoldOut = true;
+ sizes.forEach(s => {
+   const qty = stock[s] !== undefined ? stock[s] : 0;
+   if(qty > 0) {
+     allSoldOut = false;
+     sizeOptionsHtml += `<option value="${s}">${s} (${qty} left)</option>`;
+   } else {
+     sizeOptionsHtml += `<option value="${s}" disabled style="color:#aaa;">${s} - Out of Stock</option>`;
+   }
+ });
+ sizeOptionsHtml += `</select></div><div style="margin:10px 0;"><label for="modalQuantity"><strong>Quantity</strong></label><input id="modalQuantity" class="field" type="number" min="1" max="99" value="1" style="width:100%;margin-top:5px"></div>`;
+
+ const comingSoon = !hasVisiblePrice(p);
+ const outOfStock = allSoldOut || productIsOutOfStock(p);
+ let actionBtnHtml = comingSoon
+   ? `<p style="margin-top:12px;color:#8b4a30;font-weight:600">Coming Soon — shopping features are unavailable until the price is announced.</p><div style="display:flex;gap:10px;margin-top:10px"><button class="btn" style="flex:1;opacity:.45;cursor:not-allowed" disabled>Add to Bag</button><button class="add" style="flex:1;opacity:.45;cursor:not-allowed" disabled>Add to Wishlist</button></div>`
+   : `<div style="display:flex;gap:10px;margin-top:10px"><button class="btn" style="flex:1" id="modalAddToCart" ${outOfStock?'disabled title="Out of stock"':''}>${outOfStock?'Out of Stock':'Add to Bag'}</button><button class="add" style="flex:1" id="modalAddToWishlist">${wishlist.some(w=>String(typeof w==="object"?(w.productId||w.id||w.slug):w)===String(p.id))?'Remove from Wishlist':'Add to Wishlist'}</button></div>`;
+
+ const displayImg = p.img || p.imageUrl || "";
+
+ document.getElementById("modalContent").innerHTML=`<div class="modal-body"><div><img id="modalHeroImage" src="${displayImg}" alt="${p.name}" style="width:100%;aspect-ratio:3/4;object-fit:cover"></div><div><div class="eyebrow">${p.collection || p.category || "Collection"}</div><h2>${p.name}</h2><p class="price">${fmt(p.price)}</p><p>${p.description}</p><p><strong>Fabric</strong><br>${p.fabric || 'Handwoven cotton'}</p>${sizeOptionsHtml}<p><strong>Care instructions</strong><br>${p.care || 'Gentle hand wash.'}</p>${actionBtnHtml}</div></div>`;
+ 
+ const addBtn = document.getElementById("modalAddToCart");
+ if(addBtn) {
+   addBtn.addEventListener("click", () => {
+     const selectedSize = document.getElementById("modalSizeSelect").value;
+     addToCart(p.id, selectedSize, Math.max(1,Math.min(99,parseInt(document.getElementById("modalQuantity").value||"1",10)||1)));
+     document.getElementById("productModal").classList.remove("open");
+     openCart();
+   });
+ }
+
+ const wishBtn = document.getElementById("modalAddToWishlist");
+ if(wishBtn) {
+   wishBtn.addEventListener("click", () => {
+     toggleWishlist(p.id);
+     openProduct(p.id);
+   });
+ }
+
+ document.getElementById("productModal").classList.add("open");
+}
+
+function addToCart(id,size,quantity=1){
+  const productToAdd=products.find(x=>String(x.id)===String(id));
+  if(!productToAdd || !hasVisiblePrice(productToAdd)){alert("This product is Coming Soon. Add to Bag is available only after a price is displayed.");return;}
+  if(productIsOutOfStock(productToAdd) || (productToAdd.stock && Number(productToAdd.stock[size]||0)<=0)){alert("This product/size is out of stock and cannot be added to the bag.");return;}
+  if(!requireCustomerSignIn()) return;
+  const existing=cart.find(x=>String(x.id||x.productId)===String(id)&&x.size===size);
+  if(existing){existing.qty=Math.max(1,Number(existing.qty||existing.quantity)||1)+quantity;existing.quantity=existing.qty;}
+  else {const p=products.find(x=>String(x.id)===String(id));if(p)cart.push({id:p.id,productId:p.id,name:p.name,slug:p.slug||String(p.name||"").toLowerCase().replace(/[^a-z0-9]+/g,"-"),image:p.img||p.imageUrl||"",img:p.img||p.imageUrl||"",price:typeof p.price==="number"?p.price:null,displayPrice:fmt(p.price),size,qty:quantity,quantity:quantity});}
+  saveCustomerLists(); renderCart();
+}
+
+function renderCart(){
+ const qtyOf=x=>Math.max(1,Number(x.qty||x.quantity)||1);
+ document.getElementById("cartCount").textContent=cart.reduce((n,x)=>n+qtyOf(x),0);
+ document.getElementById("cartTotal").textContent=fmt(cart.reduce((n,x)=>{const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;const price=typeof p.price==="number"?p.price:(Number(x.price)||0);return n+price*qtyOf(x);},0));
+ const el=document.getElementById("cartItems");
+ el.innerHTML=cart.length?cart.map((x,i)=>{
+   const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;
+   const displayImg=p.img||p.image||p.imageUrl||"",qty=qtyOf(x),price=typeof p.price==="number"?p.price:(Number(x.price)||0);
+   return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name||"Product"}</strong><p>Size: ${x.size||"Not selected"}</p><p>${fmt(price)} × ${qty}</p><div style="display:flex;align-items:center;gap:8px;margin:7px 0"><button type="button" class="add" data-qty-minus="${i}" aria-label="Decrease quantity">−</button><strong>${qty}</strong><button type="button" class="add" data-qty-plus="${i}" aria-label="Increase quantity">+</button></div><button class="add" data-remove="${i}">Remove</button></div><div>${fmt(price*qty)}</div></div>`;
+ }).join(""):`<p>Your shopping bag is empty.</p>`;
+ el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{cart.splice(+b.dataset.remove,1);saveCustomerLists();renderCart();}));
+ el.querySelectorAll("[data-qty-minus]").forEach(b=>b.addEventListener("click",()=>changeCartQty(+b.dataset.qtyMinus,-1)));
+ el.querySelectorAll("[data-qty-plus]").forEach(b=>b.addEventListener("click",()=>changeCartQty(+b.dataset.qtyPlus,1)));
+}
+
+function changeCartQty(index,delta){const item=cart[index];if(!item)return;const qty=Math.max(1,Math.min(99,Math.max(1,Number(item.qty||item.quantity)||1)+delta));item.qty=qty;item.quantity=qty;saveCustomerLists();renderCart();}
+function renderCheckoutOrderSummary(){const el=document.getElementById("checkoutOrderSummary");if(!el)return;el.innerHTML=cart.length?cart.map((x,i)=>{const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;const qty=Math.max(1,Number(x.qty||x.quantity)||1),price=typeof p.price==="number"?p.price:(Number(x.price)||0);return `<div style="padding:8px 0;border-bottom:1px solid var(--line)"><strong>${p.name||"Product"}</strong><div style="font-size:.85rem;margin:4px 0">Size: ${x.size||"Not selected"} · ${fmt(price)} each</div><div style="display:flex;align-items:center;gap:8px"><button type="button" class="add" data-checkout-minus="${i}">−</button><strong>Qty: ${qty}</strong><button type="button" class="add" data-checkout-plus="${i}">+</button><span style="margin-left:auto">${fmt(price*qty)}</span></div></div>`}).join("")+`<p style="text-align:right"><strong>Total: ${fmt(cart.reduce((n,x)=>{const p=products.find(prod=>String(prod.id)===String(x.id||x.productId))||x;return n+(typeof p.price==="number"?p.price:(Number(x.price)||0))*Math.max(1,Number(x.qty||x.quantity)||1)},0))}</strong></p>`:`<p>Your bag is empty.</p>`;el.querySelectorAll("[data-checkout-minus]").forEach(b=>b.addEventListener("click",()=>{changeCartQty(+b.dataset.checkoutMinus,-1);renderCheckoutOrderSummary()}));el.querySelectorAll("[data-checkout-plus]").forEach(b=>b.addEventListener("click",()=>{changeCartQty(+b.dataset.checkoutPlus,1);renderCheckoutOrderSummary()}));}
+function openCart(){document.getElementById("cartDrawer").classList.add("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","false")}
+function openWishlist(){document.getElementById("wishlistDrawer").classList.add("open");document.getElementById("wishlistDrawer").setAttribute("aria-hidden","false")}
+
+document.getElementById("cartOpen").addEventListener("click",openCart);
+document.getElementById("cartClose").addEventListener("click",()=>{document.getElementById("cartDrawer").classList.remove("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","true")});
+document.getElementById("wishlistOpen").addEventListener("click",openWishlist);
+document.getElementById("wishlistClose").addEventListener("click",()=>{document.getElementById("wishlistDrawer").classList.remove("open");document.getElementById("wishlistDrawer").setAttribute("aria-hidden","true")});
+
+document.getElementById("modalClose").addEventListener("click",()=>document.getElementById("productModal").classList.remove("open"));
+document.getElementById("productModal").classList.remove("open");
+document.getElementById("productModal").addEventListener("click",e=>{if(e.target.id==="productModal")e.currentTarget.classList.remove("open")});
+
+document.getElementById("checkoutBtn").addEventListener("click",()=>{
+  if(cart.length === 0) {
+    alert("Your shopping bag is empty.");
+    return;
+  }
+  
+  if (userProfile.name) {
+    if(document.getElementById("shipName")) document.getElementById("shipName").value = userProfile.name;
+    if(document.getElementById("shipPhone")) document.getElementById("shipPhone").value = userProfile.phone;
+    if(document.getElementById("shipEmail")) document.getElementById("shipEmail").value = userProfile.email;
+    if(document.getElementById("shipAddress")) document.getElementById("shipAddress").value = userProfile.address;
+  }
+
+  document.getElementById("cartDrawer").classList.remove("open");
+  renderCheckoutOrderSummary();
+  document.getElementById("checkoutModal").classList.add("open");
+});
+document.getElementById("checkoutClose").addEventListener("click",()=>document.getElementById("checkoutModal").classList.remove("open"));
+
+// Razorpay Checkout, Order Saving & Automatic Stock Deduction
+document.getElementById("shippingForm").addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const name = document.getElementById("shipName").value.trim();
+  const phone = document.getElementById("shipPhone").value.trim();
+  const email = document.getElementById("shipEmail").value.trim();
+  const address = document.getElementById("shipAddress").value.trim();
+
+  const totalAmount = cart.reduce((n,x)=>{
+    const p=products.find(prod=>prod.id == (x.id||x.productId));
+    return n+(typeof p?.price==="number"?p.price*Math.max(1,Number(x.qty||x.quantity)||1):0);
+  },0);
+
+  document.getElementById("checkoutModal").classList.remove("open");
+
+  const options = {
+    "key": "YOUR_RAZORPAY_KEY_ID",
+    "amount": totalAmount * 100,
+    "currency": "INR",
+    "name": "Marushobha",
+    "description": "Order Payment",
+    "handler": async function (response){
+      alert("Payment Successful! Payment ID: " + response.razorpay_payment_id);
+      
+      try {
+        const dbMod = await import("https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js");
+        if (window.firestoreDb) {
+          await dbMod.addDoc(dbMod.collection(window.firestoreDb, "orders"), {
+            customerName: name,
+            phone: phone,
+            email: email,
+            address: address,
+            items: cart.map(i => {
+              const p = products.find(prod => prod.id == i.id);
+              return { name: p ? p.name : (i.name||"Product"), size: i.size, qty: Math.max(1,Number(i.qty||i.quantity)||1), price: p?.price || i.price || 0 };
+            }),
+            totalAmount: totalAmount,
+            status: "Pending Approval",
+            createdAt: dbMod.serverTimestamp()
+          });
+
+          for (const item of cart) {
+            let docId = String(item.id);
+            if (docId.startsWith("fixed-")) {
+              docId = docId.replace("fixed-", "prod_");
+            }
+            const productRef = dbMod.doc(window.firestoreDb, "products", docId);
+            const productSnap = await dbMod.getDoc(productRef);
+            if (productSnap.exists()) {
+              const pData = productSnap.data();
+              let stock = pData.stock || { XS: 5, S: 5, M: 5, L: 5 };
+              if (stock[item.size] !== undefined) {
+                stock[item.size] = Math.max(0, stock[item.size] - Math.max(1,Number(item.qty||item.quantity)||1));
+                await dbMod.updateDoc(productRef, { stock: stock });
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Error saving order or updating stock:", err);
+      }
+
+      cart = [];
+      renderCart();
+    },
+    "prefill": { "name": name, "email": email, "contact": phone },
+    "notes": { "shipping_address": address },
+    "theme": { "color": "#49382d" }
+  };
+  const rzp1 = new Razorpay(options);
+  rzp1.open();
+});
+
+document.getElementById("menuToggle").addEventListener("click",()=>{const nav=document.getElementById("mobileNav"),btn=document.getElementById("menuToggle"),open=nav.classList.toggle("open");btn.setAttribute("aria-expanded",String(open));btn.textContent=open?"×":"☰"});
+document.querySelectorAll("#mobileNav a").forEach(a=>a.addEventListener("click",()=>{document.getElementById("mobileNav").classList.remove("open");document.getElementById("menuToggle").setAttribute("aria-expanded","false");document.getElementById("menuToggle").textContent="☰"}));
+
+window.authMode="signin";
+let authMode="signin";
+function setAuthMode(mode){
+  authMode=mode;window.authMode=mode;const signup=mode==="signup";
+  document.getElementById("authTitle").textContent=signup?"Create Your Account":"Welcome Back";
+  document.getElementById("authSubtitle").textContent=signup?"Join Marushobha for a more personal shopping experience.":"Sign in to continue your style journey.";
+  document.getElementById("authDetailsWrap").classList.toggle("hidden",!signup);
+  document.getElementById("authFullName").required=signup;
+  document.getElementById("authEmailAddr").required=signup;
+  document.getElementById("authDeliveryAddr").required=signup;
+  document.getElementById("signinTab").classList.toggle("active",!signup);
+  document.getElementById("signupTab").classList.toggle("active",signup);
+  document.getElementById("mobileContinue").textContent=signup?"Send Sign-up OTP":"Send Sign-in OTP";
+  document.getElementById("googleLabel").textContent=signup?"Sign Up with Google":"Continue with Google";
+  document.getElementById("authStatus").style.display="none";
+  document.getElementById("otpWrap").classList.add("hidden");
+  document.getElementById("authOtp").required=false;
+  document.getElementById("authPhone").readOnly=false;
+  document.getElementById("changePhone").classList.add("hidden");
+}
+
+let isLoggedIn = false;
+
+document.getElementById("accountOpen").addEventListener("click", () => {
+  if (isLoggedIn) {
+    document.getElementById("profileModal").classList.add("open");
+  } else {
+    setAuthMode("signin");
+    document.getElementById("authModal").classList.add("open");
+    document.getElementById("authPhone").focus();
+  }
+});
+
+document.getElementById("accountSignup").addEventListener("click", () => {
+  if (isLoggedIn) return;
+  setAuthMode("signup");
+  document.getElementById("authModal").classList.add("open");
+  document.getElementById("authFullName").focus();
+});
+
+document.getElementById("accountSignin").addEventListener("click", () => {
+  if (isLoggedIn) return;
+  setAuthMode("signin");
+  document.getElementById("authModal").classList.add("open");
+  document.getElementById("authPhone").focus();
+});
+
+document.getElementById("profileClose").addEventListener("click", () => document.getElementById("profileModal").classList.remove("open"));
+document.getElementById("profileModal").addEventListener("click", e => { if(e.target.id === "profileModal") e.currentTarget.classList.remove("open"); });
+
+function showDashboardTab(tabName) {
+  document.querySelectorAll("[data-dashboard-tab]").forEach(button => button.classList.toggle("active", button.dataset.dashboardTab === tabName));
+  document.querySelectorAll("[data-dashboard-panel]").forEach(panel => panel.classList.toggle("active", panel.dataset.dashboardPanel === tabName));
+}
+document.querySelectorAll("[data-dashboard-tab]").forEach(button => button.addEventListener("click", () => showDashboardTab(button.dataset.dashboardTab)));
+document.querySelectorAll("[data-dashboard-go]").forEach(button => button.addEventListener("click", () => showDashboardTab(button.dataset.dashboardGo)));
+document.getElementById("dashboardPolicyLink").addEventListener("click", () => document.getElementById("profileModal").classList.remove("open"));
+
+document.getElementById("profileSignOutBtn").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    userProfile = { name: "", phone: "", email: "", address: "" };
+    document.getElementById("profileModal").classList.remove("open");
+    alert("You have signed out successfully.");
+  } catch (error) {
+    console.error("Firebase sign-out error:", error);
+    alert("Unable to sign out right now. Please try again.");
+  }
+});
+
+function updateAccountIconState() {
+  const accountButton = document.getElementById("accountOpen");
+  const accountSection = document.getElementById("account");
+  // Only show the bottom Sign In / Create Account section to signed-out visitors.
+  if (accountSection) accountSection.style.display = isLoggedIn ? "none" : "";
+  if (isLoggedIn) {
+    accountButton.title = "My Dashboard";
+    accountButton.setAttribute("aria-label", "Open My Dashboard");
+    accountButton.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle><polyline points="16 11 18 13 22 9" stroke="#25d366" stroke-width="2.5"/></svg>`;
+  } else {
+    accountButton.title = "Sign In / Account";
+    accountButton.setAttribute("aria-label", "Sign in or create account");
+    accountButton.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`;
+  }
+}
+
+document.getElementById("signinTab").addEventListener("click", () => setAuthMode("signin"));
+document.getElementById("signupTab").addEventListener("click", () => setAuthMode("signup"));
+
+document.getElementById("authClose").addEventListener("click", (e) => {
+  e.preventDefault();
+  document.getElementById("authModal").classList.remove("open");
+});
+
+document.getElementById("authModal").addEventListener("click", (e) => {
+  if (e.target.id === "authModal") {
+    document.getElementById("authModal").classList.remove("open");
+  }
+});
+
+document.getElementById("changePhone").addEventListener("click",()=>{
+  document.getElementById("otpWrap").classList.add("hidden");
+  document.getElementById("authOtp").required=false;
+  document.getElementById("authPhone").readOnly=false;
+  document.getElementById("mobileContinue").textContent=authMode==="signup"?"Send Sign-up OTP":"Send Sign-in OTP";
+  document.getElementById("changePhone").classList.add("hidden");
+  document.getElementById("authStatus").style.display="none";
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+renderProducts(); renderCart(); renderWishlist();
+</script>
+
+<!-- Firebase Firestore & Authentication Integration -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber, updateProfile, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { getFirestore, collection, onSnapshot, query, orderBy, doc, getDoc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
+  authDomain: "marushobha-1e31f.firebaseapp.com",
+  projectId: "marushobha-1e31f",
+  storageBucket: "marushobha-1e31f.firebasestorage.app",
+  messagingSenderId: "997754535596",
+  appId: "1:997754535596:web:aafc83bad8c3d413cf6909",
+  measurementId: "G-DLWGD0ZDQ1"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+window.firestoreDb = db; 
+
+const provider = new GoogleAuthProvider();
+const statusBox = document.getElementById("authStatus");
+let confirmationResult = null;
+let recaptchaVerifier = null;
+
+function showStatus(message, isError=false) {
+  statusBox.textContent = message;
+  statusBox.style.display = "block";
+  statusBox.style.background = isError ? "#f7e6e3" : "#eee5da";
+  statusBox.style.color = isError ? "#8a2e24" : "var(--brown)";
+}
+
+document.getElementById("changePhone").addEventListener("click", () => { confirmationResult = null; });
+document.getElementById("signinTab").addEventListener("click", () => { confirmationResult = null; });
+document.getElementById("signupTab").addEventListener("click", () => { confirmationResult = null; });
+
+function cleanPhone(raw) {
+  let phone = raw.replace(/[\s()-]/g, "");
+  if (/^\d{10}$/.test(phone)) phone = "+91" + phone;
+  if (!/^\+[1-9]\d{7,14}$/.test(phone)) throw new Error("Enter a valid mobile number with country code, e.g. +919876543210.");
+  return phone;
+}
+
+async function getRecaptchaVerifier() {
+  if (!recaptchaVerifier) {
+    recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+      size: "normal",
+      callback: () => {},
+      "expired-callback": () => showStatus("reCAPTCHA expired. Please try again.", true)
+    });
+    await recaptchaVerifier.render();
+  }
+  return recaptchaVerifier;
+}
+
+// Real-time Firestore Product Sync & Admin Edits Merge
+const q = query(collection(db, "products"), orderBy("name"));
+onSnapshot(q, (snapshot) => {
+  let dbProducts = [];
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    const resolvedImage = data.img || data.imageUrl || (data.images?.[0]?.src) || "";
+
+    dbProducts.push({
+      id: docSnap.id,
+      name: data.name || "Untitled Product",
+      description: data.description || "",
+      colour: data.colour || "Not specified",
+      sizes: Array.isArray(data.sizes) ? data.sizes : ["XS", "S", "M", "L"],
+      stock: data.stock || { XS: 5, S: 5, M: 5, L: 5 },
+      price: data.price !== undefined && data.price !== null && data.price !== "" ? (isNaN(data.price) ? data.price : Number(data.price)) : undefined,
+      fabric: data.fabric || "Handwoven cotton",
+      care: data.care || "Gentle hand wash.",
+      collection: data.collection || data.category || "New Arrival Collection",
+      category: data.collection || data.category || "New Arrival Collection",
+      tag: data.tag || "Handcrafted",
+      img: resolvedImage,
+      images: resolvedImage ? [{ src: resolvedImage, alt: data.name }] : []
+    });
+  });
+
+  let mergedProducts = fixedProducts.map(fp => {
+    const found = dbProducts.find(dp => dp.name.trim().toLowerCase() === fp.name.trim().toLowerCase() || dp.id === fp.id.replace("fixed-", "prod_"));
+    if (!found) return fp;
+    const foundPriceIsSet = found.price !== undefined && found.price !== null && found.price !== "";
+    return { ...fp, ...found, price: foundPriceIsSet ? found.price : fp.price, slug: fp.slug, img: found.img || fp.img };
+  });
+
+  dbProducts.forEach(dp => {
+    if (!mergedProducts.some(p => p.name.trim().toLowerCase() === dp.name.trim().toLowerCase() || p.id === dp.id)) {
+      mergedProducts.push(dp);
+    }
+  });
+
+  window.products = mergedProducts;
+  products = window.products;
+  renderProducts();
+}, (error) => {
+  console.error("Error syncing Firestore products:", error);
+});
+
+// Phone Authentication Submit Handler
+document.getElementById("authForm").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const button = document.getElementById("mobileContinue");
+  const phoneInput = document.getElementById("authPhone");
+  const otpInput = document.getElementById("authOtp");
+  const otpWrap = document.getElementById("otpWrap");
+  const changePhone = document.getElementById("changePhone");
+  button.disabled = true;
+  try {
+    if (!confirmationResult) {
+      const phoneNumber = cleanPhone(phoneInput.value.trim());
+      const verifier = await getRecaptchaVerifier();
+      confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, verifier);
+      phoneInput.value = phoneNumber;
+      phoneInput.readOnly = true;
+      otpWrap.classList.remove("hidden");
+      otpInput.required = true;
+      otpInput.focus();
+      changePhone.classList.remove("hidden");
+      button.textContent = "Verify OTP";
+      showStatus("Verification code sent by SMS. Enter the code to continue.");
+    } else {
+      const result = await confirmationResult.confirm(otpInput.value.trim());
+      if (window.authMode === "signup") {
+        userProfile.name = document.getElementById("authFullName").value.trim();
+        userProfile.email = document.getElementById("authEmailAddr").value.trim();
+        userProfile.address = document.getElementById("authDeliveryAddr").value.trim();
+        if (userProfile.name && result.user.displayName !== userProfile.name) await updateProfile(result.user, { displayName: userProfile.name });
+      } else {
+        userProfile.name = result.user.displayName || "Valued Customer";
+        userProfile.email = result.user.email || "Not Provided";
+        userProfile.address = "Not Provided";
+      }
+      userProfile.phone = result.user.phoneNumber || phoneInput.value;
+
+      if(document.getElementById("shipName")) document.getElementById("shipName").value = userProfile.name;
+      if(document.getElementById("shipPhone")) document.getElementById("shipPhone").value = userProfile.phone;
+      if(document.getElementById("shipEmail")) document.getElementById("shipEmail").value = userProfile.email;
+      if(document.getElementById("shipAddress")) document.getElementById("shipAddress").value = userProfile.address;
+
+      confirmationResult = null;
+      isLoggedIn = true;
+      updateAccountIconState();
+      updateProfileDisplay();
+
+      showStatus("You're signed in to Marushobha successfully.");
+      document.getElementById("authModal").classList.remove("open");
+    }
+  } catch (error) {
+    console.error("Firebase phone authentication error:", error);
+    const messages = {
+      "auth/invalid-phone-number": "That mobile number is invalid. Include country code +91.",
+      "auth/too-many-requests": "Too many attempts. Please try again later.",
+      "auth/operation-not-allowed": "Phone sign-in is not enabled in Firebase.",
+      "auth/captcha-check-failed": "reCAPTCHA verification failed. Please try again.",
+      "auth/invalid-verification-code": "Incorrect OTP. Check SMS and try again.",
+      "auth/code-expired": "OTP has expired. Request a new code."
+    };
+    showStatus(messages[error.code] || error.message || "Unable to complete phone sign-in.", true);
+    if (error.code && error.code.startsWith("auth/captcha")) {
+      try { if (recaptchaVerifier) await recaptchaVerifier.clear(); } catch (_) {}
+      recaptchaVerifier = null;
+      document.getElementById("recaptcha-container").innerHTML = "";
+    }
+  } finally {
+    button.disabled = false;
+  }
+});
+
+// Google Sign-In Handler
+document.getElementById("googleAuth").addEventListener("click", async () => {
+  const button = document.getElementById("googleAuth");
+  button.disabled = true;
+  try {
+    const result = await signInWithPopup(auth, provider);
+    userProfile.name = result.user.displayName || "Valued Customer";
+    userProfile.email = result.user.email || "Not Provided";
+    userProfile.phone = result.user.phoneNumber || "Not Provided";
+    userProfile.address = "Not Provided";
+
+    if(document.getElementById("shipName")) document.getElementById("shipName").value = userProfile.name;
+    if(document.getElementById("shipEmail")) document.getElementById("shipEmail").value = userProfile.email;
+
+    isLoggedIn = true;
+    updateAccountIconState();
+    updateProfileDisplay();
+
+    showStatus("You're signed in to Marushobha with Google.");
+    document.getElementById("authModal").classList.remove("open");
+  } catch (error) {
+    console.error("Firebase Google authentication error:", error);
+    const messages = {
+      "auth/popup-closed-by-user": "Google sign-in window was closed.",
+      "auth/unauthorized-domain": "Domain not authorized in Firebase settings.",
+      "auth/operation-not-allowed": "Google sign-in is not enabled in Firebase."
+    };
+    showStatus(messages[error.code] || error.message || "Google sign-in could not be completed.", true);
+  } finally { button.disabled = false; }
+});
+
+const profileEditForm = document.getElementById("profileEditForm");
+const profileSaveStatus = document.getElementById("profileSaveStatus");
+function showProfileSaveStatus(message, isError=false) {
+  profileSaveStatus.textContent = message;
+  profileSaveStatus.style.display = "block";
+  profileSaveStatus.style.background = isError ? "#f7e6e3" : "#eee5da";
+  profileSaveStatus.style.color = isError ? "#8a2e24" : "var(--brown)";
+}
+function startProfileEditing() {
+  const currentUser = auth.currentUser;
+  if (!currentUser) { showProfileSaveStatus("Please sign in again to edit your profile.", true); return; }
+  document.getElementById("editProfileName").value = userProfile.name === "Valued Customer" ? "" : (userProfile.name || "");
+  document.getElementById("editProfilePhone").value = userProfile.phone === "Not Provided" ? "" : (userProfile.phone || "");
+  document.getElementById("editProfileEmail").value = currentUser.email || "";
+  document.getElementById("editProfileAddress").value = userProfile.address === "Not Provided" ? "" : (userProfile.address || "");
+  document.getElementById("profileReadView").classList.add("hidden");
+  profileEditForm.classList.remove("hidden");
+  profileSaveStatus.style.display = "none";
+}
+document.getElementById("editProfileBtn").addEventListener("click", startProfileEditing);
+document.getElementById("cancelProfileEditBtn").addEventListener("click", () => {
+  profileEditForm.classList.add("hidden");
+  document.getElementById("profileReadView").classList.remove("hidden");
+  profileSaveStatus.style.display = "none";
+});
+profileEditForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const currentUser = auth.currentUser;
+  const saveButton = document.getElementById("saveProfileBtn");
+  if (!currentUser) { showProfileSaveStatus("Your session has expired. Please sign in again.", true); return; }
+  const name = document.getElementById("editProfileName").value.trim();
+  const phone = document.getElementById("editProfilePhone").value.trim();
+  const address = document.getElementById("editProfileAddress").value.trim();
+  if (!name) { showProfileSaveStatus("Please enter your full name.", true); return; }
+  if (name.length > 100 || phone.length > 20 || address.length > 500) { showProfileSaveStatus("One or more fields exceed the allowed length.", true); return; }
+  saveButton.disabled = true;
+  saveButton.textContent = "Saving…";
+  try {
+    const profileData = { uid: currentUser.uid, name, contactPhone: phone, address, email: currentUser.email || "", updatedAt: serverTimestamp() };
+    await setDoc(doc(db, "customerProfiles", currentUser.uid), profileData, { merge: true });
+    userProfile.name = name;
+    userProfile.phone = phone || currentUser.phoneNumber || "Not Provided";
+    userProfile.email = currentUser.email || "Not Provided";
+    userProfile.address = address || "Not Provided";
+    if (currentUser.displayName !== name) {
+      try { await updateProfile(currentUser, { displayName: name }); } catch (profileError) { console.warn("Firebase Auth display name could not be updated; Firestore profile was saved.", profileError); }
+    }
+    updateProfileDisplay();
+    profileEditForm.classList.add("hidden");
+    document.getElementById("profileReadView").classList.remove("hidden");
+    showProfileSaveStatus("Your profile details have been saved.");
+    const shipName = document.getElementById("shipName"); if (shipName) shipName.value = name;
+    const shipPhone = document.getElementById("shipPhone"); if (shipPhone) shipPhone.value = userProfile.phone;
+    const shipEmail = document.getElementById("shipEmail"); if (shipEmail) shipEmail.value = userProfile.email;
+    const shipAddress = document.getElementById("shipAddress"); if (shipAddress) shipAddress.value = userProfile.address;
+  } catch (error) {
+    console.error("Customer profile save failed:", error);
+    showProfileSaveStatus("We could not save your details. Check your internet connection and Firebase Firestore security rules, then try again.", true);
+  } finally {
+    saveButton.disabled = false;
+    saveButton.textContent = "Save Changes";
+  }
+});
+
+async function loadCustomerProfile(user) {
+  try {
+    const profileSnap = await getDoc(doc(db, "customerProfiles", user.uid));
+    if (profileSnap.exists()) {
+      const saved = profileSnap.data();
+      userProfile.name = saved.name || user.displayName || user.email || "Valued Customer";
+      userProfile.phone = saved.contactPhone || user.phoneNumber || "Not Provided";
+      userProfile.email = user.email || "Not Provided";
+      userProfile.address = saved.address || "Not Provided";
+    } else {
+      userProfile.name = user.displayName || user.email || "Valued Customer";
+      userProfile.phone = user.phoneNumber || "Not Provided";
+      userProfile.email = user.email || "Not Provided";
+      userProfile.address = "Not Provided";
+    }
+    updateProfileDisplay();
+  } catch (error) {
+    console.error("Could not load customer profile:", error);
+    userProfile.name = user.displayName || user.email || "Valued Customer";
+    userProfile.phone = user.phoneNumber || "Not Provided";
+    userProfile.email = user.email || "Not Provided";
+    userProfile.address = "Not Provided";
+    updateProfileDisplay();
+  }
+}
+
+function updateProfileDisplay() {
+  document.getElementById("dashboardWelcomeName").textContent = userProfile.name ? `Welcome, ${userProfile.name}` : "Your Marushobha account";
+  document.getElementById("profileNameDisplay").textContent = userProfile.name || "Not Provided";
+  document.getElementById("profilePhoneDisplay").textContent = userProfile.phone || "Not Provided";
+  document.getElementById("profileEmailDisplay").textContent = userProfile.email || "Not Provided";
+  document.getElementById("profileAddressDisplay").textContent = userProfile.address || "Not Provided";
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    isLoggedIn = true;
+    activeCustomerUid=user.uid;
+    cart=readCustomerList(cartStoreKey()); wishlist=readCustomerList(wishStoreKey());
+    renderCart(); renderWishlist(); renderProducts();
+    userProfile.name = user.displayName || user.email || "Valued Customer";
+    userProfile.phone = user.phoneNumber || "Not Provided";
+    userProfile.email = user.email || "Not Provided";
+    userProfile.address = "Not Provided";
+    updateAccountIconState();
+    updateProfileDisplay();
+    await loadCustomerProfile(user);
+    const returnPage=new URLSearchParams(location.search).get("return");
+    if(new URLSearchParams(location.search).get("signin")==="1" && ["bag.html","wishlist.html"].includes(returnPage)){
+      location.replace(returnPage);
+    }
+  } else {
+    isLoggedIn = false; activeCustomerUid=null; cart=[]; wishlist=[];
+    document.getElementById("cartCount").textContent="0"; document.getElementById("wishlistCount").textContent="0";
+    renderCart(); renderWishlist(); renderProducts();
+    userProfile = { name: "", phone: "", email: "", address: "" };
+    updateAccountIconState();
+  }
+});
+</script>
+
+
+<!-- Formspree FAQ form handler: shows visible success/error feedback without leaving the page -->
+<script>
+(() => {
+  const form = document.getElementById("formspree-faq");
+  const button = document.getElementById("formspree-btn");
+  const status = document.getElementById("formspree-status");
+
+  if (!form || !button || !status) {
+    console.error("Marushobha FAQ form setup error: required form elements were not found.");
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const originalButtonText = button.textContent;
+    button.disabled = true;
+    button.textContent = "Sending...";
+    status.textContent = "Sending your question...";
+    status.style.color = "var(--brown)";
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+
+      let result = {};
+      try { result = await response.json(); } catch (_) { /* Non-JSON response */ }
+
+      if (!response.ok) {
+        const details = Array.isArray(result.errors)
+          ? result.errors.map((item) => item.message).filter(Boolean).join(" ")
+          : "";
+        throw new Error(details || `Form submission failed (HTTP ${response.status}). Check the Formspree endpoint and form settings.`);
+      }
+
+      status.textContent = "Thank you! Your question has been submitted successfully.";
+      status.style.color = "#2e5932";
+      form.reset();
+    } catch (error) {
+      console.error("Marushobha Formspree submission error:", error);
+      if (error instanceof TypeError) {
+        status.textContent = "We could not connect to the form service. Check your internet connection and the Formspree endpoint, then try again.";
+      } else {
+        status.textContent = error.message || "Your question could not be sent. Please try again.";
+      }
+      status.style.color = "#8a2e24";
+    } finally {
+      button.disabled = false;
+      button.textContent = originalButtonText || "Submit Question";
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -31,36 +31,126 @@
     <div class="zoom-hint">Pinch to zoom on mobile · Use + / − or mouse wheel</div>
   </div>
 </div>
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
+
+// Same Firebase project used by the Marushobha homepage.
+const firebaseConfig = {
+  apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
+  authDomain: "marushobha-1e31f.firebaseapp.com",
+  projectId: "marushobha-1e31f",
+  storageBucket: "marushobha-1e31f.firebasestorage.app",
+  messagingSenderId: "997754535596",
+  appId: "1:997754535596:web:aafc83bad8c3d413cf6909",
+  measurementId: "G-DLWGD0ZDQ1"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 const fmt = value => typeof value === "number" ? "₹" + value.toLocaleString("en-IN") : (value || "COMING SOON");
 const slugFromName = name => (name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 let product = null, images = [], activeIndex = 0, zoom = 1, panX = 0, panY = 0;
 const $ = id => document.getElementById(id);
 function esc(s){return String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function imagePath(value){
+  if(!value) return "";
+  const raw = String(value).trim();
+  if(!raw) return "";
+  if(/^(https?:|data:|blob:)/i.test(raw) || raw.startsWith("//")) return raw;
+  // Relative product asset paths should always resolve from the website root,
+  // not from the current page's URL.
+  return new URL(raw.replace(/^\.\//, "").replace(/^\//, ""), location.origin + "/").href;
+}
 function productImages(p){
-  const arr = Array.isArray(p.images) ? p.images.map(x=>typeof x==="string"?{src:x,alt:p.name}:{src:x.src||x.url||x.image,alt:x.alt||p.name}).filter(x=>x.src) : [];
-  if(!arr.length && (p.img||p.imageUrl)) arr.push({src:p.img||p.imageUrl,alt:p.name});
-  return arr;
+  const candidates = [];
+  const add = (value, alt) => {
+    if(!value) return;
+    if(typeof value === "string") candidates.push({src:imagePath(value),alt:alt||p.name});
+    else if(typeof value === "object") {
+      const src = value.src || value.url || value.imageUrl || value.image || value.img || value.downloadURL || value.downloadUrl;
+      if(src) candidates.push({src:imagePath(src),alt:value.alt||alt||p.name});
+    }
+  };
+  for (const field of [p.images, p.imageUrls, p.gallery, p.photos, p.productImages]) {
+    if(Array.isArray(field)) field.forEach(v=>add(v,p.name));
+    else if(field) add(field,p.name);
+  }
+  for (const field of [p.img, p.imageUrl, p.image, p.mainImage, p.photo, p.photoURL, p.imageURL, p.thumbnail]) add(field,p.name);
+  const seen = new Set();
+  return candidates.filter(item=>item.src && !seen.has(item.src) && seen.add(item.src));
+}
+function normalizeProduct(data, idFromDoc=""){
+  const p = {...data};
+  if(!p.id && idFromDoc) p.id = idFromDoc;
+  p.name = p.name || p.productName || p.title || "Untitled Product";
+  p.slug = p.slug || slugFromName(p.name);
+  p.description = p.description || p.productDescription || "";
+  p.category = p.category || p.collection || p.productCategory || "Marushobha Collection";
+  p.collection = p.collection || p.category;
+  p.colour = p.colour || p.color || p.colourName || p.colorName || "As shown";
+  p.fabric = p.fabric || p.material || p.fabricComposition || "Refer to product label";
+  p.care = p.care || p.careInstructions || "Follow the garment care label.";
+  p.tag = p.tag || p.designDetails || p.details || "";
+  if(typeof p.price === "string" && p.price.trim() !== "" && !Number.isNaN(Number(p.price))) p.price = Number(p.price);
+  return p;
 }
 async function loadProduct(){
   const params = new URLSearchParams(location.search);
-  const slug = params.get("slug") || "";
-  const id = params.get("id");
-  try{
+  const slug = (params.get("slug") || "").toLowerCase();
+  const id = params.get("id") || "";
+  const nameParam = (params.get("name") || "").toLowerCase();
+  let firestoreProducts = [];
+  let firestoreError = null;
+  try {
+    // Admin Dashboard products are stored in Firestore's `products` collection.
+    const snapshot = await getDocs(collection(db, "products"));
+    snapshot.forEach(docSnap => firestoreProducts.push(normalizeProduct(docSnap.data(), docSnap.id)));
+  } catch(err) {
+    firestoreError = err;
+    console.warn("Could not read Firestore products; checking products.json fallback.", err);
+  }
+  let staticProducts = [];
+  try {
     const response = await fetch("products.json", {cache:"no-store"});
-    if(!response.ok) throw new Error("products.json could not be loaded");
-    const list = await response.json();
-    product = list.find(p => (p.slug || slugFromName(p.name)) === slug || (id && String(p.id) === id));
-  }catch(err){
-    $("productRoot").innerHTML = `<div class="error"><strong>Could not load product data.</strong><p>Please open this website through your hosting URL, not directly as a file, and make sure products.json is uploaded beside product.html.</p><p>${esc(err.message)}</p></div>`;
+    if(response.ok) {
+      const data = await response.json();
+      if(Array.isArray(data)) staticProducts = data.map(p=>normalizeProduct(p));
+    }
+  } catch(err) {
+    console.warn("Could not load products.json fallback.", err);
+  }
+  // Prefer the Firestore version for products created/edited in Admin Dashboard.
+  const combined = [...firestoreProducts];
+  for(const sp of staticProducts){
+    const exists = combined.some(fp => fp.name.trim().toLowerCase() === sp.name.trim().toLowerCase() || (sp.slug && fp.slug === sp.slug));
+    if(!exists) combined.push(sp);
+  }
+  product = combined.find(p =>
+    (id && String(p.id) === id) ||
+    (slug && (String(p.slug || slugFromName(p.name)).toLowerCase() === slug || slugFromName(p.name) === slug)) ||
+    (nameParam && String(p.name).toLowerCase() === nameParam)
+  );
+  if(!product){
+    const message = firestoreError ? `Firestore could not be read (${firestoreError.code || firestoreError.message}). Check Firestore read rules for the products collection.` : "Check that the selected product exists in Firestore or products.json and that its name/slug matches the shop link.";
+    $("productRoot").innerHTML=`<div class="error"><strong>Product not found.</strong><p>Return to the shop and select the product again.</p><p>${esc(message)}</p><a class="back" href="index.html#shop">Back to Shop</a></div>`;
     return;
   }
-  if(!product){$("productRoot").innerHTML='<div class="error"><strong>Product not found.</strong><p>Return to the shop and select the product again.</p><a class="back" href="index.html#shop">Back to Shop</a></div>';return;}
   images = productImages(product);
-  if(!images.length){$("productRoot").innerHTML='<div class="error">No product images are listed for this item in products.json.</div>';return;}
+  if(!images.length){
+    $("productRoot").innerHTML=`<div class="error"><strong>${esc(product.name)}</strong><p>No image URL was found for this product. In Admin Dashboard, make sure the product has an image URL or an images/gallery list saved in Firestore.</p><p>Supported image fields include <code>img</code>, <code>imageUrl</code>, <code>image</code>, <code>mainImage</code>, <code>images</code>, <code>imageUrls</code>, and <code>gallery</code>.</p></div>`;
+    return;
+  }
   document.title = `${product.name} | Marushobha`;
   $("crumbName").textContent = product.name;
   render();
+  const hero = $("heroImage");
+  hero.addEventListener("error", () => {
+    hero.alt = "Product image could not be loaded. Check that its URL is public and valid.";
+    hero.style.minHeight = "220px";
+    hero.style.background = "#eee7df";
+    hero.style.objectFit = "contain";
+  }, {once:true});
 }
 function render(){
   const thumbs = images.map((im,i)=>`<button class="thumb ${i===activeIndex?'active':''}" data-thumb="${i}" aria-label="Show image ${i+1}"><img src="${esc(im.src)}" alt="${esc(im.alt)}"></button>`).join("");

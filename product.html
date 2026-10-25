@@ -291,12 +291,19 @@ async function loadProduct(){
     }
   }
 
-  const normalizedRequestedSlug = slugFromName(decodeURIComponent(slug.replace(/\+/g, " ")));
+  // Homepage links use the canonical product slug so product details match the selected card.
+  // Backward compatibility: older index links may pass fixed-N IDs instead of a slug.
+  let requestedSlugValue = slug;
+  if (!requestedSlugValue && /^fixed-\d+$/.test(id)) {
+    const fixedIndex = Number(id.split("-")[1]) - 1;
+    requestedSlugValue = localCatalogueFallback[fixedIndex]?.slug || "";
+  }
+  const normalizedRequestedSlug = slugFromName(decodeURIComponent(requestedSlugValue.replace(/\+/g, " ")));
   product = allProducts.find(p => {
     const pName = p.name || p.productName || p.title || "";
     const pSlug = slugFromName(p.slug || pName);
     return (id && String(p.id) === id) ||
-      (slug && (pSlug === normalizedRequestedSlug || String(p.slug || "").toLowerCase() === slug.toLowerCase())) ||
+      (requestedSlugValue && (pSlug === normalizedRequestedSlug || String(p.slug || "").toLowerCase() === requestedSlugValue.toLowerCase())) ||
       (requestedName && String(pName).trim().toLowerCase() === decodeURIComponent(requestedName).trim().toLowerCase());
   });
 
@@ -337,7 +344,7 @@ function writeStore(base, value){
 function currentProductRecord(){
   const size = $("sizeSelect")?.value || (product.sizes || ["XS","S","M","L"])[0];
   const unitPrice = typeof product.price === "number" ? product.price : Number(String(product.price || "").replace(/[^0-9.]/g,"")) || null;
-  return { key:String(product.slug || slugFromName(product.name))+"::"+size, productId:String(product.id ?? product.slug ?? slugFromName(product.name)), slug:product.slug || slugFromName(product.name), name:product.name, image:images[0]?.src || "", price:unitPrice, displayPrice:fmt(product.price), size, quantity:Math.max(1,parseInt($("productQuantity")?.value||"1",10)||1), qty:Math.max(1,parseInt($("productQuantity")?.value||"1",10)||1), addedAt:new Date().toISOString() };
+  const productId=String(product.id ?? product.slug ?? slugFromName(product.name)); const quantity=Math.max(1,Math.min(99,parseInt($("productQuantity")?.value||"1",10)||1)); return { key:String(product.slug || slugFromName(product.name))+"::"+size, id:product.id ?? productId, productId, slug:product.slug || slugFromName(product.name), name:product.name, image:images[0]?.src || product.img || product.imageUrl || "", img:images[0]?.src || product.img || product.imageUrl || "", price:unitPrice, displayPrice:fmt(product.price), size, quantity, qty:quantity, addedAt:new Date().toISOString() };
 }
 function updateBagWishlistCounts(){
   const cart=readStore(CART_BASE), wishlist=readStore(WISH_BASE);
@@ -347,8 +354,8 @@ function updateBagWishlistCounts(){
 function showActionMessage(message){ if($("actionMessage")) $("actionMessage").textContent=message; }
 function addCurrentProductToBag(){
   if(!requireSignIn("bag")) return;
-  const item=currentProductRecord(), cart=readStore(CART_BASE), existing=cart.find(row=>row.key===item.key);
-  if(existing){existing.quantity=Math.max(1,Number(existing.quantity)||1)+item.quantity;existing.qty=existing.quantity;} else cart.push(item);
+  const item=currentProductRecord(), cart=readStore(CART_BASE), existing=cart.find(row=>row.key===item.key || (String(row.productId||row.id)===String(item.productId) && String(row.size||"")===String(item.size)));
+  if(existing){existing.quantity=Math.min(99,Math.max(1,Number(existing.quantity||existing.qty)||1)+item.quantity);existing.qty=existing.quantity;existing.key=existing.key||item.key;existing.id=existing.id??item.id;existing.productId=existing.productId||item.productId;existing.name=existing.name||item.name;existing.image=existing.image||item.image;existing.img=existing.img||item.img;existing.price=existing.price??item.price;existing.displayPrice=existing.displayPrice||item.displayPrice;} else cart.push(item);
   if(!writeStore(CART_BASE,cart)){showActionMessage("Could not save your bag. Please enable browser storage and try again.");return;}
   updateBagWishlistCounts(); showActionMessage(`${product.name} (Size ${item.size}) added to your bag.`);
   $("addToBag").textContent="✓ Added to Bag"; setTimeout(()=>{if($("addToBag")) $("addToBag").textContent="Add to Bag";},1600);
@@ -356,8 +363,8 @@ function addCurrentProductToBag(){
 function addCurrentProductToWishlist(){
   if(!requireSignIn("wishlist")) return;
   const item=currentProductRecord(), wishlist=readStore(WISH_BASE);
-  if(wishlist.some(row=>row.productId===item.productId)){showActionMessage(`${product.name} is already in your wishlist.`);return;}
-  wishlist.push({...item,key:item.productId});
+  if(wishlist.some(row=>String(typeof row==="object"?(row.productId||row.id||row.slug):row)===String(item.productId))){showActionMessage(`${product.name} is already in your wishlist.`);return;}
+  wishlist.push({...item,key:item.productId,quantity:1,qty:1});
   if(!writeStore(WISH_BASE,wishlist)){showActionMessage("Could not save your wishlist. Please enable browser storage and try again.");return;}
   updateBagWishlistCounts(); showActionMessage(`${product.name} added to your wishlist.`);
   $("addToWishlist").textContent="♥ Wishlisted"; setTimeout(()=>{if($("addToWishlist")) $("addToWishlist").textContent="♡ Add to Wishlist";},1600);

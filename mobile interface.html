@@ -3,31 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marushobha - Product Gallery & Interface</title>
+  <title>Marushobha - Product Gallery Demo</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+<body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex flex-col justify-between">
 
   <!-- Main Container -->
-  <main class="max-w-7xl mx-auto px-4 py-10">
-    <header class="mb-8 text-center">
+  <main class="max-w-7xl mx-auto px-4 py-10 w-full">
+    <header class="mb-10 text-center">
       <h1 class="text-3xl font-serif font-medium tracking-wide">Marushobha Collection</h1>
       <p class="text-sm text-gray-600 mt-1">Custom. Character. Class.</p>
     </header>
 
     <!-- Product Grid -->
     <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Products will be dynamically rendered here via JavaScript -->
+      <!-- Products will be dynamically injected here via JavaScript -->
     </div>
   </main>
 
-  <!-- Product Detail Modal -->
+  <!-- Footer -->
+  <footer class="text-center py-6 text-xs text-gray-500 border-t border-gray-200 mt-10">
+    &copy; 2026 Marushobha. All rights reserved.
+  </footer>
+
+  <!-- Product Detail Modal (First Click Interface) -->
   <div id="product-detail-modal" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
     <div class="bg-white w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col">
       <!-- Close Button -->
       <button onclick="closeProductDetail()" class="absolute top-4 right-4 z-10 bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
       </button>
       
       <!-- Modal Body Content -->
@@ -37,17 +44,19 @@
     </div>
   </div>
 
-  <!-- Full-Screen Lightbox Modal -->
+  <!-- Full-Screen Lightbox Modal (Second Click / Expand) -->
   <div id="fullscreen-lightbox" class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm hidden">
     <button onclick="closeFullScreenModal()" class="absolute top-5 right-5 text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
     </button>
-    <img id="lightbox-img" src="" class="max-h-[90vh] max-w-[90vw] object-contain rounded-md shadow-2xl" alt="Full Screen View">
+    <img id="lightbox-img" src="" class="max-h-[90vh] max-w-[90vw] object-contain rounded-md shadow-2xl" alt="Full Screen Lightbox View">
   </div>
 
   <!-- JavaScript Logic -->
   <script>
-    // Sample mock product data representing multiple uploaded images per product
+    // Sample mock product data featuring multiple uploaded images
     const allProducts = [
       {
         id: 'prod-1',
@@ -72,7 +81,7 @@
       }
     ];
 
-    // Render Product Grid on Load
+    // Render Product Cards Grid
     function renderProducts() {
       const grid = document.getElementById('product-grid');
       grid.innerHTML = allProducts.map(product => `
@@ -91,7 +100,7 @@
             ` : ''}
           </div>
 
-          <!-- Thumbnails Row for Mobile & Desktop -->
+          <!-- Thumbnails Row for Mobile & Desktop (Allows image switching directly) -->
           ${product.images.length > 1 ? `
             <div class="flex gap-1.5 p-2 overflow-x-auto scrollbar-none bg-gray-50/50 border-t border-gray-100">
               ${product.images.map((imgUrl, index) => `
@@ -145,7 +154,9 @@
             <div class="relative aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden cursor-pointer group" onclick="openFullScreenModal(window.currentActiveImgUrl)">
               <img id="detail-main-img" src="${product.images[0]}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102" alt="Product View">
               <div class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-md">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/></svg>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+                </svg>
                 Click to expand
               </div>
             </div>
@@ -166,7 +177,7 @@
               <p class="text-gray-600 mt-4 text-sm leading-relaxed">${product.description}</p>
             </div>
             
-            <button onclick="alert('Added to bag!')" class="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition-colors mt-8">
+            <button onclick="alert('Added to bag successfully!')" class="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition-colors mt-8">
               Add to Bag
             </button>
           </div>
@@ -185,7 +196,7 @@
       document.getElementById('detail-main-img').src = url;
     }
 
-    // 3. Full-Screen Lightbox View
+    // 3. Full-Screen Lightbox View (Second Click)
     function openFullScreenModal(imgUrl) {
       document.getElementById('lightbox-img').src = imgUrl;
       document.getElementById('fullscreen-lightbox').classList.remove('hidden');
@@ -195,7 +206,7 @@
       document.getElementById('fullscreen-lightbox').classList.add('hidden');
     }
 
-    // Initialize on load
+    // Initialize application on load
     window.addEventListener('DOMContentLoaded', renderProducts);
   </script>
 </body>

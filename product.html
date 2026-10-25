@@ -49,6 +49,7 @@ const fmt = value => typeof value === "number" ? "₹" + value.toLocaleString("e
 const slugFromName = name => (name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const localCatalogueFallback = [{"id":1,"slug":"boat-neck-halter-dress","name":"Boat-Neck Halter Dress","description":"A floral-print dress featuring a halter neckline with a back-neck tie, a fitted waist, and a flared skirt for a playful and elegant look.","colour":"Floral","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Not specified","care":"Follow the garment care label. Handle the printed fabric gently and avoid harsh bleach.","category":"Western Collection","tag":"Floral · Halter Neck","images":[{"src":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg","alt":"Boat-Neck Halter Dress product view"},{"src":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-model-views.png","alt":"Boat-Neck Halter Dress product view"},{"src":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-detail-views.png","alt":"Boat-Neck Halter Dress product view"}],"img":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg"},{"id":2,"slug":"mustard-muse-shirt","name":"Mustard Muse Shirt","description":"A mustard-checkered shirt made from handwoven cotton, featuring a contrasting brown pocket, wooden buttons, statement flared cuffs, and brown piping for a modern, effortless look.","colour":"Mustard","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Western Collection","tag":"Handwoven Cotton · Checked","images":[{"src":"assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg","alt":"Mustard Muse Shirt product view"},{"src":"assets/products/mustard-muse-shirt/mustard-muse-shirt-front-view.png","alt":"Mustard Muse Shirt product view"}],"img":"assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg"},{"id":3,"slug":"bow-palazzo-pants","name":"Bow Palazzo Pants","description":"A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist, paired with a sleeveless plum top for an elegant, contemporary look.","colour":"Olive Green","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton (as provided)","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Western Collection","tag":"Handwoven Cotton · Wide Leg","images":[{"src":"assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg","alt":"Bow Palazzo Pants product view"},{"src":"assets/products/bow-palazzo-pants/bow-palazzo-pants-model-views.png","alt":"Bow Palazzo Pants product view"},{"src":"assets/products/bow-palazzo-pants/bow-palazzo-pants-detail-views.png","alt":"Bow Palazzo Pants product view"}],"img":"assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg"},{"id":4,"slug":"chashni-set","name":"Chashni Set","description":"A feminine pink off-shoulder top made from handwoven cotton, featuring a delicate ruffled neckline, paired with flowing white wide-leg pants made from handwoven cotton for a soft, elegant, and effortless look.","colour":"Pink and White","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Western Collection","tag":"Handwoven Cotton · Two-Piece Set","images":[{"src":"assets/products/chashni-set/chashni-set-main.jpeg","alt":"Chashni Set product view"},{"src":"assets/products/chashni-set/chashni-set-top-details.png","alt":"Chashni Set product view"}],"img":"assets/products/chashni-set/chashni-set-main.jpeg"},{"id":5,"slug":"dune-belle-corset","name":"Dune Belle Corset","description":"A chic beige corset top made from handwoven cotton, featuring structured cups, wide shoulder straps, and elegant vertical pintuck detailing, paired with matching high-waisted, wide-leg trousers made from handwoven cotton for a refined, contemporary look.","colour":"Beige","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"DRY CLEAN ONLY. Do not machine wash, soak, or wring. Store carefully to help maintain the corset's structure.","category":"Marushobha Luxe","tag":"Handwoven Cotton · Corset Set","images":[{"src":"assets/products/dune-belle-corset/dune-belle-corset-main.jpeg","alt":"Dune Belle Corset product view"},{"src":"assets/products/dune-belle-corset/dune-belle-corset-front-view.jpeg","alt":"Dune Belle Corset product view"},{"src":"assets/products/dune-belle-corset/dune-belle-corset-detail-views.png","alt":"Dune Belle Corset product view"}],"img":"assets/products/dune-belle-corset/dune-belle-corset-main.jpeg"},{"id":6,"slug":"lotus-cuff-shirt","name":"Lotus Cuff Shirt","description":"A sky-blue striped shirt made from handwoven cotton, featuring a classic collar, button-down front, voluminous sleeves, and unique petal-shaped cuffs for a soft, elegant look.","colour":"Sky Blue","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Indian Collection","tag":"Handwoven Cotton · Petal Cuffs","images":[{"src":"assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg","alt":"Lotus Cuff Shirt product view"},{"src":"assets/products/lotus-cuff-shirt/lotus-cuff-shirt-model-views.jpeg","alt":"Lotus Cuff Shirt product view"}],"img":"assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg"},{"id":7,"slug":"thar-ki-phoolwari","name":"Thar Ki Phoolwari","description":"A pink floral-print top featuring a square neckline, broad shoulder straps, a fitted silhouette, and adjustable side-string detailing for a stylish, feminine look. Made from handwoven cotton.","colour":"Pink Floral","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Indian Collection","tag":"Handwoven Cotton · Side-String Top","images":[{"src":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg","alt":"Thar Ki Phoolwari product view"},{"src":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-detail.jpeg","alt":"Thar Ki Phoolwari product view"},{"src":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-model-views.png","alt":"Thar Ki Phoolwari product view"}],"img":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg"},{"id":8,"slug":"madhuban-side-string-top","name":"Madhuban Side-String Top","description":"A handwoven cotton top featuring a square neckline, broad shoulder straps, a playful multicolour print, and adjustable side-string detailing with decorative tassels.","colour":"Multicolour","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Indian Collection","tag":"Handwoven Cotton · Side-String Top","images":[{"src":"assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg","alt":"Madhuban Side-String Top product view"},{"src":"assets/products/madhuban-side-string-top/madhuban-side-string-top-detail.jpeg","alt":"Madhuban Side-String Top product view"}],"img":"assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg"},{"id":9,"slug":"maharani-fusion-top","name":"Maharani Fusion Top","description":"A two-piece fusion top featuring a black-and-red Bandhani-print top with a V-neckline and flared sleeves, paired with a maroon handwoven cotton corset featuring a sweetheart neckline and adjustable back lace-up detailing.","colour":"Black, Red and Maroon","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Bandhani-print top with handwoven cotton corset","care":"DRY CLEAN ONLY because this set includes a structured corset. Do not machine wash, soak, or wring. Store carefully to help maintain its shape.","category":"Indian Collection","tag":"Bandhani Print · Two-Piece Fusion Top","images":[{"src":"assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg","alt":"Maharani Fusion Top product view"},{"src":"assets/products/maharani-fusion-top/maharani-fusion-top-detail.jpeg","alt":"Maharani Fusion Top product view"}],"img":"assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg"}];
 let product = null, images = [], activeIndex = 0, zoom = 1, panX = 0, panY = 0;
+const failedImageSources = new Set();
 const $ = id => document.getElementById(id);
 function esc(s){return String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function productImages(p){
@@ -95,7 +96,7 @@ async function loadProduct(){
     });
   } catch (err) {
     firestoreError = err;
-    console.error("Could not load Firestore products:", err);
+    console.error("Could not load Firestore products. Check Firebase project config, Firestore Database existence, and read rules for the products collection:", err);
   }
 
   // Keep products.json as a fallback for the original catalogue.
@@ -111,9 +112,35 @@ async function loadProduct(){
           const entrySlug = entry.slug || slugFromName(entryName);
           const existing = combined.findIndex(p => (p.slug || slugFromName(p.name || p.productName || p.title)) === entrySlug);
           if (existing < 0) combined.push(entry);
-          else combined[existing] = {...combined[existing], ...entry,
-            images: (Array.isArray(entry.images) && entry.images.length) ? entry.images : combined[existing].images,
-            img: entry.img || entry.imageUrl || combined[existing].img || combined[existing].imageUrl};
+          else {
+            const knownGood = combined[existing];
+            const getImageEntries = source => {
+              const out = [];
+              const add = value => {
+                if (!value) return;
+                if (Array.isArray(value)) { value.forEach(add); return; }
+                if (typeof value === "string") { out.push({src:value, alt:knownGood.name || entryName}); return; }
+                if (typeof value === "object") {
+                  const src = value.src || value.url || value.imageUrl || value.image || value.downloadURL || value.downloadUrl || value.photoURL;
+                  if (src) out.push({src, alt:value.alt || knownGood.name || entryName});
+                }
+              };
+              [source.images, source.imageUrls, source.gallery, source.productImages,
+               source.img, source.imageUrl, source.image, source.mainImage, source.photo, source.photoURL].forEach(add);
+              return out;
+            };
+            // Preserve the embedded catalogue's exact image paths first; append JSON images as extras.
+            const prioritizedImages = [...getImageEntries(knownGood), ...getImageEntries(entry)];
+            const seen = new Set();
+            const uniqueImages = prioritizedImages.filter(im => {
+              if (seen.has(im.src)) return false;
+              seen.add(im.src);
+              return true;
+            });
+            combined[existing] = {...knownGood, ...entry,
+              images: uniqueImages.length ? uniqueImages : knownGood.images,
+              img: knownGood.img || entry.img || entry.imageUrl || knownGood.imageUrl};
+          }
         }
         jsonProducts = combined;
       }
@@ -231,10 +258,33 @@ function render(){
   </section>`;
   $("heroImage").addEventListener("click",openZoom);
   $("openZoom").addEventListener("click",openZoom);
+  // If a selected gallery image is broken, automatically try another image.
+  $("heroImage").addEventListener("error", () => {
+    const img = $("heroImage");
+    if (!img || img.dataset.fallbackTried === "1") return;
+    failedImageSources.add(images[activeIndex]?.src);
+    const next = images.findIndex((im, i) => i !== activeIndex && !failedImageSources.has(im.src));
+    if (next >= 0) { activeIndex = next; render(); }
+    else { img.alt = "Product image unavailable"; img.style.display = "none"; }
+  }, {once:true});
   document.querySelectorAll("[data-thumb]").forEach(b=>b.addEventListener("click",()=>{activeIndex=Number(b.dataset.thumb);render();}));
+  document.querySelectorAll(".thumb img").forEach(img=>img.addEventListener("error",()=>{img.closest(".thumb")?.classList.add("image-unavailable"); img.style.visibility="hidden";},{once:true}));
 }
 function updateZoom(){ $("lightboxImg").style.transform=`translate(${panX}px,${panY}px) scale(${zoom})`; }
-function setImage(){ $("lightboxImg").src=images[activeIndex].src; $("lightboxImg").alt=images[activeIndex].alt||product.name; zoom=1;panX=0;panY=0;updateZoom(); }
+function setImage(){
+  const img = $("lightboxImg");
+  img.onerror = () => {
+    img.onerror = null;
+    failedImageSources.add(images[activeIndex]?.src);
+    const next = images.findIndex((im, i) => i !== activeIndex && !failedImageSources.has(im.src));
+    if (next >= 0) { activeIndex = next; setImage(); render(); }
+    else { img.alt = "Product image unavailable"; img.style.display = "none"; }
+  };
+  img.style.display = "";
+  img.src = images[activeIndex].src;
+  img.alt = images[activeIndex].alt || product.name;
+  zoom=1;panX=0;panY=0;updateZoom();
+}
 function openZoom(){setImage();$("lightbox").classList.add("open");document.body.style.overflow="hidden";}
 function closeZoom(){$("lightbox").classList.remove("open");document.body.style.overflow="";}
 function changeImage(delta){activeIndex=(activeIndex+delta+images.length)%images.length;setImage();render();}

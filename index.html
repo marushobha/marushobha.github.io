@@ -40,6 +40,8 @@
 .dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 @media(max-width:600px){.dashboard-modal{padding:20px 16px}.dashboard-layout{grid-template-columns:1fr;gap:16px}.dashboard-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-nav button{text-align:center;padding:9px 6px;font-size:.82rem}.dashboard-cards{grid-template-columns:1fr}.dashboard-profile-grid{grid-template-columns:1fr}.dashboard-top h2{font-size:1.5rem}}
 
+
+.product-image-link{display:block;color:inherit;text-decoration:none}.product-image-link img{display:block;width:100%;cursor:pointer}
 </style>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -497,7 +499,7 @@ function renderProducts(){
     const displayImg = p.img || p.imageUrl || "";
     return `<article class="product">
       <div class="product-image">
-        <img loading="lazy" src="${displayImg}" alt="${p.name}">
+        <a class="product-image-link" href="product.html?slug=${encodeURIComponent(p.slug || p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''))}" aria-label="View ${p.name} details"><img loading="lazy" src="${displayImg}" alt="${p.name}"></a>
         <button class="wish" aria-label="Add ${p.name} to wishlist" data-wish="${p.id}" style="color:${isWished?'#9b3d45':'inherit'}">${isWished?'♥':'♡'}</button>
       </div>
       <div class="product-info">

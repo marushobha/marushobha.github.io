@@ -161,7 +161,7 @@ async function loadProduct(){
       };
       // Keep image URLs from BOTH sources. Firestore can contain an empty
       // images array while the original images are still in products.json.
-      const mergedImages = [...collectImages(current), ...collectImages(item)];
+      const mergedImages = [...collectImages(item), ...collectImages(current)];
       const seenImageUrls = new Set();
       const uniqueImages = mergedImages.filter(image => {
         if (seenImageUrls.has(image.src)) return false;
@@ -174,8 +174,8 @@ async function loadProduct(){
         name: current.name || current.productName || current.title || itemName,
         slug: current.slug || itemSlug,
         images: uniqueImages,
-        img: current.img || current.imageUrl || item.img || item.imageUrl || "",
-        imageUrl: current.imageUrl || current.img || item.imageUrl || item.img || ""
+        img: item.img || item.imageUrl || current.img || current.imageUrl || "",
+        imageUrl: item.imageUrl || item.img || current.imageUrl || current.img || ""
       };
     }
   }

@@ -40,8 +40,7 @@
 .dashboard-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 @media(max-width:600px){.dashboard-modal{padding:20px 16px}.dashboard-layout{grid-template-columns:1fr;gap:16px}.dashboard-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-nav button{text-align:center;padding:9px 6px;font-size:.82rem}.dashboard-cards{grid-template-columns:1fr}.dashboard-profile-grid{grid-template-columns:1fr}.dashboard-top h2{font-size:1.5rem}}
 
-
-.product-image-link{display:block;color:inherit;text-decoration:none}.product-image-link img{display:block;width:100%;cursor:pointer}
+.nav-actions #wishlistOpen{color:#b4234d;background:#fff0f4;border-color:#edb5c4}.nav-actions #cartOpen{color:#176b4d;background:#eaf6ef;border-color:#a9d7bd}.nav-actions #accountOpen{color:#6e4b36;background:#f0e7dd;border-color:#d5c1ad}.iconbtn span{min-width:15px;text-align:center}
 </style>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
@@ -474,8 +473,16 @@ let products = [...fixedProducts];
 let cart=[];
 let wishlist=[];
 let userProfile = { name: "", phone: "", email: "", address: "" };
+const STORE_BASE_CART="marushobha_cart_v1_", STORE_BASE_WISH="marushobha_wishlist_v1_";
+let activeCustomerUid = null;
+function cartStoreKey(){return activeCustomerUid?STORE_BASE_CART+activeCustomerUid:null;}
+function wishStoreKey(){return activeCustomerUid?STORE_BASE_WISH+activeCustomerUid:null;}
+function readCustomerList(key){try{const v=JSON.parse(localStorage.getItem(key)||"[]");return Array.isArray(v)?v:[]}catch{return[]}}
+function saveCustomerLists(){if(!activeCustomerUid)return;localStorage.setItem(cartStoreKey(),JSON.stringify(cart));localStorage.setItem(wishStoreKey(),JSON.stringify(wishlist));}
+function requireCustomerSignIn(){if(isLoggedIn&&activeCustomerUid)return true;setAuthMode("signin");document.getElementById("authModal").classList.add("open");showStatus("Please sign in with Google or your mobile number to use your bag and wishlist.");return false;}
 
-const fmt=n=>typeof n==="number"?"₹"+n.toLocaleString("en-IN"):n;
+
+const fmt=n=>typeof n==="number"?"₹"+n.toLocaleString("en-IN"):(n||"COMING SOON");
 const grid=document.getElementById("productGrid");
 
 function renderProducts(){
@@ -495,11 +502,11 @@ function renderProducts(){
   document.getElementById("productCount").textContent=`${list.length} product${list.length===1?"":"s"} shown`;
   
   grid.innerHTML=list.length?list.map(p=>{
-    const isWished = wishlist.includes(p.id);
+    const isWished = wishlist.some(w => (typeof w==="object" ? String(w.productId||w.id||w.slug)===String(p.id) || String(w.name||"").toLowerCase()===String(p.name).toLowerCase() : String(w)===String(p.id)));
     const displayImg = p.img || p.imageUrl || "";
     return `<article class="product">
       <div class="product-image">
-        <a class="product-image-link" href="product.html?slug=${encodeURIComponent(p.slug || p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''))}" aria-label="View ${p.name} details"><img loading="lazy" src="${displayImg}" alt="${p.name}"></a>
+        <img loading="lazy" src="${displayImg}" alt="${p.name}">
         <button class="wish" aria-label="Add ${p.name} to wishlist" data-wish="${p.id}" style="color:${isWished?'#9b3d45':'inherit'}">${isWished?'♥':'♡'}</button>
       </div>
       <div class="product-info">
@@ -521,42 +528,29 @@ function renderProducts(){
 }
 
 function toggleWishlist(id) {
-  const index = wishlist.indexOf(id);
-  if(index > -1) {
-    wishlist.splice(index, 1);
-  } else {
-    wishlist.push(id);
+  if(!requireCustomerSignIn()) return;
+  const index = wishlist.findIndex(w => String(typeof w==="object"?(w.productId||w.id||w.slug):w)===String(id));
+  if(index > -1) wishlist.splice(index,1);
+  else {
+    const p=products.find(x=>String(x.id)===String(id));
+    wishlist.push(p ? {id:p.id,productId:p.id,slug:p.slug||String(p.name||"").toLowerCase().replace(/[^a-z0-9]+/g,"-"),name:p.name,image:p.img||p.imageUrl||"",img:p.img||p.imageUrl||"",price:p.price,displayPrice:fmt(p.price)} : id);
   }
+  saveCustomerLists();
   document.getElementById("wishlistCount").textContent = wishlist.length;
-  renderProducts();
-  renderWishlist();
+  renderProducts(); renderWishlist();
 }
 
 function renderWishlist() {
   const el = document.getElementById("wishlistItems");
   document.getElementById("wishlistCount").textContent = wishlist.length;
-  el.innerHTML = wishlist.length ? wishlist.map(id => {
-    const p = products.find(x => x.id == id);
+  el.innerHTML = wishlist.length ? wishlist.map(item => {
+    const p = typeof item==="object" ? (products.find(x=>String(x.id)===String(item.productId||item.id)||String(x.name||"").toLowerCase()===String(item.name||"").toLowerCase())||item) : products.find(x=>String(x.id)===String(item));
     if (!p) return "";
-    const displayImg = p.img || p.imageUrl || "";
-    return `<div class="cart-row">
-      <img src="${displayImg}" alt="">
-      <div>
-        <strong>${p.name}</strong>
-        <p>${fmt(p.price)}</p>
-        <button class="add" data-wish-view="${p.id}">View Details</button>
-        <button class="add" data-wish-remove="${p.id}" style="margin-left:5px">Remove</button>
-      </div>
-    </div>`;
+    const displayImg = p.img || p.image || p.imageUrl || "";
+    return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name||"Product"}</strong><p>${fmt(p.price ?? p.displayPrice)}</p><button class="add" data-wish-view="${p.id||p.productId||item}">View Details</button><button class="add" data-wish-remove="${p.id||p.productId||item}" style="margin-left:5px">Remove</button></div></div>`;
   }).join("") : `<p>Your wishlist is empty.</p>`;
-
-  el.querySelectorAll("[data-wish-view]").forEach(b=>b.addEventListener("click",() => {
-    document.getElementById("wishlistDrawer").classList.remove("open");
-    openProduct(b.dataset.wishView);
-  }));
-  el.querySelectorAll("[data-wish-remove]").forEach(b=>b.addEventListener("click",() => {
-    toggleWishlist(b.dataset.wishRemove);
-  }));
+  el.querySelectorAll("[data-wish-view]").forEach(b=>b.addEventListener("click",()=>{document.getElementById("wishlistDrawer").classList.remove("open");openProduct(b.dataset.wishView);}));
+  el.querySelectorAll("[data-wish-remove]").forEach(b=>b.addEventListener("click",()=>toggleWishlist(b.dataset.wishRemove)));
 }
 
 ["categoryFilter","sizeFilter","colourFilter","sortFilter"].forEach(id=>document.getElementById(id).addEventListener("change",renderProducts));
@@ -612,30 +606,24 @@ function openProduct(id){
 }
 
 function addToCart(id,size){
-  const existing=cart.find(x=>x.id===id&&x.size===size);
-  if(existing) existing.qty++;
-  else cart.push({id,size,qty:1});
-  renderCart();
+  if(!requireCustomerSignIn()) return;
+  const existing=cart.find(x=>String(x.id||x.productId)===String(id)&&x.size===size);
+  if(existing){existing.qty=Math.max(1,Number(existing.qty||existing.quantity)||1)+1;existing.quantity=existing.qty;}
+  else {const p=products.find(x=>String(x.id)===String(id));if(p)cart.push({id:p.id,productId:p.id,name:p.name,slug:p.slug||String(p.name||"").toLowerCase().replace(/[^a-z0-9]+/g,"-"),image:p.img||p.imageUrl||"",img:p.img||p.imageUrl||"",price:typeof p.price==="number"?p.price:null,displayPrice:fmt(p.price),size,qty:1,quantity:1});}
+  saveCustomerLists(); renderCart();
 }
 
 function renderCart(){
- document.getElementById("cartCount").textContent=cart.reduce((n,x)=>n+x.qty,0);
- document.getElementById("cartTotal").textContent=fmt(cart.reduce((n,x)=>{
-   const p=products.find(prod=>prod.id == x.id);
-   return n+(typeof p?.price==="number"?p.price*x.qty:0);
- },0));
+ const qtyOf=x=>Math.max(1,Number(x.qty||x.quantity)||1);
+ document.getElementById("cartCount").textContent=cart.reduce((n,x)=>n+qtyOf(x),0);
+ document.getElementById("cartTotal").textContent=fmt(cart.reduce((n,x)=>{const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;const price=typeof p.price==="number"?p.price:(Number(x.price)||0);return n+price*qtyOf(x);},0));
  const el=document.getElementById("cartItems");
  el.innerHTML=cart.length?cart.map((x,i)=>{
-   const p=products.find(prod=>prod.id == x.id);
-   if(!p) return "";
-   const displayImg = p.img || p.imageUrl || "";
-   return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name}</strong><p>Size: ${x.size}</p><p>${fmt(p.price)} × ${x.qty}</p><button class="add" data-remove="${i}">Remove</button></div><div>${fmt(typeof p.price==="number"?p.price*x.qty:0)}</div></div>`
+   const p=products.find(prod=>String(prod.id)===String(x.id||x.productId)||String(prod.name||"").toLowerCase()===String(x.name||"").toLowerCase())||x;
+   const displayImg=p.img||p.image||p.imageUrl||"",qty=qtyOf(x),price=typeof p.price==="number"?p.price:(Number(x.price)||0);
+   return `<div class="cart-row"><img src="${displayImg}" alt=""><div><strong>${p.name||"Product"}</strong><p>Size: ${x.size||"Not selected"}</p><p>${fmt(price)} × ${qty}</p><button class="add" data-remove="${i}">Remove</button></div><div>${fmt(price*qty)}</div></div>`;
  }).join(""):`<p>Your shopping bag is empty.</p>`;
- 
- el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{
-   cart.splice(+b.dataset.remove,1);
-   renderCart();
- }));
+ el.querySelectorAll("[data-remove]").forEach(b=>b.addEventListener("click",()=>{cart.splice(+b.dataset.remove,1);saveCustomerLists();renderCart();}));
 }
 
 function openCart(){document.getElementById("cartDrawer").classList.add("open");document.getElementById("cartDrawer").setAttribute("aria-hidden","false")}
@@ -1159,6 +1147,9 @@ function updateProfileDisplay() {
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     isLoggedIn = true;
+    activeCustomerUid=user.uid;
+    cart=readCustomerList(cartStoreKey()); wishlist=readCustomerList(wishStoreKey());
+    renderCart(); renderWishlist(); renderProducts();
     userProfile.name = user.displayName || user.email || "Valued Customer";
     userProfile.phone = user.phoneNumber || "Not Provided";
     userProfile.email = user.email || "Not Provided";
@@ -1166,8 +1157,14 @@ onAuthStateChanged(auth, async (user) => {
     updateAccountIconState();
     updateProfileDisplay();
     await loadCustomerProfile(user);
+    const returnPage=new URLSearchParams(location.search).get("return");
+    if(new URLSearchParams(location.search).get("signin")==="1" && ["bag.html","wishlist.html"].includes(returnPage)){
+      location.replace(returnPage);
+    }
   } else {
-    isLoggedIn = false;
+    isLoggedIn = false; activeCustomerUid=null; cart=[]; wishlist=[];
+    document.getElementById("cartCount").textContent="0"; document.getElementById("wishlistCount").textContent="0";
+    renderCart(); renderWishlist(); renderProducts();
     userProfile = { name: "", phone: "", email: "", address: "" };
     updateAccountIconState();
   }

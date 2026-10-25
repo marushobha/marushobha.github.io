@@ -1,195 +1,272 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Marushobha - Product Collection</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8f4ed">
+<title>Product | Marushobha</title>
+<style>
+:root{--ivory:#f8f4ed;--ink:#28221e;--brown:#6e4b36;--muted:#766e66;--line:#e3d9ce;--white:#fffdf9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--ivory);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}button,select{font:inherit;cursor:pointer}.topbar{border-bottom:1px solid var(--line);padding:15px 5%;display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--ivory)}.brand{font-family:Georgia,serif;letter-spacing:.18em;font-size:1.1rem}.tagline{font-size:.65rem;letter-spacing:.15em;color:var(--muted);display:block}.back{border:1px solid var(--brown);padding:9px 14px;background:transparent;color:var(--brown)}main{max-width:1180px;margin:0 auto;padding:34px 24px 70px}.crumb{font-size:.82rem;color:var(--muted);margin-bottom:22px}.layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);gap:42px}.gallery{min-width:0}.hero-wrap{position:relative;background:#eee7df;overflow:hidden;touch-action:pan-y}.hero-img{width:100%;height:auto;max-height:78vh;aspect-ratio:3/4;object-fit:contain;display:block;cursor:zoom-in}.gallery-actions{position:absolute;right:12px;bottom:12px;display:flex;gap:8px}.gallery-actions button,.zoom-controls button{border:1px solid #d8cec3;background:#fffdf9eF;padding:8px 12px}.thumbs{display:flex;gap:10px;overflow-x:auto;padding:12px 0}.thumb{width:76px;height:96px;flex:0 0 auto;border:1px solid var(--line);padding:2px;background:transparent}.thumb.active{border:2px solid var(--brown)}.thumb img{width:100%;height:100%;object-fit:cover;display:block}.info{padding-top:8px}.eyebrow{text-transform:uppercase;letter-spacing:.15em;color:var(--brown);font-size:.75rem}.info h1{font-family:Georgia,serif;font-weight:normal;font-size:clamp(1.8rem,3vw,2.7rem);line-height:1.2;margin:10px 0}.price{font-size:1.1rem;font-weight:bold;margin:12px 0 20px}.description{color:#514941}.details{border-top:1px solid var(--line);margin-top:24px}.detail-row{padding:13px 0;border-bottom:1px solid var(--line)}.detail-row strong{display:block;font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px}.size-label{display:block;font-weight:bold;margin:22px 0 8px}.size-select{width:100%;max-width:260px;padding:12px;border:1px solid #cfc3b6;background:var(--white)}.note{font-size:.82rem;color:var(--muted);margin-top:15px}.error{background:#fff4f0;border:1px solid #e3b9ac;padding:18px}.lightbox{position:fixed;inset:0;background:#17120ff2;z-index:100;display:none;align-items:center;justify-content:center;padding:18px}.lightbox.open{display:flex}.lightbox-inner{position:relative;width:min(100%,1100px);height:min(94vh,1000px);display:flex;align-items:center;justify-content:center;overflow:hidden;touch-action:none}.lightbox-img{max-width:100%;max-height:100%;object-fit:contain;transform-origin:center;user-select:none;-webkit-user-drag:none;cursor:grab}.lightbox-img.dragging{cursor:grabbing}.lightbox-top{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;gap:10px;z-index:2}.lightbox-top button,.lightbox-nav{background:#fffdf9;border:0;padding:10px 13px}.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:1.4rem}.lightbox-prev{left:8px}.lightbox-next{right:8px}.zoom-controls{display:flex;gap:6px}.zoom-hint{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);color:white;background:#0008;padding:6px 10px;font-size:.75rem;white-space:nowrap}@media(max-width:760px){main{padding:22px 15px 45px}.topbar{padding:12px 15px}.layout{grid-template-columns:1fr;gap:20px}.hero-img{max-height:none;aspect-ratio:4/5}.info{padding-top:0}.thumb{width:66px;height:84px}.lightbox{padding:6px}.lightbox-inner{height:96vh}.lightbox-nav{padding:8px 10px}.zoom-hint{font-size:.68rem;bottom:5px}.lightbox-top button{padding:8px 10px}}
+</style>
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased min-h-screen flex flex-col justify-between">
-
-  <!-- Main Container -->
-  <main class="max-w-7xl mx-auto px-4 py-10 w-full">
-    <header class="mb-10 text-center">
-      <h1 class="text-3xl font-serif font-medium tracking-wide">Marushobha Collection</h1>
-      <p class="text-sm text-gray-600 mt-1">Custom. Character. Class.</p>
-    </header>
-
-    <!-- Product Grid -->
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <!-- Dynamic products injected via JavaScript -->
+<body>
+<header class="topbar">
+  <a href="index.html" aria-label="Marushobha home"><span class="brand">MARUSHOBHA</span><span class="tagline">CUSTOM. CHARACTER. CLASS.</span></a>
+  <a class="back" href="index.html#shop">← Back to Shop</a>
+</header>
+<main>
+  <div class="crumb"><a href="index.html">Home</a> / <a href="index.html#shop">Shop</a> / <span id="crumbName">Product</span></div>
+  <div id="productRoot"><p>Loading product details…</p></div>
+</main>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Product image zoom">
+  <div class="lightbox-inner" id="lightboxInner">
+    <div class="lightbox-top">
+      <button id="closeZoom" type="button" aria-label="Close image viewer">✕ Close</button>
+      <div class="zoom-controls"><button id="zoomOut" type="button" aria-label="Zoom out">−</button><button id="zoomReset" type="button">Reset</button><button id="zoomIn" type="button" aria-label="Zoom in">+</button></div>
     </div>
-  </main>
-
-  <!-- Product Detail Modal (First Click) -->
-  <div id="product-detail-modal" class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-    <div class="bg-white w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col">
-      <button onclick="closeProductDetail()" class="absolute top-4 right-4 z-10 bg-gray-100 hover:bg-gray-200 p-2 rounded-full transition-all">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-      <div id="detail-content" class="p-6 md:p-8 overflow-y-auto">
-        <!-- Dynamic detail content injected here -->
-      </div>
-    </div>
+    <button class="lightbox-nav lightbox-prev" id="prevImage" type="button" aria-label="Previous image">‹</button>
+    <img class="lightbox-img" id="lightboxImg" alt="">
+    <button class="lightbox-nav lightbox-next" id="nextImage" type="button" aria-label="Next image">›</button>
+    <div class="zoom-hint">Pinch to zoom on mobile · Use + / − or mouse wheel</div>
   </div>
+</div>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
+  authDomain: "marushobha-1e31f.firebaseapp.com",
+  projectId: "marushobha-1e31f",
+  storageBucket: "marushobha-1e31f.firebasestorage.app",
+  messagingSenderId: "997754535596",
+  appId: "1:997754535596:web:aafc83bad8c3d413cf6909",
+  measurementId: "G-DLWGD0ZDQ1"
+};
+const db = getFirestore(initializeApp(firebaseConfig));
 
-  <!-- Full-Screen Lightbox Modal (Second Click / Expand) -->
-  <div id="fullscreen-lightbox" class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm hidden">
-    <button onclick="closeFullScreenModal()" class="absolute top-5 right-5 text-white bg-white/10 hover:bg-white/20 p-2.5 rounded-full transition-all">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-    </button>
-    <img id="lightbox-img" src="" class="max-h-[90vh] max-w-[90vw] object-contain rounded-md shadow-2xl" alt="Full Screen View">
-  </div>
-
-  <!-- Core Script Integration -->
-  <script>
-    // Global variable to hold your fetched products from Firestore/Database
-    let activeProducts = [];
-
-    // Call this function when you load/fetch your products from Firebase
-    function initProductGallery(productsFromDB) {
-      activeProducts = productsFromDB;
-      const grid = document.getElementById('product-grid');
-      
-      grid.innerHTML = activeProducts.map(product => {
-        // Fallback checks for image structures (supports `product.images` array or single `product.imageUrl`)
-        const images = product.images && product.images.length > 0 
-          ? product.images 
-          : (product.imageUrl ? [product.imageUrl] : []);
-        
-        const mainImage = images.length > 0 ? images[0] : '';
-
-        return `
-          <div class="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden flex flex-col">
-            <!-- Main Product Image (Click to open detail view) -->
-            <div class="relative group cursor-pointer aspect-[3/4] bg-gray-50 overflow-hidden" onclick="openProductDetail('${product.id}')">
-              <img id="main-img-${product.id}" 
-                   src="${mainImage}" 
-                   alt="${product.name || 'Product'}" 
-                   class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105">
-                   
-              ${images.length > 1 ? `
-                <span class="absolute bottom-2 right-2 bg-black/65 text-white text-xs px-2 py-0.5 rounded-full backdrop-blur-sm">
-                  1/${images.length}
-                </span>
-              ` : ''}
-            </div>
-
-            <!-- Mobile & Desktop Multi-Image Thumbnails -->
-            ${images.length > 1 ? `
-              <div class="flex gap-1.5 p-2 overflow-x-auto scrollbar-none bg-gray-50/50 border-t border-gray-100">
-                ${images.map((imgUrl, index) => `
-                  <button onclick="switchImage('${product.id}', '${imgUrl}', event)" 
-                          class="w-10 h-12 flex-shrink-0 rounded overflow-hidden border ${index === 0 ? 'border-black ring-1 ring-black' : 'border-gray-200 opacity-70 hover:opacity-100'} transition-all">
-                    <img src="${imgUrl}" class="w-full h-full object-cover" alt="Thumbnail">
-                  </button>
-                `).join('')}
-              </div>
-            ` : ''}
-
-            <!-- Product Info -->
-            <div class="p-4 flex flex-col flex-grow">
-              <h3 class="text-sm font-medium text-gray-900 line-clamp-1 cursor-pointer" onclick="openProductDetail('${product.id}')">
-                ${product.name}
-              </h3>
-              <p class="text-sm font-semibold text-gray-900 mt-1">₹${product.price}</p>
-            </div>
-          </div>
-        `;
-      }).join('');
+const fmt = value => typeof value === "number" ? "₹" + value.toLocaleString("en-IN") : (value || "COMING SOON");
+const slugFromName = name => (name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const localCatalogueFallback = [{"id":1,"slug":"boat-neck-halter-dress","name":"Boat-Neck Halter Dress","description":"A floral-print dress featuring a halter neckline with a back-neck tie, a fitted waist, and a flared skirt for a playful and elegant look.","colour":"Floral","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Not specified","care":"Follow the garment care label. Handle the printed fabric gently and avoid harsh bleach.","category":"Western Collection","tag":"Floral · Halter Neck","images":[{"src":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg","alt":"Boat-Neck Halter Dress product view"},{"src":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-model-views.png","alt":"Boat-Neck Halter Dress product view"},{"src":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-detail-views.png","alt":"Boat-Neck Halter Dress product view"}],"img":"assets/products/boat-neck-halter-dress/boat-neck-halter-dress-main.jpeg"},{"id":2,"slug":"mustard-muse-shirt","name":"Mustard Muse Shirt","description":"A mustard-checkered shirt made from handwoven cotton, featuring a contrasting brown pocket, wooden buttons, statement flared cuffs, and brown piping for a modern, effortless look.","colour":"Mustard","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Western Collection","tag":"Handwoven Cotton · Checked","images":[{"src":"assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg","alt":"Mustard Muse Shirt product view"},{"src":"assets/products/mustard-muse-shirt/mustard-muse-shirt-front-view.png","alt":"Mustard Muse Shirt product view"}],"img":"assets/products/mustard-muse-shirt/mustard-muse-shirt-main.jpeg"},{"id":3,"slug":"bow-palazzo-pants","name":"Bow Palazzo Pants","description":"A chic olive-green palazzo pant made from handwoven cotton, featuring a high-waisted fit, wide-flowing legs, and a statement bow detail at the waist, paired with a sleeveless plum top for an elegant, contemporary look.","colour":"Olive Green","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton (as provided)","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Western Collection","tag":"Handwoven Cotton · Wide Leg","images":[{"src":"assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg","alt":"Bow Palazzo Pants product view"},{"src":"assets/products/bow-palazzo-pants/bow-palazzo-pants-model-views.png","alt":"Bow Palazzo Pants product view"},{"src":"assets/products/bow-palazzo-pants/bow-palazzo-pants-detail-views.png","alt":"Bow Palazzo Pants product view"}],"img":"assets/products/bow-palazzo-pants/bow-palazzo-pants-main.jpeg"},{"id":4,"slug":"chashni-set","name":"Chashni Set","description":"A feminine pink off-shoulder top made from handwoven cotton, featuring a delicate ruffled neckline, paired with flowing white wide-leg pants made from handwoven cotton for a soft, elegant, and effortless look.","colour":"Pink and White","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Western Collection","tag":"Handwoven Cotton · Two-Piece Set","images":[{"src":"assets/products/chashni-set/chashni-set-main.jpeg","alt":"Chashni Set product view"},{"src":"assets/products/chashni-set/chashni-set-top-details.png","alt":"Chashni Set product view"}],"img":"assets/products/chashni-set/chashni-set-main.jpeg"},{"id":5,"slug":"dune-belle-corset","name":"Dune Belle Corset","description":"A chic beige corset top made from handwoven cotton, featuring structured cups, wide shoulder straps, and elegant vertical pintuck detailing, paired with matching high-waisted, wide-leg trousers made from handwoven cotton for a refined, contemporary look.","colour":"Beige","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"DRY CLEAN ONLY. Do not machine wash, soak, or wring. Store carefully to help maintain the corset's structure.","category":"Marushobha Luxe","tag":"Handwoven Cotton · Corset Set","images":[{"src":"assets/products/dune-belle-corset/dune-belle-corset-main.jpeg","alt":"Dune Belle Corset product view"},{"src":"assets/products/dune-belle-corset/dune-belle-corset-front-view.jpeg","alt":"Dune Belle Corset product view"},{"src":"assets/products/dune-belle-corset/dune-belle-corset-detail-views.png","alt":"Dune Belle Corset product view"}],"img":"assets/products/dune-belle-corset/dune-belle-corset-main.jpeg"},{"id":6,"slug":"lotus-cuff-shirt","name":"Lotus Cuff Shirt","description":"A sky-blue striped shirt made from handwoven cotton, featuring a classic collar, button-down front, voluminous sleeves, and unique petal-shaped cuffs for a soft, elegant look.","colour":"Sky Blue","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Indian Collection","tag":"Handwoven Cotton · Petal Cuffs","images":[{"src":"assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg","alt":"Lotus Cuff Shirt product view"},{"src":"assets/products/lotus-cuff-shirt/lotus-cuff-shirt-model-views.jpeg","alt":"Lotus Cuff Shirt product view"}],"img":"assets/products/lotus-cuff-shirt/lotus-cuff-shirt-main.jpeg"},{"id":7,"slug":"thar-ki-phoolwari","name":"Thar Ki Phoolwari","description":"A pink floral-print top featuring a square neckline, broad shoulder straps, a fitted silhouette, and adjustable side-string detailing for a stylish, feminine look. Made from handwoven cotton.","colour":"Pink Floral","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Indian Collection","tag":"Handwoven Cotton · Side-String Top","images":[{"src":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg","alt":"Thar Ki Phoolwari product view"},{"src":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-detail.jpeg","alt":"Thar Ki Phoolwari product view"},{"src":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-model-views.png","alt":"Thar Ki Phoolwari product view"}],"img":"assets/products/thar-ki-phoolwari/thar-ki-phoolwari-main.jpeg"},{"id":8,"slug":"madhuban-side-string-top","name":"Madhuban Side-String Top","description":"A handwoven cotton top featuring a square neckline, broad shoulder straps, a playful multicolour print, and adjustable side-string detailing with decorative tassels.","colour":"Multicolour","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Handwoven cotton","care":"Gentle hand wash separately in cold water with mild detergent. Do not bleach or wring. Dry in shade and iron on low to medium heat.","category":"Indian Collection","tag":"Handwoven Cotton · Side-String Top","images":[{"src":"assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg","alt":"Madhuban Side-String Top product view"},{"src":"assets/products/madhuban-side-string-top/madhuban-side-string-top-detail.jpeg","alt":"Madhuban Side-String Top product view"}],"img":"assets/products/madhuban-side-string-top/madhuban-side-string-top-main.jpeg"},{"id":9,"slug":"maharani-fusion-top","name":"Maharani Fusion Top","description":"A two-piece fusion top featuring a black-and-red Bandhani-print top with a V-neckline and flared sleeves, paired with a maroon handwoven cotton corset featuring a sweetheart neckline and adjustable back lace-up detailing.","colour":"Black, Red and Maroon","sizes":["XS","S","M","L"],"price":"COMING SOON","fabric":"Bandhani-print top with handwoven cotton corset","care":"DRY CLEAN ONLY because this set includes a structured corset. Do not machine wash, soak, or wring. Store carefully to help maintain its shape.","category":"Indian Collection","tag":"Bandhani Print · Two-Piece Fusion Top","images":[{"src":"assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg","alt":"Maharani Fusion Top product view"},{"src":"assets/products/maharani-fusion-top/maharani-fusion-top-detail.jpeg","alt":"Maharani Fusion Top product view"}],"img":"assets/products/maharani-fusion-top/maharani-fusion-top-main.jpeg"}];
+let product = null, images = [], activeIndex = 0, zoom = 1, panX = 0, panY = 0;
+const $ = id => document.getElementById(id);
+function esc(s){return String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function productImages(p){
+  const found = [];
+  const add = v => {
+    if (!v) return;
+    if (Array.isArray(v)) { v.forEach(add); return; }
+    if (typeof v === "string") { found.push({src:v,alt:p.name || "Marushobha product"}); return; }
+    if (typeof v === "object") {
+      const src = v.src || v.url || v.imageUrl || v.image || v.downloadURL || v.downloadUrl || v.photoURL;
+      if (src) found.push({src,alt:v.alt || p.name || "Marushobha product"});
     }
+  };
+  add(p.images); add(p.imageUrls); add(p.gallery); add(p.productImages);
+  add(p.img); add(p.imageUrl); add(p.image); add(p.mainImage); add(p.photo); add(p.photoURL);
+  const seen = new Set();
+  return found.filter(x => { if (seen.has(x.src)) return false; seen.add(x.src); return true; });
+}
 
-    // Switch active image on card via thumbnails
-    function switchImage(productId, imageUrl, event) {
-      event.stopPropagation();
-      const mainImg = document.getElementById(`main-img-${productId}`);
-      if (mainImg) mainImg.src = imageUrl;
+async function loadProduct(){
+  const params = new URLSearchParams(location.search);
+  const slug = params.get("slug") || "";
+  const id = params.get("id") || "";
+  const requestedName = params.get("name") || "";
+  let firestoreProducts = [], jsonProducts = [...localCatalogueFallback], firestoreError = null;
 
-      const button = event.currentTarget;
-      const container = button.parentElement;
-      container.querySelectorAll('button').forEach(btn => {
-        btn.classList.remove('border-black', 'ring-1', 'ring-black', 'opacity-100');
-        btn.classList.add('border-gray-200', 'opacity-70');
+  // Read products created or edited by the Admin Dashboard.
+  try {
+    const snap = await getDocs(collection(db, "products"));
+    firestoreProducts = snap.docs.map(d => {
+      const data = d.data() || {};
+      const name = data.name || data.productName || data.title || "";
+      return {
+        ...data, id: data.id || d.id, name,
+        slug: data.slug || slugFromName(name),
+        description: data.description || data.productDescription || data.details || "",
+        collection: data.collection || data.category || data.collectionName || "",
+        colour: data.colour || data.color || data.colourName || data.colorName || "",
+        fabric: data.fabric || data.material || data.composition || "",
+        tag: data.tag || data.designDetails || data.details || "",
+        care: data.care || data.careInstructions || "",
+        images: data.images || data.imageUrls || data.gallery || data.productImages || []
+      };
+    });
+  } catch (err) {
+    firestoreError = err;
+    console.error("Could not load Firestore products:", err);
+  }
+
+  // Keep products.json as a fallback for the original catalogue.
+  try {
+    const response = await fetch("products.json", {cache:"no-store"});
+    if (response.ok) {
+      const list = await response.json();
+      if (Array.isArray(list)) {
+        // Keep the embedded known-good catalogue if the deployed JSON is stale or incomplete.
+        const combined = [...localCatalogueFallback];
+        for (const entry of list) {
+          const entryName = entry.name || entry.productName || entry.title || "";
+          const entrySlug = entry.slug || slugFromName(entryName);
+          const existing = combined.findIndex(p => (p.slug || slugFromName(p.name || p.productName || p.title)) === entrySlug);
+          if (existing < 0) combined.push(entry);
+          else combined[existing] = {...combined[existing], ...entry,
+            images: (Array.isArray(entry.images) && entry.images.length) ? entry.images : combined[existing].images,
+            img: entry.img || entry.imageUrl || combined[existing].img || combined[existing].imageUrl};
+        }
+        jsonProducts = combined;
+      }
+    }
+  } catch (err) {
+    console.warn("products.json fallback could not be loaded:", err);
+  }
+
+  // Merge both sources instead of discarding products.json records when a
+  // Firestore product has the same slug. Older catalogue images often live
+  // in products.json/assets, while Firestore may only contain product details.
+  const allProducts = [...firestoreProducts];
+  for (const item of jsonProducts) {
+    const itemName = item.name || item.productName || item.title || "";
+    const itemSlug = item.slug || slugFromName(itemName);
+    const index = allProducts.findIndex(p =>
+      (p.id && item.id && String(p.id) === String(item.id)) ||
+      ((p.slug || slugFromName(p.name || p.productName || p.title)) &&
+       (p.slug || slugFromName(p.name || p.productName || p.title)) === itemSlug)
+    );
+    if (index === -1) {
+      allProducts.push({...item, name:itemName, slug:itemSlug});
+    } else {
+      const current = allProducts[index];
+      const hasImageValue = value => {
+        if (typeof value === "string") return !!value.trim();
+        if (Array.isArray(value)) return value.some(hasImageValue);
+        if (value && typeof value === "object") return !!(value.src || value.url || value.imageUrl || value.image || value.downloadURL || value.downloadUrl || value.photoURL);
+        return false;
+      };
+      const collectImages = source => {
+        const out = [];
+        const add = value => {
+          if (!value) return;
+          if (Array.isArray(value)) { value.forEach(add); return; }
+          if (typeof value === "string") { out.push({src:value, alt:itemName}); return; }
+          if (typeof value === "object") {
+            const src = value.src || value.url || value.imageUrl || value.image || value.downloadURL || value.downloadUrl || value.photoURL;
+            if (src) out.push({src, alt:value.alt || itemName});
+          }
+        };
+        [source.images, source.imageUrls, source.gallery, source.productImages,
+         source.img, source.imageUrl, source.image, source.mainImage, source.photo, source.photoURL].forEach(add);
+        return out;
+      };
+      // Keep image URLs from BOTH sources. Firestore can contain an empty
+      // images array while the original images are still in products.json.
+      const mergedImages = [...collectImages(item), ...collectImages(current)];
+      const seenImageUrls = new Set();
+      const uniqueImages = mergedImages.filter(image => {
+        if (seenImageUrls.has(image.src)) return false;
+        seenImageUrls.add(image.src);
+        return true;
       });
-      button.classList.remove('border-gray-200', 'opacity-70');
-      button.classList.add('border-black', 'ring-1', 'ring-black', 'opacity-100');
+      allProducts[index] = {
+        ...item,
+        ...current,
+        name: current.name || current.productName || current.title || itemName,
+        slug: current.slug || itemSlug,
+        images: uniqueImages,
+        img: item.img || item.imageUrl || current.img || current.imageUrl || "",
+        imageUrl: item.imageUrl || item.img || current.imageUrl || current.img || ""
+      };
     }
+  }
 
-    // Open Product Detail Interface (First Click)
-    function openProductDetail(productId) {
-      const product = activeProducts.find(p => p.id === productId);
-      if (!product) return;
+  product = allProducts.find(p =>
+    (id && String(p.id) === id) ||
+    (slug && (p.slug || slugFromName(p.name || p.productName || p.title)) === slug) ||
+    (requestedName && String(p.name || p.productName || p.title).toLowerCase() === requestedName.toLowerCase())
+  );
 
-      const images = product.images && product.images.length > 0 
-        ? product.images 
-        : (product.imageUrl ? [product.imageUrl] : []);
-      
-      window.currentActiveImgUrl = images.length > 0 ? images[0] : '';
-      const detailModal = document.getElementById('product-detail-modal');
+  if (!product) {
+    const message = firestoreError
+      ? "Firebase products could not be read. Check Firestore read rules and the browser console."
+      : "Return to the shop and select the product again. Confirm the new product exists in Firestore Database → products.";
+    $("productRoot").innerHTML = `<div class="error"><strong>Product not found.</strong><p>${esc(message)}</p><a class="back" href="index.html#shop">Back to Shop</a></div>`;
+    return;
+  }
 
-      document.getElementById('detail-content').innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          <div class="space-y-4">
-            <div class="relative aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden cursor-pointer group" onclick="openFullScreenModal(window.currentActiveImgUrl)">
-              <img id="detail-main-img" src="${window.currentActiveImgUrl}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102" alt="Product View">
-              <div class="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-1.5 backdrop-blur-md">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-                </svg>
-                Click to expand
-              </div>
-            </div>
-            
-            ${images.length > 1 ? `
-              <div class="flex gap-2 overflow-x-auto pb-2">
-                ${images.map(img => `
-                  <img src="${img}" onclick="setDetailMainImage('${img}')" class="w-16 h-20 object-cover rounded cursor-pointer border hover:border-black transition-all" alt="Thumbnail">
-                `).join('')}
-              </div>
-            ` : ''}
-          </div>
+  product.name = product.name || product.productName || product.title || "Marushobha Product";
+  product.slug = product.slug || slugFromName(product.name);
+  images = productImages(product);
+  document.title = `${product.name} | Marushobha`;
+  $("crumbName").textContent = product.name;
+  if (!images.length) {
+    $("productRoot").innerHTML = `<div class="error"><strong>Product details loaded, but no image was found.</strong><p>Check the image fields in its Firestore document: img, imageUrl, or images.</p></div>`;
+    return;
+  }
+  render();
+}
 
-          <div class="flex flex-col justify-between h-full">
-            <div>
-              <h2 class="text-2xl font-serif font-medium text-gray-900">${product.name}</h2>
-              <p class="text-xl font-semibold text-gray-900 mt-2">₹${product.price}</p>
-              <p class="text-gray-600 mt-4 text-sm leading-relaxed">${product.description || ''}</p>
-            </div>
-            
-            <button onclick="addToBag('${product.id}')" class="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition-colors mt-8">
-              Add to Bag
-            </button>
-          </div>
-        </div>
-      `;
-
-      detailModal.classList.remove('hidden');
-    }
-
-    function closeProductDetail() {
-      document.getElementById('product-detail-modal').classList.add('hidden');
-    }
-
-    function setDetailMainImage(url) {
-      window.currentActiveImgUrl = url;
-      document.getElementById('detail-main-img').src = url;
-    }
-
-    // Open Full-Screen Lightbox View (Second Click)
-    function openFullScreenModal(imgUrl) {
-      if (!imgUrl) return;
-      document.getElementById('lightbox-img').src = imgUrl;
-      document.getElementById('fullscreen-lightbox').classList.remove('hidden');
-    }
-
-    function closeFullScreenModal() {
-      document.getElementById('fullscreen-lightbox').classList.add('hidden');
-    }
-  </script>
+function render(){
+  const thumbs = images.map((im,i)=>`<button class="thumb ${i===activeIndex?'active':''}" data-thumb="${i}" aria-label="Show image ${i+1}"><img src="${esc(im.src)}" alt="${esc(im.alt)}"></button>`).join("");
+  $("productRoot").innerHTML = `<section class="layout">
+    <div class="gallery">
+      <div class="hero-wrap"><img class="hero-img" id="heroImage" src="${esc(images[activeIndex].src)}" alt="${esc(images[activeIndex].alt)}" title="Click to zoom"><div class="gallery-actions"><button id="openZoom" type="button">⤢ Zoom image</button></div></div>
+      <div class="thumbs" aria-label="Product images">${thumbs}</div>
+    </div>
+    <div class="info">
+      <div class="eyebrow">${esc(product.collection || product.category || "Marushobha Collection")}</div>
+      <h1>${esc(product.name)}</h1><div class="price">${esc(fmt(product.price))}</div>
+      <p class="description">${esc(product.description || "")}</p>
+      <div class="details">
+        <div class="detail-row"><strong>Colour</strong>${esc(product.colour || "As shown")}</div>
+        <div class="detail-row"><strong>Fabric & Composition</strong>${esc(product.fabric || "Refer to product label")}</div>
+        <div class="detail-row"><strong>Design Details</strong>${esc(product.tag || "See product images and description")}</div>
+        <div class="detail-row"><strong>Available Sizes</strong>${esc((product.sizes || ["XS","S","M","L"]).join(", "))}</div>
+        <div class="detail-row"><strong>Care Instructions</strong>${esc(product.care || "Follow the garment care label.")}</div>
+      </div>
+      <label class="size-label" for="sizeSelect">Select Size</label><select class="size-select" id="sizeSelect">${(product.sizes || ["XS","S","M","L"]).map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join("")}</select>
+      <p class="note">For availability, sizing or product queries, please contact Marushobha before placing your order.</p>
+      <p><a class="back" href="index.html#shop">Continue Shopping</a></p>
+    </div>
+  </section>`;
+  $("heroImage").addEventListener("click",openZoom);
+  $("openZoom").addEventListener("click",openZoom);
+  document.querySelectorAll("[data-thumb]").forEach(b=>b.addEventListener("click",()=>{activeIndex=Number(b.dataset.thumb);render();}));
+}
+function updateZoom(){ $("lightboxImg").style.transform=`translate(${panX}px,${panY}px) scale(${zoom})`; }
+function setImage(){ $("lightboxImg").src=images[activeIndex].src; $("lightboxImg").alt=images[activeIndex].alt||product.name; zoom=1;panX=0;panY=0;updateZoom(); }
+function openZoom(){setImage();$("lightbox").classList.add("open");document.body.style.overflow="hidden";}
+function closeZoom(){$("lightbox").classList.remove("open");document.body.style.overflow="";}
+function changeImage(delta){activeIndex=(activeIndex+delta+images.length)%images.length;setImage();render();}
+$("closeZoom").addEventListener("click",closeZoom);
+$("zoomIn").addEventListener("click",()=>{zoom=Math.min(zoom+0.35,4);updateZoom();});
+$("zoomOut").addEventListener("click",()=>{zoom=Math.max(1,zoom-0.35);if(zoom===1){panX=0;panY=0;}updateZoom();});
+$("zoomReset").addEventListener("click",()=>{zoom=1;panX=0;panY=0;updateZoom();});
+$("prevImage").addEventListener("click",()=>changeImage(-1));
+$("nextImage").addEventListener("click",()=>changeImage(1));
+$("lightbox").addEventListener("click",e=>{if(e.target===$("lightbox"))closeZoom();});
+document.addEventListener("keydown",e=>{if(!$("lightbox").classList.contains("open"))return;if(e.key==="Escape")closeZoom();if(e.key==="ArrowLeft")changeImage(-1);if(e.key==="ArrowRight")changeImage(1);if(e.key==="+"){$("zoomIn").click();}if(e.key==="-"){$("zoomOut").click();}});
+$("lightboxInner").addEventListener("wheel",e=>{if(!$("lightbox").classList.contains("open"))return;e.preventDefault();zoom=Math.max(1,Math.min(4,zoom+(e.deltaY<0?.15:-.15)));updateZoom();},{passive:false});
+let pointers=new Map(), pinchStartDist=0, pinchStartZoom=1, dragStart=null;
+const inner=$("lightboxInner"), zoomImg=$("lightboxImg");
+inner.addEventListener("pointerdown",e=>{
+  if(e.target.closest("button"))return;
+  inner.setPointerCapture?.(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pointers.size===2){const a=[...pointers.values()];pinchStartDist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);pinchStartZoom=zoom;}
+  else if(pointers.size===1 && zoom>1){dragStart={x:e.clientX,y:e.clientY,px:panX,py:panY};zoomImg.classList.add("dragging");}
+});
+inner.addEventListener("pointermove",e=>{
+  if(!pointers.has(e.pointerId))return;
+  pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});
+  if(pointers.size===2){const a=[...pointers.values()];const dist=Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);if(pinchStartDist)zoom=Math.max(1,Math.min(4,pinchStartZoom*dist/pinchStartDist));if(zoom===1){panX=0;panY=0;}updateZoom();}
+  else if(pointers.size===1 && dragStart && zoom>1){panX=dragStart.px+e.clientX-dragStart.x;panY=dragStart.py+e.clientY-dragStart.y;updateZoom();}
+});
+function endPointer(e){pointers.delete(e.pointerId);if(pointers.size<2)pinchStartDist=0;if(!pointers.size){dragStart=null;zoomImg.classList.remove("dragging");}}
+inner.addEventListener("pointerup",endPointer);inner.addEventListener("pointercancel",endPointer);
+let touchStartX=0;
+inner.addEventListener("touchstart",e=>{if(e.touches.length===1)touchStartX=e.touches[0].clientX;},{passive:true});
+inner.addEventListener("touchend",e=>{if(e.changedTouches.length===1 && zoom===1){const dx=e.changedTouches[0].clientX-touchStartX;if(Math.abs(dx)>70)changeImage(dx<0?1:-1);}},{passive:true});
+loadProduct();
+</script>
 </body>
 </html>

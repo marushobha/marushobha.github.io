@@ -1,57 +1,34 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your Bag | Marushobha</title><style>
-:root{--ivory:#f8f4ed;--ink:#28221e;--brown:#6e4b36;--muted:#766e66;--line:#e3d9ce;--white:#fffdf9}
-*{box-sizing:border-box}body{margin:0;background:var(--ivory);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
-header{border-bottom:1px solid var(--line);padding:15px 5%;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.brand{font-family:Georgia,serif;letter-spacing:.18em;font-size:1.1rem;color:var(--ink);text-decoration:none}.nav{display:flex;gap:12px;flex-wrap:wrap}.nav a,.btn{border:1px solid var(--brown);padding:9px 12px;color:var(--brown);background:transparent;text-decoration:none;cursor:pointer}
-main{max-width:1050px;margin:32px auto;padding:0 20px 60px}h1{font-family:Georgia,serif;font-weight:400;font-size:2.2rem;margin-bottom:5px}.muted{color:var(--muted)}.message{padding:15px;border:1px solid var(--line);margin:20px 0;background:var(--white)}
-.row{display:grid;grid-template-columns:100px 1fr auto;gap:18px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}.row img{width:100px;height:125px;object-fit:cover;background:#eee7df}.name{font-family:Georgia,serif;font-size:1.2rem}.small{font-size:.9rem;color:var(--muted)}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.primary{background:var(--brown)!important;color:white!important}.summary{max-width:390px;margin:25px 0 0 auto;padding:20px;border:1px solid var(--line)}.empty{text-align:center;padding:40px 15px;border:1px dashed var(--line)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.card{border:1px solid var(--line);padding:12px}.card img{width:100%;height:270px;object-fit:cover;background:#eee7df}.card .name{margin:10px 0}
-@media(max-width:650px){.row{grid-template-columns:76px 1fr;gap:12px}.row img{width:76px;height:100px}.row .row-actions{grid-column:2}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card img{height:210px}}@media(max-width:430px){.grid{grid-template-columns:1fr}.card img{height:300px}}
-</style></head><body>
-<header><a class="brand" href="index.html">MARUSHOBHA</a><nav class="nav"><a href="index.html#shop">Continue Shopping</a><a href="wishlist.html">Wishlist</a><button class="btn" id="logout" hidden>Sign out</button></nav></header>
-<main><h1>Your Bag</h1><p class="muted">Saved securely to your signed-in Marushobha account.</p><div id="message" class="message">Checking sign-in…</div><div id="content"></div></main>
-
-<div id="signInModal" class="signin-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="signInTitle">
- <section class="signin-card"><button type="button" class="signin-close" id="closeSignIn" aria-label="Close sign in">×</button>
-  <h2 id="signInTitle">Sign in to Marushobha</h2><p class="signin-muted">Use Google or your mobile number to access your personal Bag and Wishlist.</p>
-  <button type="button" id="googleSignIn" class="signin-google">Continue with Google</button>
-  <div class="signin-divider"><span>OR</span></div>
-  <label for="phoneNumber">Mobile number with country code</label><input id="phoneNumber" type="tel" autocomplete="tel" placeholder="+91 9876543210">
-  <div id="recaptcha-container"></div><button type="button" id="sendOtp" class="signin-primary">Send OTP</button>
-  <label for="phoneOtp">Verification code (OTP)</label><input id="phoneOtp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Enter 6-digit OTP">
-  <button type="button" id="verifyOtp" class="signin-primary">Verify OTP &amp; Sign In</button>
-  <p id="signInStatus" class="signin-status" aria-live="polite"></p>
- </section>
-</div>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your Bag | Marushobha</title>
 <style>
-.signin-overlay{position:fixed;inset:0;z-index:9999;background:#201812b8;display:flex;align-items:center;justify-content:center;padding:16px}.signin-overlay[hidden]{display:none!important}.signin-card{position:relative;width:min(100%,430px);max-height:95vh;overflow:auto;background:#fffdf9;color:#28221e;padding:28px;border:1px solid #e3d9ce;box-shadow:0 20px 70px #0003}.signin-card h2{font-family:Georgia,serif;font-weight:400;margin:0 28px 8px 0;font-size:1.8rem}.signin-muted,.signin-status{color:#766e66;font-size:.9rem}.signin-close{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:1.8rem;cursor:pointer}.signin-google,.signin-primary{display:block;width:100%;padding:12px 14px;margin-top:12px;border:1px solid #6e4b36;cursor:pointer;font:inherit}.signin-google{background:#fffdf9;color:#6e4b36}.signin-primary{background:#6e4b36;color:white}.signin-card label{display:block;margin:12px 0 5px;font-size:.88rem}.signin-card input{width:100%;padding:12px;border:1px solid #cfc3b6;background:white;font:inherit}.signin-divider{display:flex;align-items:center;gap:12px;color:#766e66;font-size:.8rem;margin:15px 0}.signin-divider:before,.signin-divider:after{content:"";height:1px;background:#e3d9ce;flex:1}.signin-status{min-height:1.2em;margin-bottom:0}
-</style>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInWithPhoneNumber, RecaptchaVerifier, signOut } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
-import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
-const firebaseConfig={apiKey:"AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",authDomain:"marushobha-1e31f.firebaseapp.com",projectId:"marushobha-1e31f",storageBucket:"marushobha-1e31f.firebasestorage.app",messagingSenderId:"997754535596",appId:"1:997754535596:web:aafc83bad8c3d413cf6909",measurementId:"G-DLWGD0ZDQ1"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),el=id=>document.getElementById(id);
-let user=null,data={bag:[],wishlist:[]},unsubscribe=null;
-const dataRef=uid=>doc(db,"customerData",uid);
-function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function money(p){const n=Number(p.price);return n>0?"₹"+n.toLocaleString("en-IN"):(p.displayPrice||"Price coming soon");}
-let phoneConfirmation=null,recaptchaVerifier=null;
-function login(){el("signInModal").hidden=false;el("signInStatus").textContent="";}
-function authErrorMessage(err){const c=err?.code||"";if(c.includes("unauthorized-domain"))return "Add marushobha.com to Firebase Authentication → Settings → Authorized domains.";if(c.includes("invalid-phone-number"))return "Enter a valid mobile number including country code, e.g. +91…";if(c.includes("captcha-check-failed"))return "reCAPTCHA verification failed. Refresh the page and try again.";return err?.message||"Sign-in failed. Check Firebase Authentication settings and try again."}
-async function googleLogin(){try{await signInWithPopup(auth,new GoogleAuthProvider());el("signInModal").hidden=true;}catch(e){console.error(e);el("signInStatus").textContent=authErrorMessage(e)}}
-async function sendPhoneOtp(){const phone=el("phoneNumber").value.trim();if(!/^\+[1-9]\d{7,14}$/.test(phone)){el("signInStatus").textContent="Enter a valid number with country code, for example +91 9876543210.";return}try{if(recaptchaVerifier){try{recaptchaVerifier.clear()}catch{}recaptchaVerifier=null}recaptchaVerifier=new RecaptchaVerifier(auth,"recaptcha-container",{size:"normal",callback:()=>{}});await recaptchaVerifier.render();phoneConfirmation=await signInWithPhoneNumber(auth,phone,recaptchaVerifier);el("signInStatus").textContent="OTP sent. Check your SMS and enter the code below."}catch(e){console.error(e);el("signInStatus").textContent=authErrorMessage(e);if(recaptchaVerifier){try{recaptchaVerifier.clear()}catch{}recaptchaVerifier=null}}}
-async function verifyPhoneOtp(){const otp=el("phoneOtp").value.trim();if(!phoneConfirmation){el("signInStatus").textContent="First tap Send OTP.";return}if(!/^\d{6}$/.test(otp)){el("signInStatus").textContent="Enter the 6-digit OTP.";return}try{await phoneConfirmation.confirm(otp);phoneConfirmation=null;el("signInModal").hidden=true}catch(e){console.error(e);el("signInStatus").textContent=authErrorMessage(e)}}
-el("googleSignIn").addEventListener("click",googleLogin);el("sendOtp").addEventListener("click",sendPhoneOtp);el("verifyOtp").addEventListener("click",verifyPhoneOtp);el("closeSignIn").addEventListener("click",()=>el("signInModal").hidden=true);el("signInModal").addEventListener("click",e=>{if(e.target===el("signInModal"))el("signInModal").hidden=true});
-async function persist(){if(!user)throw new Error("Sign-in required");await setDoc(dataRef(user.uid),{bag:data.bag,wishlist:data.wishlist,updatedAt:new Date().toISOString()},{merge:true})}
-function render(){const list=data.bag,content=el("content");if(!list.length){content.innerHTML='<div class="empty">Your bag is empty. <p><a href="index.html#shop">Discover the collection</a></p></div>';el("message").textContent="Signed in as "+(user.email||"customer");return}
-el("message").textContent="Signed in as "+(user.email||"customer");
-content.innerHTML=list.map((p,i)=>`<article class="row"><img src="${esc(p.image||"")}" alt="${esc(p.name)}" onerror="this.style.visibility='hidden'"><div><div class="name">${esc(p.name)}</div><div class="small">Size: ${esc(p.size||"Not selected")} · ${esc(money(p))}</div><div class="buttons"><button class="btn" data-dec="${i}">−</button><span>${Math.max(1,Number(p.quantity)||1)}</span><button class="btn" data-inc="${i}">+</button><button class="btn" data-remove="${i}">Remove</button></div></div><div class="row-actions">${esc((Number(p.price)>0)?"₹"+((Number(p.price)||0)*Math.max(1,Number(p.quantity)||1)).toLocaleString("en-IN"):(p.displayPrice||"Price coming soon"))}</div></article>`).join("");
-const unknown=list.some(p=>!(Number(p.price)>0)),total=list.reduce((s,p)=>s+(Number(p.price)||0)*Math.max(1,Number(p.quantity)||1),0);
-content.innerHTML+=`<section class="summary"><p>Subtotal: <strong>${unknown?"To be confirmed":"₹"+total.toLocaleString("en-IN")}</strong></p><p class="small">Checkout is not connected yet. Connect your payment/checkout flow before accepting orders.</p><a class="btn primary" href="index.html#shop">Continue Shopping</a></section>`;
-content.querySelectorAll("[data-inc]").forEach(b=>b.onclick=async()=>{data.bag[+b.dataset.inc].quantity=Math.max(1,Number(data.bag[+b.dataset.inc].quantity)||1)+1;await persist()});
-content.querySelectorAll("[data-dec]").forEach(b=>b.onclick=async()=>{let p=data.bag[+b.dataset.dec];p.quantity=Math.max(1,(Number(p.quantity)||1)-1);await persist()});
-content.querySelectorAll("[data-remove]").forEach(b=>b.onclick=async()=>{data.bag.splice(+b.dataset.remove,1);await persist()});
-}
-el("logout").addEventListener("click",()=>signOut(auth));
-onAuthStateChanged(auth,u=>{user=u;el("logout").hidden=!u;if(unsubscribe){unsubscribe();unsubscribe=null}if(!u){data={bag:[],wishlist:[]};el("message").innerHTML='Please sign in to access your personal items. <button class="btn primary" id="login">Sign in / Create account</button>';el("content").innerHTML="";el("login").addEventListener("click",login);return}unsubscribe=onSnapshot(dataRef(u.uid),snap=>{const d=snap.exists()?snap.data():{};data={bag:Array.isArray(d.bag)?d.bag:[],wishlist:Array.isArray(d.wishlist)?d.wishlist:[]};render()},err=>{console.error(err);el("message").textContent="Unable to load saved items. Check Firestore security rules."})});
+:root{--ink:#241d1a;--muted:#766b65;--line:#e8dfda;--paper:#fffdfb;--accent:#714438}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{padding:20px 5%;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-family:Georgia,serif;letter-spacing:3px;font-size:23px;text-decoration:none;color:var(--ink)}nav{display:flex;gap:18px}a{color:var(--accent)}nav a{font-size:14px}
+main{max-width:1100px;margin:38px auto;padding:0 20px}h1{font-family:Georgia,serif;font-size:34px;font-weight:400;margin:0 0 8px}.sub{color:var(--muted);margin-bottom:28px}
+.row{display:grid;grid-template-columns:110px 1fr auto;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);align-items:center}.row img{width:110px;height:130px;object-fit:cover;background:#f5efeb}.name{font-family:Georgia,serif;font-size:20px;margin-bottom:8px}.meta{color:var(--muted);font-size:14px;line-height:1.7}.price{font-weight:600;margin-bottom:12px}.qty{display:flex;align-items:center;gap:10px;margin-top:10px}.qty button,.remove,.action{border:1px solid var(--line);background:white;padding:9px 12px;cursor:pointer;color:var(--ink)}.remove{margin-top:8px;font-size:13px}.summary{max-width:400px;margin:28px 0 0 auto;padding:22px;border:1px solid var(--line)}.total{display:flex;justify-content:space-between;font-size:18px;margin-bottom:18px}.action{display:block;text-align:center;text-decoration:none;background:var(--accent);color:white;border-color:var(--accent);padding:13px;width:100%;margin-top:10px}.empty{padding:50px 20px;text-align:center;border:1px dashed var(--line);color:var(--muted)}.empty a{display:inline-block;margin-top:14px}
+@media(max-width:600px){main{margin:25px auto}.row{grid-template-columns:82px 1fr;gap:12px}.row img{width:82px;height:105px}.row .right{grid-column:2}.name{font-size:17px}.summary{margin-top:20px}}
+</style></head><body>
+<header><a class="brand" href="index.html">MARUSHOBHA</a><nav><a href="index.html">Continue Shopping</a><a href="wishlist.html">Wishlist</a><a href="index.html#account" id="profileLink">♙ Profile</a></nav></header>
+<main><h1>Your Bag</h1><div class="sub">Review your selected pieces before checkout.</div><div id="authRequired" class="empty" hidden>Please sign in to view your personal bag.<br><a href="index.html?signin=1&return=bag.html">Sign in with Google or Mobile OTP</a></div><div id="items"></div><div id="summary"></div></main>
+<script>
+const CART_BASE="marushobha_cart_v1_"; function cartKey(){return window.marushobhaUid?CART_BASE+window.marushobhaUid:null;}
+function read(){const k=cartKey();if(!k)return[];try{let v=JSON.parse(localStorage.getItem(k)||"[]");return Array.isArray(v)?v:[]}catch{return[]}}
+function save(v){const k=cartKey();if(k)localStorage.setItem(k,JSON.stringify(v))}
+function money(v,display){if(display && display!=="Coming soon")return display;let n=Number(v);return Number.isFinite(n)&&n>0?"₹"+n.toLocaleString("en-IN"):"Price coming soon"}
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){let items=document.getElementById("items"),summary=document.getElementById("summary");const gate=document.getElementById("authRequired");if(!window.marushobhaUid){gate.hidden=false;items.innerHTML="";summary.innerHTML="";return;}gate.hidden=true;let cart=read();
+if(!cart.length){items.innerHTML='<div class="empty">Your bag is empty.<br><a href="index.html">Discover the collection</a></div>';summary.innerHTML="";return}
+items.innerHTML=cart.map((p,i)=>`<article class="row"><img src="${esc(p.image||"")}" alt="${esc(p.name)}" onerror="this.style.visibility='hidden'"><div><div class="name">${esc(p.name||"Product")}</div><div class="meta">Size: ${esc(p.size||"Not selected")}<br>${esc(money(p.price,p.displayPrice))}</div><div class="qty"><button onclick="changeQty(${i},-1)" aria-label="Decrease quantity">−</button><span>${Math.max(1,Number(p.quantity)||1)}</span><button onclick="changeQty(${i},1)" aria-label="Increase quantity">+</button></div><button class="remove" onclick="removeItem(${i})">Remove</button></div><div class="right price">${esc(money((Number(p.price)||0)*(Math.max(1,Number(p.quantity)||1)),null))}</div></article>`).join("");
+let total=cart.reduce((s,p)=>s+(Number(p.price)||0)*Math.max(1,Number(p.quantity)||1),0),hasUnknown=cart.some(p=>!(Number(p.price)>0));
+summary.innerHTML=`<section class="summary"><div class="total"><span>Subtotal</span><strong>${hasUnknown?"To be confirmed":"₹"+total.toLocaleString("en-IN")}</strong></div><div class="meta">Shipping and final charges are confirmed at checkout.</div><a class="action" href="contact.html">Proceed to Checkout</a><a class="action" style="background:white;color:var(--accent)" href="index.html">Continue Shopping</a></section>`}
+function changeQty(i,d){let c=read();if(!c[i])return;c[i].quantity=Math.max(1,(Number(c[i].quantity)||1)+d);save(c);render()}
+function removeItem(i){let c=read();c.splice(i,1);save(c);render()}
+window.renderMarushobhaBag=render;window.addEventListener("storage",render);render();
+</script><script type="module">
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+const config={apiKey:"AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",authDomain:"marushobha-1e31f.firebaseapp.com",projectId:"marushobha-1e31f",storageBucket:"marushobha-1e31f.firebasestorage.app",messagingSenderId:"997754535596",appId:"1:997754535596:web:aafc83bad8c3d413cf6909"};
+const app=getApps().length?getApps()[0]:initializeApp(config);onAuthStateChanged(getAuth(app),user=>{window.marushobhaUid=user?.uid||null;const a=document.getElementById("profileLink");if(a)a.href=user?"index.html#account":"index.html?signin=1&return=bag.html";window.renderMarushobhaBag?.();});
 </script></body></html>

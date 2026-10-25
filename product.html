@@ -108,15 +108,40 @@ async function loadProduct(){
     console.warn("products.json fallback could not be loaded:", err);
   }
 
+  // Merge both sources instead of discarding products.json records when a
+  // Firestore product has the same slug. Older catalogue images often live
+  // in products.json/assets, while Firestore may only contain product details.
   const allProducts = [...firestoreProducts];
   for (const item of jsonProducts) {
     const itemName = item.name || item.productName || item.title || "";
     const itemSlug = item.slug || slugFromName(itemName);
-    const exists = allProducts.some(p =>
+    const index = allProducts.findIndex(p =>
       (p.id && item.id && String(p.id) === String(item.id)) ||
-      ((p.slug || slugFromName(p.name)) && (p.slug || slugFromName(p.name)) === itemSlug)
+      ((p.slug || slugFromName(p.name || p.productName || p.title)) &&
+       (p.slug || slugFromName(p.name || p.productName || p.title)) === itemSlug)
     );
-    if (!exists) allProducts.push({...item, name:itemName, slug:itemSlug});
+    if (index === -1) {
+      allProducts.push({...item, name:itemName, slug:itemSlug});
+    } else {
+      const current = allProducts[index];
+      const hasImageValue = value => {
+        if (typeof value === "string") return !!value.trim();
+        if (Array.isArray(value)) return value.some(hasImageValue);
+        if (value && typeof value === "object") return !!(value.src || value.url || value.imageUrl || value.image || value.downloadURL || value.downloadUrl || value.photoURL);
+        return false;
+      };
+      const currentHasImages = [current.images, current.imageUrls, current.gallery, current.productImages,
+        current.img, current.imageUrl, current.image, current.mainImage, current.photo, current.photoURL].some(hasImageValue);
+      allProducts[index] = {
+        ...item,
+        ...current,
+        name: current.name || current.productName || current.title || itemName,
+        slug: current.slug || itemSlug,
+        images: currentHasImages ? (current.images || current.imageUrls || current.gallery || current.productImages || item.images) : item.images,
+        img: hasImageValue(current.img) ? current.img : item.img,
+        imageUrl: hasImageValue(current.imageUrl) ? current.imageUrl : item.imageUrl
+      };
+    }
   }
 
   product = allProducts.find(p =>

@@ -13,7 +13,9 @@
 <body>
 <header class="topbar">
   <a href="index.html" aria-label="Marushobha home"><span class="brand">MARUSHOBHA</span><span class="tagline">CUSTOM. CHARACTER. CLASS.</span></a>
-  <div class="auth-actions">
+  <div class="auth-actions top-actions">
+    <a class="top-link" href="bag.html">Bag <span class="count-badge" id="bagCount">0</span></a>
+    <a class="top-link" href="wishlist.html">Wishlist <span class="count-badge" id="wishlistCount">0</span></a>
     <span class="auth-status" id="authStatus">Not signed in</span>
     <button class="auth-btn" id="googleSignIn" type="button">Sign in with Google</button>
     <button class="auth-btn" id="phoneSignIn" type="button">Sign in with Mobile</button>
@@ -308,6 +310,44 @@ async function loadProduct(){
   render();
 }
 
+const CART_KEY = "marushobha_cart_v1";
+const WISHLIST_KEY = "marushobha_wishlist_v1";
+function readStore(key){
+  try { const value = JSON.parse(localStorage.getItem(key) || "[]"); return Array.isArray(value) ? value : []; }
+  catch { return []; }
+}
+function writeStore(key, value){
+  try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+  catch (err) { console.error("Could not save Marushobha bag/wishlist:", err); return false; }
+}
+function currentProductRecord(){
+  const size = $("sizeSelect")?.value || (product.sizes || ["XS","S","M","L"])[0];
+  const unitPrice = typeof product.price === "number" ? product.price : Number(String(product.price || "").replace(/[^0-9.]/g,"")) || null;
+  return { key:String(product.slug || slugFromName(product.name))+"::"+size, productId:String(product.id ?? product.slug ?? slugFromName(product.name)), slug:product.slug || slugFromName(product.name), name:product.name, image:images[0]?.src || "", price:unitPrice, displayPrice:fmt(product.price), size, quantity:1, addedAt:new Date().toISOString() };
+}
+function updateBagWishlistCounts(){
+  const cart=readStore(CART_KEY), wishlist=readStore(WISHLIST_KEY);
+  if($("bagCount")) $("bagCount").textContent=String(cart.reduce((sum,item)=>sum+Math.max(1,Number(item.quantity)||1),0));
+  if($("wishlistCount")) $("wishlistCount").textContent=String(wishlist.length);
+}
+function showActionMessage(message){ if($("actionMessage")) $("actionMessage").textContent=message; }
+function addCurrentProductToBag(){
+  const item=currentProductRecord(), cart=readStore(CART_KEY), existing=cart.find(row=>row.key===item.key);
+  if(existing) existing.quantity=Math.max(1,Number(existing.quantity)||1)+1; else cart.push(item);
+  if(!writeStore(CART_KEY,cart)){showActionMessage("Could not save your bag. Please enable browser storage and try again.");return;}
+  updateBagWishlistCounts(); showActionMessage(`${product.name} (Size ${item.size}) added to your bag.`);
+  $("addToBag").textContent="✓ Added to Bag"; setTimeout(()=>{if($("addToBag")) $("addToBag").textContent="Add to Bag";},1600);
+}
+function addCurrentProductToWishlist(){
+  const item=currentProductRecord(), wishlist=readStore(WISHLIST_KEY);
+  if(wishlist.some(row=>row.productId===item.productId)){showActionMessage(`${product.name} is already in your wishlist.`);return;}
+  wishlist.push({...item,key:item.productId});
+  if(!writeStore(WISHLIST_KEY,wishlist)){showActionMessage("Could not save your wishlist. Please enable browser storage and try again.");return;}
+  updateBagWishlistCounts(); showActionMessage(`${product.name} added to your wishlist.`);
+  $("addToWishlist").textContent="♥ Wishlisted"; setTimeout(()=>{if($("addToWishlist")) $("addToWishlist").textContent="♡ Add to Wishlist";},1600);
+}
+window.addEventListener("storage",updateBagWishlistCounts);
+
 function render(){
   const thumbs = images.map((im,i)=>`<button class="thumb ${i===activeIndex?'active':''}" data-thumb="${i}" aria-label="Show image ${i+1}"><img src="${esc(im.src)}" alt="${esc(im.alt)}"></button>`).join("");
   $("productRoot").innerHTML = `<section class="layout">
@@ -327,12 +367,17 @@ function render(){
         <div class="detail-row"><strong>Care Instructions</strong>${esc(product.care || "Follow the garment care label.")}</div>
       </div>
       <label class="size-label" for="sizeSelect">Select Size</label><select class="size-select" id="sizeSelect">${(product.sizes || ["XS","S","M","L"]).map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join("")}</select>
+      <div class="purchase-actions"><button class="add-bag" id="addToBag" type="button">Add to Bag</button><button class="add-wishlist" id="addToWishlist" type="button">♡ Add to Wishlist</button></div>
+      <p class="action-message" id="actionMessage" role="status" aria-live="polite"></p>
       <p class="note">For availability, sizing or product queries, please contact Marushobha before placing your order.</p>
       <p><a class="back" href="index.html#shop">Continue Shopping</a></p>
     </div>
   </section>`;
   $("heroImage").addEventListener("click",openZoom);
   $("openZoom").addEventListener("click",openZoom);
+  updateBagWishlistCounts();
+  $("addToBag").addEventListener("click", addCurrentProductToBag);
+  $("addToWishlist").addEventListener("click", addCurrentProductToWishlist);
   // If a selected gallery image is broken, automatically try another image.
   $("heroImage").addEventListener("error", () => {
     const img = $("heroImage");

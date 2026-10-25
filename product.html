@@ -31,10 +31,26 @@
     <div class="zoom-hint">Pinch to zoom on mobile · Use + / − or mouse wheel</div>
   </div>
 </div>
+
+<div id="signInModal" class="signin-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="signInTitle">
+ <section class="signin-card"><button type="button" class="signin-close" id="closeSignIn" aria-label="Close sign in">×</button>
+  <h2 id="signInTitle">Sign in to Marushobha</h2><p class="signin-muted">Use Google or your mobile number to access your personal Bag and Wishlist.</p>
+  <button type="button" id="googleSignIn" class="signin-google">Continue with Google</button>
+  <div class="signin-divider"><span>OR</span></div>
+  <label for="phoneNumber">Mobile number with country code</label><input id="phoneNumber" type="tel" autocomplete="tel" placeholder="+91 9876543210">
+  <div id="recaptcha-container"></div><button type="button" id="sendOtp" class="signin-primary">Send OTP</button>
+  <label for="phoneOtp">Verification code (OTP)</label><input id="phoneOtp" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="Enter 6-digit OTP">
+  <button type="button" id="verifyOtp" class="signin-primary">Verify OTP &amp; Sign In</button>
+  <p id="signInStatus" class="signin-status" aria-live="polite"></p>
+ </section>
+</div>
+<style>
+.signin-overlay{position:fixed;inset:0;z-index:9999;background:#201812b8;display:flex;align-items:center;justify-content:center;padding:16px}.signin-overlay[hidden]{display:none!important}.signin-card{position:relative;width:min(100%,430px);max-height:95vh;overflow:auto;background:#fffdf9;color:#28221e;padding:28px;border:1px solid #e3d9ce;box-shadow:0 20px 70px #0003}.signin-card h2{font-family:Georgia,serif;font-weight:400;margin:0 28px 8px 0;font-size:1.8rem}.signin-muted,.signin-status{color:#766e66;font-size:.9rem}.signin-close{position:absolute;right:12px;top:10px;border:0;background:transparent;font-size:1.8rem;cursor:pointer}.signin-google,.signin-primary{display:block;width:100%;padding:12px 14px;margin-top:12px;border:1px solid #6e4b36;cursor:pointer;font:inherit}.signin-google{background:#fffdf9;color:#6e4b36}.signin-primary{background:#6e4b36;color:white}.signin-card label{display:block;margin:12px 0 5px;font-size:.88rem}.signin-card input{width:100%;padding:12px;border:1px solid #cfc3b6;background:white;font:inherit}.signin-divider{display:flex;align-items:center;gap:12px;color:#766e66;font-size:.8rem;margin:15px 0}.signin-divider:before,.signin-divider:after{content:"";height:1px;background:#e3d9ce;flex:1}.signin-status{min-height:1.2em;margin-bottom:0}
+</style>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
 import { getFirestore, collection, getDocs, doc, getDoc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import { getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signInWithPhoneNumber, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 const firebaseConfig = {
   apiKey: "AIzaSyAX2eCSrHatv3p405XJXAq5fMsqVwDP3wQ",
   authDomain: "marushobha-1e31f.firebaseapp.com",
@@ -53,14 +69,31 @@ let authReady = false;
 let cloudUnsubscribe = null;
 let currentUser = null;
 
-async function requestSignIn() {
-  try {
-    await signInWithPopup(auth, new GoogleAuthProvider());
-  } catch (err) {
-    console.error("Sign-in failed:", err);
-    showActionMessage("Please sign in with your authorised Google account. If sign-in fails, check Firebase Authentication settings.");
-  }
+let phoneConfirmation = null, recaptchaVerifier = null;
+function openSignIn(){ $("signInModal").hidden=false; $("signInStatus").textContent=""; }
+function closeSignIn(){ $("signInModal").hidden=true; }
+async function requestSignIn() { openSignIn(); }
+async function googleLogin(){
+  try { await signInWithPopup(auth,new GoogleAuthProvider()); closeSignIn(); }
+  catch(err){ console.error("Google sign-in failed:",err); $("signInStatus").textContent=authErrorMessage(err); }
 }
+function authErrorMessage(err){ const code=err?.code||""; if(code.includes("unauthorized-domain")) return "Add marushobha.com to Firebase Authentication → Settings → Authorized domains."; if(code.includes("popup-closed-by-user")) return "Sign-in window was closed before completing sign-in."; if(code.includes("invalid-phone-number")) return "Enter a valid mobile number including country code, e.g. +91…"; if(code.includes("captcha-check-failed")) return "reCAPTCHA verification failed. Refresh the page and try again."; return err?.message || "Sign-in failed. Check Firebase Authentication settings and try again."; }
+async function sendPhoneOtp(){
+  const phone=$("phoneNumber").value.trim(); if(!/^\+[1-9]\d{7,14}$/.test(phone)){ $("signInStatus").textContent="Enter a valid number with country code, for example +91 9876543210."; return; }
+  try {
+    if(recaptchaVerifier){ try{recaptchaVerifier.clear()}catch{} recaptchaVerifier=null; }
+    recaptchaVerifier=new RecaptchaVerifier(auth,"recaptcha-container",{size:"normal",callback:()=>{}});
+    await recaptchaVerifier.render();
+    phoneConfirmation=await signInWithPhoneNumber(auth,phone,recaptchaVerifier);
+    $("signInStatus").textContent="OTP sent. Check your SMS and enter the code below.";
+  } catch(err){ console.error("Phone OTP send failed:",err); $("signInStatus").textContent=authErrorMessage(err); if(recaptchaVerifier){try{recaptchaVerifier.clear()}catch{} recaptchaVerifier=null;} }
+}
+async function verifyPhoneOtp(){
+  const otp=$("phoneOtp").value.trim(); if(!phoneConfirmation){ $("signInStatus").textContent="First tap Send OTP."; return; } if(!/^\d{6}$/.test(otp)){ $("signInStatus").textContent="Enter the 6-digit OTP."; return; }
+  try { await phoneConfirmation.confirm(otp); phoneConfirmation=null; closeSignIn(); }
+  catch(err){ console.error("OTP verification failed:",err); $("signInStatus").textContent=authErrorMessage(err); }
+}
+$("googleSignIn").addEventListener("click",googleLogin); $("sendOtp").addEventListener("click",sendPhoneOtp); $("verifyOtp").addEventListener("click",verifyPhoneOtp); $("closeSignIn").addEventListener("click",closeSignIn); $("signInModal").addEventListener("click",e=>{if(e.target===$("signInModal"))closeSignIn();});
 function requireSignedIn() {
   if (currentUser) return true;
   showActionMessage("Please sign in before using your Bag or Wishlist.");

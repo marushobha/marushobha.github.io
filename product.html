@@ -337,7 +337,7 @@ function writeStore(base, value){
 function currentProductRecord(){
   const size = $("sizeSelect")?.value || (product.sizes || ["XS","S","M","L"])[0];
   const unitPrice = typeof product.price === "number" ? product.price : Number(String(product.price || "").replace(/[^0-9.]/g,"")) || null;
-  return { key:String(product.slug || slugFromName(product.name))+"::"+size, productId:String(product.id ?? product.slug ?? slugFromName(product.name)), slug:product.slug || slugFromName(product.name), name:product.name, image:images[0]?.src || "", price:unitPrice, displayPrice:fmt(product.price), size, quantity:1, addedAt:new Date().toISOString() };
+  return { key:String(product.slug || slugFromName(product.name))+"::"+size, productId:String(product.id ?? product.slug ?? slugFromName(product.name)), slug:product.slug || slugFromName(product.name), name:product.name, image:images[0]?.src || "", price:unitPrice, displayPrice:fmt(product.price), size, quantity:Math.max(1,parseInt($("productQuantity")?.value||"1",10)||1), qty:Math.max(1,parseInt($("productQuantity")?.value||"1",10)||1), addedAt:new Date().toISOString() };
 }
 function updateBagWishlistCounts(){
   const cart=readStore(CART_BASE), wishlist=readStore(WISH_BASE);
@@ -348,7 +348,7 @@ function showActionMessage(message){ if($("actionMessage")) $("actionMessage").t
 function addCurrentProductToBag(){
   if(!requireSignIn("bag")) return;
   const item=currentProductRecord(), cart=readStore(CART_BASE), existing=cart.find(row=>row.key===item.key);
-  if(existing) existing.quantity=Math.max(1,Number(existing.quantity)||1)+1; else cart.push(item);
+  if(existing){existing.quantity=Math.max(1,Number(existing.quantity)||1)+item.quantity;existing.qty=existing.quantity;} else cart.push(item);
   if(!writeStore(CART_BASE,cart)){showActionMessage("Could not save your bag. Please enable browser storage and try again.");return;}
   updateBagWishlistCounts(); showActionMessage(`${product.name} (Size ${item.size}) added to your bag.`);
   $("addToBag").textContent="✓ Added to Bag"; setTimeout(()=>{if($("addToBag")) $("addToBag").textContent="Add to Bag";},1600);
@@ -383,7 +383,7 @@ function render(){
         <div class="detail-row"><strong>Care Instructions</strong>${esc(product.care || "Follow the garment care label.")}</div>
       </div>
       <label class="size-label" for="sizeSelect">Select Size</label><select class="size-select" id="sizeSelect">${(product.sizes || ["XS","S","M","L"]).map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join("")}</select>
-      <div class="purchase-actions"><button class="add-bag" id="addToBag" type="button">Add to Bag</button><button class="add-wishlist" id="addToWishlist" type="button">♡ Add to Wishlist</button></div>
+      <label class="size-label" for="productQuantity">Quantity</label><input id="productQuantity" type="number" min="1" max="99" value="1" inputmode="numeric" style="width:100%;padding:12px;border:1px solid var(--line);margin:0 0 14px"><div class="purchase-actions"><button class="add-bag" id="addToBag" type="button">Add to Bag</button><button class="add-wishlist" id="addToWishlist" type="button">♡ Add to Wishlist</button></div>
       <p class="action-message" id="actionMessage" role="status" aria-live="polite"></p>
       <p class="note">For availability, sizing or product queries, please contact Marushobha before placing your order.</p>
       <p><a class="back" href="index.html#shop">Continue Shopping</a></p>

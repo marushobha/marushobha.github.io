@@ -1,29 +1,13 @@
-MARUSHOBHA WEBSITE — PRODUCT CATALOGUE PACKAGE
+MARUSHOBHA SIGN-IN + BAG/WISHLIST PACKAGE
 
-Included:
-- index.html: responsive Marushobha website updated with the 9 approved products
-- products.json: structured product catalogue for future integrations
-- products.csv: spreadsheet-friendly product catalogue
-- assets/products/: organised product images and galleries
-- assets/marushobha-homepage-hero.png: homepage hero background
+Files to upload to the same deployed website folder:
+- product.html (updated sign-in modal with Google + phone OTP)
+- bag.html (Firebase-backed personal bag; Google + phone OTP sign-in)
+- wishlist.html (Firebase-backed personal wishlist; Google + phone OTP sign-in)
+- firestore-customerData-rules.txt (security rules snippet and setup checklist)
 
-Product rules applied:
-- All products: sizes XS, S, M, L
-- All product prices display COMING SOON
-- Dune Belle Corset and Maharani Fusion Top: dry clean only because they include a corset
-- Other handwoven cotton products: gentle hand wash separately in cold water, mild detergent, no bleach or wringing, dry in shade, iron on low/medium heat
-- Boat-Neck Halter Dress fabric is listed as not specified; its care advice is cautious and generic
+Keep your existing index.html, assets folder, and products.json unchanged. Product page uses existing assets/product paths and its current catalogue fallback.
 
-IMPORTANT:
-This is a front-end website prototype. The existing Firebase sign-in UI/configuration remains in the HTML but must be tested with Firebase providers and authorized domains enabled. Cart/checkout payments, stock management, order processing, and a live backend are not connected. Products are marked COMING SOON and cannot be purchased from this version.
+Before testing, enable Google and Phone providers in Firebase Authentication, add marushobha.com to Authorized domains, and merge the supplied rules block into your EXISTING Firestore rules. Do not replace your whole rules file with the snippet.
 
-To preview locally:
-1. Extract the ZIP.
-2. Open a terminal in the marushobha_website folder.
-3. Run: python -m http.server 8000
-4. Visit http://localhost:8000
-
-Before publishing, verify garment care labels and all fabric claims against the actual products.
-
-Brand logo: assets/marushobha-logo.jpeg (the supplied logo reference is used in the header, footer, and sign-in panel).
-Catalogue: only the nine products supplied and described by the user are included; generic stock-image collection tiles have been removed.
+These files have been updated in the package, but they have not been tested against your live Firebase project. Deploy and test both Google sign-in and phone OTP over HTTPS. Google and phone may result in separate customer accounts/UIDs unless you implement account linking.
